@@ -2,17 +2,28 @@ import PropTypes from "prop-types";
 import { Link } from "react-router";
 import React, { Component } from "react";
 import { injectIntl, FormattedMessage } from "react-intl";
-
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 // Import Style
 import styles from "./PostListItem.css";
 
+const styless = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    display: "none"
+  }
+});
+
 export class PostListItem extends Component {
   addReply = () => {
-    console.log("postlistitem")
+    console.log("postlistitem");
     const replyRef = this.refs.replyText;
     if (replyRef.value) {
       this.props.addReply(replyRef.value, this.props.post.cuid);
-      replyRef.value = '';
+      replyRef.value = "";
     }
   };
 
@@ -21,11 +32,31 @@ export class PostListItem extends Component {
       <div className={styles["single-post"]}>
         <h3 className={styles["post-title"]}>
           <Link to={`/posts/${this.props.post.slug}-${this.props.post.cuid}`}>
-            {this.props.post.title}</Link>
-        </h3><p className={styles["author-name"]}><FormattedMessage id="by" /> {this.props.post.name}</p>
-        <input placeholder={"Reply"} className={styles["form-field"]} ref="replyText" />
-        <p className={styles["post-action"]}><a href="#" onClick={this.addReply}><FormattedMessage id="reply" /></a></p>
+            {this.props.post.title}
+          </Link>
+        </h3>
+        <p className={styles["author-name"]}>
+          <FormattedMessage id="by" /> {this.props.post.name}
+        </p>
         <p className={styles["post-desc"]}>{this.props.post.content}</p>
+        <form noValidate autoComplete="off">
+          <input
+            placeholder={"Reply"}
+            className={styles["form-field"]}
+            ref="replyText"
+          />{" "}
+        </form>
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          href="#"
+          onClick={this.addReply}
+        >
+          {" "}
+          Reply
+        </Button>
+        <br />
         <p className={styles["post-action"]}>
           <a href="#" onClick={this.props.onDelete}>
             <FormattedMessage id="deletePost" />
