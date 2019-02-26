@@ -9,11 +9,11 @@ function PostList(props) {
   return (
     <div className="listView">
       {
-        props.posts.map((individualPost) => (
+        props.posts.map(individualPost => (
           <PostListItem
             post={individualPost}
             key={individualPost.cuid}
-            addReply={() => props.handleAddReply(individualPost.reply)}
+            addReply={props.handleAddReply}
             onDelete={() => props.handleDeletePost(individualPost.cuid)}
           />
         ))

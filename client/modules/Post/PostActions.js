@@ -69,8 +69,6 @@ export function fetchPost(cuid) {
 }
 
 export function addReply(reply) {
-  console.log("reply")
-  console.log(reply)
   return {
     type: ADD_REPLY,
     reply,
@@ -78,7 +76,6 @@ export function addReply(reply) {
 }
 
 export function addReplyRequest(reply) {
-  console.log(reply)
   return (dispatch) => {
     return callApi('replies', 'post', {
       reply: {

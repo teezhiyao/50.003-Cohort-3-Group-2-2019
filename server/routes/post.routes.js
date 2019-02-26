@@ -113,33 +113,28 @@ router.route("/userPosts").post(function (req, res, next) {
 
 // Add a new Reply
 router.route("/replies").post(function (req, res, next) {
-  console.log(req)
+  console.log("In Add a new reply")
+  console.log(req.body)
   const newReply = new Reply({
-    reply: req.body.reply,
-    cuid: req.body.cuid,
+    reply: req.body.reply.reply,
+    cuid: req.body.reply.cuid,
   });
-  console.log(req)
   mongo.connect(url, function (err, MongoClient) {
     assert.equal(null, err);
     var db = MongoClient.db("Issue");
     db.collection("replies").insert(newReply, function (err, result) {
       assert.equal(null, err);
-      console.log("Reply inserted");
       db.close();
     });
   });
-
   // Sanitize inputs
-  newPost.title = sanitizeHtml(newPost.title);
-  newPost.name = sanitizeHtml(newPost.name);
-  newPost.content = sanitizeHtml(newPost.content);
-  // newPost.slug = tempSlug
-  newPost.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ post: saved });
-  });
+  // newReply.reply = sanitizeHtml(newReply.reply);
+  // newReply.save((err, saved) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   }
+  //   res.json({ post: saved });
+  // });
 });
 
 export default router;

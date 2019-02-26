@@ -8,35 +8,23 @@ import styles from "./PostListItem.css";
 
 export class PostListItem extends Component {
   addReply = () => {
+    console.log("postlistitem")
     const replyRef = this.refs.replyText;
     if (replyRef.value) {
-      this.props.addReply(replyRef.value);
+      this.props.addReply(replyRef.value, this.props.post.cuid);
       replyRef.value = '';
     }
   };
 
   render() {
-
     return (
       <div className={styles["single-post"]}>
         <h3 className={styles["post-title"]}>
           <Link to={`/posts/${this.props.post.slug}-${this.props.post.cuid}`}>
-            {this.props.post.title}
-          </Link>
-        </h3>
-        <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {this.props.post.name}
-        </p>
-        <input
-          placeholder={"Reply"}
-          className={styles["form-field"]}
-          ref="replyText"
-        />
-        <p className={styles["post-action"]}>
-          <a href="#" onClick={this.addReply}>
-            <FormattedMessage id="reply" />
-          </a>
-        </p>
+            {this.props.post.title}</Link>
+        </h3><p className={styles["author-name"]}><FormattedMessage id="by" /> {this.props.post.name}</p>
+        <input placeholder={"Reply"} className={styles["form-field"]} ref="replyText" />
+        <p className={styles["post-action"]}><a href="#" onClick={this.addReply}><FormattedMessage id="reply" /></a></p>
         <p className={styles["post-desc"]}>{this.props.post.content}</p>
         <p className={styles["post-action"]}>
           <a href="#" onClick={this.props.onDelete}>
@@ -58,8 +46,9 @@ PostListItem.propTypes = {
     cuid: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),
-  addReply: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  // addReply: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  addReply: PropTypes.func.isRequired
 };
 export default injectIntl(PostListItem);
 

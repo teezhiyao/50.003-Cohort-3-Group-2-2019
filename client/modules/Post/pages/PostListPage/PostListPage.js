@@ -7,7 +7,7 @@ import PostList from '../../components/PostList';
 import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
 
 // Import Actions
-import { addPostRequest, addPostUserRequest, addReply, fetchPosts, deletePostRequest } from '../../PostActions';
+import { addPostRequest, addPostUserRequest, fetchPosts, deletePostRequest, addReplyRequest } from '../../PostActions';
 import { toggleAddPost } from '../../../App/AppActions';
 
 // Import Selectors
@@ -36,10 +36,10 @@ class PostListPage extends Component {
     this.props.dispatch(addPostUserRequest({ name, title, content }));
   };
 
-  handleAddReply = reply => {
+  handleAddReply = (reply, cuid) => {
     console.log("PostListPage log");
-    console.log(reply)
-    this.props.dispatch(addReply({ reply }));
+    console.log((reply, cuid))
+    this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
   render() {
