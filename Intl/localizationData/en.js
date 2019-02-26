@@ -1,20 +1,20 @@
 export default {
-  locale: 'en',
+  locale: "en",
   messages: {
-    siteTitle: 'Accenture',
-    addPost: 'Add Post',
-    addUser: 'Add User',
-    switchLanguage: 'Switch Language',
-    twitterMessage: 'We are on Twitter',
-    by: 'By',
-    deletePost: 'Delete Post',
-    createNewPost: 'Create new post',
-    authorName: 'Author\'s Name',
-    reply: 'Reply',
-    postTitle: 'Post Title',
-    postContent: 'Post Content',
-    submit: 'Submit',
-    createUser: 'Create User',
+    siteTitle: "Accenture Ticketing",
+    addPost: "Add Post",
+    addUser: "Add User",
+    switchLanguage: "Switch Language",
+    twitterMessage: "We are on Twitter",
+    by: "By",
+    deletePost: "Delete Post",
+    createNewPost: "Create new post",
+    authorName: "Author's Name",
+    reply: "Reply",
+    postTitle: "Post Title",
+    postContent: "Post Content",
+    submit: "Submit",
+    createUser: "Create User",
     comment: `user {name} {value, plural,
     	  =0 {does not have any comments}
     	  =1 {has # comment}
@@ -29,6 +29,6 @@ export default {
     	  =0 {does not have any comments}
     	  =1 {has # comment}
     	  other {has # comments}
-    	} as of {date}`,
-  },
+    	} as of {date}`
+  }
 };

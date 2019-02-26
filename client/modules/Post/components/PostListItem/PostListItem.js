@@ -5,17 +5,11 @@ import { injectIntl, FormattedMessage } from "react-intl";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
 // Import Style
 import styles from "./PostListItem.css";
-
-const styless = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  }
-});
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 export class PostListItem extends Component {
   addReply = () => {
@@ -29,41 +23,48 @@ export class PostListItem extends Component {
 
   render() {
     return (
-      <div className={styles["single-post"]}>
-        <h3 className={styles["post-title"]}>
-          <Link to={`/posts/${this.props.post.slug}-${this.props.post.cuid}`}>
-            {this.props.post.title}
-          </Link>
-        </h3>
-        <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {this.props.post.name}
-        </p>
-        <p className={styles["post-desc"]}>{this.props.post.content}</p>
-        <form noValidate autoComplete="off">
-          <input
-            placeholder={"Reply"}
-            className={styles["form-field"]}
-            ref="replyText"
-          />{" "}
-        </form>
+      // <div className={styles["single-post"]}>
+      <Card>
+        <CardContent>
+          <h3 className={styles["post-title"]}>
+            <Link to={`/posts/${this.props.post.slug}-${this.props.post.cuid}`}>
+              {this.props.post.title}
+            </Link>
+          </h3>
+          <p className={styles["author-name"]}>
+            <FormattedMessage id="by" /> {this.props.post.name}
+          </p>
+          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+          <form noValidate autoComplete="off">
+            <input
+              placeholder={"Reply"}
+              className={styles["form-field"]}
+              ref="replyText"
+            />{" "}
+          </form>
+        </CardContent>
         <br />
-        <Button
-          variant="contained"
-          color="primary"
-          href="#"
-          onClick={this.addReply}
-        >
-          {" "}
-          Reply
-        </Button>
-        <br />
-        <p className={styles["post-action"]}>
-          <a href="#" onClick={this.props.onDelete}>
-            <FormattedMessage id="deletePost" />
-          </a>
-        </p>
-        <hr className={styles.divider} />
-      </div>
+        <CardActions>
+          <Button
+            variant="contained"
+            color="primary"
+            href="#"
+            onClick={this.addReply}
+          >
+            {" "}
+            Reply
+          </Button>
+        </CardActions>
+        <CardContent>
+          <br />
+          <p className={styles["post-action"]}>
+            <a href="#" onClick={this.props.onDelete}>
+              <FormattedMessage id="deletePost" />
+            </a>
+          </p>
+          <hr className={styles.divider} />
+        </CardContent>
+      </Card>
     );
   }
 }
