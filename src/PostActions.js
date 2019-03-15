@@ -16,18 +16,13 @@ export function addPost(post) {
   };
 }
 
-export function addUserRequest(post) {
+export function addPostRequest(post) {
   return dispatch => {
-    return callApi("userRegister", "post", {
+    return callApi("createUser", "post", {
       post: {
-        username: post.name,
-        password: post.name,
-        category: post.name,
+        name: post.name,
         title: post.title,
-        content: post.content,
-        postID: post.cuid,
-        status: post.title,
-        replyDataStructure: post.title
+        content: post.content
       }
     }).then(res => dispatch(addPost(res.post)));
   };
