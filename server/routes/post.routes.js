@@ -8,10 +8,16 @@ import cuid from "cuid";
 import slug from "limax";
 import sanitizeHtml from "sanitize-html";
 import issueSchema from "../models/post";
+import apitoken from "../../nopush";
+
 const router = new Router();
 const mongo = require("mongodb");
 const assert = require("assert");
 const url = config.mongoURL;
+
+const token = apitoken;
+const userUrl =
+  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
 var request = require("request");
 
 // Get all Posts
@@ -28,6 +34,34 @@ router.route("/posts").get(function(req, res, next) {
       });
   });
 });
+
+// router.route("/email").post(function(req, res, next) {
+//   console.log("Email trying hard");
+//   console.log(req.body);
+//   console.log(token);
+
+//   var options = {
+//     method: "POST",
+//     url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
+//     headers: {
+//       "cache-control": "no-cache",
+//       "Content-Type": "application/json",
+//       "Server-Token": apitoken
+//     },
+//     body: {
+//       subject: req.body.post.username,
+//       sender: "teezhiyao@gmail.com",
+//       recipient: "teezhiyao@gmail.com",
+//       html: "<h1>" + req.body.post.content + "</h1>"
+//     },
+//     json: true
+//   };
+
+//   request(options, function(error, response, body) {
+//     if (error) throw new Error(error);
+//     console.log(body);
+//   });
+// });
 
 // Get all Replies
 router.route("/replys").get(function(req, res, next) {
@@ -155,12 +189,6 @@ router.route("/replies").post(function(req, res, next) {
   //   res.json({ post: saved });
   // });
 });
-
-const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlF6Y3hRVEl5UkRVeU1qYzNSakEzTnpKQ01qVTROVVJFUlVZelF6VTRPRUV6T0RreE1UVTVPQSJ9.eyJpc3MiOiJodHRwczovL2FjbmFwaS1wcm9kLmF1dGgwLmNvbS8iLCJzdWIiOiI1cDZnbzhaNWtwTlI5bHk4U1lONEh5RlVTZEp2WE5oZkBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vcGxhY2UiLCJpYXQiOjE1NDk5NTI5MDEsImV4cCI6MTU1MjU0NDkwMSwiYXpwIjoiNXA2Z284WjVrcE5SOWx5OFNZTjRIeUZVU2RKdlhOaGYiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.cPm5fS0jQ2R60dtG5gsL97g0ukUGogB9KjbinzvOPHMCmC1YB58tnYTJle3BnG3DePzpQTQlpB9QSaOyE8uXsmNb1rFfOK9oFLLJ9pU7912oYp8KAHfXxtyYs_ajZ6Q9SWbYvPD9OAm5ZhpIb4OmQ4pUkwxoUwWejsHzh0K7u1987X-_wJt-XIb0vn1twJFoTI0qZ_pXwOo7TKNsjYDJkvvA3em-S2CYDqJmD7Nqsg3xEf0yPoH9SQiojqHQt7hgcsMymFVYuV5SOkYknMn3TFHGFQI-iQ3zftKm3iv6i3oxcFEceuOdjPGjXUSWN08xS6gJbxc5N9yzIBB6rgRI8A";
-const userUrl =
-  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
-var request = require("request");
 
 router.route("/userRegister").post(function(req, res, next) {
   console.log("I have reached here");

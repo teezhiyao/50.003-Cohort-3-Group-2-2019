@@ -18,7 +18,7 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return dispatch => {
-    return callApi("userRegister", "post", {
+    return callApi("email", "post", {
       post: {
         username: post.name,
         password: post.name,
@@ -121,3 +121,18 @@ export function fetchReplys() {
     });
   };
 }
+
+// export function addEmail(email) {
+//   return {
+//     type: Email,
+//     email
+//   };
+// }
+
+// export function email() {
+//   return dispatch => {
+//     return callApi("email").then(res => {
+//       dispatch(addEmail(res.replys));
+//     });
+//   };
+// }

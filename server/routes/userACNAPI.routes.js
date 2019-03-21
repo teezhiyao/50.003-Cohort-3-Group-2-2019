@@ -1,5 +1,6 @@
 import { Router } from "express";
 import apitoken from "../../nopush";
+
 const router = new Router();
 const token = apitoken;
 const userUrl =
@@ -90,6 +91,34 @@ router.route("/deleteUser").delete(function(req, res, next) {
       "Content-Type": "application/json"
     }
   };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+  });
+});
+
+router.route("/email").post(function(req, res, next) {
+  console.log("Email trying hard");
+  console.log(req.body);
+  console.log(token);
+
+  var options = {
+    method: "POST",
+    url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
+    headers: {
+      "cache-control": "no-cache",
+      "Content-Type": "application/json",
+      "Server-Token": apitoken
+    },
+    body: {
+      subject: req.body.post.username,
+      sender: "teezhiyao@gmail.com",
+      recipient: "teezhiyao@gmail.com",
+      html: "<h1>" + req.body.post.content + "</h1>"
+    },
+    json: true
+  };
+
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(body);
