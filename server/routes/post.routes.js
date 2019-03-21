@@ -21,22 +21,6 @@ const userUrl =
 var request = require("request");
 
 // Get all Posts
-router.route("/posts").get(function(req, res, next) {
-  mongo.connect(url, function(err, MongoClient) {
-    assert.equal(null, err);
-    const db = MongoClient.db("Issue");
-
-    db.collection("issues")
-      .find()
-      .toArray((err, result) => {
-        if (err) return console.log(err);
-        // renders index.ejs
-        res.json({ posts: result });
-        console.log(result);
-      });
-  });
-});
-
 router.route("/queryAllPost").get(function(req, res, next) {
   var options = {
     method: "GET",
@@ -51,8 +35,60 @@ router.route("/queryAllPost").get(function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     res.json({ posts: JSON.parse(body) });
-    console.log(JSON.parse(body).results);
+    // console.log(JSON.parse(body).results);
   });
+});
+
+// Add a new Post
+router.route("/postNewPost").post(function(req, res, next) {
+  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
+  const newPost = new Issue({
+    title: req.body.post.title,
+    content: req.body.post.content,
+    name: req.body.post.name,
+    slug: tempSlug,
+    cuid: cuid()
+  });
+
+  var options = {
+    method: "POST",
+    url:
+      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    },
+    body: {
+      userType: "User",
+      name: req.body.post.name,
+      userID: "1002845",
+      category: "Client Login Issue",
+      title: req.body.post.title,
+      content: req.body.post.content,
+      url: "www.mywebsite.com",
+      slug: tempSlug,
+      cuid: cuid,
+      dateAdded: Date.now.toString,
+      resolveStatus: false,
+      replyscuid: {}
+    },
+    json: true
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+  });
+  // Sanitize inputs
+  // newPost.title = sanitizeHtml(newPost.title);
+  // newPost.name = sanitizeHtml(newPost.name);
+  // newPost.content = sanitizeHtml(newPost.content);
+  // // newPost.slug = tempSlug
+  // newPost.save((err, saved) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   }
+  //   res.json({ post: saved });
+  // });
 });
 
 // Get all Replies
