@@ -53,7 +53,7 @@ export class PostCreateWidget extends Component {
           <a
             className={styles["post-submit-button"]}
             href="#"
-            onClick={this.anpm install pre-commit --save-devt}
+            onClick={this.addPost}
           >
             <FormattedMessage id="submit" />
           </a>
