@@ -1,25 +1,25 @@
-import { Router } from "express";
-import * as PostController from "../controllers/post.controller";
-import config from "../config";
-import Issue from "../models/post";
-import Reply from "../models/reply";
+import { Router } from 'express';
+import * as PostController from '../controllers/post.controller';
+import config from '../config';
+import Issue from '../models/post';
+import Reply from '../models/reply';
 
-import cuid from "cuid";
-import slug from "limax";
-import sanitizeHtml from "sanitize-html";
-import issueSchema from "../models/post";
+import cuid from 'cuid';
+import slug from 'limax';
+import sanitizeHtml from 'sanitize-html';
+import issueSchema from '../models/post';
 const router = new Router();
-const mongo = require("mongodb");
-const assert = require("assert");
+const mongo = require('mongodb');
+const assert = require('assert');
 const url = config.mongoURL;
-var request = require("request");
+var request = require('request');
 
 // Get all Posts
-router.route("/posts").get(function(req, res, next) {
+router.route('/posts').get(function(req, res, next) {
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
-    const db = MongoClient.db("Issue");
-    db.collection("issues")
+    const db = MongoClient.db('Issue');
+    db.collection('issues')
       .find()
       .toArray((err, result) => {
         if (err) return console.log(err);
@@ -30,12 +30,12 @@ router.route("/posts").get(function(req, res, next) {
 });
 
 // Get all Replies
-router.route("/replys").get(function(req, res, next) {
+router.route('/replys').get(function(req, res, next) {
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
-    const db = MongoClient.db("Issue");
+    const db = MongoClient.db('Issue');
     // console.log(req.body);
-    db.collection("replies")
+    db.collection('replies')
       .find({ cuid: req.params.cuid })
       .toArray((err, result) => {
         if (err) return console.log(err);
@@ -46,11 +46,11 @@ router.route("/replys").get(function(req, res, next) {
 });
 
 // Get one post by cuid
-router.route("/posts/:cuid").get(PostController.getPost);
+router.route('/posts/:cuid').get(PostController.getPost);
 
 // Add a new Post
-router.route("/posts").post(function(req, res, next) {
-  console.log("This api");
+router.route('/posts').post(function(req, res, next) {
+  console.log('This api');
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
   const newPost = new Issue({
     title: req.body.post.title,
@@ -61,10 +61,10 @@ router.route("/posts").post(function(req, res, next) {
   });
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
-    var db = MongoClient.db("Issue");
-    db.collection("issues").insert(newPost, function(err, result) {
+    var db = MongoClient.db('Issue');
+    db.collection('issues').insert(newPost, function(err, result) {
       assert.equal(null, err);
-      console.log("Item inserted");
+      console.log('Item inserted');
       MongoClient.close();
     });
   });
@@ -82,22 +82,22 @@ router.route("/posts").post(function(req, res, next) {
 });
 
 // Delete a post by cuid
-router.route("/posts/:cuid").delete(function(req, res) {
+router.route('/posts/:cuid').delete(function(req, res) {
   mongo.connect(url, function(err, MongoClient) {
-    const db = MongoClient.db("Issue");
+    const db = MongoClient.db('Issue');
     console.log(req.params.cuid);
-    db.collection("issues").findOneAndDelete(
+    db.collection('issues').findOneAndDelete(
       { cuid: req.params.cuid },
       (err, result) => {
         if (err) return res.send(500, err);
-        res.send("Deleted");
+        res.send('Deleted');
       }
     );
   });
 });
 
 // Add a new User
-router.route("/userPosts").post(function(req, res, next) {
+router.route('/userPosts').post(function(req, res, next) {
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
   const newPost = new Issue({
     title: req.body.post.title,
@@ -109,10 +109,10 @@ router.route("/userPosts").post(function(req, res, next) {
   console.log(req.body.post);
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
-    var db = MongoClient.db("Issue");
-    db.collection("users").insert(newPost, function(err, result) {
+    var db = MongoClient.db('Issue');
+    db.collection('users').insert(newPost, function(err, result) {
       assert.equal(null, err);
-      console.log("Item inserted");
+      console.log('Item inserted');
       db.close();
     });
   });
@@ -131,8 +131,8 @@ router.route("/userPosts").post(function(req, res, next) {
 });
 
 // Add a new Reply
-router.route("/replies").post(function(req, res, next) {
-  console.log("In Add a new reply");
+router.route('/replies').post(function(req, res, next) {
+  console.log('In Add a new reply');
   console.log(req.body);
   const newReply = new Reply({
     reply: req.body.reply.reply,
@@ -140,8 +140,8 @@ router.route("/replies").post(function(req, res, next) {
   });
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
-    var db = MongoClient.db("Issue");
-    db.collection("replies").insert(newReply, function(err, result) {
+    var db = MongoClient.db('Issue');
+    db.collection('replies').insert(newReply, function(err, result) {
       assert.equal(null, err);
       db.close();
     });
@@ -157,21 +157,21 @@ router.route("/replies").post(function(req, res, next) {
 });
 
 const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlF6Y3hRVEl5UkRVeU1qYzNSakEzTnpKQ01qVTROVVJFUlVZelF6VTRPRUV6T0RreE1UVTVPQSJ9.eyJpc3MiOiJodHRwczovL2FjbmFwaS1wcm9kLmF1dGgwLmNvbS8iLCJzdWIiOiI1cDZnbzhaNWtwTlI5bHk4U1lONEh5RlVTZEp2WE5oZkBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vcGxhY2UiLCJpYXQiOjE1NDk5NTI5MDEsImV4cCI6MTU1MjU0NDkwMSwiYXpwIjoiNXA2Z284WjVrcE5SOWx5OFNZTjRIeUZVU2RKdlhOaGYiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.cPm5fS0jQ2R60dtG5gsL97g0ukUGogB9KjbinzvOPHMCmC1YB58tnYTJle3BnG3DePzpQTQlpB9QSaOyE8uXsmNb1rFfOK9oFLLJ9pU7912oYp8KAHfXxtyYs_ajZ6Q9SWbYvPD9OAm5ZhpIb4OmQ4pUkwxoUwWejsHzh0K7u1987X-_wJt-XIb0vn1twJFoTI0qZ_pXwOo7TKNsjYDJkvvA3em-S2CYDqJmD7Nqsg3xEf0yPoH9SQiojqHQt7hgcsMymFVYuV5SOkYknMn3TFHGFQI-iQ3zftKm3iv6i3oxcFEceuOdjPGjXUSWN08xS6gJbxc5N9yzIBB6rgRI8A";
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlF6Y3hRVEl5UkRVeU1qYzNSakEzTnpKQ01qVTROVVJFUlVZelF6VTRPRUV6T0RreE1UVTVPQSJ9.eyJpc3MiOiJodHRwczovL2FjbmFwaS1wcm9kLmF1dGgwLmNvbS8iLCJzdWIiOiI1cDZnbzhaNWtwTlI5bHk4U1lONEh5RlVTZEp2WE5oZkBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vcGxhY2UiLCJpYXQiOjE1NDk5NTI5MDEsImV4cCI6MTU1MjU0NDkwMSwiYXpwIjoiNXA2Z284WjVrcE5SOWx5OFNZTjRIeUZVU2RKdlhOaGYiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.cPm5fS0jQ2R60dtG5gsL97g0ukUGogB9KjbinzvOPHMCmC1YB58tnYTJle3BnG3DePzpQTQlpB9QSaOyE8uXsmNb1rFfOK9oFLLJ9pU7912oYp8KAHfXxtyYs_ajZ6Q9SWbYvPD9OAm5ZhpIb4OmQ4pUkwxoUwWejsHzh0K7u1987X-_wJt-XIb0vn1twJFoTI0qZ_pXwOo7TKNsjYDJkvvA3em-S2CYDqJmD7Nqsg3xEf0yPoH9SQiojqHQt7hgcsMymFVYuV5SOkYknMn3TFHGFQI-iQ3zftKm3iv6i3oxcFEceuOdjPGjXUSWN08xS6gJbxc5N9yzIBB6rgRI8A';
 const userUrl =
-  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
-var request = require("request");
+  'https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users';
+var request = require('request');
 
-router.route("/userRegister").post(function(req, res, next) {
-  console.log("I have reached here");
+router.route('/userRegister').post(function(req, res, next) {
+  console.log('I have reached here');
   console.log(req.body);
   var options = {
-    method: "POST",
+    method: 'POST',
     url: userUrl,
     headers: {
-      "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     },
     body: req.body.post,
     json: true
@@ -182,14 +182,14 @@ router.route("/userRegister").post(function(req, res, next) {
   });
 });
 
-router.route("/queryAll").get(function(req, res, next) {
+router.route('/queryAll').get(function(req, res, next) {
   var options = {
-    method: "GET",
+    method: 'GET',
     url: `${userUrl}/users`,
     headers: {
-      "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {
@@ -198,17 +198,17 @@ router.route("/queryAll").get(function(req, res, next) {
   });
 });
 
-router.route("/updateUser").put(function(req, res, next) {
+router.route('/updateUser').put(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
   var options = {
-    method: "PUT",
+    method: 'PUT',
     url: `${userUrl}/${username}`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     },
     body: req.body
   };
@@ -218,15 +218,15 @@ router.route("/updateUser").put(function(req, res, next) {
   });
 });
 
-router.route("/getCurrentUser").get(function(req, res, next) {
+router.route('/getCurrentUser').get(function(req, res, next) {
   var options = {
-    method: "GET",
+    method: 'GET',
     url: `${userUrl}/me`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {
@@ -235,17 +235,17 @@ router.route("/getCurrentUser").get(function(req, res, next) {
   });
 });
 
-router.route("/deleteUser").delete(function(req, res, next) {
+router.route('/deleteUser').delete(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
   var options = {
-    method: "DELETE",
+    method: 'DELETE',
     url: `${userUrl}/${username}`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {

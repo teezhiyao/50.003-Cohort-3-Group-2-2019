@@ -1,13 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 // Import Components
-import PostListItem from "./PostListItem/PostListItem";
-import addReply from "./PostListItem/PostListItem";
+import PostListItem from './PostListItem/PostListItem';
+import addReply from './PostListItem/PostListItem';
+
+//takes in props(all posts) and displays every post
 
 function PostList(props) {
   return (
-    <div className="listView">
+    <div className='listView'>
       {props.posts.map(individualPost => (
         <PostListItem
           post={individualPost}

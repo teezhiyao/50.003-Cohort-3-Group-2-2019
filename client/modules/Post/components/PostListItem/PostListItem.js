@@ -1,65 +1,67 @@
-import PropTypes from "prop-types";
-import { Link } from "react-router";
-import React, { Component } from "react";
-import { injectIntl, FormattedMessage } from "react-intl";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import React, { Component } from 'react';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
 // Import Style
-import styles from "./PostListItem.css";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
+import styles from './PostListItem.css';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import PostDetailPage from '../../pages/PostDetailPage/PostDetailPage';
 
 export class PostListItem extends Component {
   addReply = () => {
-    // console.log("postlistitem");
+    // console.log('postlistitem');
     const replyRef = this.refs.replyText;
     if (replyRef.value) {
       this.props.addReply(replyRef.value, this.props.post.cuid);
-      replyRef.value = "";
+      replyRef.value = '';
     }
   };
 
   render() {
     return (
-      // <div className={styles["single-post"]}>
+      // <div className={styles['single-post']}>
       <Card>
         <CardContent>
-          <h3 className={styles["post-title"]}>
+          <h3 className={styles['post-title']}>
             <Link to={`/posts/${this.props.post.cuid}`}>
               {this.props.post.title}
+              {/* <PostDetailPage post = {this.props.post}/> */}
             </Link>
           </h3>
-          <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.name}
+          <p className={styles['author-name']}>
+            <FormattedMessage id='by' /> {this.props.post.name}
           </p>
-          <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          <form noValidate autoComplete="off">
+          <p className={styles['post-desc']}>{this.props.post.content}</p>
+          <form noValidate autoComplete='off'>
             <input
-              placeholder={"Reply"}
-              className={styles["form-field"]}
-              ref="replyText"
-            />{" "}
+              placeholder={'Reply'}
+              className={styles['form-field']}
+              ref='replyText'
+            />{' '}
           </form>
         </CardContent>
         <br />
         <CardActions>
           <Button
-            variant="contained"
-            color="primary"
-            href="#"
+            variant='contained'
+            color='primary'
+            href='#'
             onClick={this.addReply}
           >
-            {" "}
+            {' '}
             Reply
           </Button>
         </CardActions>
         <CardContent>
           <br />
-          <p className={styles["post-action"]}>
-            <a href="#" onClick={this.props.onDelete}>
-              <FormattedMessage id="deletePost" />
+          <p className={styles['post-action']}>
+            <a href='#' onClick={this.props.onDelete}>
+              <FormattedMessage id='deletePost' />
             </a>
           </p>
           <hr className={styles.divider} />

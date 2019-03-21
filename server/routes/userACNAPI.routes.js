@@ -1,19 +1,19 @@
-import { Router } from "express";
-import apitoken from "../../nopush";
+import { Router } from 'express';
+import apitoken from '../../nopush';
 const router = new Router();
 const token = apitoken;
 const userUrl =
-  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
-var request = require("request");
+  'https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users';
+var request = require('request');
 
-router.route("/userRegister").post(function(req, res, next) {
+router.route('/userRegister').post(function(req, res, next) {
   var options = {
-    method: "POST",
+    method: 'POST',
     url: userUrl,
     headers: {
-      "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     },
     body: req.body,
     json: true
@@ -24,14 +24,14 @@ router.route("/userRegister").post(function(req, res, next) {
   });
 });
 
-router.route("/queryAll").get(function(req, res, next) {
+router.route('/queryAll').get(function(req, res, next) {
   var options = {
-    method: "GET",
+    method: 'GET',
     url: `${userUrl}/users`,
     headers: {
-      "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {
@@ -40,17 +40,17 @@ router.route("/queryAll").get(function(req, res, next) {
   });
 });
 
-router.route("/updateUser").put(function(req, res, next) {
+router.route('/updateUser').put(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
   var options = {
-    method: "PUT",
+    method: 'PUT',
     url: `${userUrl}/${username}`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     },
     body: req.body
   };
@@ -60,15 +60,15 @@ router.route("/updateUser").put(function(req, res, next) {
   });
 });
 
-router.route("/getCurrentUser").get(function(req, res, next) {
+router.route('/getCurrentUser').get(function(req, res, next) {
   var options = {
-    method: "GET",
+    method: 'GET',
     url: `${userUrl}/me`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {
@@ -77,17 +77,17 @@ router.route("/getCurrentUser").get(function(req, res, next) {
   });
 });
 
-router.route("/deleteUser").delete(function(req, res, next) {
+router.route('/deleteUser').delete(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
   var options = {
-    method: "DELETE",
+    method: 'DELETE',
     url: `${userUrl}/${username}`,
     headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      'cache-control': 'no-cache',
+      'X-Parse-Session-Token': sessionToken,
+      'Server-Token': token,
+      'Content-Type': 'application/json'
     }
   };
   request(options, function(error, response, body) {
