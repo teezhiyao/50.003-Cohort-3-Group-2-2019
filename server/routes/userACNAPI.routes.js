@@ -111,7 +111,7 @@ router.route("/email").post(function(req, res, next) {
       "Server-Token": apitoken
     },
     body: {
-      subject: req.body.post.username,
+      subject: req.body.post.title,
       sender: "teezhiyao@gmail.com",
       recipient: "teezhiyao@gmail.com",
       html: "<h1>" + req.body.post.content + "</h1>"

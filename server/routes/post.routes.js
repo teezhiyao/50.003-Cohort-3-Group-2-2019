@@ -25,43 +25,35 @@ router.route("/posts").get(function(req, res, next) {
   mongo.connect(url, function(err, MongoClient) {
     assert.equal(null, err);
     const db = MongoClient.db("Issue");
+
     db.collection("issues")
       .find()
       .toArray((err, result) => {
         if (err) return console.log(err);
         // renders index.ejs
         res.json({ posts: result });
+        console.log(result);
       });
   });
 });
 
-// router.route("/email").post(function(req, res, next) {
-//   console.log("Email trying hard");
-//   console.log(req.body);
-//   console.log(token);
-
-//   var options = {
-//     method: "POST",
-//     url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
-//     headers: {
-//       "cache-control": "no-cache",
-//       "Content-Type": "application/json",
-//       "Server-Token": apitoken
-//     },
-//     body: {
-//       subject: req.body.post.username,
-//       sender: "teezhiyao@gmail.com",
-//       recipient: "teezhiyao@gmail.com",
-//       html: "<h1>" + req.body.post.content + "</h1>"
-//     },
-//     json: true
-//   };
-
-//   request(options, function(error, response, body) {
-//     if (error) throw new Error(error);
-//     console.log(body);
-//   });
-// });
+router.route("/queryAllPost").get(function(req, res, next) {
+  var options = {
+    method: "GET",
+    url:
+      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    res.json({ posts: JSON.parse(body) });
+    console.log(JSON.parse(body).results);
+  });
+});
 
 // Get all Replies
 router.route("/replys").get(function(req, res, next) {

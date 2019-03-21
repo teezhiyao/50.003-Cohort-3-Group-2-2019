@@ -1,12 +1,12 @@
-import callApi from '../../util/apiCaller';
+import callApi from "../../util/apiCaller";
 
 // Export Constants
-export const ADD_POST = 'ADD_POST';
-export const ADD_POSTS = 'ADD_POSTS';
-export const DELETE_POST = 'DELETE_POST';
-export const ADD_USER = 'ADD_USER';
-export const ADD_REPLY = 'ADD_REPLY';
-export const ADD_REPLYS = 'ADD_REPLYS';
+export const ADD_POST = "ADD_POST";
+export const ADD_POSTS = "ADD_POSTS";
+export const DELETE_POST = "DELETE_POST";
+export const ADD_USER = "ADD_USER";
+export const ADD_REPLY = "ADD_REPLY";
+export const ADD_REPLYS = "ADD_REPLYS";
 
 // Export Actions
 export function addPost(post) {
@@ -40,9 +40,9 @@ export function addUser(post) {
 }
 
 export function addPostUserRequest(post) {
-  console.log('addpostuserrequest');
+  console.log("addpostuserrequest");
   return dispatch => {
-    return callApi('userPosts', 'post', {
+    return callApi("userPosts", "post", {
       post: {
         name: post.name,
         title: post.title,
@@ -61,8 +61,8 @@ export function addPosts(posts) {
 
 export function fetchPosts() {
   return dispatch => {
-    return callApi('posts').then(res => {
-      dispatch(addPosts(res.posts));
+    return callApi("queryAllPost").then(res => {
+      dispatch(addPosts(res.posts.results));
     });
   };
 }
@@ -82,7 +82,7 @@ export function addReply(reply) {
 
 export function addReplyRequest(reply) {
   return dispatch => {
-    return callApi('replies', 'post', {
+    return callApi("replies", "post", {
       reply: {
         reply: reply.reply,
         cuid: reply.cuid
@@ -100,7 +100,7 @@ export function deletePost(cuid) {
 
 export function deletePostRequest(cuid) {
   return dispatch => {
-    return callApi(`posts/${cuid}`, 'delete').then(() =>
+    return callApi(`posts/${cuid}`, "delete").then(() =>
       dispatch(deletePost(cuid))
     );
   };
@@ -123,7 +123,9 @@ export function deletePostRequest(cuid) {
 
 export function fetchReply(cuid) {
   return dispatch => {
-    return callApi(`replies/${cuid}`).then(res => dispatch(addReply(res.reply)));
+    return callApi(`replies/${cuid}`).then(res =>
+      dispatch(addReply(res.reply))
+    );
   };
 }
 
