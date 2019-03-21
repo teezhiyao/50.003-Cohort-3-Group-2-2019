@@ -113,8 +113,8 @@ module.exports = {
       basePath: '/',
     }),
     new ChunkManifestPlugin({
-      filename: "chunk-manifest.json",
-      manifestVariable: "webpackManifest",
+      filename: 'chunk-manifest.json',
+      manifestVariable: 'webpackManifest',
     }),
     new webpack.optimize.UglifyJsPlugin(),
   ],

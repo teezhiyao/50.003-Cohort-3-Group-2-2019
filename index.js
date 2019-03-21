@@ -10,12 +10,12 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // Babel polyfill to convert ES6 code in runtime
   require('babel-register')({
-    "plugins": [
+    'plugins': [
       [
-        "babel-plugin-webpack-loaders",
+        'babel-plugin-webpack-loaders',
         {
-          "config": "./webpack.config.babel.js",
-          "verbose": false
+          'config': './webpack.config.babel.js',
+          'verbose': false
         }
       ]
     ]
