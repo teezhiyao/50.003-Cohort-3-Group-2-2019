@@ -172,12 +172,7 @@ export class App extends Component {
             </div>
             <Divider />
             <List>
-              {[
-                "Pending Issues",
-                "Urgent Issues",
-                "Resolved Issues",
-                "Common Issues"
-              ].map((text, index) => (
+              {["Home", "Profile"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -188,14 +183,16 @@ export class App extends Component {
             </List>
             <Divider />
             <List>
-              {["All Issues", "Deleted", "Spam"].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
+              {["Pending Issues", "Resolved Issues", "All Issues"].map(
+                (text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                )
+              )}
             </List>
             <Divider />
             <List>
