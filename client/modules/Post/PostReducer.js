@@ -5,7 +5,7 @@ import {
   ADD_USER,
   ADD_REPLY,
   ADD_REPLYS
-} from "./PostActions";
+} from './PostActions';
 
 // Initial State
 const initialState = { data: [] };
