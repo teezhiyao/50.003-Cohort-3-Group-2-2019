@@ -76,6 +76,7 @@ router.route("/postNewPost").post(function(req, res, next) {
     json: true
   };
   request(options, function(error, response, body) {
+    // console.log(response.body.objectId);
     if (error) throw new Error(error);
   });
   // Sanitize inputs
@@ -107,39 +108,25 @@ router.route("/replys").get(function(req, res, next) {
   });
 });
 
-// Get one post by cuid
-router.route("/posts/:cuid").get(PostController.getPost);
-
-// Add a new Post
-router.route("/posts").post(function(req, res, next) {
-  console.log("This api");
-  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
-  const newPost = new Issue({
-    title: req.body.post.title,
-    content: req.body.post.content,
-    name: req.body.post.name,
-    slug: tempSlug,
-    cuid: cuid()
-  });
-  mongo.connect(url, function(err, MongoClient) {
-    assert.equal(null, err);
-    var db = MongoClient.db("Issue");
-    db.collection("issues").insert(newPost, function(err, result) {
-      assert.equal(null, err);
-      console.log("Item inserted");
-      MongoClient.close();
-    });
-  });
-  // Sanitize inputs
-  newPost.title = sanitizeHtml(newPost.title);
-  newPost.name = sanitizeHtml(newPost.name);
-  newPost.content = sanitizeHtml(newPost.content);
-  // newPost.slug = tempSlug
-  newPost.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
+// Get one post by objectId
+router.route("/posts/:objectId").get(function(req, res, next) {
+  console.log(req.params);
+  var options = {
+    method: "GET",
+    url: `https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts/${
+      req.params.objectId
+    }`,
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
     }
-    res.json({ post: saved });
+  };
+
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    //console.log(body);
   });
 });
 

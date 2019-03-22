@@ -1,7 +1,7 @@
-import Post from '../models/post';
-import cuid from 'cuid';
-import slug from 'limax';
-import sanitizeHtml from 'sanitize-html';
+import Post from "../models/post";
+import cuid from "cuid";
+import slug from "limax";
+import sanitizeHtml from "sanitize-html";
 
 // /**
 //  * Get all posts
@@ -18,20 +18,20 @@ import sanitizeHtml from 'sanitize-html';
 //   });
 // }
 
-/**
- * Get a single post
- * @param req
- * @param res
- * @returns void
- */
-export function getPost(req, res) {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ post });
-  });
-}
+// /**
+//  * Get a single post
+//  * @param req
+//  * @param res
+//  * @returns void
+//  */
+// export function getPost(req, res) {
+//   Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//     res.json({ post });
+//   });
+// }
 
 /**
  * Delete a post

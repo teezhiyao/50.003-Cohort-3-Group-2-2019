@@ -28,9 +28,9 @@ export class PostListItem extends Component {
       <Card>
         <CardContent>
           <h3 className={styles["post-title"]}>
-            <Link to={`/posts/${this.props.post.cuid}`}>
+            <Link to={`/posts/${this.props.post.objectId}`}>
               {this.props.post.title}
-              {/* <PostDetailPage post = {this.props.post}/> */}
+              {/* <PostDetailPage post={this.props.post} /> */}
             </Link>
           </h3>
           <p className={styles["author-name"]}>
@@ -78,6 +78,7 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),
   // addReply: PropTypes.func.isRequired,

@@ -99,8 +99,6 @@ router.route("/deleteUser").delete(function(req, res, next) {
 
 router.route("/email").post(function(req, res, next) {
   console.log("Email trying hard");
-  console.log(req.body);
-  console.log(token);
 
   var options = {
     method: "POST",

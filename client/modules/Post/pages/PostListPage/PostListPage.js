@@ -90,6 +90,7 @@ PostListPage.propTypes = {
       name: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
+      objectId: PropTypes.string.isRequired,
       reply: PropTypes.string
     })
   ),

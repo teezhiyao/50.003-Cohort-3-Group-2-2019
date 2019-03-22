@@ -21,16 +21,18 @@ import { getPost } from "../../PostReducer";
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
 export function PostDetailPage(props) {
+  console.log("testing");
+  console.log(props);
   return (
     <div>
       <Helmet title={props.post.title} />
       <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
         <h3 className={styles["post-title"]}>{props.post.title}</h3>
         <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.name}
+          <FormattedMessage id="by" /> {props.post.userName}
         </p>
         <p className={styles["post-desc"]}>{props.post.content}</p>
-        <p className="REPLIES">{props.post.replyscuid}</p>
+        {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
         <p className="ResolveStatus">{props.post.resolveStatus}</p>
         <p className="date">{props.post.dateAdded}</p>
         {/* <h3 className={styles['post-title']}>
@@ -47,14 +49,17 @@ export function PostDetailPage(props) {
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
   params => {
-    return fetchPost(params.cuid);
+    return fetchPost(params.objectId);
   }
 ];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
+  console.log("Mapping here");
+  console.log(props);
+  console.log(getPost(state, props.postd));
   return {
-    post: getPost(state, props.params.cuid)
+    post: getPost(state, props.post.objectId)
   };
 }
 
@@ -64,7 +69,7 @@ PostDetailPage.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired,
     replyscuid: PropTypes.array,
     resolveStatus: PropTypes.bool,
     dateAdded: PropTypes.string

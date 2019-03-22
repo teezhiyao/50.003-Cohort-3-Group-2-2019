@@ -5,7 +5,7 @@ import {
   ADD_USER,
   ADD_REPLY,
   ADD_REPLYS
-} from './PostActions';
+} from "./PostActions";
 
 // Initial State
 const initialState = { data: [] };
@@ -48,9 +48,9 @@ const PostReducer = (state = initialState, action) => {
 // Get all posts
 export const getPosts = state => state.posts.data;
 
-// Get post by cuid
-export const getPost = (state, cuid) =>
-  state.posts.data.filter(post => post.cuid === cuid)[0];
+// Get post by objectId
+export const getPost = (state, objectId) =>
+  state.posts.data.filter(post => post.objectId === objectId)[0];
 
 // Export Reducer
 export default PostReducer;
