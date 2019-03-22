@@ -18,7 +18,7 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return dispatch => {
-    return callApi("postNewPost", "post", {
+    return callApi("email", "post", {
       post: {
         username: post.name,
         category: post.category,
