@@ -112,17 +112,17 @@ export function addReplyRequest(reply) {
   };
 }
 
-export function deletePost(cuid) {
+export function deletePost(objectId) {
   return {
     type: DELETE_POST,
-    cuid
+    objectId
   };
 }
 
-export function deletePostRequest(cuid) {
+export function deletePostRequest(objectId) {
   return dispatch => {
-    return callApi(`posts/${cuid}`, "delete").then(() =>
-      dispatch(deletePost(cuid))
+    return callApi(`posts/${objectId}`, "delete").then(() =>
+      dispatch(deletePost(objectId))
     );
   };
 }

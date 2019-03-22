@@ -20,6 +20,7 @@ const userUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
 const postUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts";
+
 var request = require("request");
 
 // Get all Posts
@@ -116,51 +117,43 @@ router.route("/postNewPost").post(function(req, res, next) {
     },
     json: true
   };
-
   request(options2, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(body);
   });
 });
 
-// router.route("/queryAllPost").get(function(req, res, next) {
-//   var options = {
-//     method: "GET",
-//     url: postUrl,
-//     headers: {
-//       "cache-control": "no-cache",
-//       "Server-Token": token,
-//       "Content-Type": "application/json"
-//     }
-//   };
-//   request(options, function(error, response, body) {
-//     if (error) throw new Error(error);
-//     res.json({ posts: JSON.parse(body) });
-//   });
-// });
-
 // Get one post by objectId
 router.route("/posts/:objectId").get(function(req, res, next) {
-  console.log("saying hello");
-
-  console.log(req.params);
   var options = {
     method: "GET",
-    url: `https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts/${
-      req.params.objectId
-    }`,
+    url: `${postUrl}/${req.params.objectId}`,
     headers: {
       "cache-control": "no-cache",
       "Server-Token": token,
       "Content-Type": "application/json"
     }
   };
-
   request(options, function(error, reponse, body) {
     if (error) throw new Error(error);
-    console.log(JSON.parse(body));
-    // console.log(res.json({ posts: JSON.parse(body) }));
+    // console.log(JSON.parse(body));
     res.json({ post: JSON.parse(body) });
+  });
+});
+
+router.route("/posts/:objectId").delete(function(req, res, next) {
+  var options = {
+    method: "DELETE",
+    url: `${postUrl}/${req.params.objectId}`,
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, reponse, body) {
+    if (error) throw new Error(error);
+    console.log("Deleted");
   });
 });
 

@@ -14,7 +14,7 @@ function PostList(props) {
           post={individualPost}
           key={individualPost.cuid}
           addReply={props.handleAddReply}
-          onDelete={() => props.handleDeletePost(individualPost.cuid)}
+          onDelete={() => props.handleDeletePost(individualPost.objectId)}
         />
       ))}
     </div>
