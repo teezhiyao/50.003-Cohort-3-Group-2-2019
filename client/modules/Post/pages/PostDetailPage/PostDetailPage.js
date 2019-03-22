@@ -57,7 +57,7 @@ PostDetailPage.need = [
 function mapStateToProps(state, props) {
   console.log("Mapping here");
   console.log(props);
-  console.log(getPost(state, props.postd));
+  console.log(getPost(state, props.post));
   return {
     post: getPost(state, props.post.objectId)
   };

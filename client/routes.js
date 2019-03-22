@@ -1,7 +1,8 @@
 /* eslint-disable global-require */
-import React from "react";
+import React, { Component } from "react";
 import { Route, IndexRoute } from "react-router";
 import App from "./modules/App/App";
+import { Loggedin } from "./modules/Login/pages/Loggedin";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
@@ -46,5 +47,22 @@ export default (
         });
       }}
     />
+    {/* <Route path="/Loggedin" component={Loggedin} /> */}
+    <Route
+      path="/Loggedin"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Login/pages/Loggedin").default);
+        });
+      }}
+    />
+    {/* <Route
+      path="/login"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Login/pages/LoggedIn").default);
+        });
+      }}
+    /> */}
   </Route>
 );
