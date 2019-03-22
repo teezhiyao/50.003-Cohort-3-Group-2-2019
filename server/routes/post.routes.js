@@ -41,6 +41,7 @@ router.route("/queryAllPost").get(function(req, res, next) {
 
 // Add a new Post
 router.route("/postNewPost").post(function(req, res, next) {
+  console.log(req.body.post);
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
   const newPost = new Issue({
     title: req.body.post.title,
@@ -100,10 +101,19 @@ router.route("/postNewPost").post(function(req, res, next) {
       "Server-Token": apitoken
     },
     body: {
-      subject: req.body.post.title,
-      sender: "teezhiyao@gmail.com",
+      subject: "New issue added by " + req.body.post.username,
+      sender: "ZhiYao@mymail.accenture.com",
       recipient: "teezhiyao@gmail.com",
-      html: "<h1>" + req.body.post.content + "</h1>"
+      html:
+        "<h3>" +
+        "There is a new issue: " +
+        req.body.post.title +
+        " posted by " +
+        req.body.post.name +
+        "</h3></h3>" +
+        " Content of the issue is " +
+        req.body.post.content +
+        "</h3>"
     },
     json: true
   };
@@ -320,8 +330,6 @@ router.route("/deleteUser").delete(function(req, res, next) {
 });
 
 router.route("/email").post(function(req, res, next) {
-  console.log("Email trying hard");
-
   var options = {
     method: "POST",
     url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",

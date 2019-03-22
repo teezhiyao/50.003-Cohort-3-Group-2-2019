@@ -20,7 +20,7 @@ export function addPostRequest(post) {
   return dispatch => {
     return callApi("postNewPost", "post", {
       post: {
-        username: post.username,
+        username: post.name,
         category: post.category,
         resolveStatus: post.resolveStatus,
         title: post.title,
