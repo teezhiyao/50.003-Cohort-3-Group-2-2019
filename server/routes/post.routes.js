@@ -1,23 +1,12 @@
 import { Router } from "express";
-import * as PostController from "../controllers/post.controller";
-import config from "../config";
 import Issue from "../models/post";
-import Reply from "../models/reply";
-
 import cuid from "cuid";
 import slug from "limax";
 import sanitizeHtml from "sanitize-html";
-import issueSchema from "../models/post";
 import apitoken from "../../nopush";
 
 const router = new Router();
-const mongo = require("mongodb");
-const assert = require("assert");
-const url = config.mongoURL;
-
 const token = apitoken;
-const userUrl =
-  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
 const postUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts";
 
@@ -40,7 +29,7 @@ router.route("/queryAllPost").get(function(req, res, next) {
   });
 });
 
-// Add a new Post and send out email notification to admin
+// Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
   console.log(req.body.post);
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
@@ -141,6 +130,7 @@ router.route("/posts/:objectId").get(function(req, res, next) {
   });
 });
 
+// Delete one post by objectId
 router.route("/posts/:objectId").delete(function(req, res, next) {
   var options = {
     method: "DELETE",
@@ -156,20 +146,5 @@ router.route("/posts/:objectId").delete(function(req, res, next) {
     console.log("Deleted");
   });
 });
-
-// Delete a post by cuid
-// router.route("/posts/:cuid").delete(function(req, res) {
-//   mongo.connect(url, function(err, MongoClient) {
-//     const db = MongoClient.db("Issue");
-//     console.log(req.params.cuid);
-//     db.collection("issues").findOneAndDelete(
-//       { cuid: req.params.cuid },
-//       (err, result) => {
-//         if (err) return res.send(500, err);
-//         res.send("Deleted");
-//       }
-//     );
-//   });
-// });
 
 export default router;
