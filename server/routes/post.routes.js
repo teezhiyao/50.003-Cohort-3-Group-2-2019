@@ -18,14 +18,15 @@ const url = config.mongoURL;
 const token = apitoken;
 const userUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
+const postUrl =
+  "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts";
 var request = require("request");
 
 // Get all Posts
 router.route("/queryAllPost").get(function(req, res, next) {
   var options = {
     method: "GET",
-    url:
-      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    url: postUrl,
     headers: {
       "cache-control": "no-cache",
       "Server-Token": token,
@@ -35,7 +36,6 @@ router.route("/queryAllPost").get(function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     res.json({ posts: JSON.parse(body) });
-    // console.log(JSON.parse(body).results);
   });
 });
 
@@ -53,8 +53,7 @@ router.route("/postNewPost").post(function(req, res, next) {
 
   var options = {
     method: "POST",
-    url:
-      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    url: postUrl,
     headers: {
       "cache-control": "no-cache",
       "Server-Token": token,
@@ -124,24 +123,26 @@ router.route("/postNewPost").post(function(req, res, next) {
   });
 });
 
-// // Get all Replies
-// router.route("/replys").get(function(req, res, next) {
-//   mongo.connect(url, function(err, MongoClient) {
-//     assert.equal(null, err);
-//     const db = MongoClient.db("Issue");
-//     // console.log(req.body);
-//     db.collection("replies")
-//       .find({ cuid: req.params.cuid })
-//       .toArray((err, result) => {
-//         if (err) return console.log(err);
-//         // renders index.ejs
-//         res.json({ replys: result });
-//       });
+// router.route("/queryAllPost").get(function(req, res, next) {
+//   var options = {
+//     method: "GET",
+//     url: postUrl,
+//     headers: {
+//       "cache-control": "no-cache",
+//       "Server-Token": token,
+//       "Content-Type": "application/json"
+//     }
+//   };
+//   request(options, function(error, response, body) {
+//     if (error) throw new Error(error);
+//     res.json({ posts: JSON.parse(body) });
 //   });
 // });
 
 // Get one post by objectId
 router.route("/posts/:objectId").get(function(req, res, next) {
+  console.log("saying hello");
+
   console.log(req.params);
   var options = {
     method: "GET",
@@ -155,49 +156,26 @@ router.route("/posts/:objectId").get(function(req, res, next) {
     }
   };
 
-  request(options, function(error, response, body) {
+  request(options, function(error, reponse, body) {
     if (error) throw new Error(error);
-
-    //console.log(body);
+    console.log(JSON.parse(body));
+    // console.log(res.json({ posts: JSON.parse(body) }));
+    res.json({ post: JSON.parse(body) });
   });
 });
 
 // Delete a post by cuid
-router.route("/posts/:cuid").delete(function(req, res) {
-  mongo.connect(url, function(err, MongoClient) {
-    const db = MongoClient.db("Issue");
-    console.log(req.params.cuid);
-    db.collection("issues").findOneAndDelete(
-      { cuid: req.params.cuid },
-      (err, result) => {
-        if (err) return res.send(500, err);
-        res.send("Deleted");
-      }
-    );
-  });
-});
-
-// router.route("/email").post(function(req, res, next) {
-//   var options = {
-//     method: "POST",
-//     url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
-//     headers: {
-//       "cache-control": "no-cache",
-//       "Content-Type": "application/json",
-//       "Server-Token": apitoken
-//     },
-//     body: {
-//       subject: req.body.post.title,
-//       sender: "teezhiyao@gmail.com",
-//       recipient: "teezhiyao@gmail.com",
-//       html: "<h1>" + req.body.post.content + "</h1>"
-//     },
-//     json: true
-//   };
-
-//   request(options, function(error, response, body) {
-//     if (error) throw new Error(error);
-//     console.log(body);
+// router.route("/posts/:cuid").delete(function(req, res) {
+//   mongo.connect(url, function(err, MongoClient) {
+//     const db = MongoClient.db("Issue");
+//     console.log(req.params.cuid);
+//     db.collection("issues").findOneAndDelete(
+//       { cuid: req.params.cuid },
+//       (err, result) => {
+//         if (err) return res.send(500, err);
+//         res.send("Deleted");
+//       }
+//     );
 //   });
 // });
 

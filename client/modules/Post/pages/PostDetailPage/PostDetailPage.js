@@ -22,19 +22,19 @@ import { getPost } from "../../PostReducer";
 //AND RESOLVE STATUS TOGGLE
 export function PostDetailPage(props) {
   console.log("testing");
-  console.log(props);
+  console.log(props.post.post);
   return (
     <div>
-      <Helmet title={props.post.title} />
+      <Helmet title={props.post.post.title} />
       <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-        <h3 className={styles["post-title"]}>{props.post.title}</h3>
+        <h3 className={styles["post-title"]}>{props.post.post.title}</h3>
         <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.userName}
+          <FormattedMessage id="by" /> {props.post.post.userName}
         </p>
-        <p className={styles["post-desc"]}>{props.post.content}</p>
+        <p className={styles["post-desc"]}>{props.post.post.content}</p>
         {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
-        <p className="ResolveStatus">{props.post.resolveStatus}</p>
-        <p className="date">{props.post.dateAdded}</p>
+        <p className="ResolveStatus">{props.post.post.resolveStatus}</p>
+        <p className="date">{props.post.post.dateAdded}</p>
         {/* <h3 className={styles['post-title']}>
             <Link to={`/`}>
               Back to Home Page
@@ -55,25 +55,26 @@ PostDetailPage.need = [
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
-  console.log("Mapping here");
-  console.log(props);
-  console.log(getPost(state, props.post));
+  // console.log("Mapping here");
+  // console.log(props.params);
+  // props.post = getPost(state, props.params.objectId);
+  // console.log(props.post);
+
   return {
-    post: getPost(state, props.post.objectId)
+    post: getPost(state, props.params.objectId)
   };
 }
 
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    title: PropTypes.string,
     content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
     objectId: PropTypes.string.isRequired,
-    replyscuid: PropTypes.array,
-    resolveStatus: PropTypes.bool,
-    dateAdded: PropTypes.string
-  }).isRequired
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
+    reply: PropTypes.string
+  })
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

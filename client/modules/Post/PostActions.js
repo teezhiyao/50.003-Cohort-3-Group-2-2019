@@ -88,10 +88,8 @@ export function fetchPost(objectId) {
     console.log("fetch 1 post");
     console.log(objectId);
 
-    return callApi(`posts/${objectId}`).then(function(value) {
-      console.log("print value");
-      console.log(value);
-      value => dispatch(addPost(value));
+    return callApi(`posts/${objectId}`).then(res => {
+      dispatch(addPost(res));
     });
   };
 }
