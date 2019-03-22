@@ -130,6 +130,9 @@ router.route("/posts/:objectId").get(function(req, res, next) {
   });
 });
 
+// Update one post by objectId (To-Do)
+router.route("/posts/:objectId").put(function(req, res, next) {});
+
 // Delete one post by objectId
 router.route("/posts/:objectId").delete(function(req, res, next) {
   var options = {
