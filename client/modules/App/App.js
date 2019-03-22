@@ -19,6 +19,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "react-router";
+
 // Import Style
 // import styles from './App.css';
 
@@ -196,14 +198,14 @@ export class App extends Component {
             </List>
             <Divider />
             <List>
-              {["Log Out"].map((text, index) => (
-                <ListItem button key={text}>
+              <Link to={"/Loggedin"}>
+                <ListItem button key="Log Out">
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary="Log Out" />
                 </ListItem>
-              ))}
+              </Link>
             </List>
           </Drawer>
           <main
