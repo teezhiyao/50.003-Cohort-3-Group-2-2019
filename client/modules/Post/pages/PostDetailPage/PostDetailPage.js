@@ -1,39 +1,40 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import {BrowserRouter, Route} from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import { FormattedMessage } from "react-intl";
+import { BrowserRouter, Route } from "react-router-dom";
 
 // Import Style
-import styles from '../../components/PostListItem/PostListItem.css';
+import styles from "../../components/PostListItem/PostListItem.css";
 
-import {PostListPage} from '../PostListPage/PostListPage';
+import { PostListPage } from "../PostListPage/PostListPage";
 
 // Import Actions
-import { fetchPost } from '../../PostActions';
+import { fetchPost } from "../../PostActions";
 
 // Import Selectors
-import { getPost } from '../../PostReducer';
+import { getPost } from "../../PostReducer";
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
 //CREATE THREAD OF REPLIES
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
 export function PostDetailPage(props) {
+  console.log("testing");
+  console.log(props);
   return (
-    
     <div>
-     
       <Helmet title={props.post.title} />
-      <div className={`${styles['single-post']} ${styles['post-detail']}`}>
-      
-        <h3 className={styles['post-title']}>{props.post.title}</h3>
-        <p className={styles['author-name']}><FormattedMessage id='by' /> {props.post.name}</p>
-        <p className={styles['post-desc']}>{props.post.content}</p>
-        <p className='REPLIES'>{props.post.replyscuid}</p>
-        <p className='ResolveStatus'>{props.post.resolveStatus}</p>
-        <p className='date'>{props.post.dateAdded}</p>
+      <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
+        <h3 className={styles["post-title"]}>{props.post.title}</h3>
+        <p className={styles["author-name"]}>
+          <FormattedMessage id="by" /> {props.post.userName}
+        </p>
+        <p className={styles["post-desc"]}>{props.post.content}</p>
+        {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
+        <p className="ResolveStatus">{props.post.resolveStatus}</p>
+        <p className="date">{props.post.dateAdded}</p>
         {/* <h3 className={styles['post-title']}>
             <Link to={`/`}>
               Back to Home Page
@@ -42,19 +43,23 @@ export function PostDetailPage(props) {
           </h3> */}
       </div>
     </div>
-    
   );
 }
 
 // Actions required to provide data for this component to render in server side.
-PostDetailPage.need = [params => {
-  return fetchPost(params.cuid);
-}];
+PostDetailPage.need = [
+  params => {
+    return fetchPost(params.objectId);
+  }
+];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
+  console.log("Mapping here");
+  console.log(props);
+  console.log(getPost(state, props.post));
   return {
-    post: getPost(state, props.params.cuid),
+    post: getPost(state, props.post.objectId)
   };
 }
 
@@ -64,31 +69,14 @@ PostDetailPage.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired,
     replyscuid: PropTypes.array,
     resolveStatus: PropTypes.bool,
     dateAdded: PropTypes.string
-  }).isRequired,
+  }).isRequired
 };
 
 export default connect(mapStateToProps)(PostDetailPage);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //import React from 'react';
 
@@ -105,7 +93,6 @@ export default connect(mapStateToProps)(PostDetailPage);
 // }
 
 // export default PostDetailPage;
-
 
 // import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
@@ -124,7 +111,6 @@ export default connect(mapStateToProps)(PostDetailPage);
 //   fetchReply
 // } from '../../PostActions';
 
-
 // // // Import Selectors
 // import { getShowAddPost } from '../../../App/AppReducer';
 // import { getPosts } from '../../PostReducer';
@@ -139,7 +125,7 @@ export default connect(mapStateToProps)(PostDetailPage);
 // //get post
 // //get replies
 // //add replies
-    
+
 //   componentDidMount() {
 //     console.log(this.props.post.cuid);
 //     this.props.dispatch(fetchPost(this.props.post.cuid));
@@ -202,7 +188,7 @@ export default connect(mapStateToProps)(PostDetailPage);
 //       return fetchPosts();
 //     }
 //   ];
-  
+
 //   // Retrieve data from store as props
 //   function mapStateToProps(state) {
 //     // console.log(state);

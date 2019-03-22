@@ -21,47 +21,98 @@ const userUrl =
 var request = require("request");
 
 // Get all Posts
-router.route("/posts").get(function(req, res, next) {
-  mongo.connect(url, function(err, MongoClient) {
-    assert.equal(null, err);
-    const db = MongoClient.db("Issue");
-    db.collection("issues")
-      .find()
-      .toArray((err, result) => {
-        if (err) return console.log(err);
-        // renders index.ejs
-        res.json({ posts: result });
-      });
+router.route("/queryAllPost").get(function(req, res, next) {
+  var options = {
+    method: "GET",
+    url:
+      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    res.json({ posts: JSON.parse(body) });
+    // console.log(JSON.parse(body).results);
   });
 });
 
-// router.route("/email").post(function(req, res, next) {
-//   console.log("Email trying hard");
-//   console.log(req.body);
-//   console.log(token);
+// Add a new Post
+router.route("/postNewPost").post(function(req, res, next) {
+  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
+  const newPost = new Issue({
+    title: req.body.post.title,
+    content: req.body.post.content,
+    name: req.body.post.name,
+    slug: tempSlug,
+    cuid: cuid()
+  });
 
-//   var options = {
-//     method: "POST",
-//     url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
-//     headers: {
-//       "cache-control": "no-cache",
-//       "Content-Type": "application/json",
-//       "Server-Token": apitoken
-//     },
-//     body: {
-//       subject: req.body.post.username,
-//       sender: "teezhiyao@gmail.com",
-//       recipient: "teezhiyao@gmail.com",
-//       html: "<h1>" + req.body.post.content + "</h1>"
-//     },
-//     json: true
-//   };
+  var options = {
+    method: "POST",
+    url:
+      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts",
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    },
+    body: {
+      userType: "User",
+      name: req.body.post.name,
+      userID: "1002845",
+      category: "Client Login Issue",
+      title: req.body.post.title,
+      content: req.body.post.content,
+      url: "www.mywebsite.com",
+      slug: tempSlug,
+      cuid: cuid,
+      dateAdded: Date.now.toString,
+      resolveStatus: false,
+      replyscuid: {}
+    },
+    json: true
+  };
+  request(options, function(error, response, body) {
+    // console.log(response.body.objectId);
+    if (error) throw new Error(error);
+  });
+  // Sanitize inputs
+  // newPost.title = sanitizeHtml(newPost.title);
+  // newPost.name = sanitizeHtml(newPost.name);
+  // newPost.content = sanitizeHtml(newPost.content);
+  // // newPost.slug = tempSlug
+  // newPost.save((err, saved) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   }
+  //   res.json({ post: saved });
+  // });
 
-//   request(options, function(error, response, body) {
-//     if (error) throw new Error(error);
-//     console.log(body);
-//   });
-// });
+  var options2 = {
+    method: "POST",
+    url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
+    headers: {
+      "cache-control": "no-cache",
+      "Content-Type": "application/json",
+      "Server-Token": apitoken
+    },
+    body: {
+      subject: req.body.post.title,
+      sender: "teezhiyao@gmail.com",
+      recipient: "teezhiyao@gmail.com",
+      html: "<h1>" + req.body.post.content + "</h1>"
+    },
+    json: true
+  };
+
+  request(options2, function(error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+  });
+});
 
 // Get all Replies
 router.route("/replys").get(function(req, res, next) {
@@ -79,39 +130,25 @@ router.route("/replys").get(function(req, res, next) {
   });
 });
 
-// Get one post by cuid
-router.route("/posts/:cuid").get(PostController.getPost);
-
-// Add a new Post
-router.route("/posts").post(function(req, res, next) {
-  console.log("This api");
-  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
-  const newPost = new Issue({
-    title: req.body.post.title,
-    content: req.body.post.content,
-    name: req.body.post.name,
-    slug: tempSlug,
-    cuid: cuid()
-  });
-  mongo.connect(url, function(err, MongoClient) {
-    assert.equal(null, err);
-    var db = MongoClient.db("Issue");
-    db.collection("issues").insert(newPost, function(err, result) {
-      assert.equal(null, err);
-      console.log("Item inserted");
-      MongoClient.close();
-    });
-  });
-  // Sanitize inputs
-  newPost.title = sanitizeHtml(newPost.title);
-  newPost.name = sanitizeHtml(newPost.name);
-  newPost.content = sanitizeHtml(newPost.content);
-  // newPost.slug = tempSlug
-  newPost.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
+// Get one post by objectId
+router.route("/posts/:objectId").get(function(req, res, next) {
+  console.log(req.params);
+  var options = {
+    method: "GET",
+    url: `https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts/${
+      req.params.objectId
+    }`,
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
     }
-    res.json({ post: saved });
+  };
+
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    //console.log(body);
   });
 });
 
@@ -276,6 +313,32 @@ router.route("/deleteUser").delete(function(req, res, next) {
       "Content-Type": "application/json"
     }
   };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+  });
+});
+
+router.route("/email").post(function(req, res, next) {
+  console.log("Email trying hard");
+
+  var options = {
+    method: "POST",
+    url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
+    headers: {
+      "cache-control": "no-cache",
+      "Content-Type": "application/json",
+      "Server-Token": apitoken
+    },
+    body: {
+      subject: req.body.post.title,
+      sender: "teezhiyao@gmail.com",
+      recipient: "teezhiyao@gmail.com",
+      html: "<h1>" + req.body.post.content + "</h1>"
+    },
+    json: true
+  };
+
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(body);

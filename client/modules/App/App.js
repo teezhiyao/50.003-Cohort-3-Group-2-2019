@@ -1,44 +1,46 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import { Link } from "react-router";
+
 // Import Style
 // import styles from './App.css';
 
 // Import Components
-import Helmet from 'react-helmet';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Helmet from "react-helmet";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 // Import Actions
-import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+import { toggleAddPost } from "./AppActions";
+import { switchLanguage } from "../../modules/Intl/IntlActions";
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: "flex"
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     })
@@ -46,7 +48,7 @@ const styles = theme => ({
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     })
@@ -56,7 +58,7 @@ const styles = theme => ({
     marginRight: 20
   },
   hide: {
-    display: 'none'
+    display: "none"
   },
   drawer: {
     width: drawerWidth,
@@ -66,23 +68,23 @@ const styles = theme => ({
     width: drawerWidth
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end'
+    justifyContent: "flex-end"
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
     marginLeft: -drawerWidth
   },
   contentShift: {
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     }),
@@ -132,21 +134,21 @@ export class App extends Component {
         <div className={classes.root}>
           <CssBaseline />
           <AppBar
-            position='fixed'
+            position="fixed"
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open
             })}
           >
             <Toolbar disableGutters={!open}>
               <IconButton
-                color='inherit'
-                aria-label='Open drawer'
+                color="inherit"
+                aria-label="Open drawer"
                 onClick={this.handleDrawerOpen}
                 className={classNames(classes.menuButton, open && classes.hide)}
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant='h6' color='inherit' noWrap>
+              <Typography variant="h6" color="inherit" noWrap>
                 Ticketing Support System
               </Typography>
             </Toolbar>
@@ -154,8 +156,8 @@ export class App extends Component {
 
           <Drawer
             className={classes.drawer}
-            variant='persistent'
-            anchor='left'
+            variant="persistent"
+            anchor="left"
             open={open}
             classes={{
               paper: classes.drawerPaper
@@ -163,7 +165,7 @@ export class App extends Component {
           >
             <div className={classes.drawerHeader}>
               <IconButton onClick={this.handleDrawerClose}>
-                {theme.direction === 'ltr' ? (
+                {theme.direction === "ltr" ? (
                   <ChevronLeftIcon />
                 ) : (
                   <ChevronRightIcon />
@@ -172,12 +174,7 @@ export class App extends Component {
             </div>
             <Divider />
             <List>
-              {[
-                'Pending Issues',
-                'Urgent Issues',
-                'Resolved Issues',
-                'Common Issues'
-              ].map((text, index) => (
+              {["Home", "Profile"].map((text, index) => (
                 <ListItem button key={text}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -188,14 +185,27 @@ export class App extends Component {
             </List>
             <Divider />
             <List>
-              {['All Issues', 'Deleted', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
+              {["Pending Issues", "Resolved Issues", "All Issues"].map(
+                (text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                )
+              )}
+            </List>
+            <Divider />
+            <List>
+              <Link to={"/Loggedin"}>
+                <ListItem button key="Log Out">
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary="Log Out" />
                 </ListItem>
-              ))}
+              </Link>
             </List>
           </Drawer>
           <main
@@ -204,17 +214,17 @@ export class App extends Component {
             })}
           >
             <Helmet
-              title='Issue Reporting'
-              titleTemplate='%s - Blog App'
+              title="Issue Reporting"
+              titleTemplate="%s - Blog App"
               meta={[
-                { charset: 'utf-8' },
+                { charset: "utf-8" },
                 {
-                  'http-equiv': 'X-UA-Compatible',
-                  content: 'IE=edge'
+                  "http-equiv": "X-UA-Compatible",
+                  content: "IE=edge"
                 },
                 {
-                  name: 'viewport',
-                  content: 'width=device-width, initial-scale=1'
+                  name: "viewport",
+                  content: "width=device-width, initial-scale=1"
                 }
               ]}
             />
