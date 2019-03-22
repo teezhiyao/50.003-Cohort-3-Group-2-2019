@@ -32,6 +32,22 @@ export function addPostRequest(post) {
   };
 }
 
+export function emailCall(post) {
+  return dispatch => {
+    return callApi("email", "post", {
+      post: {
+        username: post.username,
+        category: post.category,
+        resolveStatus: post.resolveStatus,
+        title: post.title,
+        content: post.content,
+        cuid: post.cuid,
+        replyDataStructure: post.replys
+      }
+    }).then(res => dispatch(addPost(res.post)));
+  };
+}
+
 export function addUser(post) {
   return {
     type: ADD_USER,
