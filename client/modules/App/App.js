@@ -20,6 +20,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router";
+import {Register} from "../Login/containers/Auth/Register";
+import {BrowserRouter, Route} from 'react-router-dom';
+
 
 // Import Style
 // import styles from './App.css';
@@ -130,6 +133,7 @@ export class App extends Component {
       //   {this.state.isMounted &&
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
+      
       <div>
         <div className={classes.root}>
           <CssBaseline />
@@ -198,14 +202,22 @@ export class App extends Component {
             </List>
             <Divider />
             <List>
-              <Link to={"/Loggedin"}>
+            <Link to={`/Loggedin`}>
+              
+              
+           
+                    
                 <ListItem button key="Log Out">
+                  
+                  
+                  
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
                   <ListItemText primary="Log Out" />
+                  
                 </ListItem>
-              </Link>
+                </Link>
             </List>
           </Drawer>
           <main
@@ -238,7 +250,9 @@ export class App extends Component {
           </main>
         </div>
       </div>
+      
       // </div>
+      
     );
   }
 }
