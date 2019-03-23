@@ -73,11 +73,11 @@ export class PostListItem extends Component {
 
 PostListItem.propTypes = {
   post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),

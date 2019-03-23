@@ -6,7 +6,6 @@ import PostListItem from "./PostListItem/PostListItem";
 import addReply from "./PostListItem/PostListItem";
 
 //takes in props(all posts) and displays every post
-
 function PostList(props) {
   return (
     <div className="listView">
@@ -15,7 +14,7 @@ function PostList(props) {
           post={individualPost}
           key={individualPost.cuid}
           addReply={props.handleAddReply}
-          onDelete={() => props.handleDeletePost(individualPost.cuid)}
+          onDelete={() => props.handleDeletePost(individualPost.objectId)}
         />
       ))}
     </div>
@@ -25,7 +24,7 @@ function PostList(props) {
 PostList.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       objectId: PropTypes.string.isRequired,

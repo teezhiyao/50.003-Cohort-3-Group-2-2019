@@ -35,7 +35,7 @@ const PostReducer = (state = initialState, action) => {
       };
     case DELETE_POST:
       return {
-        data: state.data.filter(post => post.cuid !== action.cuid)
+        data: state.data.filter(post => post.objectId !== action.objectId)
       };
 
     default:
@@ -49,8 +49,9 @@ const PostReducer = (state = initialState, action) => {
 export const getPosts = state => state.posts.data;
 
 // Get post by objectId
-export const getPost = (state, objectId) =>
-  state.posts.data.filter(post => post.objectId === objectId)[0];
+export const getPost = (state, objectId) => state.posts.data[0];
+
+// state.posts.data.filter(post => post.objectId === objectId)[0];
 
 // Export Reducer
 export default PostReducer;

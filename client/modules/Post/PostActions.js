@@ -18,9 +18,9 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return dispatch => {
-    return callApi("postNewPost", "post", {
+    return callApi("email", "post", {
       post: {
-        username: post.username,
+        username: post.name,
         category: post.category,
         resolveStatus: post.resolveStatus,
         title: post.title,
@@ -88,10 +88,8 @@ export function fetchPost(objectId) {
     console.log("fetch 1 post");
     console.log(objectId);
 
-    return callApi(`posts/${objectId}`).then(function(value) {
-      console.log("print value");
-      console.log(value);
-      value => dispatch(addPost(value));
+    return callApi(`posts/${objectId}`).then(res => {
+      dispatch(addPost(res));
     });
   };
 }
@@ -114,17 +112,17 @@ export function addReplyRequest(reply) {
   };
 }
 
-export function deletePost(cuid) {
+export function deletePost(objectId) {
   return {
     type: DELETE_POST,
-    cuid
+    objectId
   };
 }
 
-export function deletePostRequest(cuid) {
+export function deletePostRequest(objectId) {
   return dispatch => {
-    return callApi(`posts/${cuid}`, "delete").then(() =>
-      dispatch(deletePost(cuid))
+    return callApi(`posts/${objectId}`, "delete").then(() =>
+      dispatch(deletePost(objectId))
     );
   };
 }
