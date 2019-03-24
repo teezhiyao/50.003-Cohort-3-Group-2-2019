@@ -21,7 +21,7 @@ import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 
 class PostListPage extends Component {
-  componentDidMount() {
+  componentDidMount() { // this function is called the moment this component is rendered.
     this.props.dispatch(fetchPosts());
   }
 
