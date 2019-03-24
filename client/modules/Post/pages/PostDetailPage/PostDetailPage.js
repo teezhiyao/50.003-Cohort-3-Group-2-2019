@@ -48,12 +48,12 @@ class PostDetailPage extends Component {
           {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
           <p className="date">{this.props.post.dateAdded}</p>
-
+          {/* 
           <PostList
-            handleDeletePost={this.handleDeletePost}
-            handleAddReply={this.handleAddReply}
-            posts={this.props.posts}
-          />
+          handleDeletePost={this.handleDeletePost}
+          handleAddReply={this.handleAddReply}
+          posts={this.props.posts}
+        /> */}
         </div>
       </div>
     );
