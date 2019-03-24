@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import React, { Component } from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
+import PropTypes from "prop-types";
+import { Link } from "react-router";
+import React, { Component } from "react";
+import { injectIntl, FormattedMessage } from "react-intl";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Card from "@material-ui/core/Card";
 // Import Style
-import styles from './PostListItem.css';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import styles from "./PostListItem.css";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 export class ReplyListItem extends Component {
   //   addReply = () => {
@@ -25,7 +25,7 @@ export class ReplyListItem extends Component {
     return (
       <Card>
         <CardContent>
-          <p className={styles['reply-desc']}>{this.props.reply.reply}</p>
+          <p className={styles["reply-desc"]}>{this.props.reply.reply}</p>
           <br />
           <hr className={styles.divider} />
         </CardContent>
@@ -37,7 +37,7 @@ export class ReplyListItem extends Component {
 ReplyListItem.propTypes = {
   reply: PropTypes.shape({
     reply: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired
+    cuid: PropTypes.string
   })
 };
 export default injectIntl(ReplyListItem);

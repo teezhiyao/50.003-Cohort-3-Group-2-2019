@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
@@ -20,32 +20,34 @@ import { getPost } from "../../PostReducer";
 //CREATE THREAD OF REPLIES
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
-export function PostDetailPage(props) {
-  console.log("testing");
-  console.log(props.post.post);
-  return (
-    <div>
-      <Helmet title={props.post.post.title} />
-      <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-        <h3 className={styles["post-title"]}>{props.post.post.title}</h3>
-        <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.post.userName}
-        </p>
-        <p className={styles["post-desc"]}>{props.post.post.content}</p>
-        {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
-        <p className="ResolveStatus">{props.post.post.resolveStatus}</p>
-        <p className="date">{props.post.post.dateAdded}</p>
-        {/* <h3 className={styles['post-title']}>
+class PostDetailPage extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchPost(this.props.post.objectId));
+  }
+  render() {
+    return (
+      <div>
+        <Helmet title={this.props.post.title} />
+        <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
+          <h3 className={styles["post-title"]}>{this.props.post.title}</h3>
+          <p className={styles["author-name"]}>
+            <FormattedMessage id="by" /> {this.props.post.userName}
+          </p>
+          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+          {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
+          <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
+          <p className="date">{this.props.post.dateAdded}</p>
+          {/* <h3 className={styles['post-title']}>
             <Link to={`/`}>
               Back to Home Page
               
             </Link>
           </h3> */}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
   params => {
@@ -72,7 +74,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     objectId: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
     reply: PropTypes.string
   })
 };

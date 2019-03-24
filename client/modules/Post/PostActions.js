@@ -89,7 +89,7 @@ export function fetchPost(objectId) {
     console.log(objectId);
 
     return callApi(`posts/${objectId}`).then(res => {
-      dispatch(addPost(res));
+      dispatch(addPost(res.post));
     });
   };
 }

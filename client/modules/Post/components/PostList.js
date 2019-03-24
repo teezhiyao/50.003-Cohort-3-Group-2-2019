@@ -29,7 +29,7 @@ PostList.propTypes = {
       content: PropTypes.string.isRequired,
       objectId: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
-      cuid: PropTypes.string.isRequired,
+      cuid: PropTypes.string,
       reply: PropTypes.string
     })
   ),

@@ -105,7 +105,7 @@ Loggedin.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   })
