@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { FormattedMessage } from "react-intl";
 
-
-
 // Import Style
 import styles from "../../components/PostListItem/PostListItem.css";
 
@@ -21,31 +19,46 @@ import { getPost } from "../../PostReducer";
 //CREATE THREAD OF REPLIES
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
-export function PostDetailPage(props) {
-  console.log("testing");
-  console.log(props.post);
-  return (
-    <div>
-      <Helmet title={props.post.title} />
-      <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-        <h3 className={styles["post-title"]}>{props.post.title}</h3>
-        <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.userName}
-        </p>
-        <p className={styles["post-desc"]}>{props.post.content}</p>
-        {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
-        <p className="ResolveStatus">{props.post.resolveStatus}</p>
-        <p className="date">{props.post.dateAdded}</p>
-        {/* <h3 className={styles['post-title']}>
-            <Link to={`/`}>
-              Back to Home Page
-              
-            </Link>
-          </h3> */}
+
+class PostDetailPage extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchPost(this.props.post.objectId));
+  }
+
+  handleDeletePost = post => {
+    if (confirm("Do you want to delete this post")) {
+      this.props.dispatch(deletePostRequest(post));
+    }
+  };
+
+  handleAddReply = (reply, cuid) => {
+    this.props.dispatch(addReplyRequest({ reply, cuid }));
+  };
+
+  render() {
+    return (
+      <div>
+        <Helmet title={this.props.post.title} />
+        <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
+          <h3 className={styles["post-title"]}>{this.props.post.title}</h3>
+          <p className={styles["author-name"]}>
+            <FormattedMessage id="by" /> {this.props.post.userName}
+          </p>
+          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+          {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
+          <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
+          <p className="date">{this.props.post.dateAdded}</p>
+
+          <PostList
+            handleDeletePost={this.handleDeletePost}
+            handleAddReply={this.handleAddReply}
+            posts={this.props.posts}
+          />
         </div>
       </div>
     );
   }
+}
 
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
