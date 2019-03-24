@@ -1,9 +1,9 @@
-var Crawler = require("js-crawler");
+// var Crawler = require("js-crawler");
  
-new Crawler().configure({depth: 3})
-  .crawl("http://localhost:8100", function onSuccess(page) {
-    console.log(page.url);
-  });
+// new Crawler().configure({depth: 3})
+//   .crawl("http://localhost:8100", function onSuccess(page) {
+//     console.log(page.url);
+//   });
   
 
 // Options-based API
@@ -28,19 +28,18 @@ new Crawler().configure({depth: 3})
 
 
 
-// //Handling errors
-// //It is possible to pass an extra callback to handle errors, consider the modified example above:
-// var Crawler = require("js-crawler");
+//Handling errors
+var Crawler = require("js-crawler");
  
-// new Crawler().configure({depth: 3})
-//   .crawl("http://localhost:8100", function(page) {
-//     console.log(page.url);
-//   }, function(response) {
-//     console.log("ERROR occurred:");
-//     console.log(response.status);
-//     console.log(response.url);
-//     console.log(response.referer);
-//   });
+new Crawler().configure({depth: 3})
+  .crawl("http://localhost:8100", function(page) {
+    console.log(page.url);
+  }, function(response) {
+    console.log("ERROR occurred:");
+    console.log(response.status);
+    console.log(response.url);
+    console.log(response.referer);
+  });
 
 
 
