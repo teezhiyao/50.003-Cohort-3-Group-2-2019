@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 // Import Style
 import styles from "../../components/PostListItem/PostListItem.css";
 
-import { PostListPage } from "../PostListPage/PostListPage";
+import PostListItem from "../../components/PostListItem/PostListItem";
 
 // Import Actions
 import { fetchPost } from "../../PostActions";
@@ -48,12 +48,13 @@ class PostDetailPage extends Component {
           {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
           <p className="date">{this.props.post.dateAdded}</p>
-          {/* 
-          <PostList
-          handleDeletePost={this.handleDeletePost}
-          handleAddReply={this.handleAddReply}
-          posts={this.props.posts}
-        /> */}
+
+          <PostListItem
+            post={this.props.post}
+            key={this.props.post.objectId}
+            addReply={this.handleAddReply}
+            onDelete={() => this.handleDeletePost(this.props.post.objectId)}
+          />
         </div>
       </div>
     );
