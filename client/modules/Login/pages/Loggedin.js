@@ -47,12 +47,6 @@ export class Loggedin extends Component {
     // }
   };
 
-  //   setRedirect = () => {
-  //     this.setState({
-  //       redirect: true
-  //     });
-  //   };
-
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to="/" />;
