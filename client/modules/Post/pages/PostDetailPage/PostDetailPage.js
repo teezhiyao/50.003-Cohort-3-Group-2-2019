@@ -23,19 +23,19 @@ import { getPost } from "../../PostReducer";
 //AND RESOLVE STATUS TOGGLE
 export function PostDetailPage(props) {
   console.log("testing");
-  console.log(props.post.post);
+  console.log(props.post);
   return (
     <div>
-      <Helmet title={props.post.post.title} />
+      <Helmet title={props.post.title} />
       <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-        <h3 className={styles["post-title"]}>{props.post.post.title}</h3>
+        <h3 className={styles["post-title"]}>{props.post.title}</h3>
         <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.post.userName}
+          <FormattedMessage id="by" /> {props.post.userName}
         </p>
-        <p className={styles["post-desc"]}>{props.post.post.content}</p>
+        <p className={styles["post-desc"]}>{props.post.content}</p>
         {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
-        <p className="ResolveStatus">{props.post.post.resolveStatus}</p>
-        <p className="date">{props.post.post.dateAdded}</p>
+        <p className="ResolveStatus">{props.post.resolveStatus}</p>
+        <p className="date">{props.post.dateAdded}</p>
         {/* <h3 className={styles['post-title']}>
             <Link to={`/`}>
               Back to Home Page
@@ -73,7 +73,7 @@ PostDetailPage.propTypes = {
     content: PropTypes.string.isRequired,
     objectId: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
     reply: PropTypes.string
   })
 };
