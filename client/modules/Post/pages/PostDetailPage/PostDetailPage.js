@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
@@ -42,10 +42,10 @@ export function PostDetailPage(props) {
               
             </Link>
           </h3> */}
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
