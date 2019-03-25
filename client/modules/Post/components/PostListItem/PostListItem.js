@@ -29,56 +29,20 @@ export class PostListItem extends Component {
 
   render() {
     return (
-      // <div className={styles['single-post']}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{this.props.post.title}</Typography>
-        </ExpansionPanelSummary>
-        <Card>
-          <ExpansionPanelDetails>
-            <CardContent>
-              <h3 className={styles["post-title"]}>
-                <Link to={`/posts/${this.props.post.objectId}`}>
-                  {this.props.post.title}
-                  {/* <PostDetailPage post={this.props.post} /> */}
-                </Link>
-              </h3>
-              <p className={styles["author-name"]}>
-                <FormattedMessage id="by" /> {this.props.post.name}
-              </p>
-              <p className={styles["post-desc"]}>{this.props.post.content}</p>
-              {/* <form noValidate autoComplete="off">
-            <input
-              placeholder={"Reply"}
-              className={styles["form-field"]}
-              ref="replyText"
-            />{" "}
-          </form> */}
-            </CardContent>
-          </ExpansionPanelDetails>
-          {/* <br />
-        <CardActions>
-          <Button
-            variant="contained"
-            color="primary"
-            href="#"
-            onClick={this.addReply}
-          >
-            {" "}
-            Reply
-          </Button>
-        </CardActions>
+      <Card>
         <CardContent>
-          <br />
-          <p className={styles["post-action"]}>
-            <a href="#" onClick={this.props.onDelete}>
-              <FormattedMessage id="deletePost" />
-            </a>
+          <h3 className={styles["post-title"]}>
+            <Link to={`/posts/${this.props.post.objectId}`}>
+              {this.props.post.title}
+              {/* <PostDetailPage post={this.props.post} /> */}
+            </Link>
+          </h3>
+          <p className={styles["author-name"]}>
+            <FormattedMessage id="by" /> {this.props.post.name}
           </p>
-          <hr className={styles.divider} />
-        </CardContent> */}
-        </Card>
-      </ExpansionPanel>
+          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+        </CardContent>
+      </Card>
     );
   }
 }

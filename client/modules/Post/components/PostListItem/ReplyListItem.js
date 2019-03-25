@@ -26,8 +26,6 @@ export class ReplyListItem extends Component {
       <Card>
         <CardContent>
           <p className={styles["reply-desc"]}>{this.props.reply.content}</p>
-          <br />
-          <hr className={styles.divider} />
         </CardContent>
       </Card>
     );
