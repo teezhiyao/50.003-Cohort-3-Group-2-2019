@@ -32,7 +32,7 @@ export class PostListItem extends Component {
       // <div className={styles['single-post']}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Expansion Panel 1</Typography>
+          <Typography>{this.props.post.title}</Typography>
         </ExpansionPanelSummary>
         <Card>
           <ExpansionPanelDetails>
