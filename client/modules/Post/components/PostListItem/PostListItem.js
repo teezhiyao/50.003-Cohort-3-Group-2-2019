@@ -37,15 +37,15 @@ export class PostListItem extends Component {
             <FormattedMessage id="by" /> {this.props.post.name}
           </p>
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          <form noValidate autoComplete="off">
+          {/* <form noValidate autoComplete="off">
             <input
               placeholder={"Reply"}
               className={styles["form-field"]}
               ref="replyText"
             />{" "}
-          </form>
+          </form> */}
         </CardContent>
-        <br />
+        {/* <br />
         <CardActions>
           <Button
             variant="contained"
@@ -65,7 +65,7 @@ export class PostListItem extends Component {
             </a>
           </p>
           <hr className={styles.divider} />
-        </CardContent>
+        </CardContent> */}
       </Card>
     );
   }
