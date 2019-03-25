@@ -33,7 +33,8 @@ router.route("/createUser").post(function(req, res, next) {
   });
 });
 
-//Try logging in
+//Try logging in , To-Do : Refine after connecting with front-end
+//Returns fail/success response based on validity of credentials
 router.route("/userLogin").get(function(req, res, next) {
   console.log(req);
   var options = {
@@ -53,6 +54,7 @@ router.route("/userLogin").get(function(req, res, next) {
   });
 });
 
+//To retrieve all user, To Do : Confirm if needed
 router.route("/queryAllUser").get(function(req, res, next) {
   var options = {
     method: "GET",
@@ -69,6 +71,7 @@ router.route("/queryAllUser").get(function(req, res, next) {
   });
 });
 
+//To Do : Not implemented as no context for updating information yet
 router.route("/updateUser").put(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
@@ -89,6 +92,7 @@ router.route("/updateUser").put(function(req, res, next) {
   });
 });
 
+//To Do : Need to implement when user/admin are given permission as the session token will be needed for reading/deleting objects
 router.route("/getCurrentUser").get(function(req, res, next) {
   var options = {
     method: "GET",
@@ -106,6 +110,7 @@ router.route("/getCurrentUser").get(function(req, res, next) {
   });
 });
 
+//To Do: Check with accenture about user deletion. Current status is that it looks impossible without master token(Not provided)
 router.route("/deleteUser").delete(function(req, res, next) {
   const username = user;
   const sessionToken = 1029382;
@@ -125,6 +130,7 @@ router.route("/deleteUser").delete(function(req, res, next) {
   });
 });
 
+//To Do: Implement floating bar for emailing to admin/user , Not sure where to place on UI
 router.route("/email").post(function(req, res, next) {
   console.log("Email trying hard");
 
