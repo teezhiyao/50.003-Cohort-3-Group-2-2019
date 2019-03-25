@@ -8,8 +8,9 @@ import { FormattedMessage } from "react-intl";
 import styles from "../../components/PostListItem/PostListItem.css";
 
 import PostListItem from "../../components/PostListItem/PostListItem";
+import PostList from "../../components/PostList";
 
-// Import Actions
+// Import ActionsY
 import { fetchPost } from "../../PostActions";
 
 // Import Selectors
@@ -55,6 +56,12 @@ class PostDetailPage extends Component {
             addReply={this.handleAddReply}
             onDelete={() => this.handleDeletePost(this.props.post.objectId)}
           />
+
+          {/* <PostList
+            handleDeletePost={this.handleDeletePost}
+            handleAddReply={this.handleAddReply}
+            posts={PropTypes.arrayOf(this.props.posts)}
+          /> */}
         </div>
       </div>
     );
