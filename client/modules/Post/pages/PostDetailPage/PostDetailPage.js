@@ -8,13 +8,13 @@ import { FormattedMessage } from "react-intl";
 import styles from "../../components/PostListItem/PostListItem.css";
 
 import PostListItem from "../../components/PostListItem/PostListItem";
-import PostList from "../../components/PostList";
+import ReplyList from "../../components/ReplyList";
 
 // Import ActionsY
-import { fetchPost } from "../../PostActions";
+import { fetchPosts, fetchPost } from "../../PostActions";
 
 // Import Selectors
-import { getPost } from "../../PostReducer";
+import { getPost, getPosts } from "../../PostReducer";
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
 //CREATE THREAD OF REPLIES
@@ -24,6 +24,7 @@ import { getPost } from "../../PostReducer";
 class PostDetailPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPost(this.props.post.objectId));
+    this.props.dispatch(fetchPosts());
   }
 
   handleDeletePost = post => {
@@ -39,31 +40,29 @@ class PostDetailPage extends Component {
   render() {
     return (
       <div>
-        <Helmet title={this.props.post.title} />
+        {/* <Helmet title={this.props.post.title} />
         <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
           <h3 className={styles["post-title"]}>{this.props.post.title}</h3>
           <p className={styles["author-name"]}>
             <FormattedMessage id="by" /> {this.props.post.userName}
           </p>
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
-          <p className="date">{this.props.post.dateAdded}</p>
+          <p className="date">{this.props.post.dateAdded}</p> */}
 
-          <PostListItem
-            post={this.props.post}
-            key={this.props.post.objectId}
-            addReply={this.handleAddReply}
-            onDelete={() => this.handleDeletePost(this.props.post.objectId)}
-          />
-
-          {/* <PostList
-            handleDeletePost={this.handleDeletePost}
-            handleAddReply={this.handleAddReply}
-            posts={PropTypes.arrayOf(this.props.posts)}
-          /> */}
-        </div>
+        <PostListItem
+          post={this.props.post}
+          key={this.props.post.objectId}
+          addReply={this.handleAddReply}
+          onDelete={() => this.handleDeletePost(this.props.post.objectId)}
+        />
+        <ReplyList
+          handleDeletePost={this.handleDeletePost}
+          handleAddReply={this.handleAddReply}
+          posts={this.props.replies}
+        />
       </div>
+      // </div>
     );
   }
 }
@@ -83,7 +82,8 @@ function mapStateToProps(state, props) {
   // console.log(props.post);
 
   return {
-    post: getPost(state, props.params.objectId)
+    post: getPost(state, props.params.objectId),
+    replies: getPosts(state)
   };
 }
 
@@ -96,7 +96,15 @@ PostDetailPage.propTypes = {
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string,
     reply: PropTypes.string
-  })
+  }),
+  replies: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      content: PropTypes.string.isRequired,
+      objectId: PropTypes.string.isRequired
+    })
+  ),
+  dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

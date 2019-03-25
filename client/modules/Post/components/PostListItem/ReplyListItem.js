@@ -25,7 +25,7 @@ export class ReplyListItem extends Component {
     return (
       <Card>
         <CardContent>
-          <p className={styles["reply-desc"]}>{this.props.reply.reply}</p>
+          <p className={styles["reply-desc"]}>{this.props.reply.content}</p>
           <br />
           <hr className={styles.divider} />
         </CardContent>
@@ -36,8 +36,8 @@ export class ReplyListItem extends Component {
 
 ReplyListItem.propTypes = {
   reply: PropTypes.shape({
-    reply: PropTypes.string.isRequired,
-    cuid: PropTypes.string
+    content: PropTypes.string.isRequired,
+    objectId: PropTypes.string
   })
 };
 export default injectIntl(ReplyListItem);

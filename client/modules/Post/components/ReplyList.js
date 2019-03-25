@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Import Components
-import ReplyListItem from "./ReplyListItem/ReplyListItem";
-import addReply from "./ReplyListItem/ReplyListItem";
+import ReplyListItem from "./PostListItem/ReplyListItem";
+// import addReply from "./ReplyListItem/ReplyListItem";
 
 function ReplyList(props) {
   return (
     <div className="listView">
       {props.posts.map(individualReply => (
-        <ReplyListItem post={individualReply} key={individualReply.cuid} />
+        <ReplyListItem reply={individualReply} key={individualReply.objectId} />
       ))}
     </div>
   );
@@ -18,8 +18,9 @@ function ReplyList(props) {
 ReplyList.propTypes = {
   posts: PropTypes.arrayOf(
     PropTypes.shape({
+      name: PropTypes.string,
       reply: PropTypes.string.isRequired,
-      cuid: PropTypes.string
+      objectId: PropTypes.string
     })
   )
 };
