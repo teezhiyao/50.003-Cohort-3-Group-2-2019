@@ -8,6 +8,7 @@ const userUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
 var request = require("request");
 
+//Create User account using ACNAPI
 router.route("/createUser").post(function(req, res, next) {
   console.log("I have reached here");
   console.log(req.body);
@@ -32,7 +33,27 @@ router.route("/createUser").post(function(req, res, next) {
   });
 });
 
-router.route("/queryAll").get(function(req, res, next) {
+//Try logging in
+router.route("/userLogin").get(function(req, res, next) {
+  console.log(req);
+  var options = {
+    method: "GET",
+    url: `https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/login`,
+    qs: { username: "teezhiyao", password: "teezhiyao" },
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": apitoken,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    console.log(body);
+    console.log(response);
+  });
+});
+
+router.route("/queryAllUser").get(function(req, res, next) {
   var options = {
     method: "GET",
     url: `${userUrl}/users`,
