@@ -11,6 +11,11 @@ import styles from "./PostListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import PostDetailPage from "../../pages/PostDetailPage/PostDetailPage";
+import Typography from "@material-ui/core/Typography";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export class PostListItem extends Component {
   addReply = () => {
@@ -25,27 +30,33 @@ export class PostListItem extends Component {
   render() {
     return (
       // <div className={styles['single-post']}>
-      <Card>
-        <CardContent>
-          <h3 className={styles["post-title"]}>
-            <Link to={`/posts/${this.props.post.objectId}`}>
-              {this.props.post.title}
-              {/* <PostDetailPage post={this.props.post} /> */}
-            </Link>
-          </h3>
-          <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.name}
-          </p>
-          <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          {/* <form noValidate autoComplete="off">
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Expansion Panel 1</Typography>
+        </ExpansionPanelSummary>
+        <Card>
+          <ExpansionPanelDetails>
+            <CardContent>
+              <h3 className={styles["post-title"]}>
+                <Link to={`/posts/${this.props.post.objectId}`}>
+                  {this.props.post.title}
+                  {/* <PostDetailPage post={this.props.post} /> */}
+                </Link>
+              </h3>
+              <p className={styles["author-name"]}>
+                <FormattedMessage id="by" /> {this.props.post.name}
+              </p>
+              <p className={styles["post-desc"]}>{this.props.post.content}</p>
+              {/* <form noValidate autoComplete="off">
             <input
               placeholder={"Reply"}
               className={styles["form-field"]}
               ref="replyText"
             />{" "}
           </form> */}
-        </CardContent>
-        {/* <br />
+            </CardContent>
+          </ExpansionPanelDetails>
+          {/* <br />
         <CardActions>
           <Button
             variant="contained"
@@ -66,7 +77,8 @@ export class PostListItem extends Component {
           </p>
           <hr className={styles.divider} />
         </CardContent> */}
-      </Card>
+        </Card>
+      </ExpansionPanel>
     );
   }
 }
