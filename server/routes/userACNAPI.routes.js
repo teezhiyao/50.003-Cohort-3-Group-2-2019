@@ -8,36 +8,22 @@ const userUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/users";
 var request = require("request");
 
-router.route("/userRegister").post(function(req, res, next) {
-  var options = {
-    method: "POST",
-    url: userUrl,
-    headers: {
-      "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
-    },
-    body: req.body,
-    json: true
-  };
-  request(options, function(error, response, body) {
-    if (error) throw new Error(error);
-    console.log(body);
-  });
-});
-
-router.route("/userRegister").post(function(req, res, next) {
+router.route("/createUser").post(function(req, res, next) {
   console.log("I have reached here");
   console.log(req.body);
+  //To-Do username & password are all the same now before login page is set-up
   var options = {
     method: "POST",
     url: userUrl,
     headers: {
       "cache-control": "no-cache",
-      "Server-Token": token,
+      "Server-Token": apitoken,
       "Content-Type": "application/json"
     },
-    body: req.body.post,
+    body: {
+      username: req.body.post.username,
+      password: req.body.post.username
+    },
     json: true
   };
   request(options, function(error, response, body) {
