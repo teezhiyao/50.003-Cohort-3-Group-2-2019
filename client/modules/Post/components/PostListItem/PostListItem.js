@@ -40,7 +40,12 @@ export class PostListItem extends Component {
           <p className={styles["author-name"]}>
             <FormattedMessage id="by" /> {this.props.post.name}
           </p>
-          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+          <span className={styles["post-desc"]}>{this.props.post.content}</span>
+          <span className={styles["post-action"]}>
+            <span href="#" align="left" onClick={this.props.onDelete}>
+              <FormattedMessage id="deletePost" />
+            </span>
+          </span>
         </CardContent>
       </Card>
     );
