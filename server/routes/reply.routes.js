@@ -11,20 +11,23 @@ const replyUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Replies";
 var request = require("request");
 
-// Get all Replies To Do: Figure out how to filter replies
-router.route("/queryAllReplies").get(function(req, res, next) {
+// Get all Replies Using PostId
+router.route("/queryReplies").get(function(req, res, next) {
+  console.log("Reached queryReplies");
+  console.log(req);
   var options = {
     method: "GET",
     url: replyUrl,
+    qs: { where: `{%22postId%22:%22${req.params.postId}%22}` },
     headers: {
       "cache-control": "no-cache",
-      "Server-Token": token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Server-Token": apitoken
     }
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    res.json({ posts: JSON.parse(body) });
+    res.json({ replies: JSON.parse(body) });
   });
 });
 

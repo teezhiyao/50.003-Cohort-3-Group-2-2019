@@ -11,10 +11,12 @@ import PostListItem from "../../components/PostListItem/PostListItem";
 import ReplyList from "../../components/ReplyList";
 
 // Import ActionsY
-import { fetchPosts, fetchPost } from "../../PostActions";
+import { fetchPosts, fetchPost, fetchReplies } from "../../PostActions";
 
 // Import Selectors
 import { getPost, getPosts } from "../../PostReducer";
+import { getReplies } from "../../RepliesReducer";
+
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
 //CREATE THREAD OF REPLIES
@@ -23,8 +25,9 @@ import { getPost, getPosts } from "../../PostReducer";
 
 class PostDetailPage extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchPost(this.props.post.objectId));
     this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchPost(this.props.post.objectId));
+    this.props.dispatch(fetchReplies(this.props.post.objectId));
   }
 
   handleDeletePost = post => {
@@ -59,7 +62,7 @@ class PostDetailPage extends Component {
         <ReplyList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
-          posts={this.props.replies}
+          replies={this.props.replies}
         />
       </div>
       // </div>
@@ -70,20 +73,20 @@ class PostDetailPage extends Component {
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
   params => {
-    return fetchPost(params.objectId);
+    return fetchPosts();
   }
 ];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
-  // console.log("Mapping here");
-  // console.log(props.params);
+  console.log("Mapping here");
+  console.log(state);
   // props.post = getPost(state, props.params.objectId);
   // console.log(props.post);
 
   return {
     post: getPost(state, props.params.objectId),
-    replies: getPosts(state)
+    replies: getReplies(state, props.params.objectId)
   };
 }
 
@@ -101,7 +104,8 @@ PostDetailPage.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       content: PropTypes.string.isRequired,
-      objectId: PropTypes.string.isRequired
+      objectId: PropTypes.string.isRequired,
+      postId: PropTypes.string.isRequired
     })
   ),
   dispatch: PropTypes.func.isRequired

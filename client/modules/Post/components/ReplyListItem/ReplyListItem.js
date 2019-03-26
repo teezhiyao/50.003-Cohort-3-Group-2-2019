@@ -35,7 +35,8 @@ export class ReplyListItem extends Component {
 ReplyListItem.propTypes = {
   reply: PropTypes.shape({
     content: PropTypes.string.isRequired,
-    objectId: PropTypes.string
+    objectId: PropTypes.string,
+    postId: PropTypes.string.isRequired
   })
 };
 export default injectIntl(ReplyListItem);

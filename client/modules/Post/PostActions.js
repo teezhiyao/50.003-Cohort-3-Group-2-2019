@@ -6,7 +6,7 @@ export const ADD_POSTS = "ADD_POSTS";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_USER = "ADD_USER";
 export const ADD_REPLY = "ADD_REPLY";
-export const ADD_REPLYS = "ADD_REPLYS";
+export const ADD_REPLIES = "ADD_REPLIES";
 
 // Export Actions
 export function addPost(post) {
@@ -94,24 +94,6 @@ export function fetchPost(objectId) {
   };
 }
 
-export function addReply(reply) {
-  return {
-    type: ADD_REPLY,
-    reply
-  };
-}
-
-export function addReplyRequest(reply) {
-  return dispatch => {
-    return callApi("replies", "post", {
-      reply: {
-        reply: reply.reply,
-        cuid: reply.cuid
-      }
-    }).then(res => dispatch(addReply(res.reply)));
-  };
-}
-
 export function deletePost(objectId) {
   return {
     type: DELETE_POST,
@@ -127,40 +109,35 @@ export function deletePostRequest(objectId) {
   };
 }
 
-// export function addReplys(replys) {
-//   return {
-//     type: ADD_REPLYS,
-//     replys
-//   };
-// }
-
-// export function fetchReplys() {
-//   return dispatch => {
-//     return callApi('replys').then(res => {
-//       dispatch(addReplys(res.replys));
-//     });
-//   };
-// }
-
-export function fetchReply(cuid) {
-  return dispatch => {
-    return callApi(`replies/${cuid}`).then(res =>
-      dispatch(addReply(res.reply))
-    );
+export function addReply(replies) {
+  return {
+    type: ADD_REPLY,
+    replies
   };
 }
 
-// export function addEmail(email) {
-//   return {
-//     type: Email,
-//     email
-//   };
-// }
+export function addReplies(replies) {
+  return {
+    type: ADD_REPLIES,
+    replies
+  };
+}
 
-// export function email() {
-//   return dispatch => {
-//     return callApi("email").then(res => {
-//       dispatch(addEmail(res.replys));
-//     });
-//   };
-// }
+export function addReplyRequest(reply) {
+  return dispatch => {
+    return callApi("replies", "post", {
+      reply: {
+        reply: reply.reply,
+        cuid: reply.cuid
+      }
+    }).then(res => dispatch(addReply(res.reply)));
+  };
+}
+
+export function fetchReplies(postId) {
+  return dispatch => {
+    return callApi(`queryReplies`).then(res =>
+      dispatch(addReplies(res.replies.results))
+    );
+  };
+}

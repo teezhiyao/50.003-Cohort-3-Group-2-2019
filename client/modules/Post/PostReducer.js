@@ -3,8 +3,7 @@ import {
   ADD_POSTS,
   DELETE_POST,
   ADD_USER,
-  ADD_REPLY,
-  ADD_REPLYS
+  ADD_REPLY
 } from "./PostActions";
 
 // Initial State
@@ -26,10 +25,6 @@ const PostReducer = (state = initialState, action) => {
         data: action.posts
       };
     case ADD_POSTS:
-      return {
-        data: action.posts
-      };
-    case ADD_REPLYS:
       return {
         data: action.posts
       };

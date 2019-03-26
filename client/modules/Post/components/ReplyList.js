@@ -8,7 +8,7 @@ import ReplyListItem from "./ReplyListItem/ReplyListItem";
 function ReplyList(props) {
   return (
     <div className="listView">
-      {props.posts.map(individualReply => (
+      {props.replies.map(individualReply => (
         <ReplyListItem reply={individualReply} key={individualReply.objectId} />
       ))}
     </div>
@@ -16,11 +16,12 @@ function ReplyList(props) {
 }
 
 ReplyList.propTypes = {
-  posts: PropTypes.arrayOf(
+  replies: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      reply: PropTypes.string.isRequired,
-      objectId: PropTypes.string
+      content: PropTypes.string.isRequired,
+      objectId: PropTypes.string,
+      postId: PropTypes.string
     })
   )
 };
