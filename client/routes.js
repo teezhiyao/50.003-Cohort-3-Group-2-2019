@@ -53,7 +53,10 @@ export default (
       path="/Loggedin"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require("../client/src/containers/Base/HeaderContainer").default);
+          cb(
+            null,
+            require("../client/src/containers/Base/HeaderContainer").default
+          );
         });
       }}
     />
