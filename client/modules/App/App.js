@@ -44,7 +44,7 @@ import { toggleAddPost } from "./AppActions";
 import { switchLanguage } from "../../modules/Intl/IntlActions";
 
 const drawerWidth = 240;
-
+//To do : Tidy up file by using imports instead of throwing everything here
 const styles = theme => ({
   root: {
     display: "flex"
