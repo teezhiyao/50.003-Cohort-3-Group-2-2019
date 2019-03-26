@@ -11,8 +11,22 @@ const replyUrl =
   "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Replies";
 var request = require("request");
 
-// Get all Replies from a Post
-router.route("/queryPostReplies").get(function(req, res, next) {});
+// Get all Replies To Do: Figure out how to filter replies
+router.route("/queryAllReplies").get(function(req, res, next) {
+  var options = {
+    method: "GET",
+    url: replyUrl,
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    res.json({ posts: JSON.parse(body) });
+  });
+});
 
 // Add a new Reply and sends out email notification to user
 router.route("/postNewReply").reply(function(req, res, next) {});

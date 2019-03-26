@@ -14,9 +14,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 function PostList(props) {
   return (
     <div className="listView">
-      {props.posts.map(individualPost => (
+      {props.posts.map((individualPost, index) => (
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>{index + 1}</Typography>
+            <Typography>{" : "}</Typography>
             <Typography>{individualPost.title}</Typography>
           </ExpansionPanelSummary>
           <PostListItem
