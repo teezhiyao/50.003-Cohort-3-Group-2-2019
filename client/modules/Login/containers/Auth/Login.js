@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as authActions from 'redux/modules/auth';
+import * as authActions from '../../../../redux/modules/auth';
 
 class Login extends Component {
 

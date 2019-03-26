@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import path from "path";
 import IntlWrapper from "../client/modules/Intl/IntlWrapper";
-import {ServerRouter} from 'react-router-dom';
+import {BrowserRouter, ServerRouter, StaticRouter} from 'react-router-dom';
 
 // Initialize the Express App
 const app = new Express();
@@ -165,12 +165,18 @@ app.use((req, res, next) => {
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
-          
+          // <ServerRouter>
           <Provider store={store}>
-            <IntlWrapper>
-              <RouterContext {...renderProps} />
-            </IntlWrapper>
+            {/* <ServerRouter> */}
+              
+              <StaticRouter location={req.url} >
+              <IntlWrapper>
+                <RouterContext {...renderProps} />
+              </IntlWrapper>
+              </StaticRouter>
+            {/* </ServerRouter> */}
           </Provider>
+          // </ServerRouter>
           
         );
         const finalState = store.getState();
