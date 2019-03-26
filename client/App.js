@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import IntlWrapper from './modules/Intl/IntlWrapper';
+import {BrowserRouter, ServerRouter} from 'react-router-dom';
+
 
 // Import Routes
 import routes from './routes';
@@ -16,11 +18,13 @@ require('./main.css');
 export default function App(props) {
   return (
     <Provider store={props.store}>
+    <BrowserRouter>
       <IntlWrapper>
         <Router history={browserHistory}>
           {routes}
         </Router>
       </IntlWrapper>
+    </BrowserRouter>
     </Provider>
   );
 }

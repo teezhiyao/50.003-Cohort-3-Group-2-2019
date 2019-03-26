@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header, { LoginButton } from 'components/Base/Header';
+import Header, { LoginButton } from '../../components/Base/Header';
 import { connect } from 'react-redux';
 
 class HeaderContainer extends Component {

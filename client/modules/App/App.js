@@ -21,7 +21,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { Register } from "../Login/containers/Auth/Register";
+import { Login } from "../Login/containers/Auth/";
 import { BrowserRouter, Route } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -31,6 +31,8 @@ import Menu from "@material-ui/core/Menu";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
+import { AuthWrapper } from '../Login/components/Auth';
+
 // Import Style
 // import styles from './App.css';
 
@@ -390,12 +392,16 @@ export class App extends Component {
 
             <List>
               <Link to={`/Loggedin`}>
+              
+        
                 <ListItem button key="Log Out">
+                
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
                   <ListItemText primary="Log Out" />
                 </ListItem>
+                
               </Link>
             </List>
           </Drawer>

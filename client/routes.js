@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== "production") {
   // Require async routes only in development for react-hot-reloader to work.
   require("./modules/Post/pages/PostListPage/PostListPage");
   require("./modules/Post/pages/PostDetailPage/PostDetailPage");
+  require("../client/src/App");
 }
 
 // react-router setup with code-splitting
@@ -52,7 +53,7 @@ export default (
       path="/Loggedin"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require("../client/modules/Login/containers/Auth/Login").default);
+          cb(null, require("../client/src/containers/Base/HeaderContainer").default);
         });
       }}
     />
