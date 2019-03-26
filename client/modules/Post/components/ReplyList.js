@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Import Components
-import ReplyListItem from "./PostListItem/ReplyListItem";
+import ReplyListItem from "./ReplyListItem/ReplyListItem";
 // import addReply from "./ReplyListItem/ReplyListItem";
 
 function ReplyList(props) {

@@ -41,8 +41,8 @@ export class PostListItem extends Component {
             <FormattedMessage id="by" /> {this.props.post.name}
           </p>
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
-          <span className={styles["post-action"]}>
-            <span href="#" align="left" onClick={this.props.onDelete}>
+          <span style={{ float: "right" }} className={styles["post-action"]}>
+            <span href="#" align="right" onClick={this.props.onDelete}>
               <FormattedMessage id="deletePost" />
             </span>
           </span>
