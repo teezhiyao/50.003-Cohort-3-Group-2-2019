@@ -14,7 +14,7 @@ var request = require("request");
 // Get all Replies Using PostId
 router.route("/queryReplies").get(function(req, res, next) {
   console.log("Reached queryReplies");
-  console.log(req.body);
+  console.log(req);
   var options = {
     method: "GET",
     url: replyUrl + '?where={"postId":"ZEcLQzpX8e"}',

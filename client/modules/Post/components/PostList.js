@@ -9,6 +9,8 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
 
 //takes in props(all posts) and displays every post
 function PostList(props) {
@@ -17,9 +19,14 @@ function PostList(props) {
       {props.posts.map((individualPost, index) => (
         <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            {/* <TableRow> */}
+            {/* <TableCell> */}
             <Typography>{index + 1}</Typography>
-            <Typography>{" : "}</Typography>
+            {/* </TableCell>
+              <TableCell> */}
             <Typography>{individualPost.title}</Typography>
+            {/* </TableCell> */}
+            {/* </TableRow> */}
           </ExpansionPanelSummary>
           <PostListItem
             post={individualPost}
