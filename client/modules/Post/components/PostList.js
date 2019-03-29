@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 // Import Components
@@ -9,28 +9,54 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  root: {
+    width: "100%"
+  },
+  numberingHeader: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "2.00%",
+    flexShrink: 0
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary
+  }
+});
 
 //takes in props(all posts) and displays every post
-function PostList(props) {
-  return (
-    <div className="listView">
-      {props.posts.map((individualPost, index) => (
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{index + 1}</Typography>
-            <Typography>{" : "}</Typography>
-            <Typography>{individualPost.title}</Typography>
-          </ExpansionPanelSummary>
-          <PostListItem
-            post={individualPost}
-            key={individualPost.cuid}
-            addReply={props.handleAddReply}
-            onDelete={() => props.handleDeletePost(individualPost.objectId)}
-          />
-        </ExpansionPanel>
-      ))}
-    </div>
-  );
+class PostList extends Component {
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className="listView">
+        {this.props.posts.map((individualPost, index) => (
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography className={classes.numberingHeader}>
+                {index + 1}
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                {individualPost.title}
+              </Typography>
+            </ExpansionPanelSummary>
+
+            <PostListItem
+              post={individualPost}
+              key={individualPost.cuid}
+              addReply={this.props.handleAddReply}
+              onDelete={() =>
+                this.props.handleDeletePost(individualPost.objectId)
+              }
+            />
+          </ExpansionPanel>
+        ))}
+      </div>
+    );
+  }
 }
 
 PostList.propTypes = {
@@ -46,7 +72,8 @@ PostList.propTypes = {
     })
   ),
   handleDeletePost: PropTypes.func.isRequired,
-  handleAddReply: PropTypes.func.isRequired
+  handleAddReply: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default PostList;
+export default withStyles(styles)(PostList);

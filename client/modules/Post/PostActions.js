@@ -136,8 +136,19 @@ export function addReplyRequest(reply) {
 
 export function fetchReplies(postId) {
   return dispatch => {
-    return callApi(`queryReplies`).then(res =>
+    return callApi(`queryReplies/${postId}`).then(res =>
       dispatch(addReplies(res.replies.results))
     );
   };
 }
+
+// export function fetchPost(objectId) {
+//   return dispatch => {
+//     console.log("fetch 1 post");
+//     console.log(objectId);
+
+//     return callApi(`posts/${objectId}`).then(res => {
+//       dispatch(addPost(res.post));
+//     });
+//   };
+// }

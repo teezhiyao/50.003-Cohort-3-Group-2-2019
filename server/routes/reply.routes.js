@@ -12,12 +12,12 @@ const replyUrl =
 var request = require("request");
 
 // Get all Replies Using PostId
-router.route("/queryReplies").get(function(req, res, next) {
+router.route("/queryReplies/:postId").get(function(req, res, next) {
   console.log("Reached queryReplies");
-  console.log(req.body);
+  console.log(req.params);
   var options = {
     method: "GET",
-    url: replyUrl + '?where={"postId":"ZEcLQzpX8e"}',
+    url: replyUrl + `?where={"postId":"${req.params.postId}"}`,
     // qs: { where: "{%22postId%22:%22ZEcLQzpX8e%22}" },
     headers: {
       "cache-control": "no-cache",
@@ -27,18 +27,18 @@ router.route("/queryReplies").get(function(req, res, next) {
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    console.log(JSON.parse(body));
+    // console.log(JSON.parse(body));
     res.json({ replies: JSON.parse(body) });
   });
 });
 
-// Add a new Reply and sends out email notification to user
+// To-Do Add a new Reply and sends out email notification to user
 router.route("/postNewReply").get(function(req, res, next) {});
 
-// Delete one reply by objectId(reply)
+// To-Do Delete one reply by objectId(reply)
 router.route("/reply/:objectId").delete(function(req, res, next) {});
 
-// Delete all replies related to post by objectId(post)
+// To-Do Delete all replies related to post by objectId(post)
 router.route("/reply/:objectId").delete(function(req, res, next) {});
 
 export default router;
