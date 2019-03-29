@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 class HeaderContainer extends Component {
   render() {
-    const { visible } = this.props;
-    if(!visible) return null;
+    //const { visible } = this.props;
+    //if(!visible) return null;
 
     return (
       <Header>
@@ -15,12 +15,12 @@ class HeaderContainer extends Component {
   }
 }
 
-export default connect(
-    (state) => ({
-        visible: state.base.getIn(['header', 'visible'])
-    }),
-    (dispatch) => ({
+// export default connect(
+//     (state) => ({
+//         visible: state.base.getIn(['header', 'visible'])
+//     }),
+//     (dispatch) => ({
 
-    })
-)(HeaderContainer);
-//export default HeaderContainer;
+//     })
+// )(HeaderContainer);
+export default HeaderContainer;

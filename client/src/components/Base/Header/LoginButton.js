@@ -32,7 +32,7 @@ const BorderedButton = styled(Link)`
 `;
 
 const LoginButton = () => (
-    <BorderedButton to="Loggedin/auth/login">
+    <BorderedButton to="/auth/login">
         Log in / Sign up
     </BorderedButton>
 );

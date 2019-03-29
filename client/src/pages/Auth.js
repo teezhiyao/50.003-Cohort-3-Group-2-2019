@@ -22,7 +22,7 @@ class Auth extends Component {
         return (
             
             <AuthWrapper>
-                <Route path="Loggedin/auth/login" component={Login}/>
+                <Route path="/auth/login" component={Login}/>
                 <Route path="/auth/register" component={Register}/>
             </AuthWrapper>
         );
