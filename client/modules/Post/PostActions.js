@@ -136,8 +136,8 @@ export function addReplyRequest(reply) {
 
 export function fetchReplies(postId) {
   return dispatch => {
-    return callApi(`queryReplies`).then(res =>
-      dispatch(addReplies(res.replies))
+    return callApi(`queryReplies/${postId}`).then(res =>
+      dispatch(addReplies(res.replies.results))
     );
   };
 }

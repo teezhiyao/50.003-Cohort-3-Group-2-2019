@@ -27,7 +27,7 @@ class PostDetailPage extends Component {
   componentDidMount() {
     // this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchPost(this.props.post.objectId));
-    this.props.dispatch(fetchReplies());
+    this.props.dispatch(fetchReplies(this.props.post.objectId));
   }
 
   handleDeletePost = post => {
