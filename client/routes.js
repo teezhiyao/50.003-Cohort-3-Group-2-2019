@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Route, IndexRoute } from "react-router";
 import App from "./modules/App/App";
-import { Loggedin } from "./modules/Login/pages/Loggedin";
+//import { Loggedin } from "./modules/Login/pages/Loggedin";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
@@ -19,7 +19,8 @@ if (process.env.NODE_ENV !== "production") {
   // Require async routes only in development for react-hot-reloader to work.
   require("./modules/Post/pages/PostListPage/PostListPage");
   require("./modules/Post/pages/PostDetailPage/PostDetailPage");
-  require("../client/src/App");
+  
+  require("./modules/Login/Login");
 }
 
 // react-router setup with code-splitting
@@ -50,12 +51,12 @@ export default (
     />
     {/* <Route path="/Loggedin" component={Loggedin} /> */}
     <Route
-      path="/Loggedin"
+      path="/loginx"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(
             null,
-            require("../client/src/containers/Base/HeaderContainer").default
+            require("./modules/Login/Login").default
           );
         });
       }}

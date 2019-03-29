@@ -21,7 +21,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { Link } from "react-router";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { Login } from "../Login/containers/Auth/";
+//import { Login } from "../Login/containers/Auth/";
 import { BrowserRouter, Route } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -31,7 +31,7 @@ import Menu from "@material-ui/core/Menu";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
-import { AuthWrapper } from '../Login/components/Auth';
+//import { AuthWrapper } from '../Login/components/Auth';
 
 // Import Style
 // import styles from './App.css';
@@ -40,6 +40,7 @@ import { AuthWrapper } from '../Login/components/Auth';
 import Helmet from "react-helmet";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import Login from "../Login/Login";
 
 // Import Actions
 import { toggleAddPost } from "./AppActions";
@@ -266,7 +267,7 @@ export class App extends Component {
       //   {this.state.isMounted &&
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
-
+      <BrowserRouter>
       <div>
         <div className={classes.root}>
           <CssBaseline />
@@ -389,9 +390,13 @@ export class App extends Component {
               )}
             </List>
             <Divider />
+            <Route path="/login" exact component={Login} />
 
             <List>
-              <Link to={`/Loggedin`}>
+            <Link to={`/login`}>
+            {/* <ul className="right">
+                <li><a href='/login'>Log-out</a></li>
+            </ul> */}
               
         
                 <ListItem button key="Log Out">
@@ -435,8 +440,9 @@ export class App extends Component {
           </main>
         </div>
       </div>
-
+      </BrowserRouter>
       // </div>
+      
     );
   }
 }

@@ -11,7 +11,7 @@ class App extends Component {
         <HeaderContainer />
         <Route exact path="/" component={Home} />
         <Route path="/Loggedin" component={Auth} />
-        <Route path="/auth" component={Loggedin} />
+        <Route path="/" component={Loggedin} />
       </div>
     );
   }

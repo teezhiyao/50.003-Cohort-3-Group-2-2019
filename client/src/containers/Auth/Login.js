@@ -45,10 +45,10 @@ class Login extends Component {
                     <option value="user">User</option>
                     <option value="administrator">Adminstrator</option>
                 </select> */}
-                <Link to="//localhost:3009/#" target="_blank">
+                <Link to="//localhost:8100/#" target="_blank">
                     <AuthButton>Log in as Admin</AuthButton>
                 </Link>
-                <Link to="//localhost:8200/#" target="_blank">
+                <Link to="//localhost:8100/#" target="_blank">
                     <AuthButton>Log in as User</AuthButton>
                 </Link>
                 
