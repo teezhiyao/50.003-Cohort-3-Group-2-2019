@@ -22,7 +22,12 @@ const styles = theme => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    flexBasis: "88.00%"
+  },
+  miscHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "10.00%"
   }
 });
 
@@ -38,9 +43,11 @@ class PostList extends Component {
               <Typography className={classes.numberingHeader}>
                 {index + 1}
               </Typography>
-
               <Typography className={classes.secondaryHeading}>
                 {individualPost.title}
+              </Typography>
+              <Typography className={classes.miscHeading}>
+                {"Something Else"}
               </Typography>
             </ExpansionPanelSummary>
 
