@@ -14,6 +14,7 @@ var request = require("request");
 
 // Get all Posts
 router.route("/queryAllPost").get(function(req, res, next) {
+  // console.log(res);
   var options = {
     method: "GET",
     url: postUrl,
@@ -33,13 +34,13 @@ router.route("/queryAllPost").get(function(req, res, next) {
 router.route("/postNewPost").post(function(req, res, next) {
   console.log(req.body.post);
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
-  const newPost = new Issue({
-    title: req.body.post.title,
-    content: req.body.post.content,
-    name: req.body.post.name,
-    slug: tempSlug,
-    cuid: cuid()
-  });
+  // const newPost = new Issue({
+  //   title: req.body.post.title,
+  //   content: req.body.post.content,
+  //   name: req.body.post.name,
+  //   slug: tempSlug,
+  //   cuid: cuid()
+  // });
 
   var options = {
     method: "POST",

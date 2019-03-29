@@ -25,9 +25,9 @@ import { getReplies } from "../../RepliesReducer";
 
 class PostDetailPage extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchPosts());
+    // this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchPost(this.props.post.objectId));
-    this.props.dispatch(fetchReplies(this.props.post.objectId));
+    this.props.dispatch(fetchReplies());
   }
 
   handleDeletePost = post => {
@@ -73,20 +73,20 @@ class PostDetailPage extends Component {
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [
   params => {
-    return fetchPosts();
+    return fetchPost(params.objectId);
   }
 ];
 
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   console.log("Mapping here");
-  console.log(state);
+  console.log(state.replies);
   // props.post = getPost(state, props.params.objectId);
   // console.log(props.post);
 
   return {
     post: getPost(state, props.params.objectId),
-    replies: getReplies(state, props.params.objectId)
+    replies: getReplies(state)
   };
 }
 
