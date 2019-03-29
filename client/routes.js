@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Route, IndexRoute } from "react-router";
 import App from "./modules/App/App";
-import { Loggedin } from "./modules/Login/pages/Loggedin";
+import { Login } from "./modules/Login/Login";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
@@ -53,10 +53,7 @@ export default (
       path="/Loggedin"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(
-            null,
-            require("../client/src/containers/Base/HeaderContainer").default
-          );
+          cb(null, require("./modules/Login/Login").default);
         });
       }}
     />
