@@ -13,9 +13,16 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      redirect: false
     };
   }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
+  };
 
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -38,11 +45,15 @@ class Login extends Component {
   //   this.props.dispatch(addReplyRequest({ this.state.email, cuid }));
   // };
 
+  //To-Do - Log in not routing. Need to figure out promise/how to store the user value
   Login = () => {
     const email = this.state.email;
     const password = this.state.password;
-    if (this.props.dispatch(tryLogin(email, password)).code) {
-      console.log("go to new link");
+    // console.log(props.user);
+    if (confirm("Do you want to Log in")) {
+      this.props.dispatch(fetchLogin(email, password)).then();
+
+      // this.props.user = tryLogin(email, password);
     }
 
     // if (nameRef.value && titleRef.value && contentRef.value) {
@@ -93,6 +104,11 @@ function mapStateToProps(state, props) {
 }
 
 Login.propTypes = {
+  user: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string
+    })
+  ),
   dispatch: PropTypes.func.isRequired
 };
 
