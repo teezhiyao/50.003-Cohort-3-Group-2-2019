@@ -142,6 +142,20 @@ export function fetchReplies(postId) {
   };
 }
 
+export function tryLogin(username, password) {
+  return dispatch => {
+    return callApi(
+      `userLogin/${username}/${password}`
+      // , "get", {
+      //   // user: {
+      //   //   username: username,
+      //   //   password: password
+      //   // }
+      // }
+    ).then(res => dispatch(addPost(res.post)));
+  };
+}
+
 // export function fetchPost(objectId) {
 //   return dispatch => {
 //     console.log("fetch 1 post");

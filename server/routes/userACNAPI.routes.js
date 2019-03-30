@@ -35,12 +35,13 @@ router.route("/createUser").post(function(req, res, next) {
 
 //Try logging in , To-Do : Refine after connecting with front-end
 //Returns fail/success response based on validity of credentials
-router.route("/userLogin").get(function(req, res, next) {
-  console.log(req);
+router.route("/userLogin/:username/:password").get(function(req, res, next) {
+  console.log("Printing Params");
+  console.log(req.params);
   var options = {
     method: "GET",
     url: `https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/login`,
-    qs: { username: "teezhiyao", password: "teezhiyao" },
+    qs: { username: req.params.username, password: req.params.password },
     headers: {
       "cache-control": "no-cache",
       "Server-Token": apitoken,
@@ -49,8 +50,8 @@ router.route("/userLogin").get(function(req, res, next) {
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    console.log(body);
-    console.log(response);
+    console.log(JSON.parse(body));
+    res.json({ post: JSON.parse(body) });
   });
 });
 
