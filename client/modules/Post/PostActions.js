@@ -6,7 +6,7 @@ export const ADD_POSTS = "ADD_POSTS";
 export const DELETE_POST = "DELETE_POST";
 export const ADD_USER = "ADD_USER";
 export const ADD_REPLY = "ADD_REPLY";
-export const ADD_REPLYS = "ADD_REPLYS";
+export const ADD_REPLIES = "ADD_REPLIES";
 
 // Export Actions
 export function addPost(post) { // this is a Redux action creator
@@ -20,7 +20,7 @@ export function addPostRequest(post) {
   return dispatch => {
     return callApi("postNewPost", "post", {
       post: {
-        username: post.username,
+        username: post.name,
         category: post.category,
         resolveStatus: post.resolveStatus,
         title: post.title,
@@ -50,10 +50,10 @@ export function emailCall(post) {
   };
 }
 
-export function addUser(post) {
+export function addUser(user) {
   return {
     type: ADD_USER,
-    post
+    user
   };
 }
 
@@ -90,18 +90,38 @@ export function fetchPost(objectId) {
     console.log("fetch 1 post");
     console.log(objectId);
 
-    return callApi(`posts/${objectId}`).then(function(value) {
-      console.log("print value");
-      console.log(value);
-      value => dispatch(addPost(value));
+    return callApi(`posts/${objectId}`).then(res => {
+      dispatch(addPost(res.post));
     });
   };
 }
 
-export function addReply(reply) {
+export function deletePost(objectId) {
+  return {
+    type: DELETE_POST,
+    objectId
+  };
+}
+
+export function deletePostRequest(objectId) {
+  return dispatch => {
+    return callApi(`posts/${objectId}`, "delete").then(() =>
+      dispatch(deletePost(objectId))
+    );
+  };
+}
+
+export function addReply(replies) {
   return {
     type: ADD_REPLY,
-    reply
+    replies
+  };
+}
+
+export function addReplies(replies) {
+  return {
+    type: ADD_REPLIES,
+    replies
   };
 }
 
@@ -116,55 +136,29 @@ export function addReplyRequest(reply) {
   };
 }
 
-export function deletePost(cuid) {
-  return {
-    type: DELETE_POST,
-    cuid
-  };
-}
-
-export function deletePostRequest(cuid) {
+export function fetchReplies(postId) {
   return dispatch => {
-    return callApi(`posts/${cuid}`, "delete").then(() =>
-      dispatch(deletePost(cuid))
+    return callApi(`queryReplies/${postId}`).then(res =>
+      dispatch(addReplies(res.replies.results))
     );
   };
 }
 
-// export function addReplys(replys) {
-//   return {
-//     type: ADD_REPLYS,
-//     replys
-//   };
-// }
-
-// export function fetchReplys() {
-//   return dispatch => {
-//     return callApi('replys').then(res => {
-//       dispatch(addReplys(res.replys));
-//     });
-//   };
-// }
-
-export function fetchReply(cuid) {
+export function fetchLogin(username, password) {
   return dispatch => {
-    return callApi(`replies/${cuid}`).then(res =>
-      dispatch(addReply(res.reply))
+    return callApi(`userLogin/${username}/${password}`).then(res =>
+      dispatch(addUser(res.user))
     );
   };
 }
 
-// export function addEmail(email) {
-//   return {
-//     type: Email,
-//     email
-//   };
-// }
-
-// export function email() {
+// export function fetchPost(objectId) {
 //   return dispatch => {
-//     return callApi("email").then(res => {
-//       dispatch(addEmail(res.replys));
+//     console.log("fetch 1 post");
+//     console.log(objectId);
+
+//     return callApi(`posts/${objectId}`).then(res => {
+//       dispatch(addPost(res.post));
 //     });
 //   };
 // }

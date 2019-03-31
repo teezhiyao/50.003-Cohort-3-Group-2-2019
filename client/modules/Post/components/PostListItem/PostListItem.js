@@ -11,6 +11,11 @@ import styles from "./PostListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import PostDetailPage from "../../pages/PostDetailPage/PostDetailPage";
+import Typography from "@material-ui/core/Typography";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export class PostListItem extends Component {
   addReply = () => {
@@ -24,7 +29,6 @@ export class PostListItem extends Component {
 
   render() {
     return (
-      // <div className={styles['single-post']}>
       <Card>
         <CardContent>
           <h3 className={styles["post-title"]}>
@@ -36,35 +40,12 @@ export class PostListItem extends Component {
           <p className={styles["author-name"]}>
             <FormattedMessage id="by" /> {this.props.post.name}
           </p>
-          <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          <form noValidate autoComplete="off">
-            <input
-              placeholder={"Reply"}
-              className={styles["form-field"]}
-              ref="replyText"
-            />{" "}
-          </form>
-        </CardContent>
-        <br />
-        <CardActions>
-          <Button
-            variant="contained"
-            color="primary"
-            href="#"
-            onClick={this.addReply}
-          >
-            {" "}
-            Reply
-          </Button>
-        </CardActions>
-        <CardContent>
-          <br />
-          <p className={styles["post-action"]}>
-            <a href="#" onClick={this.props.onDelete}>
+          <span className={styles["post-desc"]}>{this.props.post.content}</span>
+          <span style={{ float: "right" }} className={styles["post-action"]}>
+            <span href="#" align="right" onClick={this.props.onDelete}>
               <FormattedMessage id="deletePost" />
-            </a>
-          </p>
-          <hr className={styles.divider} />
+            </span>
+          </span>
         </CardContent>
       </Card>
     );
@@ -73,11 +54,11 @@ export class PostListItem extends Component {
 
 PostListItem.propTypes = {
   post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),

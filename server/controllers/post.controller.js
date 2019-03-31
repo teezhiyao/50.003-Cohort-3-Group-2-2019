@@ -24,14 +24,14 @@ import sanitizeHtml from "sanitize-html";
 //  * @param res
 //  * @returns void
 //  */
-// export function getPost(req, res) {
-//   Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//     res.json({ post });
-//   });
-// }
+export function getPost(req, res) {
+  Post.findOne({ cuid: req.params.objectId }).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
 
 /**
  * Delete a post

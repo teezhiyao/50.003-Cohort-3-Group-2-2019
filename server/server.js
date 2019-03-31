@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import path from "path";
 import IntlWrapper from "../client/modules/Intl/IntlWrapper";
+import { BrowserRouter, ServerRouter, StaticRouter } from "react-router-dom";
 
 // Initialize the Express App
 const app = new Express();
@@ -49,6 +50,8 @@ import routes from "../client/routes";
 import { fetchComponentData } from "./util/fetchData";
 import posts from "./routes/post.routes";
 import posts1 from "./routes/userACNAPI.routes";
+import replies from "./routes/reply.routes";
+
 import dummyData from "./dummyData";
 import serverConfig from "./config";
 
@@ -75,6 +78,7 @@ app.use(bodyParser.urlencoded({ limit: "20mb", extended: false }));
 app.use(Express.static(path.resolve(__dirname, "../dist/client")));
 app.use("/api", posts);
 app.use("/api", posts1);
+app.use("/api", replies);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -164,11 +168,18 @@ app.use((req, res, next) => {
     return fetchComponentData(store, renderProps.components, renderProps.params)
       .then(() => {
         const initialView = renderToString(
+          // <ServerRouter>
           <Provider store={store}>
-            <IntlWrapper>
-              <RouterContext {...renderProps} />
-            </IntlWrapper>
+            {/* <ServerRouter> */}
+
+            <StaticRouter location={req.url}>
+              <IntlWrapper>
+                <RouterContext {...renderProps} />
+              </IntlWrapper>
+            </StaticRouter>
+            {/* </ServerRouter> */}
           </Provider>
+          // </ServerRouter>
         );
         const finalState = store.getState();
 

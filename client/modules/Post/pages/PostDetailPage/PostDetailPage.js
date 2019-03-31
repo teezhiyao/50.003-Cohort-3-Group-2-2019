@@ -1,49 +1,73 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { FormattedMessage } from "react-intl";
-import { BrowserRouter, Route } from "react-router-dom";
 
 // Import Style
 import styles from "../../components/PostListItem/PostListItem.css";
 
-import { PostListPage } from "../PostListPage/PostListPage";
+import PostListItem from "../../components/PostListItem/PostListItem";
+import ReplyList from "../../components/ReplyList";
 
-// Import Actions
-import { fetchPost } from "../../PostActions";
+// Import ActionsY
+import { fetchPosts, fetchPost, fetchReplies } from "../../PostActions";
 
 // Import Selectors
-import { getPost } from "../../PostReducer";
+import { getPost, getPosts } from "../../PostReducer";
+import { getReplies } from "../../RepliesReducer";
+
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
 //CREATE THREAD OF REPLIES
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
-export function PostDetailPage(props) {
-  console.log("testing");
-  console.log(props);
-  return (
-    <div>
-      <Helmet title={props.post.title} />
-      <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-        <h3 className={styles["post-title"]}>{props.post.title}</h3>
-        <p className={styles["author-name"]}>
-          <FormattedMessage id="by" /> {props.post.userName}
-        </p>
-        <p className={styles["post-desc"]}>{props.post.content}</p>
-        {/* <p className="REPLIES">{props.post.replyscuid}</p> */}
-        <p className="ResolveStatus">{props.post.resolveStatus}</p>
-        <p className="date">{props.post.dateAdded}</p>
-        {/* <h3 className={styles['post-title']}>
-            <Link to={`/`}>
-              Back to Home Page
-              
-            </Link>
-          </h3> */}
+
+class PostDetailPage extends Component {
+  componentDidMount() {
+    // this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchPost(this.props.post.objectId));
+    this.props.dispatch(fetchReplies(this.props.post.objectId));
+  }
+
+  handleDeletePost = post => {
+    if (confirm("Do you want to delete this post")) {
+      this.props.dispatch(deletePostRequest(post));
+    }
+  };
+
+  handleAddReply = (reply, cuid) => {
+    this.props.dispatch(addReplyRequest({ reply, cuid }));
+  };
+
+  render() {
+    return (
+      <div>
+        {/* <Helmet title={this.props.post.title} />
+        <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
+          <h3 className={styles["post-title"]}>{this.props.post.title}</h3>
+          <p className={styles["author-name"]}>
+            <FormattedMessage id="by" /> {this.props.post.userName}
+          </p>
+          <p className={styles["post-desc"]}>{this.props.post.content}</p>
+          <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
+          <p className="date">{this.props.post.dateAdded}</p> */}
+
+        <PostListItem
+          post={this.props.post}
+          key={this.props.post.objectId}
+          addReply={this.handleAddReply}
+          onDelete={() => this.handleDeletePost(this.props.post.objectId)}
+        />
+        <ReplyList
+          handleDeletePost={this.handleDeletePost}
+          handleAddReply={this.handleAddReply}
+          replies={this.props.replies}
+        />
       </div>
-    </div>
-  );
+      // </div>
+    );
+  }
 }
 
 // Actions required to provide data for this component to render in server side.
@@ -56,24 +80,35 @@ PostDetailPage.need = [
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   console.log("Mapping here");
-  console.log(props);
-  console.log(getPost(state, props.post));
+  console.log(state.replies);
+  // props.post = getPost(state, props.params.objectId);
+  // console.log(props.post);
+
   return {
-    post: getPost(state, props.post.objectId)
+    post: getPost(state, props.params.objectId),
+    replies: getReplies(state)
   };
 }
 
 PostDetailPage.propTypes = {
   post: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    title: PropTypes.string,
     content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
     objectId: PropTypes.string.isRequired,
-    replyscuid: PropTypes.array,
-    resolveStatus: PropTypes.bool,
-    dateAdded: PropTypes.string
-  }).isRequired
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string,
+    reply: PropTypes.string
+  }),
+  replies: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      content: PropTypes.string.isRequired,
+      objectId: PropTypes.string.isRequired,
+      postId: PropTypes.string.isRequired
+    })
+  ),
+  dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps)(PostDetailPage);

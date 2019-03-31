@@ -3,8 +3,7 @@ import {
   ADD_POSTS,
   DELETE_POST,
   ADD_USER,
-  ADD_REPLY,
-  ADD_REPLYS
+  ADD_REPLY
 } from "./PostActions";
 
 // Initial State
@@ -29,13 +28,9 @@ const PostReducer = (state = initialState, action) => {
       return {
         data: action.posts
       };
-    case ADD_REPLYS:
-      return {
-        data: action.posts
-      };
     case DELETE_POST:
       return {
-        data: state.data.filter(post => post.cuid !== action.cuid)
+        data: state.data.filter(post => post.objectId !== action.objectId)
       };
 
     default:
@@ -51,6 +46,8 @@ export const getPosts = state => state.posts.data;
 // Get post by objectId
 export const getPost = (state, objectId) =>
   state.posts.data.filter(post => post.objectId === objectId)[0];
+
+// state.posts.data.filter(post => post.objectId === objectId)[0];
 
 // Export Reducer
 export default PostReducer;
