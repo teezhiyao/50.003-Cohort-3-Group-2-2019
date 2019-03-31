@@ -48,10 +48,10 @@ export function emailCall(post) {
   };
 }
 
-export function addUser(post) {
+export function addUser(user) {
   return {
     type: ADD_USER,
-    post
+    user
   };
 }
 
@@ -138,6 +138,14 @@ export function fetchReplies(postId) {
   return dispatch => {
     return callApi(`queryReplies/${postId}`).then(res =>
       dispatch(addReplies(res.replies.results))
+    );
+  };
+}
+
+export function fetchLogin(username, password) {
+  return dispatch => {
+    return callApi(`userLogin/${username}/${password}`).then(res =>
+      dispatch(addUser(res.user))
     );
   };
 }
