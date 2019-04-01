@@ -20,6 +20,8 @@ if (process.env.NODE_ENV !== "production") {
   require("./modules/Post/pages/PostListPage/PostListPage");
   require("./modules/Post/pages/PostDetailPage/PostDetailPage");
   require("../client/src/App");
+  require("./modules/LoginAllUpdated/Login");
+  //require("./modules/LoginAllUpdated/signUp")
 }
 
 // react-router setup with code-splitting
@@ -53,10 +55,18 @@ export default (
       path="/Loggedin"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require("./modules/Login/Login").default);
+          cb(null, require("./modules/LoginAllUpdated/Login").default);
         });
       }}
     />
+    {/* <Route
+      path="/SignUp"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/LoginAllUpdated/signUp").default);
+        });
+      }}
+    /> */}
     {/* <Route
       path="/login"
       getComponent={(nextState, cb) => {

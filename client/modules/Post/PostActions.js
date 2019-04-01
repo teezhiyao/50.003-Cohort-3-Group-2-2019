@@ -145,8 +145,9 @@ export function fetchReplies(postId) {
 export function fetchLogin(username, password) {
   return dispatch => {
     return callApi(`userLogin/${username}/${password}`).then(res =>
-      dispatch(addUser(res.user))
+      dispatch(addUser(res.user)).then(res => console.log(res))
     );
+    
   };
 }
 
