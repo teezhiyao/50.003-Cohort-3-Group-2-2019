@@ -9,7 +9,7 @@ export const ADD_REPLY = "ADD_REPLY";
 export const ADD_REPLIES = "ADD_REPLIES";
 
 // Export Actions
-export function addPost(post) {
+export function addPost(post) { // this is a Redux action creator
   return {
     type: ADD_POST,
     post
@@ -28,7 +28,9 @@ export function addPostRequest(post) {
         cuid: post.cuid,
         replyDataStructure: post.replys
       }
-    }).then(res => dispatch(addPost(res.post)));
+    }).then(res => dispatch(addPost(res.post))); // dispatch updates the store by adding the action
+                                                // actions describe what happens but don't describe how the app changes
+                                                // reducers specify how the app's state changes in response to the actions sent
   };
 }
 
