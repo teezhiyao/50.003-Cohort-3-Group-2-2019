@@ -31,7 +31,7 @@ import Menu from "@material-ui/core/Menu";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
-import { AuthWrapper } from '../Login/components/Auth';
+import { AuthWrapper } from "../Login/components/Auth";
 
 // Import Style
 // import styles from './App.css';
@@ -392,21 +392,27 @@ export class App extends Component {
 
             <List>
               <Link to={`/Loggedin`}>
-              
-        
                 <ListItem button key="Log Out">
-                
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
                   <ListItemText primary="Log Out" />
                 </ListItem>
-                
               </Link>
             </List>
 
+            <Divider />
 
-            
+            <List>
+              <Link to={`/SignUpPage`}>
+                <ListItem button key="Signup">
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Signup" />
+                </ListItem>
+              </Link>
+            </List>
           </Drawer>
           <main
             className={classNames(classes.content, {

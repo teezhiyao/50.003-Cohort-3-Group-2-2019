@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { Route, IndexRoute } from "react-router";
 import App from "./modules/App/App";
-import { Login } from "./modules/Login/Login";
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
@@ -21,7 +20,7 @@ if (process.env.NODE_ENV !== "production") {
   require("./modules/Post/pages/PostDetailPage/PostDetailPage");
   require("../client/src/App");
   require("./modules/LoginAllUpdated/Login");
-  //require("./modules/LoginAllUpdated/signUp")
+  require("./modules/LoginAllUpdated/SignUp");
 }
 
 // react-router setup with code-splitting
@@ -59,14 +58,14 @@ export default (
         });
       }}
     />
-    {/* <Route
-      path="/SignUp"
+    <Route
+      path="/SignUpPage"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require("./modules/LoginAllUpdated/signUp").default);
+          cb(null, require("./modules/LoginAllUpdated/SignUp").default);
         });
       }}
-    /> */}
+    />
     {/* <Route
       path="/login"
       getComponent={(nextState, cb) => {
