@@ -11,17 +11,19 @@ import PostListItem from "../../components/PostListItem/PostListItem";
 import ReplyList from "../../components/ReplyList";
 
 // Import ActionsY
-import { fetchPosts, fetchPost, fetchReplies } from "../../PostActions";
+import { fetchPosts, fetchPost, fetchReplies, addReply } from "../../PostActions";
 
 // Import Selectors
 import { getPost, getPosts } from "../../PostReducer";
 import { getReplies } from "../../RepliesReducer";
+
 
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
 //CREATE THREAD OF REPLIES
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
+
 
 class PostDetailPage extends Component {
   componentDidMount() {
@@ -39,8 +41,17 @@ class PostDetailPage extends Component {
   handleAddReply = (reply, cuid) => {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
-
+  addReply = () => {
+    const replyRef = this.refs.reply;
+    console.log(replyRef.value);
+    if (replyRef.value) {
+      //this.addReply(replyRef.value);
+      replyRef.value = "";
+    }
+  };
+  
   render() {
+    
     return (
       <div>
         {/* <Helmet title={this.props.post.title} />
@@ -64,6 +75,23 @@ class PostDetailPage extends Component {
           handleAddReply={this.handleAddReply}
           replies={this.props.replies}
         />
+        <input
+            placeholder={"Reply to Issue"}
+            className={styles["form-field"]}
+            ref="reply"
+          />
+          
+         <select>
+                    <option value="user">User</option>
+                    <option value="administrator">Adminstrator</option>
+        </select> 
+        <a
+            className={styles["post-submit-button"]}
+            href="#"
+            onClick={this.addReply}
+          >
+          <FormattedMessage id="submit" />
+          </a>
       </div>
       // </div>
     );
