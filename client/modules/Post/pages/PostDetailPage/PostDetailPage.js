@@ -64,6 +64,20 @@ class PostDetailPage extends Component {
           handleAddReply={this.handleAddReply}
           replies={this.props.replies}
         />
+        <input
+            placeholder={"Reply to Issue"}
+            className={styles["form-field"]}
+            ref="reply"
+          />
+
+
+        <a
+            className={styles["post-submit-button"]}
+            href="#"
+            onClick={this.addReply}
+          >
+          <FormattedMessage id="submit" />
+          </a>
       </div>
       // </div>
     );
