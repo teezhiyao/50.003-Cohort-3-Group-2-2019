@@ -27,8 +27,7 @@ if (process.env.NODE_ENV !== "production") {
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
   <Route path="/" component={App}>
-    <Route
-      path="/home"
+    <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(
@@ -38,7 +37,6 @@ export default (
         });
       }}
     />
-
     <Route
       path="/posts/:objectId"
       getComponent={(nextState, cb) => {
@@ -51,6 +49,7 @@ export default (
         });
       }}
     />
+    {/* <Route path="/Loggedin" component={Loggedin} /> */}
     <Route
       path="/Loggedin"
       getComponent={(nextState, cb) => {
@@ -67,5 +66,13 @@ export default (
         });
       }}
     />
+    {/* <Route
+      path="/login"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Login/pages/LoggedIn").default);
+        });
+      }}
+    /> */}
   </Route>
 );

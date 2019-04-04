@@ -356,7 +356,7 @@ export class App extends Component {
             <Divider />
 
             <List>
-              <Link to={`/home`}>
+              <Link to={`/`}>
                 <ListItem button key="Home">
                   <ListItemIcon>
                     <InboxIcon />
@@ -365,7 +365,7 @@ export class App extends Component {
                 </ListItem>
               </Link>
 
-              <Link to={`/home`}>
+              <Link to={`/`}>
                 <ListItem button key="Profile">
                   <ListItemIcon>
                     <MailIcon />
