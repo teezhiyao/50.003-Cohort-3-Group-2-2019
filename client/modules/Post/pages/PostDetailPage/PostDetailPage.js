@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { FormattedMessage } from "react-intl";
-import ToggleButton from 'react-toggle-button'
-
 
 // Import Style
 import styles from "../../components/PostListItem/PostListItem.css";
@@ -13,12 +11,11 @@ import PostListItem from "../../components/PostListItem/PostListItem";
 import ReplyList from "../../components/ReplyList";
 
 // Import ActionsY
-import { fetchPosts, fetchPost, fetchReplies, addReply } from "../../PostActions";
+import { fetchPosts, fetchPost, fetchReplies } from "../../PostActions";
 
 // Import Selectors
 import { getPost, getPosts } from "../../PostReducer";
 import { getReplies } from "../../RepliesReducer";
-
 
 //TO DO
 //CREATE LINK BACK TO MAINPAGE
@@ -26,11 +23,7 @@ import { getReplies } from "../../RepliesReducer";
 //RESOLVE STATUS INDICATION
 //AND RESOLVE STATUS TOGGLE
 
-
 class PostDetailPage extends Component {
-  state={
-    value:false
-  }
   componentDidMount() {
     // this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchPost(this.props.post.objectId));
@@ -46,29 +39,8 @@ class PostDetailPage extends Component {
   handleAddReply = (reply, cuid) => {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
-  addReply = () => {
-    const replyRef = this.refs.reply;
-    console.log(replyRef.value);
-    if (replyRef.value) {
-      //this.addReply(replyRef.value);
-      replyRef.value = "";
-    }
-  };
-  handleToggle = (value) => {
-    this.setState({
-      value: !value,
-    })
-    console.log(value);
-    console.log(this.props.post)
-    console.log(this.props.post.resolveStatus);
-    //NEED TO CHANGE THE RESOLVE STATUS IN DATABASE
-    
-    //console.log(this.props.post.resolveStatus.);
-    //console.log(this.props.post) 
-  }
-  
+
   render() {
-    
     return (
       <div>
         {/* <Helmet title={this.props.post.title} />
@@ -80,34 +52,6 @@ class PostDetailPage extends Component {
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
           <p className="date">{this.props.post.dateAdded}</p> */}
-          <ToggleButton
-            inactiveLabel={"Resolved"}
-            activeLabel={"Unresolved"}
-            
-            colors={{
-              activeThumb: {
-                base: 'rgb(250,250,250)',
-              },
-              inactiveThumb: {
-                base: 'rgb(62,130,247)',
-              },
-              active: {
-                base: 'rgb(207,221,245)',
-                hover: 'rgb(177, 191, 215)',
-              },
-              inactive: {
-                base: 'rgb(65,66,68)',
-                hover: 'rgb(95,96,98)',
-              }
-            }}
-            
-            value={ this.state.value || false }
-            onToggle={(value) => {
-              this.handleToggle(value)
-            }}
-            // onToggle={this.handleToggle(this.state.value)} 
-            />
-
 
         <PostListItem
           post={this.props.post}
@@ -115,29 +59,11 @@ class PostDetailPage extends Component {
           addReply={this.handleAddReply}
           onDelete={() => this.handleDeletePost(this.props.post.objectId)}
         />
-        
         <ReplyList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
           replies={this.props.replies}
         />
-        <input
-            placeholder={"Reply to Issue"}
-            className={styles["form-field"]}
-            ref="reply"
-          />
-          
-         <select>
-                    <option value="user">User</option>
-                    <option value="administrator">Adminstrator</option>
-        </select> 
-        <a
-            className={styles["post-submit-button"]}
-            href="#"
-            onClick={this.addReply}
-          >
-          <FormattedMessage id="submit" />
-          </a>
       </div>
       // </div>
     );

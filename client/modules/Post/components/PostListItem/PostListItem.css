@@ -69,15 +69,6 @@
   outline: none;
   color: #212121;
 }
-.post-submit-button {
-  display: inline-block;
-  padding: 8px 16px;
-  font-size: 18px;
-  color: #FFF;
-  background: #03A9F4;
-  text-decoration: none;
-  border-radius: 4px;
-}
 
 textarea {
   min-height: 100px;
