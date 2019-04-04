@@ -40,6 +40,15 @@ class PostDetailPage extends Component {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
+  addReply = () => {
+    const replyRef = this.refs.reply;
+    console.log(replyRef.value);
+    if (replyRef.value) {
+      //this.addReply(replyRef.value);
+      replyRef.value = "";
+    }
+  };
+
   render() {
     return (
       <div>
@@ -65,19 +74,17 @@ class PostDetailPage extends Component {
           replies={this.props.replies}
         />
         <input
-            placeholder={"Reply to Issue"}
-            className={styles["form-field"]}
-            ref="reply"
-          />
-
-
+          placeholder={"Reply to Issue"}
+          className={styles["form-field"]}
+          ref="reply"
+        />
         <a
-            className={styles["post-submit-button"]}
-            href="#"
-            onClick={this.addReply}
-          >
+          className={styles["post-submit-button"]}
+          href="#"
+          onClick={this.addReply}
+        >
           <FormattedMessage id="submit" />
-          </a>
+        </a>
       </div>
       // </div>
     );
