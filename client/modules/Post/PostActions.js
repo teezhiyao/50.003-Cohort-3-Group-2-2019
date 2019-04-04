@@ -9,7 +9,8 @@ export const ADD_REPLY = "ADD_REPLY";
 export const ADD_REPLIES = "ADD_REPLIES";
 
 // Export Actions
-export function addPost(post) { // this is a Redux action creator
+export function addPost(post) {
+  // this is a Redux action creator
   return {
     type: ADD_POST,
     post
@@ -29,8 +30,8 @@ export function addPostRequest(post) {
         replyDataStructure: post.replys
       }
     }).then(res => dispatch(addPost(res.post))); // dispatch updates the store by adding the action
-                                                // actions describe what happens but don't describe how the app changes
-                                                // reducers specify how the app's state changes in response to the actions sent
+    // actions describe what happens but don't describe how the app changes
+    // reducers specify how the app's state changes in response to the actions sent
   };
 }
 
@@ -139,17 +140,18 @@ export function addReplyRequest(reply) {
 export function fetchReplies(postId) {
   return dispatch => {
     return callApi(`queryReplies/${postId}`).then(res =>
-      dispatch(addReplies(res.replies.results))
+      dispatch(addReplies(res.post.results))
     );
   };
 }
 
 export function fetchLogin(username, password) {
+  console.log("fetch posts");
+
   return dispatch => {
     return callApi(`userLogin/${username}/${password}`).then(res =>
-      dispatch(addUser(res.user)).then(res => console.log(res))
+      dispatch(addUser(res.post))
     );
-    
   };
 }
 
