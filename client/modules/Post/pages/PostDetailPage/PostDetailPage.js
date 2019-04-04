@@ -81,10 +81,7 @@ class PostDetailPage extends Component {
             ref="reply"
           />
           
-         <select>
-                    <option value="user">User</option>
-                    <option value="administrator">Adminstrator</option>
-        </select> 
+          
         <a
             className={styles["post-submit-button"]}
             href="#"

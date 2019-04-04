@@ -46,6 +46,9 @@ class PostList extends Component {
               <Typography className={classes.secondaryHeading}>
                 {individualPost.title}
               </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Category: {individualPost.category}
+              </Typography>
               <Typography className={classes.miscHeading}>
                 {"Something Else"}
               </Typography>
@@ -75,7 +78,8 @@ PostList.propTypes = {
       objectId: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
       cuid: PropTypes.string,
-      reply: PropTypes.string
+      reply: PropTypes.string,
+      category: PropTypes.string
     })
   ),
   handleDeletePost: PropTypes.func.isRequired,
