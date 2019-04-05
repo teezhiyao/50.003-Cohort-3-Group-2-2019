@@ -19,6 +19,7 @@ import { toggleAddPost } from "../../../App/AppActions";
 // Import Selectors
 import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
+import { getUser } from "../../UserReducer";
 
 class PostListPage extends Component {
   constructor(props) {
@@ -31,6 +32,13 @@ class PostListPage extends Component {
   componentDidMount() {
     // this function is called the moment this component is rendered.
     this.props.dispatch(fetchPosts());
+    console.log("componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("Component should update");
+    this.props.dispatch(fetchPosts());
+    return true;
   }
 
   handleDeletePost = post => {
@@ -115,7 +123,8 @@ function mapStateToProps(state) {
   // console.log(state);
   return {
     showAddPost: getShowAddPost(state),
-    posts: getPosts(state)
+    posts: getPosts(state),
+    users: getUser(state)
   };
 }
 
@@ -130,6 +139,11 @@ PostListPage.propTypes = {
       category: PropTypes.string
     })
   ),
+  users: PropTypes.shape({
+    name: PropTypes.string,
+    userType: PropTypes.string,
+    sessionToken: PropTypes.string.isRequired
+  }),
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 };
