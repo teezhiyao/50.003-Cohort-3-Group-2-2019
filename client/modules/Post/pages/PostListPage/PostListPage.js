@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 // Import Components
 import PostList from "../../components/PostList";
 import PostCreateWidget from "../../components/PostCreateWidget/PostCreateWidget";
+import Button from "@material-ui/core/Button";
 
 // Import Actions
 import {
@@ -71,6 +72,11 @@ class PostListPage extends Component {
     console.log(this.state);
   };
 
+  placeholder = () => {
+    console.log("In Place Holder");
+    console.log(this.props.users);
+  };
+
   render() {
     const categoryList = [
       { value: "all", label: "All Issues" },
@@ -94,6 +100,9 @@ class PostListPage extends Component {
             })}
           </select>
         </label>
+        <Button variant="contained" color="primary" onClick={this.placeholder}>
+          Placeholder
+        </Button>
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
