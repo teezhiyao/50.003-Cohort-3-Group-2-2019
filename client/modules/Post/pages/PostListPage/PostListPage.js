@@ -21,11 +21,15 @@ import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 
 class PostListPage extends Component {
-  state = {
-    categorySelected: 'all',
+  constructor(props) {
+    super(props);
+    this.state = {
+      categorySelected: "all"
+    };
   }
 
-  componentDidMount() { // this function is called the moment this component is rendered.
+  componentDidMount() {
+    // this function is called the moment this component is rendered.
     this.props.dispatch(fetchPosts());
   }
 
@@ -54,17 +58,17 @@ class PostListPage extends Component {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
-  handleSelectCategory = (e)=>{
-    this.setState({categorySelected: e.target.value,});
+  handleSelectCategory = e => {
+    this.setState({ categorySelected: e.target.value });
     console.log(this.state);
   };
 
   render() {
     const categoryList = [
-      { value: 'all' , label: 'All Issues' },
-      { value: 'LOGINISSUE', label: 'Login Issue' },
-      { value: 'APIERROR', label: 'API Issue' },
-      { value: 'LOGOUTISSUE', label: 'Logout Issue' }
+      { value: "all", label: "All Issues" },
+      { value: "LOGINISSUE", label: "Login Issue" },
+      { value: "APIERROR", label: "API Issue" },
+      { value: "LOGOUTISSUE", label: "Logout Issue" }
     ];
     return (
       <div>
@@ -73,26 +77,31 @@ class PostListPage extends Component {
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
         />
-        <label> Issue Category 
-          <select onChange ={this.handleSelectCategory}>
-            {categoryList.map((category)=>{
-              return <option value = {category.value}>{category.label}</option>
-            })}    
+        <label>
+          {" "}
+          Issue Category
+          <select onChange={this.handleSelectCategory}>
+            {categoryList.map(category => {
+              return <option value={category.value}>{category.label}</option>;
+            })}
           </select>
-        </label> 
+        </label>
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
-          posts={this.state.categorySelected == 'all' ? this.props.posts:
-            this.props.posts.filter(post => post.category === this.state.categorySelected)}
+          posts={
+            this.state.categorySelected == "all"
+              ? this.props.posts
+              : this.props.posts.filter(
+                  post => post.category === this.state.categorySelected
+                )
+          }
           //posts={this.props.posts}
         />
       </div>
     );
   }
 }
-
-
 
 // Actions required to provide data for this component to render in sever side.
 PostListPage.need = [

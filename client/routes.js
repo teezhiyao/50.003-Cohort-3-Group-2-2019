@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { Route, IndexRoute } from "react-router";
 import App from "./modules/App/App";
-
+import PostListPage from "./modules/Post/pages/PostListPage/PostListPage";
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
   require.ensure = function requireModule(deps, callback) {
@@ -28,6 +28,7 @@ if (process.env.NODE_ENV !== "production") {
 export default (
   <Route path="/" component={App}>
     <IndexRoute
+      // component={PostListPage}
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(

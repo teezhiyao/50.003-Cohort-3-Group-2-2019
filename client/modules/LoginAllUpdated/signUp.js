@@ -5,9 +5,13 @@ import Button from "react-bootstrap/Button";
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 // import Bootstrap from "react-bootstrap";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+
 import "./signUp.css";
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
 
@@ -60,68 +64,6 @@ export default class SignUp extends Component {
 
     this.setState({ isLoading: true });
   };
-
-  // renderConfirmationForm() {
-  //   return (
-  //     <Form onSubmit={this.handleConfirmationSubmit}>
-  //       <Form.Group controlId="confirmationCode" bssize="large">
-  //         <Form.Control
-  //           autoFocus
-  //           type="tel"
-  //           value={this.state.confirmationCode}
-  //           onChange={this.handleChange}
-  //         />
-  //       </Form.Group>
-  //       <Button
-  //         //block
-  //         bssize="large"
-  //         disabled={!this.validateConfirmationForm()}
-  //         type="submit"
-  //         // isLoading={this.state.isLoading}
-  //         // text="Verify"
-  //         // loadingText="Verifying…"
-  //       />
-  //     </Form>
-  //   );
-  // }
-
-  // renderForm() {
-  //   return (
-  //     <Form onSubmit={this.handleSubmit}>
-  //       <Form.Group controlId="email" bssize="large">
-  //         <Form.Control
-  //           autoFocus
-  //           type="email"
-  //           value={this.state.email}
-  //           onChange={this.handleChange}
-  //         />
-  //       </Form.Group>
-  //       <Form.Group controlId="password" bssize="large">
-  //         <Form.Control
-  //           value={this.state.password}
-  //           onChange={this.handleChange}
-  //           type="password"
-  //         />
-  //       </Form.Group>
-  //       <Form.Group controlId="confirmPassword" bssize="large">
-  //         <Form.Control
-  //           value={this.state.confirmPassword}
-  //           onChange={this.handleChange}
-  //           type="password"
-  //         />
-  //       </Form.Group>
-  //       <Button
-  //         //block
-  //         bssize="large"
-  //         disabled={!this.validateForm()}
-  //         type="submit"
-  //         // isLoading={this.state.isLoading}
-  //         // text="Signup"
-  //         // loadingText="Signing up…"
-  //       />
-  //     </Form>
-  //   );
-  // }
 
   render() {
     return (
@@ -188,3 +130,21 @@ export default class SignUp extends Component {
     );
   }
 }
+
+function mapStateToProps(state, props) {
+  // props.post = getPost(state, props.params.objectId);
+  // console.log(props.post);
+
+  return {};
+}
+
+SignUp.propTypes = {
+  user: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string
+    })
+  ),
+  dispatch: PropTypes.func.isRequired
+};
+
+export default withRouter(connect(mapStateToProps)(SignUp));

@@ -144,7 +144,7 @@ export function addReplyRequest(reply, postId) {
 export function fetchReplies(postId) {
   return dispatch => {
     return callApi(`queryReplies/${postId}`).then(res =>
-      dispatch(addReplies(res.replies.results))
+      dispatch(addReplies(res.post.results))
     );
   };
 }
@@ -152,7 +152,8 @@ export function fetchReplies(postId) {
 export function fetchLogin(username, password) {
   return dispatch => {
     return callApi(`userLogin/${username}/${password}`).then(res =>
-      dispatch(addUser(res.user)).then(res => console.log(res))
+      // dispatch(addUser(res.user)).then(res => console.log(res))
+      dispatch(addUser(res.post))
     );
   };
 }
