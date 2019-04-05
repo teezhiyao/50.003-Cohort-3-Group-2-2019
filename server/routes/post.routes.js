@@ -30,6 +30,26 @@ router.route("/queryAllPost").get(function(req, res, next) {
   });
 });
 
+// Get all Allowed Posts
+router.route("/queryAllowedPost/:sessionToken").get(function(req, res, next) {
+  console.log("In query Allowed");
+  console.log(req.params);
+  var options = {
+    method: "GET",
+    url: postUrl,
+    headers: {
+      "cache-control": "no-cache",
+      "X-Parse-Session-Token": req.params.sessionToken,
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+    res.json({ posts: JSON.parse(body) });
+  });
+});
+
 // Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
   console.log(req.body.post);

@@ -79,6 +79,15 @@ export function addPosts(posts) {
   };
 }
 
+export function fetchAllowedPosts(sessionToken) {
+  console.log("fetching Allowed post");
+  return dispatch => {
+    return callApi(`queryAllowedPost/${sessionToken}`).then(res => {
+      dispatch(addPosts(res.posts.results));
+    });
+  };
+}
+
 export function fetchPosts() {
   console.log("fetching post");
   return dispatch => {

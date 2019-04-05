@@ -3,7 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Bootstrap from "react-bootstrap";
 import "./Login.css";
-import { fetchLogin, fetchPosts, fetchReplies } from "../Post/PostActions";
+import {
+  fetchLogin,
+  fetchPosts,
+  fetchReplies,
+  fetchAllowedPosts
+} from "../Post/PostActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
@@ -12,8 +17,6 @@ import { Link, browserHistory } from "react-router";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(fetchPosts());
-    this.props.dispatch(fetchReplies());
     this.state = {
       email: "",
       password: "",
@@ -48,9 +51,17 @@ class Login extends Component {
       if (confirm("Do you want to Log in")) {
         this.props.dispatch(fetchLogin(email, password)).then(
           function(response) {
-            if (response.user.objectId === "XHNhUvlgx5") {
+            console.log(!response.user.code);
+            if (!response.user.code) {
               console.log("Success!", response.user.objectId);
+              console.log(response);
+              this.props.dispatch(
+                fetchAllowedPosts(response.user.sessionToken)
+              );
+              this.props.dispatch(fetchReplies());
               browserHistory.push("/home");
+            } else if (response.user.code === 101) {
+              console.log("Failed Login!");
             }
           }.bind(this)
         );
@@ -67,7 +78,7 @@ class Login extends Component {
           <Form.Group controlId="email" bsSize="large">
             <Form.Control
               autoFocus
-              type="email"
+              // type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
