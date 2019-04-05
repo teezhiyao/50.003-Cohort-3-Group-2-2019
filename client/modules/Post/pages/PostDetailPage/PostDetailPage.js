@@ -11,7 +11,12 @@ import PostListItem from "../../components/PostListItem/PostListItem";
 import ReplyList from "../../components/ReplyList";
 
 // Import ActionsY
-import { fetchPosts, fetchPost, fetchReplies } from "../../PostActions";
+import {
+  fetchPosts,
+  fetchPost,
+  fetchReplies,
+  addReplyRequest
+} from "../../PostActions";
 
 // Import Selectors
 import { getPost, getPosts } from "../../PostReducer";
@@ -25,7 +30,6 @@ import { getReplies } from "../../RepliesReducer";
 
 class PostDetailPage extends Component {
   componentDidMount() {
-    // this.props.dispatch(fetchPosts());
     this.props.dispatch(fetchPost(this.props.post.objectId));
     this.props.dispatch(fetchReplies(this.props.post.objectId));
   }
@@ -42,7 +46,10 @@ class PostDetailPage extends Component {
 
   addReply = () => {
     const replyRef = this.refs.reply;
+    const cuid = "asdkjsa";
     console.log(replyRef.value);
+    console.log("I'm here");
+    this.props.dispatch(addReplyRequest(replyRef, this.props.post.objectId));
     if (replyRef.value) {
       //this.addReply(replyRef.value);
       replyRef.value = "";
@@ -101,7 +108,7 @@ PostDetailPage.need = [
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   console.log("Mapping here");
-  console.log(state.replies);
+  console.log(state);
   // props.post = getPost(state, props.params.objectId);
   // console.log(props.post);
 

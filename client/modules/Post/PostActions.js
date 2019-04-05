@@ -127,12 +127,15 @@ export function addReplies(replies) {
   };
 }
 
-export function addReplyRequest(reply) {
+export function addReplyRequest(reply, postId) {
   return dispatch => {
-    return callApi("replies", "post", {
+    console.log("In addReplyRequest");
+    console.log(reply);
+    console.log(postId);
+    return callApi("postNewReply", "post", {
       reply: {
-        reply: reply.reply,
-        cuid: reply.cuid
+        content: "asdsa",
+        postId: postId
       }
     }).then(res => dispatch(addReply(res.reply)));
   };
