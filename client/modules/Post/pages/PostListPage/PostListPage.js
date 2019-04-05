@@ -35,11 +35,11 @@ class PostListPage extends Component {
     console.log("componentDidMount");
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("Component should update");
-    this.props.dispatch(fetchPosts());
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("Component should update");
+  //   this.props.dispatch(fetchPosts());
+  //   return true;
+  // }
 
   handleDeletePost = post => {
     // console.log(post);

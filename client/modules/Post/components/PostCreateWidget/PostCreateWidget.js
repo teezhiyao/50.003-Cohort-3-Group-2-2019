@@ -57,7 +57,7 @@ export class PostCreateWidget extends Component {
           >
             <FormattedMessage id="submit" />
           </a>
-          <input
+          {/* <input
             placeholder={this.props.intl.messages.authorName}
             className={styles["form-field"]}
             ref="nameAdmin"
@@ -78,7 +78,7 @@ export class PostCreateWidget extends Component {
             onClick={this.addUser}
           >
             <FormattedMessage id="createUser" />
-          </a>
+          </a> */}
         </div>
       </div>
     );
