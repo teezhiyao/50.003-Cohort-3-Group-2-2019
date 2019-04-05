@@ -13,7 +13,7 @@ var request = require("request");
 
 // Get all Replies Using PostId
 router.route("/queryReplies/:postId").get(function(req, res, next) {
-  console.log("Getting all post");
+  console.log("Getting all replies for post");
   // console.log(req.params);
   var options = {
     method: "GET",

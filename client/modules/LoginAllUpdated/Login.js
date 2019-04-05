@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Bootstrap from "react-bootstrap";
 import "./Login.css";
-import { fetchLogin, fetchPosts } from "../Post/PostActions";
+import { fetchLogin, fetchPosts, fetchReplies } from "../Post/PostActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
@@ -13,7 +13,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.props.dispatch(fetchPosts());
-
+    this.props.dispatch(fetchReplies());
     this.state = {
       email: "",
       password: "",
@@ -44,16 +44,7 @@ class Login extends Component {
     try {
       const email = this.state.email;
       const password = this.state.password;
-      // console.log(props.user);
-      // this.props.dispatch(fetchLogin(email, password));
       console.log("IN HANDLE SUBMIT");
-      // this.props
-      //   .dispatch(fetchLogin(email, password))
-      //   .then(function(response) {
-      //     console.log("Success!", response.user.objectId);
-      //     return response.user.objectId;
-      //   });
-
       if (confirm("Do you want to Log in")) {
         this.props.dispatch(fetchLogin(email, password)).then(
           function(response) {
@@ -67,26 +58,6 @@ class Login extends Component {
     } catch (e) {
       alert(e.message);
     }
-  };
-  // Login = () => {
-  //   this.props.dispatch(addReplyRequest({ this.state.email, cuid }));
-  // };
-
-  //To-Do - Log in not routing. Need to figure out promise/how to store the user value
-  Login = () => {
-    const email = this.state.email;
-    const password = this.state.password;
-    // console.log(props.user);
-    if (confirm("Do you want to Log in")) {
-      this.props.dispatch(fetchLogin(email, password)).then();
-
-      // this.props.user = tryLogin(email, password);
-    }
-
-    // if (nameRef.value && titleRef.value && contentRef.value) {
-    //   this.props.addPost(nameRef.value, titleRef.value, contentRef.value);
-    //   nameRef.value = titleRef.value = contentRef.value = "";
-    // }
   };
 
   render() {
