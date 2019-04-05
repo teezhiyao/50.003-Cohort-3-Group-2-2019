@@ -120,7 +120,7 @@ PostListPage.need = [
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
-  // console.log(state);
+  console.log(state);
   return {
     showAddPost: getShowAddPost(state),
     posts: getPosts(state),

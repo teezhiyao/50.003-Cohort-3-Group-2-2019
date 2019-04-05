@@ -12,6 +12,7 @@ import { Link, browserHistory } from "react-router";
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.props.dispatch(fetchPosts());
 
     this.state = {
       email: "",
@@ -26,9 +27,6 @@ class Login extends Component {
     }
   };
 
-  componentDidMount() {
-    this.props.dispatch(fetchPosts());
-  }
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
@@ -61,7 +59,7 @@ class Login extends Component {
           function(response) {
             if (response.user.objectId === "XHNhUvlgx5") {
               console.log("Success!", response.user.objectId);
-              browserHistory.push("/SignUpPage");
+              browserHistory.push("/home");
             }
           }.bind(this)
         );

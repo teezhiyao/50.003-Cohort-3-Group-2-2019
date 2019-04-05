@@ -15,15 +15,7 @@ const PostReducer = (state = initialState, action) => {
       return {
         data: [action.post, ...state.data]
       };
-    case ADD_USER:
-      return {
-        data: [action.post, ...state.data]
-      };
 
-    case ADD_REPLY:
-      return {
-        data: action.posts
-      };
     case ADD_POSTS:
       return {
         data: action.posts

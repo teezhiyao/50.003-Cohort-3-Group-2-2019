@@ -28,6 +28,14 @@ if (process.env.NODE_ENV !== "production") {
 export default (
   <Route path="/" component={App}>
     <IndexRoute
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/LoginAllUpdated/Login").default);
+        });
+      }}
+    />
+    <Route
+      path="/home"
       // component={PostListPage}
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
@@ -51,14 +59,6 @@ export default (
       }}
     />
     {/* <Route path="/Loggedin" component={Loggedin} /> */}
-    <Route
-      path="/Loggedin"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require("./modules/LoginAllUpdated/Login").default);
-        });
-      }}
-    />
     <Route
       path="/SignUpPage"
       getComponent={(nextState, cb) => {

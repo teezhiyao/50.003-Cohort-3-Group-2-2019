@@ -80,6 +80,7 @@ export function addPosts(posts) {
 }
 
 export function fetchPosts() {
+  console.log("fetching post");
   return dispatch => {
     return callApi("queryAllPost").then(res => {
       dispatch(addPosts(res.posts.results));
@@ -153,7 +154,7 @@ export function fetchLogin(username, password) {
   return dispatch => {
     return callApi(`userLogin/${username}/${password}`).then(res =>
       // dispatch(addUser(res.user)).then(res => console.log(res))
-      dispatch(addUser(res.post))
+      dispatch(addUser(res.user))
     );
   };
 }

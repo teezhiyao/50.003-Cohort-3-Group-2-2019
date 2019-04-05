@@ -51,7 +51,7 @@ router.route("/userLogin/:username/:password").get(function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(JSON.parse(body));
-    res.json({ post: JSON.parse(body) });
+    res.json({ user: JSON.parse(body) });
   });
 });
 
