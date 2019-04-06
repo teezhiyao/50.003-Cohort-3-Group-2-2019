@@ -42,6 +42,15 @@ class PostListPage extends Component {
   //   return true;
   // }
 
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   console.log("In Component DId Update");
+  //   console.log(prevProps.posts);
+  //   // if (this.props.posts.length !== prevProps.userID) {
+  //   //   this.props.dispatch(fetchAllowedPosts(props.users.objectId));
+  //   // }
+  // }
+
   handleDeletePost = post => {
     // console.log(post);
     if (confirm("Do you want to delete this post")) {
@@ -151,7 +160,8 @@ PostListPage.propTypes = {
   users: PropTypes.shape({
     name: PropTypes.string,
     userType: PropTypes.string,
-    sessionToken: PropTypes.string.isRequired
+    sessionToken: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired
   }),
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired

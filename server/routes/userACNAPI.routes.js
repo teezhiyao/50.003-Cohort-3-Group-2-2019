@@ -93,44 +93,6 @@ router.route("/updateUser").put(function(req, res, next) {
   });
 });
 
-//To Do : Need to implement when user/admin are given permission as the session token will be needed for reading/deleting objects
-router.route("/getCurrentUser").get(function(req, res, next) {
-  var options = {
-    method: "GET",
-    url: `${userUrl}/me`,
-    headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
-    }
-  };
-  request(options, function(error, response, body) {
-    if (error) throw new Error(error);
-    console.log(body);
-  });
-});
-
-//To Do: Check with accenture about user deletion. Current status is that it looks impossible without master token(Not provided)
-router.route("/deleteUser").delete(function(req, res, next) {
-  const username = user;
-  const sessionToken = 1029382;
-  var options = {
-    method: "DELETE",
-    url: `${userUrl}/${username}`,
-    headers: {
-      "cache-control": "no-cache",
-      "X-Parse-Session-Token": sessionToken,
-      "Server-Token": token,
-      "Content-Type": "application/json"
-    }
-  };
-  request(options, function(error, response, body) {
-    if (error) throw new Error(error);
-    console.log(body);
-  });
-});
-
 //To Do: Implement floating bar for emailing to admin/user , Not sure where to place on UI
 router.route("/email").post(function(req, res, next) {
   console.log("Email trying hard");
@@ -157,5 +119,43 @@ router.route("/email").post(function(req, res, next) {
     console.log(body);
   });
 });
+
+//User can only delete self, Can't be used without Master Token
+// router.route("/deleteUser").delete(function(req, res, next) {
+//   const username = user;
+//   const sessionToken = 1029382;
+//   var options = {
+//     method: "DELETE",
+//     url: `${userUrl}/${username}`,
+//     headers: {
+//       "cache-control": "no-cache",
+//       "X-Parse-Session-Token": sessionToken,
+//       "Server-Token": token,
+//       "Content-Type": "application/json"
+//     }
+//   };
+//   request(options, function(error, response, body) {
+//     if (error) throw new Error(error);
+//     console.log(body);
+//   });
+// });
+
+//Don't think getCurrent User will be needed
+// router.route("/getCurrentUser").get(function(req, res, next) {
+//   var options = {
+//     method: "GET",
+//     url: `${userUrl}/me`,
+//     headers: {
+//       "cache-control": "no-cache",
+//       "X-Parse-Session-Token": sessionToken,
+//       "Server-Token": token,
+//       "Content-Type": "application/json"
+//     }
+//   };
+//   request(options, function(error, response, body) {
+//     if (error) throw new Error(error);
+//     console.log(body);
+//   });
+// });
 
 export default router;
