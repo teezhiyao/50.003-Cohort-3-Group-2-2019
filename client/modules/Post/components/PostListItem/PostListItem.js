@@ -16,7 +16,7 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import DeleteIcon from "@material-ui/icons/Delete";
 export class PostListItem extends Component {
   addReply = () => {
     // console.log('postlistitem');
@@ -43,7 +43,7 @@ export class PostListItem extends Component {
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <span href="#" align="right" onClick={this.props.onDelete}>
-              <FormattedMessage id="deletePost" />
+              <DeleteIcon id="deletePost" />
             </span>
           </span>
         </CardContent>

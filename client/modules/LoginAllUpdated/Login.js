@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import Button from "@material-ui/core/Button";
 import Bootstrap from "react-bootstrap";
 import "./Login.css";
 import {
@@ -93,14 +93,18 @@ class Login extends Component {
           <Button
             block
             bsSize="large"
+            variant="contained"
+            color="primary"
             disabled={!this.validateForm()}
             type="submit"
             onClick={this.handleSubmit}
           >
             Login
-          </Button>
+          </Button>{" "}
           <Link to={`/SignUpPage`}>
-            <Button type="signup">Sign Up</Button>
+            <Button variant="contained" color="primary" type="signup">
+              Sign Up
+            </Button>
           </Link>
         </Form>
       </div>

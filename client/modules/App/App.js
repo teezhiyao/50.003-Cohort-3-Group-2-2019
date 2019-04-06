@@ -366,7 +366,7 @@ export class App extends Component {
               <Link to={`/home`}>
                 <ListItem button key="Profile">
                   <ListItemIcon>
-                    <MailIcon />
+                    <AccountCircle />
                   </ListItemIcon>
                   <ListItemText primary="Profile" />
                 </ListItem>

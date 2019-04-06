@@ -49,9 +49,7 @@ class PostList extends Component {
               <Typography className={classes.secondaryHeading}>
                 Category: {individualPost.category}
               </Typography>
-              <Typography className={classes.miscHeading}>
-                {"Something Else"}
-              </Typography>
+              <Typography className={classes.miscHeading}>{"tags"}</Typography>
             </ExpansionPanelSummary>
 
             <PostListItem
