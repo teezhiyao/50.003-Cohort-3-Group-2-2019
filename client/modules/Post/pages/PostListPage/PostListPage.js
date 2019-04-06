@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import {
   addPostRequest,
   addPostUserRequest,
-  fetchPosts,
+  fetchAllowedPosts,
   deletePostRequest,
   addReplyRequest
 } from "../../PostActions";
@@ -32,7 +32,7 @@ class PostListPage extends Component {
 
   componentDidMount() {
     // this function is called the moment this component is rendered.
-    this.props.dispatch(fetchPosts());
+    this.props.dispatch(fetchAllowedPosts(this.props.users.sessionToken));
     console.log("componentDidMount");
   }
 
@@ -121,11 +121,11 @@ class PostListPage extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-PostListPage.need = [
-  () => {
-    return fetchPosts();
-  }
-];
+// PostListPage.need = [
+//   () => {
+//     return fetchPosts(this.props.users.sessionToken);
+//   }
+// ];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
