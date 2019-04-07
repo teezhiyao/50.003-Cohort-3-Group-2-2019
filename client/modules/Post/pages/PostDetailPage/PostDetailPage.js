@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { FormattedMessage } from "react-intl";
-import ToggleButton from 'react-toggle-button'
-
+import ToggleButton from "react-toggle-button";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 // Import Style
 import styles from "../../components/PostListItem/PostListItem.css";
 
@@ -30,9 +32,10 @@ import { getReplies } from "../../RepliesReducer";
 //AND RESOLVE STATUS TOGGLE
 
 class PostDetailPage extends Component {
-  state={
-    value:false
-  }
+  state = {
+    value: false,
+    resolve: false
+  };
   componentDidMount() {
     this.props.dispatch(fetchPost(this.props.post.objectId));
     this.props.dispatch(fetchReplies(this.props.post.objectId));
@@ -43,18 +46,25 @@ class PostDetailPage extends Component {
       this.props.dispatch(deletePostRequest(post));
     }
   };
-  handleToggle = (value) => {
+
+  handleChange = name => event => {
+    console.log(name);
+    console.log(event.target.checked);
+    this.setState({ [name]: event.target.checked });
+  };
+
+  handleToggle = value => {
     this.setState({
-      value: !value,
-    })
+      value: !value
+    });
     console.log(value);
-    console.log(this.props.post)
+    console.log(this.props.post);
     console.log(this.props.post.resolveStatus);
     //NEED TO CHANGE THE RESOLVE STATUS IN DATABASE
-    
+
     //console.log(this.props.post.resolveStatus.);
-    //console.log(this.props.post) 
-  }
+    //console.log(this.props.post)
+  };
 
   handleAddReply = (reply, cuid) => {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
@@ -84,34 +94,41 @@ class PostDetailPage extends Component {
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
           <p className="date">{this.props.post.dateAdded}</p> */}
-          <ToggleButton
-            inactiveLabel={"Resolved"}
-            activeLabel={"Unresolved"}
-            
-            colors={{
-              activeThumb: {
-                base: 'rgb(250,250,250)',
-              },
-              inactiveThumb: {
-                base: 'rgb(62,130,247)',
-              },
-              active: {
-                base: 'rgb(207,221,245)',
-                hover: 'rgb(177, 191, 215)',
-              },
-              inactive: {
-                base: 'rgb(65,66,68)',
-                hover: 'rgb(95,96,98)',
-              }
-            }}
-            
-            value={ this.state.value || false }
-            onToggle={(value) => {
-              this.handleToggle(value)
-            }}
-            // onToggle={this.handleToggle(this.state.value)} 
+        <ToggleButton
+          inactiveLabel={"Resolved"}
+          activeLabel={"Unresolved"}
+          colors={{
+            activeThumb: {
+              base: "rgb(250,250,250)"
+            },
+            inactiveThumb: {
+              base: "rgb(62,130,247)"
+            },
+            active: {
+              base: "rgb(207,221,245)",
+              hover: "rgb(177, 191, 215)"
+            },
+            inactive: {
+              base: "rgb(65,66,68)",
+              hover: "rgb(95,96,98)"
+            }
+          }}
+          value={this.state.value || false}
+          onToggle={value => {
+            this.handleToggle(value);
+          }}
+          // onToggle={this.handleToggle(this.state.value)}
+        />
+        <FormControlLabel
+          control={
+            <Switch
+              checked={this.state.resolve}
+              onChange={this.handleChange("resolve")}
+              color="primary"
             />
-
+          }
+          label={this.state.resolve ? "Resolved" : "Unresolved"}
+        />
 
         <PostListItem
           post={this.props.post}
