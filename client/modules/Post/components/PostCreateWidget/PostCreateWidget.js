@@ -17,23 +17,13 @@ export class PostCreateWidget extends Component {
     }
   };
 
-  addUser = () => {
-    const nameRef = this.refs.nameAdmin;
-    const titleRef = this.refs.titleAdmin;
-    const contentRef = this.refs.contentAdmin;
-    if (nameRef.value && titleRef.value && contentRef.value) {
-      this.props.addUser(nameRef.value, titleRef.value, contentRef.value);
-      nameRef.value = titleRef.value = contentRef.value = "";
-    }
-  };
-
   render() {
     const cls = `${styles.form} ${this.props.showAddPost ? styles.appear : ""}`;
     return (
       <div className={cls}>
         <div className={styles["form-content"]}>
           <h2 className={styles["form-title"]}>
-            <FormattedMessage id="createNewPost" />
+            <FormattedMessage id="createNewPost" />x
           </h2>
           <input
             placeholder={this.props.intl.messages.authorName}

@@ -52,7 +52,6 @@ router.route("/queryAllowedPost/:sessionToken").get(function(req, res, next) {
 
 // Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
-  console.log(req.body.post);
   var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
 
   var options = {
@@ -82,6 +81,9 @@ router.route("/postNewPost").post(function(req, res, next) {
   request(options, function(error, response, body) {
     // console.log(response.body.objectId);
     if (error) throw new Error(error);
+    console.log("reqqq");
+    console.log(options.body);
+    res.json(options.body);
   });
   // Sanitize inputs
   // newPost.title = sanitizeHtml(newPost.title);
