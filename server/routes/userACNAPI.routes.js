@@ -11,7 +11,7 @@ var request = require("request");
 //Create User account using ACNAPI
 router.route("/createUser").post(function(req, res, next) {
   console.log("I have reached here");
-  console.log(req.body);
+  console.log(req.body.user);
   //To-Do username & password are all the same now before login page is set-up
   var options = {
     method: "POST",
@@ -22,14 +22,62 @@ router.route("/createUser").post(function(req, res, next) {
       "Content-Type": "application/json"
     },
     body: {
-      username: req.body.post.username,
-      password: req.body.post.username
+      username: req.body.user.username,
+      password: req.body.user.password,
+      email: req.body.user.email,
+      name: req.body.user.name,
+      age: req.body.user.age
     },
     json: true
   };
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    console.log(body);
+    else {
+      console.log("insfdlkasdfl");
+
+      console.log(body);
+      res.json(body);
+
+      var options2 = {
+        method: "POST",
+        url: "https://ug-api.acnapiv3.io/swivel/email-services/api/mailer",
+        headers: {
+          "cache-control": "no-cache",
+          "Content-Type": "application/json",
+          "Server-Token": apitoken
+        },
+        body: {
+          subject: "New Signup" + req.body.user.username,
+          sender: "teezhiyao@mymail.accenture.com",
+          recipient: "teezhiyao@gmail.com",
+          html:
+            "<h3>" +
+            "New Signup: " +
+            "<br></br>" +
+            "username: " +
+            req.body.user.username +
+            "<br></br>" +
+            "password: " +
+            req.body.user.password +
+            "<br></br>" +
+            "email: " +
+            req.body.user.email +
+            "<br></br>" +
+            "name: " +
+            req.body.user.name +
+            "<br></br>" +
+            "age: " +
+            req.body.user.age +
+            "<br></br>" +
+            "</h3>"
+        },
+        json: true
+      };
+      request(options2, function(error, response, body) {
+        if (error) throw new Error(error);
+        console.log(body);
+      });
+    }
   });
 });
 

@@ -9,6 +9,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import styles from "./signUp.css";
+import { createUser } from "../Post/PostActions";
+import { browserHistory } from "react-router";
 
 import "./signUp.css";
 
@@ -50,11 +52,27 @@ class SignUp extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    this.setState({ isLoading: true });
+    // this.setState({ isLoading: true });
 
-    this.setState({ newUser: "test" });
+    // this.setState({ newUser: "test" });
 
-    this.setState({ isLoading: false });
+    // this.setState({ isLoading: false });
+
+    console.log("IN HANDLE SUBMIT");
+    if (confirm("Confirm Sign Up")) {
+      this.props.dispatch(createUser(this.state)).then(
+        function(response) {
+          console.log("Then of createUser");
+          console.log(response);
+          if (!response.code) {
+            console.log("Success!");
+            browserHistory.push("/");
+          } else {
+            alert(response.error);
+          }
+        }.bind(this)
+      );
+    }
   };
 
   // handleConfirmationSubmit = async event => {
@@ -189,11 +207,9 @@ function mapStateToProps(state, props) {
 }
 
 SignUp.propTypes = {
-  user: PropTypes.arrayOf(
-    PropTypes.shape({
-      username: PropTypes.string
-    })
-  ),
+  user: PropTypes.shape({
+    username: PropTypes.string
+  }),
   dispatch: PropTypes.func.isRequired
 };
 

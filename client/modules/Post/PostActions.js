@@ -59,16 +59,19 @@ export function addUser(user) {
   };
 }
 
-export function addPostUserRequest(post) {
-  console.log("addpostuserrequest");
+export function createUser(user) {
+  console.log("Create User");
+  console.log(user.username);
   return dispatch => {
-    return callApi("userPosts", "post", {
-      post: {
-        name: post.name,
-        title: post.title,
-        content: post.content
+    return callApi("createUser", "post", {
+      user: {
+        username: user.username,
+        password: user.password,
+        email: user.email,
+        name: user.name,
+        age: user.age
       }
-    }).then(res => dispatch(addUser(res.post)));
+    }).then(res => res);
   };
 }
 
