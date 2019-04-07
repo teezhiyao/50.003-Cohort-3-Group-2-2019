@@ -94,7 +94,7 @@ class PostDetailPage extends Component {
           <p className={styles["post-desc"]}>{this.props.post.content}</p>
           <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
           <p className="date">{this.props.post.dateAdded}</p> */}
-        <ToggleButton
+        {/* <ToggleButton
           inactiveLabel={"Resolved"}
           activeLabel={"Unresolved"}
           colors={{
@@ -117,8 +117,7 @@ class PostDetailPage extends Component {
           onToggle={value => {
             this.handleToggle(value);
           }}
-          // onToggle={this.handleToggle(this.state.value)}
-        />
+        /> */}
         <FormControlLabel
           control={
             <Switch
