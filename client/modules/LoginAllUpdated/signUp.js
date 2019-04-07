@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import styles from "./signUp.css";
 
 import "./signUp.css";
 
@@ -69,32 +70,38 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         {this.state.newUser === null && (
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group controlId="email" bssize="large">
+          <Form onSubmit={this.handleSubmit} className={styles["form"]}>
+            <Form.Group controlId="email" className={styles["form-field"]} >
               <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Email"
                 autoFocus
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Group controlId="password" bssize="large">
+            <Form.Group controlId="password" className={styles["form-field"]}>
               <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Password"
                 value={this.state.password}
                 onChange={this.handleChange}
                 type="password"
               />
             </Form.Group>
-            <Form.Group controlId="confirmPassword" bssize="large">
+            <Form.Group controlId="confirmPassword" className={styles["form-field"]}>
               <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Confirm Password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
                 type="password"
               />
             </Form.Group>
-            <Button
+            <button
               //block
-              bssize="large"
+              className={styles["post-button"]}
               disabled={!this.validateForm()}
               type="submit"
               // isLoading={this.state.isLoading}
@@ -102,22 +109,23 @@ class SignUp extends Component {
               // loadingText="Signing up…"
             >
               Sign Up
-            </Button>
+            </button>
           </Form>
         )}
         {this.state.newUser !== null && (
-          <Form onSubmit={this.handleConfirmationSubmit}>
-            <Form.Group controlId="confirmationCode" bssize="large">
+          <Form onSubmit={this.handleConfirmationSubmit} className={styles["form"]}>
+            <Form.Group controlId="confirmationCode" className={styles["form-field"]}>
               <Form.Control
+                className={styles["form-field-text"]}
                 autoFocus
                 type="tel"
                 value={this.state.confirmationCode}
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
+            <button
               //block
-              bssize="large"
+              className={styles["post-button"]}
               disabled={!this.validateConfirmationForm()}
               type="submit"
               // isLoading={this.state.isLoading}

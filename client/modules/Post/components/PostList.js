@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   root: {
-    width: "100%"
+    width: "100%",
   },
   numberingHeader: {
     fontSize: theme.typography.pxToRem(15),

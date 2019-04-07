@@ -47,8 +47,9 @@ const drawerWidth = 240;
 //To do : Tidy up file by using imports instead of throwing everything here
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
+  
   grow: {
     flexGrow: 1
   },
@@ -283,7 +284,7 @@ export class App extends Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
+              <Typography variant="h6"  color="inherit" noWrap>
                 Ticketing Support System
               </Typography>
 
