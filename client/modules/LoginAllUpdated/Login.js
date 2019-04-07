@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "@material-ui/core/Button";
 import Bootstrap from "react-bootstrap";
-import "./Login.css";
+//import "./Login.css";
+import styles from "./Login.css";
+
 import {
   fetchLogin,
   fetchPosts,
@@ -74,25 +76,30 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="email" bsSize="large">
+        <Form onSubmit={this.handleSubmit} className={styles["form"]}>
+          <Form.Group controlId="email"  className={styles["form-field"]} >
             <Form.Control
+              className={styles["form-field-text"]}
+              placeholder="Username"
               autoFocus
               // type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="password" bsSize="large">
+          <Form.Group controlId="password" className={styles["form-field"]}>
             <Form.Control
+              className={styles["form-field-text"]}
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
           </Form.Group>
-          <Button
+          <button
+            
             block
-            bsSize="large"
+            className={styles["post-login-button"]}
             variant="contained"
             color="primary"
             disabled={!this.validateForm()}
@@ -100,11 +107,12 @@ class Login extends Component {
             onClick={this.handleSubmit}
           >
             Login
-          </Button>{" "}
+          </button>{" "}
+            
           <Link to={`/SignUpPage`}>
-            <Button variant="contained" color="primary" type="signup">
+            <button variant="contained" color="primary" type="signup" className={styles["post-signup-button"]}>
               Sign Up
-            </Button>
+            </button>
           </Link>
         </Form>
       </div>
