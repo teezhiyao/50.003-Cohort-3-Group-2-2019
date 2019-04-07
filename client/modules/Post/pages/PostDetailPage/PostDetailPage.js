@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import { FormattedMessage } from "react-intl";
 import ToggleButton from "react-toggle-button";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 // Import Style
@@ -118,7 +117,7 @@ class PostDetailPage extends Component {
             this.handleToggle(value);
           }}
         /> */}
-        <FormControlLabel
+        {/* <FormControlLabel
           control={
             <Switch
               checked={this.state.resolve}
@@ -127,7 +126,7 @@ class PostDetailPage extends Component {
             />
           }
           label={this.state.resolve ? "Resolved" : "Unresolved"}
-        />
+        /> */}
 
         <PostListItem
           post={this.props.post}
