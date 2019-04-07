@@ -18,6 +18,9 @@ class SignUp extends Component {
 
     this.state = {
       isLoading: false,
+      username: "",
+      name: "",
+      age: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -71,13 +74,43 @@ class SignUp extends Component {
       <div className="SignUp">
         {this.state.newUser === null && (
           <Form onSubmit={this.handleSubmit} className={styles["form"]}>
-            <Form.Group controlId="email" className={styles["form-field"]} >
+            <Form.Group controlId="name" className={styles["form-field"]}>
+              <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Name"
+                autoFocus
+                type="text"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="username" className={styles["form-field"]}>
+              <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Username"
+                autoFocus
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="email" className={styles["form-field"]}>
               <Form.Control
                 className={styles["form-field-text"]}
                 placeholder="Email"
                 autoFocus
                 type="email"
                 value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="age" className={styles["form-field"]}>
+              <Form.Control
+                className={styles["form-field-text"]}
+                placeholder="Age"
+                autoFocus
+                type="text"
+                value={this.state.age}
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -90,7 +123,10 @@ class SignUp extends Component {
                 type="password"
               />
             </Form.Group>
-            <Form.Group controlId="confirmPassword" className={styles["form-field"]}>
+            <Form.Group
+              controlId="confirmPassword"
+              className={styles["form-field"]}
+            >
               <Form.Control
                 className={styles["form-field-text"]}
                 placeholder="Confirm Password"
@@ -113,8 +149,14 @@ class SignUp extends Component {
           </Form>
         )}
         {this.state.newUser !== null && (
-          <Form onSubmit={this.handleConfirmationSubmit} className={styles["form"]}>
-            <Form.Group controlId="confirmationCode" className={styles["form-field"]}>
+          <Form
+            onSubmit={this.handleConfirmationSubmit}
+            className={styles["form"]}
+          >
+            <Form.Group
+              controlId="confirmationCode"
+              className={styles["form-field"]}
+            >
               <Form.Control
                 className={styles["form-field-text"]}
                 autoFocus

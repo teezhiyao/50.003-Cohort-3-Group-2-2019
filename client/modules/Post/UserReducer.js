@@ -17,8 +17,8 @@ const UserReducer = (state = initialState, action) => {
 
 /* Selectors */
 
-// Get all posts
-export const getUser = (state, postId) => state.user.data;
+// Get User
+export const getUser = state => state.user.data;
 
 // Export Reducer
 export default UserReducer;
