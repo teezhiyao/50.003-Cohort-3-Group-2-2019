@@ -64,6 +64,7 @@ class Login extends Component {
               browserHistory.push("/home");
             } else if (response.user.code === 101) {
               console.log("Failed Login!");
+              
             }
           }.bind(this)
         );
@@ -102,7 +103,7 @@ class Login extends Component {
             className={styles["post-login-button"]}
             variant="contained"
             color="primary"
-            disabled={!this.validateForm()}
+            disabled={!this.validateForm() }
             type="submit"
             onClick={this.handleSubmit}
           >
