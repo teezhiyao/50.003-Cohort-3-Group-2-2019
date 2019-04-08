@@ -56,6 +56,7 @@ router.route("/postNewReply").post(function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(body);
+    res.json(options.body);
   });
 });
 

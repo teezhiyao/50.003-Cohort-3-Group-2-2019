@@ -74,7 +74,9 @@ class PostDetailPage extends Component {
     const cuid = "asdkjsa";
     console.log(replyRef.value);
     console.log("I'm here");
-    this.props.dispatch(addReplyRequest(replyRef, this.props.post.objectId));
+    this.props.dispatch(
+      addReplyRequest(replyRef.value, this.props.post.objectId)
+    );
     if (replyRef.value) {
       //this.addReply(replyRef.value);
       replyRef.value = "";
@@ -116,16 +118,6 @@ class PostDetailPage extends Component {
           onToggle={value => {
             this.handleToggle(value);
           }}
-        /> */}
-        {/* <FormControlLabel
-          control={
-            <Switch
-              checked={this.state.resolve}
-              onChange={this.handleChange("resolve")}
-              color="primary"
-            />
-          }
-          label={this.state.resolve ? "Resolved" : "Unresolved"}
         /> */}
 
         <PostListItem

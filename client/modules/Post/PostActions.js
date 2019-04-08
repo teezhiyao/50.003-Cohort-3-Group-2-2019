@@ -147,10 +147,10 @@ export function addReplyRequest(reply, postId) {
     console.log(postId);
     return callApi("postNewReply", "post", {
       reply: {
-        content: "asdsa",
+        content: reply,
         postId: postId
       }
-    }).then(res => dispatch(addReply(res.reply)));
+    }).then(res => dispatch(addReply(res)));
   };
 }
 

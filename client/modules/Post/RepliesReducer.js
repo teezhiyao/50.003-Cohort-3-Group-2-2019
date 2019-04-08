@@ -1,4 +1,4 @@
-import { ADD_REPLIES } from "./PostActions";
+import { ADD_REPLIES, ADD_REPLY } from "./PostActions";
 
 // Initial State
 const initialState = { data: [] };
@@ -9,7 +9,10 @@ const RepliesReducer = (state = initialState, action) => {
       return {
         data: action.replies
       };
-
+    case ADD_REPLY:
+      return {
+        data: [action.replies, ...state.data]
+      };
     default:
       return state;
   }
