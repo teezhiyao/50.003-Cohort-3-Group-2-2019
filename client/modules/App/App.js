@@ -30,6 +30,7 @@ import Menu from "@material-ui/core/Menu";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
+import { getUser } from "../Post/UserReducer";
 
 // Import Style
 // import styles from './App.css';
@@ -47,9 +48,9 @@ const drawerWidth = 240;
 //To do : Tidy up file by using imports instead of throwing everything here
 const styles = theme => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
-  
+
   grow: {
     flexGrow: 1
   },
@@ -284,7 +285,7 @@ export class App extends Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6"  color="inherit" noWrap>
+              <Typography variant="h6" color="inherit" noWrap>
                 Ticketing Support System
               </Typography>
 
@@ -301,6 +302,9 @@ export class App extends Component {
                 />
               </div>
               <div className={classes.grow} />
+              <Typography variant="h6" color="inherit" noWrap>
+                {this.props.users.name && "Welcome " + this.props.users.name}
+              </Typography>
               <div className={classes.sectionDesktop}>
                 <IconButton color="inherit">
                   <Badge badgeContent={4} color="secondary">
@@ -454,13 +458,21 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
+  theme: PropTypes.object.isRequired,
+  users: PropTypes.shape({
+    name: PropTypes.string,
+    userType: PropTypes.string,
+    sessionToken: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired
+  })
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
+  console.log(store);
   return {
-    intl: store.intl
+    intl: store.intl,
+    users: getUser(store)
   };
 }
 
