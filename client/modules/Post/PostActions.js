@@ -27,7 +27,6 @@ export function addPostRequest(post) {
         title: post.title,
         content: post.content,
         cuid: post.cuid,
-        url: post.url,
         replyDataStructure: post.replys
       }
     }).then(res => dispatch(addPost(res)));
