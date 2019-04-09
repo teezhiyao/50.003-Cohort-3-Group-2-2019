@@ -26,7 +26,7 @@ export class PostCreateWidget extends Component {
             <FormattedMessage id="createNewPost" />x
           </h2>
           <input
-            placeholder={this.props.intl.messages.authorName}
+            placeholder={"Category"}
             className={styles["form-field"]}
             ref="name"
           />
