@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
   root: {
-    width: "100%",
+    width: "100%"
   },
   numberingHeader: {
     fontSize: theme.typography.pxToRem(15),
@@ -49,16 +49,8 @@ class PostList extends Component {
               <Typography className={classes.secondaryHeading}>
                 tags: {individualPost.category}
               </Typography>
-              <BlockTitle>Chips With Text</BlockTitle>
-              <Block strong>
-                <Chip text="Example Chip" />
-                <Chip text="Another Chip" />
-                <Chip text="One More Chip" />
-                <Chip text="Fourth Chip" />
-                <Chip text="Last One" />
-              </Block>
-              {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
 
+              {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
             </ExpansionPanelSummary>
 
             <PostListItem
