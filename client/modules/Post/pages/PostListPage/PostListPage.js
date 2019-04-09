@@ -43,10 +43,12 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (name, title, content) => {
+  handleAddPost = (category, title, content) => {
     console.log("Maybe here");
     this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content }));
+    this.props.dispatch(
+      addPostRequest([this.props.users.username, title, content, category])
+    );
   };
 
   handleAddUser = (name, title, content) => {
@@ -138,7 +140,8 @@ PostListPage.propTypes = {
       content: PropTypes.string.isRequired,
       objectId: PropTypes.string.isRequired,
       reply: PropTypes.string,
-      category: PropTypes.string
+      category: PropTypes.string,
+      url: PropTypes.state
     })
   ),
   users: PropTypes.shape({
