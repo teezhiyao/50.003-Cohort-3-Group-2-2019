@@ -66,7 +66,7 @@ router.route("/postNewPost").post(function(req, res, next) {
       userType: "User",
       name: req.body.post.name,
       userID: "1002845",
-      category: "Client Login Issue",
+      category: req.body.post.category,
       title: req.body.post.title,
       content: req.body.post.content,
       url: "www.mywebsite.com",

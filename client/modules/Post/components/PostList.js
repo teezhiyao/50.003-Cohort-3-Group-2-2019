@@ -47,9 +47,18 @@ class PostList extends Component {
                 {individualPost.title}
               </Typography>
               <Typography className={classes.secondaryHeading}>
-                Category: {individualPost.category}
+                tags: {individualPost.category}
               </Typography>
-              <Typography className={classes.miscHeading}>{"tags"}</Typography>
+              <BlockTitle>Chips With Text</BlockTitle>
+              <Block strong>
+                <Chip text="Example Chip" />
+                <Chip text="Another Chip" />
+                <Chip text="One More Chip" />
+                <Chip text="Fourth Chip" />
+                <Chip text="Last One" />
+              </Block>
+              {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
+
             </ExpansionPanelSummary>
 
             <PostListItem

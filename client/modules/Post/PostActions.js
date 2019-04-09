@@ -18,14 +18,15 @@ export function addPost(post) {
 }
 
 export function addPostRequest(post) {
+  console.log(post);
   return dispatch => {
     return callApi("postNewPost", "post", {
       post: {
-        username: post.name,
-        category: post.category,
+        username: post[0],
+        category: post[3],
         resolveStatus: post.resolveStatus,
-        title: post.title,
-        content: post.content,
+        title: post[1],
+        content: post[2],
         cuid: post.cuid,
         url: post.url,
         replyDataStructure: post.replys

@@ -43,10 +43,12 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (name, title, content, url) => {
+  handleAddPost = (category, title, content) => {
     console.log("Maybe here");
     this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addPostRequest({ name, title, content, url }));
+    this.props.dispatch(
+      addPostRequest([this.props.users.username, title, content, category])
+    );
   };
 
   handleAddUser = (name, title, content) => {
@@ -89,7 +91,7 @@ class PostListPage extends Component {
           Issue Category
           <select onChange={this.handleSelectCategory}>
             {categoryList.map(category => {
-              return <option value={category.value}>{category.label}</option>;
+              return <option value={category.value}> {category.label} </option>;
             })}
           </select>
         </label>
