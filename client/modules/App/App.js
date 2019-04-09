@@ -30,7 +30,6 @@ import Menu from "@material-ui/core/Menu";
 import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
-import { getUser } from "../Post/UserReducer";
 
 // Import Style
 // import styles from './App.css';
@@ -48,9 +47,9 @@ const drawerWidth = 240;
 //To do : Tidy up file by using imports instead of throwing everything here
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
-
+  
   grow: {
     flexGrow: 1
   },
@@ -266,220 +265,183 @@ export class App extends Component {
       //   {this.state.isMounted &&
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
-      <div>
-        {this.props.users.name && (
-          <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-              position="fixed"
-              className={classNames(classes.appBar, {
-                [classes.appBarShift]: open
-              })}
-            >
-              <Toolbar disableGutters={!open}>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={this.handleDrawerOpen}
-                  className={classNames(
-                    classes.menuButton,
-                    open && classes.hide
-                  )}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" color="inherit" noWrap>
-                  Ticketing Support System
-                </Typography>
 
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder="Search…"
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput
-                    }}
-                  />
+      <div>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={classNames(classes.appBar, {
+              [classes.appBarShift]: open
+            })}
+          >
+            <Toolbar disableGutters={!open}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classNames(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6"  color="inherit" noWrap>
+                Ticketing Support System
+              </Typography>
+
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
                 </div>
-                <div className={classes.grow} />
-                <Typography variant="h6" color="inherit" noWrap>
-                  {this.props.users.name && "Welcome " + this.props.users.name}
-                </Typography>
-                <div className={classes.sectionDesktop}>
-                  <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                      <MailIcon />
-                    </Badge>
-                  </IconButton>
-                  <IconButton color="inherit">
-                    <Badge badgeContent={17} color="secondary">
-                      <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
-                  <IconButton
-                    aria-owns={isMenuOpen ? "material-appbar" : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleProfileMenuOpen}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                </div>
-                <div className={classes.sectionMobile}>
-                  <IconButton
-                    aria-haspopup="true"
-                    onClick={this.handleMobileMenuOpen}
-                    color="inherit"
-                  >
-                    <MoreIcon />
-                  </IconButton>
-                </div>
-              </Toolbar>
-            </AppBar>
-            {renderMenu}
-            {renderMobileMenu}
-            <Drawer
-              className={classes.drawer}
-              variant="persistent"
-              anchor="left"
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-            >
-              <div className={classes.drawerHeader}>
-                <IconButton onClick={this.handleDrawerClose}>
-                  {theme.direction === "ltr" ? (
-                    <ChevronLeftIcon />
-                  ) : (
-                    <ChevronRightIcon />
-                  )}
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                />
+              </div>
+              <div className={classes.grow} />
+              <div className={classes.sectionDesktop}>
+                <IconButton color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton color="inherit">
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-owns={isMenuOpen ? "material-appbar" : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
                 </IconButton>
               </div>
-              <Divider />
-
-              <List>
-                <Link to={`/home`}>
-                  <ListItem button key="Home">
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Home" />
-                  </ListItem>
-                </Link>
-
-                <Link to={`/profile`}>
-                  <ListItem button key="Profile">
-                    <ListItemIcon>
-                      <AccountCircle />
-                    </ListItemIcon>
-                    <ListItemText primary="Profile" />
-                  </ListItem>
-                </Link>
-              </List>
-
-              <Divider />
-              <List>
-                {["Pending Issues", "Resolved Issues", "All Issues"].map(
-                  (text, index) => (
-                    <ListItem button key={text}>
-                      <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                    </ListItem>
-                  )
+              <div className={classes.sectionMobile}>
+                <IconButton
+                  aria-haspopup="true"
+                  onClick={this.handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </Toolbar>
+          </AppBar>
+          {renderMenu}
+          {renderMobileMenu}
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={this.handleDrawerClose}>
+                {theme.direction === "ltr" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
                 )}
-              </List>
-              <Divider />
+              </IconButton>
+            </div>
+            <Divider />
 
-              <List>
-                <Link to={`/`}>
-                  <ListItem button key="Log Out">
+            <List>
+              <Link to={`/home`}>
+                <ListItem button key="Home">
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+              </Link>
+
+              <Link to={`/profile`}>
+                <ListItem button key="Profile">
+                  <ListItemIcon>
+                    <AccountCircle />
+                  </ListItemIcon>
+                  <ListItemText primary="Profile" />
+                </ListItem>
+              </Link>
+            </List>
+
+            <Divider />
+            <List>
+              {["Pending Issues", "Resolved Issues", "All Issues"].map(
+                (text, index) => (
+                  <ListItem button key={text}>
                     <ListItemIcon>
-                      <MailIcon />
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
-                    <ListItemText primary="Log Out" />
+                    <ListItemText primary={text} />
                   </ListItem>
-                </Link>
-              </List>
+                )
+              )}
+            </List>
+            <Divider />
 
-              <Divider />
+            <List>
+              <Link to={`/`}>
+                <ListItem button key="Log Out">
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Log Out" />
+                </ListItem>
+              </Link>
+            </List>
 
-              <List>
-                <Link to={`/SignUpPage`}>
-                  <ListItem button key="Signup">
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Signup" />
-                  </ListItem>
-                </Link>
-              </List>
-            </Drawer>
-            <main
-              className={classNames(classes.content, {
-                [classes.contentShift]: open
-              })}
-            >
-              <Helmet
-                title="Issue Reporting"
-                titleTemplate="%s - Blog App"
-                meta={[
-                  { charset: "utf-8" },
-                  {
-                    "http-equiv": "X-UA-Compatible",
-                    content: "IE=edge"
-                  },
-                  {
-                    name: "viewport",
-                    content: "width=device-width, initial-scale=1"
-                  }
-                ]}
-              />
-              <Header
-                switchLanguage={lang =>
-                  this.props.dispatch(switchLanguage(lang))
+            <Divider />
+
+            <List>
+              <Link to={`/SignUpPage`}>
+                <ListItem button key="Signup">
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Signup" />
+                </ListItem>
+              </Link>
+            </List>
+          </Drawer>
+          <main
+            className={classNames(classes.content, {
+              [classes.contentShift]: open
+            })}
+          >
+            <Helmet
+              title="Issue Reporting"
+              titleTemplate="%s - Blog App"
+              meta={[
+                { charset: "utf-8" },
+                {
+                  "http-equiv": "X-UA-Compatible",
+                  content: "IE=edge"
+                },
+                {
+                  name: "viewport",
+                  content: "width=device-width, initial-scale=1"
                 }
-                intl={this.props.intl}
-                toggleAddPost={this.toggleAddPostSection}
-              />
-              <div className={styles.container}>{this.props.children}</div>
-              <Footer />
-            </main>
-          </div>
-        )}
-        {!this.props.users.name && (
-          <div className={classes.root}>
-            <CssBaseline />
-            <main
-              className={classNames(classes.content, {
-                [classes.contentShift]: open
-              })}
-            >
-              {" "}
-              <Helmet
-                title="Issue Reporting"
-                titleTemplate="%s - Blog App"
-                meta={[
-                  { charset: "utf-8" },
-                  {
-                    "http-equiv": "X-UA-Compatible",
-                    content: "IE=edge"
-                  },
-                  {
-                    name: "viewport",
-                    content: "width=device-width, initial-scale=1"
-                  }
-                ]}
-              />
-              <div className={styles.container}>{this.props.children}</div>
-            </main>
-          </div>
-        )}
+              ]}
+            />
+            <Header
+              switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
+              intl={this.props.intl}
+              toggleAddPost={this.toggleAddPostSection}
+            />
+            <div className={styles.container}>{this.props.children}</div>
+            <Footer />
+          </main>
+        </div>
       </div>
 
       // </div>
@@ -492,21 +454,13 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-  users: PropTypes.shape({
-    name: PropTypes.string,
-    userType: PropTypes.string,
-    sessionToken: PropTypes.string.isRequired,
-    objectId: PropTypes.string.isRequired
-  })
+  theme: PropTypes.object.isRequired
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
-  console.log(store);
   return {
-    intl: store.intl,
-    users: getUser(store)
+    intl: store.intl
   };
 }
 
