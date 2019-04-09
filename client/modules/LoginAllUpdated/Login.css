@@ -2,11 +2,20 @@
   margin: auto;
   margin-bottom: 16px;
   margin-top: 16px;
-  width: 30%;
+  width: 50%;
   background: #fafafa;
   padding: 15px 15px;
+  border: 0px solid #ddd;
+  border-radius: 4px;
+}
+
+.heading {
+  width: 50%;
+  margin: auto;
+  padding: 64px 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  background: #0099cc;
 }
 
 .post-login-button {

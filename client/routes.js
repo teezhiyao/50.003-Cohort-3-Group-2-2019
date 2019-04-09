@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== "production") {
   require("./modules/Post/pages/PostListPage/PostListPage");
   require("./modules/Post/pages/PostDetailPage/PostDetailPage");
   require("./modules/Post/pages/Profile/Profile");
-  
+
   require("./modules/LoginAllUpdated/Login");
   require("./modules/LoginAllUpdated/SignUp");
 }
