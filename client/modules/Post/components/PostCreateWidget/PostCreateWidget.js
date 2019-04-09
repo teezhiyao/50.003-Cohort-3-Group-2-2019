@@ -7,7 +7,7 @@ import styles from "./PostCreateWidget.css";
 
 export class PostCreateWidget extends Component {
   addPost = () => {
-    const nameRef = this.refs.name;
+    const nameRef = this.refs.category;
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
     console.log("trying here");
@@ -16,20 +16,36 @@ export class PostCreateWidget extends Component {
       nameRef.value = titleRef.value = contentRef.value = "";
     }
   };
-
+  // handleSelectCategory = (e) =>{
+  //   this.props.intl.messages.postTitle = e.target.value;
+  // }
+  
   render() {
     const cls = `${styles.form} ${this.props.showAddPost ? styles.appear : ""}`;
     return (
       <div className={cls}>
         <div className={styles["form-content"]}>
           <h2 className={styles["form-title"]}>
-            <FormattedMessage id="createNewPost" />x
+            <FormattedMessage id="createNewPost" />
           </h2>
-          <input
+          
+          
+          <label>
+            {" "}
+            Issue Category
+            {/* <select onChange={this.handleSelectCategory} ref="category" > */}
+            <select ref="category" >
+              {this.props.categoryList.filter(category => category.value != "all")
+              .map(category => {
+                return <option value={category.value}> {category.label} </option>;
+              })}
+            </select>
+          </label>
+          {/* <input
             placeholder={"Category"}
             className={styles["form-field"]}
             ref="name"
-          />
+          /> */}
           <input
             placeholder={this.props.intl.messages.postTitle}
             className={styles["form-field"]}

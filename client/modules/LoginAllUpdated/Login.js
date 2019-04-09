@@ -103,7 +103,6 @@ class Login extends Component {
             />
           </Form.Group>
           <button
-            block
             className={styles["post-login-button"]}
             variant="contained"
             color="primary"

@@ -51,6 +51,7 @@
     "react": "^16.8.3",
     "react-basic-table": "^1.0.14",
     "react-bootstrap": "^1.0.0-beta.6",
+    "react-chips": "^0.8.0",
     "react-dom": "^16.8.3",
     "react-helmet": "^5.2.0",
     "react-intl": "^2.1.2",

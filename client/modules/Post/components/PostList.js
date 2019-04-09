@@ -10,6 +10,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
+import { Chip } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,10 @@ const styles = theme => ({
 
 //takes in props(all posts) and displays every post
 class PostList extends Component {
+  handleClickChip=() => {
+    console.log("clicked chip");
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -47,16 +52,9 @@ class PostList extends Component {
                 {individualPost.title}
               </Typography>
               <Typography className={classes.secondaryHeading}>
-                tags: {individualPost.category}
+                Category: 
+                <Chip label={individualPost.category} onClick= {this.handleClickChip} />
               </Typography>
-              <BlockTitle>Chips With Text</BlockTitle>
-              <Block strong>
-                <Chip text="Example Chip" />
-                <Chip text="Another Chip" />
-                <Chip text="One More Chip" />
-                <Chip text="Fourth Chip" />
-                <Chip text="Last One" />
-              </Block>
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
 
             </ExpansionPanelSummary>

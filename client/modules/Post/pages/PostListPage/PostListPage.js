@@ -26,7 +26,13 @@ class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorySelected: "all"
+      categorySelected: "all",
+      categoryList: [
+        { value: "all", label: "All Issues" },
+        { value: "LOGINISSUE", label: "Login Issue" },
+        { value: "APIERROR", label: "API Issue" },
+        { value: "LOGOUTISSUE", label: "Logout Issue" }
+      ]
     };
   }
 
@@ -72,25 +78,26 @@ class PostListPage extends Component {
     console.log(this.props.users);
   };
 
+  handleNewCategory =(e)=>{
+    this.setState(state => state.categoryList = [e.target.value, ...state.categoryList, ]);
+  };
+
   render() {
-    const categoryList = [
-      { value: "all", label: "All Issues" },
-      { value: "LOGINISSUE", label: "Login Issue" },
-      { value: "APIERROR", label: "API Issue" },
-      { value: "LOGOUTISSUE", label: "Logout Issue" }
-    ];
+    
     return (
       <div>
         <PostCreateWidget
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
+          categoryList = {this.state.categoryList}
+          handleNewCategory = {this.handleNewCategory}
         />
         <label>
           {" "}
           Issue Category
           <select onChange={this.handleSelectCategory}>
-            {categoryList.map(category => {
+            {this.state.categoryList.map(category => {
               return <option value={category.value}> {category.label} </option>;
             })}
           </select>
