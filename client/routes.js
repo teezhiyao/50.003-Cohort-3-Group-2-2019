@@ -22,6 +22,8 @@ if (process.env.NODE_ENV !== "production") {
 
   require("./modules/LoginAllUpdated/Login");
   require("./modules/LoginAllUpdated/SignUp");
+  require("./modules/Post/pages/Resolved/Resolved");
+  require("./modules/Post/pages/Pending/Pending")
 }
 
 // react-router setup with code-splitting
@@ -73,6 +75,22 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require("./modules/Post/pages/Profile/Profile").default);
+        });
+      }}
+    />
+    <Route
+      path="/resolved"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Post/pages/Resolved/Resolved").default);
+        });
+      }}
+    />
+    <Route
+      path="/pending"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Post/pages/Pending/Pending").default);
         });
       }}
     />
