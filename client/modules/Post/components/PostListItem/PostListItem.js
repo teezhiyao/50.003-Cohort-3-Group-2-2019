@@ -41,7 +41,6 @@ export class PostListItem extends Component {
           <h3 className={styles["post-title"]}>
             <Link to={`/posts/${this.props.post.objectId}`}>
               {this.props.post.title}
-              {/* <PostDetailPage post={this.props.post} /> */}
             </Link>
           </h3>
           <p className={styles["author-name"]}>

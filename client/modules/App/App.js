@@ -31,6 +31,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import { getUser } from "../Post/UserReducer";
+import Chatbot from "../chatbot/Chatbot";
 
 // Import Style
 // import styles from './App.css';
@@ -384,23 +385,24 @@ export class App extends Component {
               <Divider />
               <List>
                 {/* {["Pending Issues", "Resolved Issues", "All Issues"].map( */}
-                {["Pending Issues", "Resolved Issues"].map(
+                {["Pending Issues", "Resolved Issues"].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>
+                      {index === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
 
-                  (text, index) => (
-                    
-                      <ListItem button key={text}>
-                        
-                        <ListItemIcon>
-                          {index === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        
-                        {index === 0 ? <Link to={`/pending`}><ListItemText primary={text} /></Link> : null}
-                        {index === 1 ? <Link to={`/resolved`}><ListItemText primary={text} /></Link> : null}
-
-                      </ListItem>
-                    
-                  )
-                )}
+                    {index === 0 ? (
+                      <Link to={`/pending`}>
+                        <ListItemText primary={text} />
+                      </Link>
+                    ) : null}
+                    {index === 1 ? (
+                      <Link to={`/resolved`}>
+                        <ListItemText primary={text} />
+                      </Link>
+                    ) : null}
+                  </ListItem>
+                ))}
               </List>
               <Divider />
 
@@ -458,6 +460,7 @@ export class App extends Component {
               <div className={styles.container}>{this.props.children}</div>
               <Footer />
             </main>
+            <Chatbot />
           </div>
         )}
         {!this.props.users.name && (
