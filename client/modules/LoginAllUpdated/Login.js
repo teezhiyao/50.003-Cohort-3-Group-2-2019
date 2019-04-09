@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Bootstrap from "react-bootstrap";
 //import "./Login.css";
 import styles from "./Login.css";
+import Typography from "@material-ui/core/Typography";
 
 import {
   fetchLogin,
@@ -64,7 +65,6 @@ class Login extends Component {
               browserHistory.push("/home");
             } else if (response.user.code === 101) {
               console.log("Failed Login!");
-              
             }
           }.bind(this)
         );
@@ -77,8 +77,13 @@ class Login extends Component {
   render() {
     return (
       <div className="Login">
+        <div className={styles.heading}>
+          <Typography variant="h4" color="inherit">
+            Ticketing Support System
+          </Typography>
+        </div>
         <Form onSubmit={this.handleSubmit} className={styles["form"]}>
-          <Form.Group controlId="email"  className={styles["form-field"]} >
+          <Form.Group controlId="email" className={styles["form-field"]}>
             <Form.Control
               className={styles["form-field-text"]}
               placeholder="Username"
@@ -98,20 +103,23 @@ class Login extends Component {
             />
           </Form.Group>
           <button
-            
             block
             className={styles["post-login-button"]}
             variant="contained"
             color="primary"
-            disabled={!this.validateForm() }
+            disabled={!this.validateForm()}
             type="submit"
             onClick={this.handleSubmit}
           >
             Login
           </button>{" "}
-            
           <Link to={`/SignUpPage`}>
-            <button variant="contained" color="primary" type="signup" className={styles["post-signup-button"]}>
+            <button
+              variant="contained"
+              color="primary"
+              type="signup"
+              className={styles["post-signup-button"]}
+            >
               Sign Up
             </button>
           </Link>
