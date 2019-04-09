@@ -89,7 +89,7 @@ class PostListPage extends Component {
           Issue Category
           <select onChange={this.handleSelectCategory}>
             {categoryList.map(category => {
-              return <option value={category.value}>{category.label}</option>;
+              return <option value={category.value}> {category.label} </option>;
             })}
           </select>
         </label>
