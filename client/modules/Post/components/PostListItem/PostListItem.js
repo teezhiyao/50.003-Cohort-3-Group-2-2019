@@ -42,7 +42,7 @@ export class PostListItem extends Component {
             <Link to={`/posts/${this.props.post.objectId}`}>
               {this.props.post.title}
               {/* <PostDetailPage post={this.props.post} /> */}
-            </Link>
+            </Link> 
           </h3>
           <p className={styles["author-name"]}>
             <FormattedMessage id="by" /> {this.props.post.name}

@@ -383,14 +383,22 @@ export class App extends Component {
 
               <Divider />
               <List>
-                {["Pending Issues", "Resolved Issues", "All Issues"].map(
+                {/* {["Pending Issues", "Resolved Issues", "All Issues"].map( */}
+                {["Pending Issues", "Resolved Issues"].map(
+
                   (text, index) => (
-                    <ListItem button key={text}>
-                      <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                    </ListItem>
+                    
+                      <ListItem button key={text}>
+                        
+                        <ListItemIcon>
+                          {index === 0 ? <InboxIcon /> : <MailIcon />}
+                        </ListItemIcon>
+                        
+                        {index === 0 ? <Link to={`/pending`}><ListItemText primary={text} /></Link> : null}
+                        {index === 1 ? <Link to={`/resolved`}><ListItemText primary={text} /></Link> : null}
+
+                      </ListItem>
+                    
                   )
                 )}
               </List>

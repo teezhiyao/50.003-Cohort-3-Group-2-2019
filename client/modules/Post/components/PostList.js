@@ -64,7 +64,7 @@ class PostList extends Component {
                 
               </Typography>
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
-
+            
             </ExpansionPanelSummary>
 
             <PostListItem
