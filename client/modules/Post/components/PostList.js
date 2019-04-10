@@ -55,13 +55,9 @@ class PostList extends Component {
               </Typography>
               <Typography className={classes.secondaryHeading}>
                 Category: 
-                
-                  <Link to={{
-                    pathname: '/cat',
-                    state:{
-                      category: "LOGINISSUE"
-                      }
-                    }}>
+                  <Link to={
+                    `/cat/${individualPost.category}`
+                    }>
                     <Chip label={individualPost.category} onClick= {this.handleClickChip}>  
                     </Chip>
                   </Link>

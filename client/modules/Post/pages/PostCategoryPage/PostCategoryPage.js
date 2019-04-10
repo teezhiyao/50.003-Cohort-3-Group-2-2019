@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
+
 
 // Import Components
 import Typography from "@material-ui/core/Typography";
@@ -55,9 +57,10 @@ class PostCategoryPage extends Component {
   componentDidMount() {
     // this function is called the moment this component is rendered.
     console.log("This is PostCategoryPage");
-
-    const {category} = this.props.location.state;       // we have issue passing prop through link now
-    //this.setState({categorySelected: {category}});    
+    console.log(this.props);
+    const category = this.props.params.category;       // we have issue passing prop through link now
+    this.setState({categorySelected: category});
+    
   }
 
   handleDeletePost = post => {
@@ -74,13 +77,16 @@ class PostCategoryPage extends Component {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
+  handleClick=()=>{
+    console.log(this.state)
+  }
 
   render() {
-    
+    const { classes } = this.props;
     return (
       <div>
         <h1>  Displaying all Issue Threads related to 
-            <Chip label="LOGINISSUE" />
+            <Chip label= {this.state.categorySelected} onClick = {this.handleClick}/>
             </h1>
         {this.props.posts.filter(
                   individualPost => individualPost.category === this.state.categorySelected
@@ -153,7 +159,8 @@ PostCategoryPage.propTypes = {
     objectId: PropTypes.string.isRequired
   }),
   showAddPost: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object
 };
 
 PostCategoryPage.contextTypes = {
