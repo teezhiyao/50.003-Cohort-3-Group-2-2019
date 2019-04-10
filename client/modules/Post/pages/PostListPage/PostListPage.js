@@ -31,7 +31,8 @@ class PostListPage extends Component {
         { value: "all", label: "All Issues" },
         { value: "LOGINISSUE", label: "Login Issue" },
         { value: "APIERROR", label: "API Issue" },
-        { value: "LOGOUTISSUE", label: "Logout Issue" }
+        { value: "LOGOUTISSUE", label: "Logout Issue" },
+        { value: "Client Login Issue", label: "Client Login Issue" }
       ]
     };
   }
@@ -39,6 +40,7 @@ class PostListPage extends Component {
   componentDidMount() {
     // this function is called the moment this component is rendered.
     console.log("componentDidMount");
+    console.log(this.state);
   }
 
   handleDeletePost = post => {
@@ -78,8 +80,16 @@ class PostListPage extends Component {
     console.log(this.props.users);
   };
 
-  handleNewCategory =(e)=>{
-    this.setState(state => state.categoryList = [e.target.value, ...state.categoryList, ]);
+  handleNewCategory =(newCategory)=>{
+    //this.setState({categoryList : [...this.state.categoryList,{value:{newCategory}, label:{newCategory} }]});
+    this.setState(state =>{
+      const categoryList = [...state.categoryList,{value:{newCategory}, label:{newCategory} }];
+      return {
+        categorySelected:"all",
+        categoryList,
+      }
+    });
+    console.log(this.state.categoryList);
   };
 
   render() {
@@ -123,11 +133,11 @@ class PostListPage extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-// PostListPage.need = [
-//   () => {
-//     return fetchPosts(this.props.users.sessionToken);
-//   }
-// ];
+  // PostListPage.need = [
+  //   () => {
+  //     return fetchPosts(this.props.users.sessionToken);
+  //   }
+  // ];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {

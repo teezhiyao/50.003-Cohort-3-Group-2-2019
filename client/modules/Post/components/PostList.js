@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 // Import Components
 import PostListItem from "./PostListItem/PostListItem";
+import {Link} from 'react-router';
 import addReply from "./PostListItem/PostListItem";
 import Typography from "@material-ui/core/Typography";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -36,6 +37,7 @@ const styles = theme => ({
 class PostList extends Component {
   handleClickChip=() => {
     console.log("clicked chip");
+    
   }
 
   render() {
@@ -53,7 +55,17 @@ class PostList extends Component {
               </Typography>
               <Typography className={classes.secondaryHeading}>
                 Category: 
-                <Chip label={individualPost.category} onClick= {this.handleClickChip} />
+                
+                  <Link to={{
+                    pathname: '/cat',
+                    state:{
+                      category: "LOGINISSUE"
+                      }
+                    }}>
+                    <Chip label={individualPost.category} onClick= {this.handleClickChip}>  
+                    </Chip>
+                  </Link>
+                
               </Typography>
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
 
@@ -81,7 +93,7 @@ PostList.propTypes = {
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       objectId: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
+      slug: PropTypes.string,
       cuid: PropTypes.string,
       reply: PropTypes.string,
       category: PropTypes.string

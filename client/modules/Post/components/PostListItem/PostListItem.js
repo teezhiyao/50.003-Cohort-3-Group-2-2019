@@ -74,14 +74,14 @@ PostListItem.propTypes = {
     name: PropTypes.string,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    slug: PropTypes.string,
     cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),
   // addReply: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  addReply: PropTypes.func.isRequired
+  addReply: PropTypes.func
 };
 export default injectIntl(PostListItem);
 

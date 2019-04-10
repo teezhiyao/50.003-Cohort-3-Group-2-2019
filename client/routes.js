@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== "production") {
 
   require("./modules/LoginAllUpdated/Login");
   require("./modules/LoginAllUpdated/SignUp");
+  require("./modules/Post/pages/PostCategoryPage/PostCategoryPage");
 }
 
 // react-router setup with code-splitting
@@ -48,12 +49,24 @@ export default (
       }}
     />
     <Route
-      path="/posts/:objectId"
+      path="/posts/:objectId" // colon means dynamic path
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(
             null,
             require("./modules/Post/pages/PostDetailPage/PostDetailPage")
+              .default
+          );
+        });
+      }}
+    />
+    <Route
+      path="/cat"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(
+            null,
+            require("./modules/Post/pages/PostCategoryPage/PostCategoryPage")
               .default
           );
         });

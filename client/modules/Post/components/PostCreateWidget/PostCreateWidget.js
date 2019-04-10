@@ -6,6 +6,12 @@ import { injectIntl, intlShape, FormattedMessage } from "react-intl";
 import styles from "./PostCreateWidget.css";
 
 export class PostCreateWidget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newCategory: null
+    };
+  }
   addPost = () => {
     const nameRef = this.refs.category;
     const titleRef = this.refs.title;
@@ -16,19 +22,27 @@ export class PostCreateWidget extends Component {
       nameRef.value = titleRef.value = contentRef.value = "";
     }
   };
-  // handleSelectCategory = (e) =>{
-  //   this.props.intl.messages.postTitle = e.target.value;
-  // }
   
+  handleNewCategory =(e)=>{
+    this.setState({newCategory: e.target.value});
+    console.log("changing state");
+    console.log(e.target.value);
+    console.log(this.state.newCategory);
+  }
+  addNewCategory=()=>{
+        this.props.handleNewCategory(this.state.newCategory);
+    console.log("added new category:");
+    console.log(this.state.newCategory);
+  }
   render() {
     const cls = `${styles.form} ${this.props.showAddPost ? styles.appear : ""}`;
+    console.log("in post create widget");
     return (
       <div className={cls}>
         <div className={styles["form-content"]}>
           <h2 className={styles["form-title"]}>
             <FormattedMessage id="createNewPost" />
           </h2>
-          
           
           <label>
             {" "}
@@ -41,11 +55,16 @@ export class PostCreateWidget extends Component {
               })}
             </select>
           </label>
-          {/* <input
-            placeholder={"Category"}
-            className={styles["form-field"]}
-            ref="name"
-          /> */}
+          
+          {/*To add new category: */}
+          <form onSubmit={this.addNewCategory}>
+              <label>
+                Can't find your category?
+                <input type="text" placeholder="Optional" value={this.state.newCategory} onChange={this.handleNewCategory}/>
+              </label>
+                <button type="submit">Add new category</button>
+          </form>
+
           <input
             placeholder={this.props.intl.messages.postTitle}
             className={styles["form-field"]}
@@ -93,8 +112,10 @@ export class PostCreateWidget extends Component {
 
 PostCreateWidget.propTypes = {
   addPost: PropTypes.func.isRequired,
-  showAddPost: PropTypes.bool.isRequired,
   addUser: PropTypes.func.isRequired,
+  showAddPost: PropTypes.bool.isRequired,
+  categoryList: PropTypes.array,
+  handleNewCategory: PropTypes.func.isRequired,
   intl: intlShape.isRequired
 };
 
