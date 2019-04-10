@@ -51,6 +51,7 @@ import { fetchComponentData } from "./util/fetchData";
 import posts from "./routes/post.routes";
 import posts1 from "./routes/userACNAPI.routes";
 import replies from "./routes/reply.routes";
+import chatMessage from "./routes/dialogFlowRoutes";
 
 import dummyData from "./dummyData";
 import serverConfig from "./config";
@@ -79,6 +80,7 @@ app.use(Express.static(path.resolve(__dirname, "../dist/client")));
 app.use("/api", posts);
 app.use("/api", posts1);
 app.use("/api", replies);
+app.use("/api", chatMessage);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {

@@ -6,6 +6,7 @@ import Message from "./Message";
 // import 'materialize-css/dist/css/materialize.min.css';
 import Card from "./Card";
 import QuickReplies from "./QuickReplies";
+import callApi from "../../util/apiCaller";
 
 const cookies = new Cookies();
 
@@ -31,35 +32,51 @@ class Chatbot extends Component {
     }
   }
   df_text_query(queryText) {
-    // let msg;
-    // let says = {
-    //   speaks: "user",
-    //   msg: {
-    //     text: {
-    //       text: queryText
-    //     }
-    //   }
-    // };
-    // this.setState({ messages: [...this.state.messages, says] });
+    let msg;
+    let says = {
+      speaks: "user",
+      msg: {
+        text: {
+          text: queryText
+        }
+      }
+    };
+    // return callApi("postNewPost", "post", {
+
+    const res = callApi("api/df_text_query", "post", {
+      text: queryText,
+      userID: cookies.get("userID")
+    });
+    console.log("In Df text");
+    console.log(res);
+    // this.setState({ messages: ["What is this. lol2"] });
+
     // const res = axios.post("/api/df_text_query", {
     //   text: queryText,
     //   userID: cookies.get("userID")
     // });
-    // for (let msg of res.data.fulfillmentMessages) {
-    //   says = {
-    //     speaks: "bot",
-    //     msg: msg
-    //   };
-    //   this.setState({ messages: [...this.state.messages, says] });
-    // }
+
+    for (let msg of res.data.fulfillmentMessages) {
+      says = {
+        speaks: "bot",
+        msg: msg
+      };
+      this.setState({ messages: [...this.state.messages, says] });
+    }
   }
   df_event_query(eventName) {
     // const res = axios.post("/api/df_event_query", {
     //   event: eventName,
     //   userID: cookies.get("userID")
     // });
-    // let msg,
-    //   says = {};
+    const res = dispatch =>
+      callApi("api/df_event_query", "post", {
+        event: eventName,
+        userID: cookies.get("userID")
+      }).then(res => res);
+    console.log("In Df event");
+    console.log(res);
+    // this.setState({ messages: ["What is this. lol"] });
     // for (let msg of res.data.fulfillmentMessages) {
     //   let says = {
     //     speaks: "me",
