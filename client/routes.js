@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from "./modules/App/App";
 import PostListPage from "./modules/Post/pages/PostListPage/PostListPage";
 import PostCategoryPage from "./modules/Post/pages/PostCategoryPage/PostCategoryPage";
+
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
   require.ensure = function requireModule(deps, callback) {
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV !== "production") {
   require("./modules/Post/pages/Resolved/Resolved");
   require("./modules/Post/pages/Pending/Pending")
   require("./modules/Post/pages/PostCategoryPage/PostCategoryPage");
+  require("./modules/Post/pages/PostGrid/PostGrid")
 }
 
 // react-router setup with code-splitting
@@ -109,6 +111,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require("./modules/Post/pages/Pending/Pending").default);
+        });
+      }}
+    />
+    <Route
+      path="/grid"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Post/pages/PostGrid/PostGrid").default);
         });
       }}
     />

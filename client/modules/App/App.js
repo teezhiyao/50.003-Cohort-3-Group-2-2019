@@ -379,6 +379,14 @@ export class App extends Component {
                     <ListItemText primary="Profile" />
                   </ListItem>
                 </Link>
+                <Link to={`/grid`}>
+                  <ListItem button key="Board">
+                    <ListItemIcon>
+                      <AccountCircle />
+                    </ListItemIcon>
+                    <ListItemText primary="Board" />
+                  </ListItem>
+                </Link>
               </List>
 
               <Divider />

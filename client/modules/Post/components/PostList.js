@@ -63,13 +63,9 @@ class PostList extends Component {
                   </Link>
                 
               </Typography>
-<<<<<<< HEAD
-              {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
-=======
->>>>>>> d09a23c2546ae72af4b18b598a9f18ecda5f153c
 
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
-            </ExpansionPanelSummary>
+          </ExpansionPanelSummary>
 
             <PostListItem
               post={individualPost}
