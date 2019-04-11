@@ -40,21 +40,51 @@ class Profile extends Component {
             <span className={styles["text"]}>{this.props.users.age}</span>,
             ],
             [
-                <span className={styles["text"]}>User Type</span>,
-                <span className={styles["text"]}>{this.props.users.userType}</span>,
-                ]
+            <span className={styles["text"]}>User Type</span>,
+            <span className={styles["text"]}>{this.props.users.userType}</span>,
+            ],
+            [
+            <span className={styles["text"]}>   </span>,
+            <span className={styles["text"]}>   </span>,
+            ]
         ];
         return(
-            <div>
+            <div >
                 <p className={styles["box"]}>
-                    <p className={styles["header"]}>
+                <div class="w3-card-4">
+                    <p className={styles["header"]} >
                         Profile 
                     </p>
                     <img className={styles["profile_image"]} src={profile} ></img>
                 {/* <p className={styles["text"]}> {this.props.users.name} </p>
                 <p className={styles["text"]}>Username : {this.props.users.username} </p> */}
-                <ReactBasicTable rows={rows} columns={columns} />
+                {/* <ReactBasicTable rows={rows} columns={columns} /> */}
                 {/* className={styles["table"]} */}
+                <table class="w3-table" className={styles["table"]}>
+                    
+                    <tr>
+                    <td >Username</td>
+                    <td>{this.props.users.username}</td>
+                    </tr>
+                    <tr>
+                    <td>Full Name</td>
+                    <td>{this.props.users.name}</td>
+                    </tr>
+                    <tr>
+                    <td>Age</td>
+                    <td>{this.props.users.age}</td>
+                    </tr>
+                    <tr>
+                    <td>User Type</td>
+                    <td>{this.props.users.userType}</td>
+                    </tr>
+                    <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    </tr>
+                </table>
+                
+                </div>
                 </p>
                 
                 
