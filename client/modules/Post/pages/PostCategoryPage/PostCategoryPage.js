@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-
 // Import Components
 import Typography from "@material-ui/core/Typography";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -27,30 +26,30 @@ import { getPosts } from "../../PostReducer";
 import { getUser } from "../../UserReducer";
 
 const styles = theme => ({
-    root: {
-      width: "100%",
-    },
-    numberingHeader: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: "2.00%",
-      flexShrink: 0
-    },
-    secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
-      flexBasis: "88.00%"
-    },
-    miscHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: "10.00%"
-    }
-  });
+  root: {
+    width: "100%"
+  },
+  numberingHeader: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "2.00%",
+    flexShrink: 0
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    flexBasis: "88.00%"
+  },
+  miscHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "10.00%"
+  }
+});
 
 class PostCategoryPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        categorySelected: "LOGINISSUE"
+      categorySelected: "LOGINISSUE"
     };
   }
 
@@ -58,9 +57,8 @@ class PostCategoryPage extends Component {
     // this function is called the moment this component is rendered.
     console.log("This is PostCategoryPage");
     console.log(this.props);
-    const category = this.props.params.category;       // we have issue passing prop through link now
-    this.setState({categorySelected: category});
-    
+    const category = this.props.params.category; // we have issue passing prop through link now
+    this.setState({ categorySelected: category });
   }
 
   handleDeletePost = post => {
@@ -77,47 +75,51 @@ class PostCategoryPage extends Component {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
-  handleClick=()=>{
-    console.log(this.state)
-  }
+  handleClick = () => {
+    console.log(this.state);
+  };
 
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <h1>  Displaying all Issue Threads related to 
-            <Chip label= {this.state.categorySelected} onClick = {this.handleClick}/>
-            </h1>
-        {this.props.posts.filter(
-                  individualPost => individualPost.category === this.state.categorySelected
-                ).map((individualPost, index) => (
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography className={styles.numberingHeader}>
-                {index + 1}
-              </Typography>
-              <Typography className={styles.secondaryHeading}>
-                {individualPost.title}
-              </Typography>
-              <Typography className={styles.secondaryHeading}>
-                Category: 
-                <Chip label={individualPost.category}/>
-              </Typography>
-              {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
+        <h1>
+          {" "}
+          Displaying all Issue Threads related to
+          <Chip
+            label={this.state.categorySelected}
+            onClick={this.handleClick}
+          />
+        </h1>
+        {this.props.posts
+          .filter(
+            individualPost =>
+              individualPost.category === this.state.categorySelected
+          )
+          .map((individualPost, index) => (
+            <ExpansionPanel>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography className={classes.numberingHeader}>
+                  {index + 1}
+                </Typography>
+                <Typography className={classes.secondaryHeading}>
+                  {individualPost.title}
+                </Typography>
+                <Typography className={classes.secondaryHeading}>
+                  Category:
+                  <Chip label={individualPost.category} />
+                </Typography>
+                {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
+              </ExpansionPanelSummary>
 
-            </ExpansionPanelSummary>
-
-            <PostListItem
-              post={individualPost}
-              key={individualPost.cuid}
-              addReply={this.handleAddReply}
-              onDelete={() =>
-                this.handleDeletePost(individualPost.objectId)
-              }
-            />
-          </ExpansionPanel>
-        ))}
-    
+              <PostListItem
+                post={individualPost}
+                key={individualPost.cuid}
+                addReply={this.handleAddReply}
+                onDelete={() => this.handleDeletePost(individualPost.objectId)}
+              />
+            </ExpansionPanel>
+          ))}
       </div>
     );
   }
@@ -167,4 +169,4 @@ PostCategoryPage.contextTypes = {
   router: PropTypes.object
 };
 
-export default connect(mapStateToProps)(PostCategoryPage);  
+export default connect(mapStateToProps)(withStyles(styles)(PostCategoryPage));
