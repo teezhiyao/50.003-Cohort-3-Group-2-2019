@@ -48,7 +48,7 @@ router.route("/postNewReply").post(function(req, res, next) {
     },
     body: {
       content: req.body.reply.content,
-      postId: req.body.reply.content.postId
+      postId: req.body.reply.postId
     },
     json: true
   };

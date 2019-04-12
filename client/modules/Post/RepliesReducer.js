@@ -11,7 +11,7 @@ const RepliesReducer = (state = initialState, action) => {
       };
     case ADD_REPLY:
       return {
-        data: [action.replies, ...state.data]
+        data: [...state.data, action.replies]
       };
     default:
       return state;
