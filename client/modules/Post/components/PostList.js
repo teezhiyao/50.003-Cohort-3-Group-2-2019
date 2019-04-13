@@ -78,9 +78,6 @@ class PostList extends Component {
               post={individualPost}
               key={individualPost.cuid}
               addReply={this.props.handleAddReply}
-              onDelete={() =>
-                this.props.handleDeletePost(individualPost.objectId)
-              }
             />
           </ExpansionPanel>
         ))}

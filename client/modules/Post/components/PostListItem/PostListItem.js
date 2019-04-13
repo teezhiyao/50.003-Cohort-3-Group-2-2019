@@ -42,7 +42,7 @@ export class PostListItem extends Component {
             <Link to={`/posts/${this.props.post.objectId}`}>
               {this.props.post.title}
               {/* <PostDetailPage post={this.props.post} /> */}
-            </Link> 
+            </Link>
           </h3>
           <p className={styles["author-name"]}>
             <FormattedMessage id="by" /> {this.props.post.name}
@@ -59,9 +59,6 @@ export class PostListItem extends Component {
               }
               label={this.state.resolve ? "Resolved" : "Unresolved"}
             />
-            <span href="#" align="right" onClick={this.props.onDelete}>
-              <DeleteIcon id="deletePost" />
-            </span>
           </span>
         </CardContent>
       </Card>
@@ -80,7 +77,6 @@ PostListItem.propTypes = {
     reply: PropTypes.string
   }),
   // addReply: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
   addReply: PropTypes.func
 };
 export default injectIntl(PostListItem);

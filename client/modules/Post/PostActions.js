@@ -115,6 +115,8 @@ export function fetchPost(objectId) {
 }
 
 export function deletePost(objectId) {
+  console.log("In delete post redux");
+
   return {
     type: DELETE_POST,
     objectId
