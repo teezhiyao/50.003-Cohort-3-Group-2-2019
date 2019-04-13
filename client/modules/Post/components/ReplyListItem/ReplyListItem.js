@@ -10,6 +10,7 @@ import Card from "@material-ui/core/Card";
 import styles from "./ReplyListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export class ReplyListItem extends Component {
   //   addReply = () => {
@@ -25,7 +26,12 @@ export class ReplyListItem extends Component {
     return (
       <Card>
         <CardContent>
-          <p className={styles["reply-desc"]}>{this.props.reply.content}</p>
+          <span className={styles["reply-desc"]}>
+            {this.props.reply.content}
+          </span>
+          <span href="#" align="right" onClick={this.props.onDelete}>
+            <DeleteIcon id="deleteReplies" />
+          </span>
         </CardContent>
       </Card>
     );
@@ -37,7 +43,8 @@ ReplyListItem.propTypes = {
     content: PropTypes.string.isRequired,
     objectId: PropTypes.string,
     postId: PropTypes.string.isRequired
-  })
+  }),
+  onDelete: PropTypes.func.isRequired
 };
 export default injectIntl(ReplyListItem);
 

@@ -61,9 +61,24 @@ router.route("/postNewReply").post(function(req, res, next) {
 });
 
 // To-Do Delete one reply by objectId(reply)
-router.route("/reply/:objectId").delete(function(req, res, next) {});
+router.route("/reply/:objectId").delete(function(req, res, next) {
+  console.log("Trying to delete reply");
+  var options = {
+    method: "DELETE",
+    url: `${replyUrl}/${req.params.objectId}`,
+    headers: {
+      "cache-control": "no-cache",
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    }
+  };
+  request(options, function(error, reponse, body) {
+    if (error) throw new Error(error);
+    console.log("Deleted");
+  });
+});
 
 // To-Do Delete all replies related to post by objectId(post)
-router.route("/reply/:objectId").delete(function(req, res, next) {});
+// router.route("/reply/:objectId").delete(function(req, res, next) {});
 
 export default router;

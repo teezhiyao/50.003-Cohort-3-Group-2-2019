@@ -7,6 +7,7 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_USER = "ADD_USER";
 export const ADD_REPLY = "ADD_REPLY";
 export const ADD_REPLIES = "ADD_REPLIES";
+export const DELETE_REPLY = "DELETE_REPLY";
 
 // Export Actions
 export function addPost(post) {
@@ -120,9 +121,11 @@ export function deletePost(objectId) {
   };
 }
 
-export function deletePostRequest(objectId) {
+export function deletePostRequest(objectId, sessionToken) {
+  console.log("In delete post request");
+  console.log(sessionToken);
   return dispatch => {
-    return callApi(`posts/${objectId}`, "delete").then(() =>
+    return callApi(`posts/${objectId}/${sessionToken}`, "delete").then(() =>
       dispatch(deletePost(objectId))
     );
   };
@@ -153,6 +156,21 @@ export function addReplyRequest(reply, postId) {
         postId: postId
       }
     }).then(res => dispatch(addReply(res)));
+  };
+}
+
+export function deleteReply(objectId) {
+  return {
+    type: DELETE_REPLY,
+    objectId
+  };
+}
+
+export function deleteReplyRequest(objectId) {
+  return dispatch => {
+    return callApi(`reply/${objectId}`, "delete").then(() =>
+      dispatch(deleteReply(objectId))
+    );
   };
 }
 

@@ -44,10 +44,13 @@ class PostListPage extends Component {
   }
 
   handleDeletePost = post => {
-    // console.log(post);
+    console.log("In handle delete post");
+    console.log(post);
     if (confirm("Do you want to delete this post")) {
       // eslint-disable-line
-      this.props.dispatch(deletePostRequest(post));
+      this.props.dispatch(
+        deletePostRequest(post, this.props.users.sessionToken)
+      );
     }
   };
 
@@ -80,28 +83,30 @@ class PostListPage extends Component {
     console.log(this.props.users);
   };
 
-  handleNewCategory =(newCategory)=>{
+  handleNewCategory = newCategory => {
     //this.setState({categoryList : [...this.state.categoryList,{value:{newCategory}, label:{newCategory} }]});
-    this.setState(state =>{
-      const categoryList = [...state.categoryList,{value:{newCategory}, label:{newCategory} }];
+    this.setState(state => {
+      const categoryList = [
+        ...state.categoryList,
+        { value: { newCategory }, label: { newCategory } }
+      ];
       return {
-        categorySelected:"all",
-        categoryList,
-      }
+        categorySelected: "all",
+        categoryList
+      };
     });
     console.log(this.state.categoryList);
   };
 
   render() {
-    
     return (
       <div>
         <PostCreateWidget
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
-          categoryList = {this.state.categoryList}
-          handleNewCategory = {this.handleNewCategory}
+          categoryList={this.state.categoryList}
+          handleNewCategory={this.handleNewCategory}
         />
         <label>
           {" "}
@@ -133,11 +138,11 @@ class PostListPage extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-  // PostListPage.need = [
-  //   () => {
-  //     return fetchPosts(this.props.users.sessionToken);
-  //   }
-  // ];
+// PostListPage.need = [
+//   () => {
+//     return fetchPosts(this.props.users.sessionToken);
+//   }
+// ];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {

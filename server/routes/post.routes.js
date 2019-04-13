@@ -150,19 +150,22 @@ router.route("/posts/:objectId").get(function(req, res, next) {
 router.route("/posts/:objectId").put(function(req, res, next) {});
 
 // Delete one post by objectId
-router.route("/posts/:objectId").delete(function(req, res, next) {
+router.route("/posts/:objectId/:sessionToken").delete(function(req, res, next) {
+  console.log(req.params);
   var options = {
     method: "DELETE",
     url: `${postUrl}/${req.params.objectId}`,
     headers: {
       "cache-control": "no-cache",
       "Server-Token": token,
+      "X-Parse-Session-Token": req.params.sessionToken,
       "Content-Type": "application/json"
     }
   };
-  request(options, function(error, reponse, body) {
+  request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log("Deleted");
+    console.log(body);
   });
 });
 
