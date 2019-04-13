@@ -51,7 +51,7 @@ export class PostListItem extends Component {
               </h3>
               <p className={styles["author-name"]}>
                 <FormattedMessage id="by" /> {this.props.post.username}
-              </p>{" "}
+              </p>
             </p>
           )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
