@@ -51,8 +51,17 @@ class PostList extends Component {
                 {index + 1}
               </Typography>
               <Typography className={classes.secondaryHeading}>
-                {individualPost.title}
+                <Link to={`/posts/${individualPost.objectId}`}>
+                  {individualPost.title}
+                </Link>
               </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                <Link to={`/posts/${individualPost.username}`}>
+                  {"By " + individualPost.username}
+                </Link>
+              </Typography>
+
               <Typography className={classes.secondaryHeading}>
                 Category:
                 <Link to={`/cat/${individualPost.category}`}>

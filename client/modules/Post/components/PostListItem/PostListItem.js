@@ -10,6 +10,7 @@ import Card from "@material-ui/core/Card";
 import styles from "./PostListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { withRouter } from "react-router";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -31,6 +32,7 @@ export class PostListItem extends Component {
   handleChange = name => event => {
     console.log(name);
     console.log(event.target.checked);
+    // console.log(this.props.location.pathname);
     this.setState({ [name]: event.target.checked });
   };
 
@@ -38,14 +40,20 @@ export class PostListItem extends Component {
     return (
       <Card>
         <CardContent>
-          <h3 className={styles["post-title"]}>
-            <Link to={`/posts/${this.props.post.objectId}`}>
-              {this.props.post.title}
-            </Link>
-          </h3>
-          <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.username}
-          </p>
+          {/* <p> {this.props.location.pathname}</p> */}
+
+          {this.props.location.pathname !== "/home" && (
+            <p>
+              <h3 className={styles["post-title"]}>
+                <Link to={`/posts/${this.props.post.objectId}`}>
+                  {this.props.post.title}
+                </Link>
+              </h3>
+              <p className={styles["author-name"]}>
+                <FormattedMessage id="by" /> {this.props.post.username}
+              </p>{" "}
+            </p>
+          )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <FormControlLabel
@@ -75,9 +83,10 @@ PostListItem.propTypes = {
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string
   }),
+  location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,
   addReply: PropTypes.func
 };
-export default injectIntl(PostListItem);
+export default withRouter(PostListItem);
 
 // export default PostListItem;
