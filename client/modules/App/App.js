@@ -267,7 +267,7 @@ export class App extends Component {
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
       <div>
-        {this.props.users.name && (
+        {this.props.location.pathname !== "/" && (
           <div className={classes.root}>
             <CssBaseline />
             <AppBar
@@ -469,7 +469,7 @@ export class App extends Component {
             </main>
           </div>
         )}
-        {!this.props.users.name && (
+        {this.props.location.pathname === "/" && (
           <div className={classes.root}>
             <CssBaseline />
             <main
