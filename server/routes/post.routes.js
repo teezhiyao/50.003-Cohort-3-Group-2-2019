@@ -52,8 +52,6 @@ router.route("/queryAllowedPost/:sessionToken").get(function(req, res, next) {
 
 // Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
-  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
-
   var options = {
     method: "POST",
     url: postUrl,
@@ -64,14 +62,11 @@ router.route("/postNewPost").post(function(req, res, next) {
     },
     body: {
       userType: "User",
-      name: req.body.post.name,
-      userID: "1002845",
+      username: req.body.post.username,
       category: req.body.post.category,
       title: req.body.post.title,
       content: req.body.post.content,
       url: "www.mywebsite.com",
-      slug: tempSlug,
-      cuid: cuid,
       dateAdded: Date.now.toString,
       resolveStatus: false,
       replyscuid: {},

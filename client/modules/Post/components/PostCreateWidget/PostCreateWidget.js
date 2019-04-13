@@ -13,27 +13,27 @@ export class PostCreateWidget extends Component {
     };
   }
   addPost = () => {
-    const nameRef = this.refs.category;
+    const catRef = this.refs.category;
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
     console.log("trying here");
-    if (nameRef.value && titleRef.value && contentRef.value) {
-      this.props.addPost(nameRef.value, titleRef.value, contentRef.value);
-      nameRef.value = titleRef.value = contentRef.value = "";
+    if (catRef.value && titleRef.value && contentRef.value) {
+      this.props.addPost(catRef.value, titleRef.value, contentRef.value);
+      catRef.value = titleRef.value = contentRef.value = "";
     }
   };
-  
-  handleNewCategory =(e)=>{
-    this.setState({newCategory: e.target.value});
+
+  handleNewCategory = e => {
+    this.setState({ newCategory: e.target.value });
     console.log("changing state");
     console.log(e.target.value);
     console.log(this.state.newCategory);
-  }
-  addNewCategory=()=>{
-        this.props.handleNewCategory(this.state.newCategory);
+  };
+  addNewCategory = () => {
+    this.props.handleNewCategory(this.state.newCategory);
     console.log("added new category:");
     console.log(this.state.newCategory);
-  }
+  };
   render() {
     const cls = `${styles.form} ${this.props.showAddPost ? styles.appear : ""}`;
     console.log("in post create widget");
@@ -43,26 +43,34 @@ export class PostCreateWidget extends Component {
           <h2 className={styles["form-title"]}>
             <FormattedMessage id="createNewPost" />
           </h2>
-          
+
           <label>
             {" "}
             Issue Category
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
-            <select ref="category" >
-              {this.props.categoryList.filter(category => category.value != "all")
-              .map(category => {
-                return <option value={category.value}> {category.label} </option>;
-              })}
+            <select ref="category">
+              {this.props.categoryList
+                .filter(category => category.value != "all")
+                .map(category => {
+                  return (
+                    <option value={category.value}> {category.label} </option>
+                  );
+                })}
             </select>
           </label>
-          
+
           {/*To add new category: */}
           <form onSubmit={this.addNewCategory}>
-              <label>
-                Can't find your category?
-                <input type="text" placeholder="Optional" value={this.state.newCategory} onChange={this.handleNewCategory}/>
-              </label>
-                <button type="submit">Add new category</button>
+            <label>
+              Can't find your category?
+              <input
+                type="text"
+                placeholder="Optional"
+                value={this.state.newCategory}
+                onChange={this.handleNewCategory}
+              />
+            </label>
+            <button type="submit">Add new category</button>
           </form>
 
           <input

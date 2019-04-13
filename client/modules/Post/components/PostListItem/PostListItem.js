@@ -41,11 +41,10 @@ export class PostListItem extends Component {
           <h3 className={styles["post-title"]}>
             <Link to={`/posts/${this.props.post.objectId}`}>
               {this.props.post.title}
-              {/* <PostDetailPage post={this.props.post} /> */}
             </Link>
           </h3>
           <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.name}
+            <FormattedMessage id="by" /> {this.props.post.username}
           </p>
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
           <span style={{ float: "right" }} className={styles["post-action"]}>

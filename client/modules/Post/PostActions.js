@@ -18,19 +18,21 @@ export function addPost(post) {
   };
 }
 
-export function addPostRequest(post) {
-  console.log(post);
+export function addPostRequest(username, title, content, category) {
+  console.log("In addPostRequest");
+  // console.log(username);
+  // console.log(title);
+  // console.log(content);
+
   return dispatch => {
     return callApi("postNewPost", "post", {
       post: {
-        username: post[0],
-        category: post[3],
-        resolveStatus: post.resolveStatus,
-        title: post[1],
-        content: post[2],
-        cuid: post.cuid,
-        url: post.url,
-        replyDataStructure: post.replys
+        username: username,
+        category: category,
+        resolveStatus: false,
+        title: title,
+        content: content,
+        url: "placeholder for url"
       }
     }).then(res => dispatch(addPost(res)));
     // dispatch updates the store by adding the action
