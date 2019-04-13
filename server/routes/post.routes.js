@@ -74,7 +74,12 @@ router.route("/postNewPost").post(function(req, res, next) {
       cuid: cuid,
       dateAdded: Date.now.toString,
       resolveStatus: false,
-      replyscuid: {}
+      replyscuid: {},
+      ACL: {
+        "2ZtufYEUQd": { read: true },
+        "role:Admin": { read: true, write: true },
+        "*": {}
+      }
     },
     json: true
   };
