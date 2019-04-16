@@ -18,7 +18,7 @@ export function addPost(post) {
   };
 }
 
-export function addPostRequest(username, title, content, category) {
+export function addPostRequest(username, title, content, category, imageData) {
   console.log("In addPostRequest");
   // console.log(username);
   // console.log(title);
@@ -32,7 +32,7 @@ export function addPostRequest(username, title, content, category) {
         resolveStatus: false,
         title: title,
         content: content,
-        url: "placeholder for url"
+        imageData: imageData
       }
     }).then(res => dispatch(addPost(res)));
     // dispatch updates the store by adding the action

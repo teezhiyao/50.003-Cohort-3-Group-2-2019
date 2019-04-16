@@ -66,7 +66,7 @@ router.route("/postNewPost").post(function(req, res, next) {
       category: req.body.post.category,
       title: req.body.post.title,
       content: req.body.post.content,
-      url: "www.mywebsite.com",
+      imageData: req.body.post.imageData,
       dateAdded: Date.now.toString,
       resolveStatus: false,
       replyscuid: {},

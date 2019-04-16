@@ -54,11 +54,17 @@ class PostListPage extends Component {
     }
   };
 
-  handleAddPost = (category, title, content) => {
+  handleAddPost = (category, title, content, imageData) => {
     console.log("Maybe here");
     this.props.dispatch(toggleAddPost());
     this.props.dispatch(
-      addPostRequest(this.props.users.username, title, content, category)
+      addPostRequest(
+        this.props.users.username,
+        title,
+        content,
+        category,
+        imageData
+      )
     );
   };
 
