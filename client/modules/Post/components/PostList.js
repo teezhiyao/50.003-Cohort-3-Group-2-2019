@@ -105,7 +105,8 @@ PostList.propTypes = {
       slug: PropTypes.string,
       cuid: PropTypes.string,
       reply: PropTypes.string,
-      category: PropTypes.string
+      category: PropTypes.string,
+      imageData: PropTypes.string
     })
   ),
   handleDeletePost: PropTypes.func.isRequired,

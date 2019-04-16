@@ -169,7 +169,8 @@ PostListPage.propTypes = {
       objectId: PropTypes.string.isRequired,
       reply: PropTypes.string,
       category: PropTypes.string,
-      url: PropTypes.state
+      url: PropTypes.state,
+      imageData: PropTypes.string
     })
   ),
   users: PropTypes.shape({

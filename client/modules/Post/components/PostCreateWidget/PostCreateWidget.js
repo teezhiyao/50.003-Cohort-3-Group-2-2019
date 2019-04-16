@@ -102,9 +102,7 @@ export class PostCreateWidget extends Component {
         </div>
         <div className="process">
           <h4 className="process__heading">Process: Using Base64</h4>
-          <p className="process__details">
-            Upload image as Base64 directly to MongoDB database
-          </p>
+          <p className="process__details">Upload image</p>
 
           <div className="process__upload-btn">
             <FileBase

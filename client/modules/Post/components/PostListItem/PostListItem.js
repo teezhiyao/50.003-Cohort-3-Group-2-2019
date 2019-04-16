@@ -55,6 +55,7 @@ export class PostListItem extends Component {
             </p>
           )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
+          <img src={this.props.post.imageData} />
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <FormControlLabel
               control={
@@ -81,7 +82,8 @@ PostListItem.propTypes = {
     slug: PropTypes.string,
     cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
-    reply: PropTypes.string
+    reply: PropTypes.string,
+    imageData: PropTypes.string
   }),
   location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,
