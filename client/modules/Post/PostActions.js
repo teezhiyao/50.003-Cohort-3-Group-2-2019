@@ -7,6 +7,7 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_USER = "ADD_USER";
 export const ADD_REPLY = "ADD_REPLY";
 export const ADD_REPLIES = "ADD_REPLIES";
+export const DELETE_REPLY = "DELETE_REPLY";
 
 // Export Actions
 export function addPost(post) {
@@ -17,19 +18,21 @@ export function addPost(post) {
   };
 }
 
-export function addPostRequest(post) {
-  console.log(post);
+export function addPostRequest(username, title, content, category, imageData) {
+  console.log("In addPostRequest");
+  // console.log(username);
+  // console.log(title);
+  // console.log(content);
+
   return dispatch => {
     return callApi("postNewPost", "post", {
       post: {
-        username: post[0],
-        category: post[3],
-        resolveStatus: post.resolveStatus,
-        title: post[1],
-        content: post[2],
-        cuid: post.cuid,
-        url: post.url,
-        replyDataStructure: post.replys
+        username: username,
+        category: category,
+        resolveStatus: false,
+        title: title,
+        content: content,
+        imageData: imageData
       }
     }).then(res => dispatch(addPost(res)));
     // dispatch updates the store by adding the action
@@ -114,15 +117,18 @@ export function fetchPost(objectId) {
 }
 
 export function deletePost(objectId) {
+  console.log("In delete post redux");
   return {
     type: DELETE_POST,
     objectId
   };
 }
 
-export function deletePostRequest(objectId) {
+export function deletePostRequest(objectId, sessionToken) {
+  console.log("In delete post request");
+  console.log(sessionToken);
   return dispatch => {
-    return callApi(`posts/${objectId}`, "delete").then(() =>
+    return callApi(`posts/${objectId}/${sessionToken}`, "delete").then(() =>
       dispatch(deletePost(objectId))
     );
   };
@@ -153,6 +159,21 @@ export function addReplyRequest(reply, postId) {
         postId: postId
       }
     }).then(res => dispatch(addReply(res)));
+  };
+}
+
+export function deleteReply(objectId) {
+  return {
+    type: DELETE_REPLY,
+    objectId
+  };
+}
+
+export function deleteReplyRequest(objectId) {
+  return dispatch => {
+    return callApi(`reply/${objectId}`, "delete").then(() =>
+      dispatch(deleteReply(objectId))
+    );
   };
 }
 

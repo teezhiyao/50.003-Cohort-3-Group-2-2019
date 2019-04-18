@@ -1,4 +1,4 @@
-import { ADD_REPLIES, ADD_REPLY } from "./PostActions";
+import { ADD_REPLIES, ADD_REPLY, DELETE_REPLY } from "./PostActions";
 
 // Initial State
 const initialState = { data: [] };
@@ -11,7 +11,11 @@ const RepliesReducer = (state = initialState, action) => {
       };
     case ADD_REPLY:
       return {
-        data: [action.replies, ...state.data]
+        data: [...state.data, action.replies]
+      };
+    case DELETE_REPLY:
+      return {
+        data: state.data.filter(replies => replies.objectId !== action.objectId)
       };
     default:
       return state;

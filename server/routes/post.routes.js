@@ -52,8 +52,6 @@ router.route("/queryAllowedPost/:sessionToken").get(function(req, res, next) {
 
 // Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
-  var tempSlug = slug(req.body.post.title.toLowerCase(), { lowercase: true });
-
   var options = {
     method: "POST",
     url: postUrl,
@@ -64,17 +62,19 @@ router.route("/postNewPost").post(function(req, res, next) {
     },
     body: {
       userType: "User",
-      name: req.body.post.name,
-      userID: "1002845",
+      username: req.body.post.username,
       category: req.body.post.category,
       title: req.body.post.title,
       content: req.body.post.content,
-      url: "www.mywebsite.com",
-      slug: tempSlug,
-      cuid: cuid,
+      imageData: req.body.post.imageData,
       dateAdded: Date.now.toString,
       resolveStatus: false,
-      replyscuid: {}
+      replyscuid: {},
+      ACL: {
+        "2ZtufYEUQd": { read: true },
+        "role:Admin": { read: true, write: true },
+        "*": {}
+      }
     },
     json: true
   };
@@ -150,19 +150,22 @@ router.route("/posts/:objectId").get(function(req, res, next) {
 router.route("/posts/:objectId").put(function(req, res, next) {});
 
 // Delete one post by objectId
-router.route("/posts/:objectId").delete(function(req, res, next) {
+router.route("/posts/:objectId/:sessionToken").delete(function(req, res, next) {
+  console.log(req.params);
   var options = {
     method: "DELETE",
     url: `${postUrl}/${req.params.objectId}`,
     headers: {
       "cache-control": "no-cache",
       "Server-Token": token,
+      "X-Parse-Session-Token": req.params.sessionToken,
       "Content-Type": "application/json"
     }
   };
-  request(options, function(error, reponse, body) {
+  request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log("Deleted");
+    console.log(body);
   });
 });
 

@@ -15,11 +15,18 @@ const PostReducer = (state = initialState, action) => {
         data: action.posts
       };
     case DELETE_POST:
+      const newlst = state.data.filter(
+        post => post.objectId !== action.objectId
+      );
+      console.log("Logging in delete post");
+      console.log(newlst);
       return {
-        data: state.data.filter(post => post.objectId !== action.objectId)
+        data: newlst
       };
 
     default:
+      console.log("In default return state");
+
       return state;
   }
 };

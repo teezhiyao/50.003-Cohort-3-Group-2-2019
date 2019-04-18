@@ -7,9 +7,31 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 // Import Style
-import styles from "./ReplyListItem.css";
+// import styles from "./ReplyListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Typography from "@material-ui/core/Typography";
+
+const styles = theme => ({
+  root: {
+    width: "100%"
+  },
+  numberingHeader: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "2.00%",
+    flexShrink: 0
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    flexBasis: "88.00%"
+  },
+  miscHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: "10.00%"
+  }
+});
 
 export class ReplyListItem extends Component {
   //   addReply = () => {
@@ -22,10 +44,22 @@ export class ReplyListItem extends Component {
   //   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <Card>
         <CardContent>
-          <p className={styles["reply-desc"]}>{this.props.reply.content}</p>
+          <Typography className={classes.secondaryHeading}>
+            {this.props.reply.content}
+          </Typography>
+          <Typography
+            className={classes.numberingHeading}
+            href="#"
+            align="right"
+            onClick={this.props.onDelete}
+          >
+            <DeleteIcon id="deleteReplies" />
+          </Typography>
         </CardContent>
       </Card>
     );
@@ -37,8 +71,9 @@ ReplyListItem.propTypes = {
     content: PropTypes.string.isRequired,
     objectId: PropTypes.string,
     postId: PropTypes.string.isRequired
-  })
+  }),
+  onDelete: PropTypes.func.isRequired
 };
-export default injectIntl(ReplyListItem);
+export default withStyles(styles)(ReplyListItem);
 
 // export default ReplyListItem;

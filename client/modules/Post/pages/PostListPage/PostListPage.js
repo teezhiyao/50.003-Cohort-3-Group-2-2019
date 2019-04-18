@@ -26,28 +26,45 @@ class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorySelected: "all"
+      categorySelected: "all",
+      categoryList: [
+        { value: "all", label: "All Issues" },
+        { value: "LOGINISSUE", label: "Login Issue" },
+        { value: "APIERROR", label: "API Issue" },
+        { value: "LOGOUTISSUE", label: "Logout Issue" },
+        { value: "Client Login Issue", label: "Client Login Issue" }
+      ]
     };
   }
 
   componentDidMount() {
     // this function is called the moment this component is rendered.
     console.log("componentDidMount");
+    console.log(this.state);
   }
 
   handleDeletePost = post => {
-    // console.log(post);
+    console.log("In handle delete post");
+    console.log(post);
     if (confirm("Do you want to delete this post")) {
       // eslint-disable-line
-      this.props.dispatch(deletePostRequest(post));
+      this.props.dispatch(
+        deletePostRequest(post, this.props.users.sessionToken)
+      );
     }
   };
 
-  handleAddPost = (category, title, content) => {
+  handleAddPost = (category, title, content, imageData) => {
     console.log("Maybe here");
     this.props.dispatch(toggleAddPost());
     this.props.dispatch(
-      addPostRequest([this.props.users.username, title, content, category])
+      addPostRequest(
+        this.props.users.username,
+        title,
+        content,
+        category,
+        imageData
+      )
     );
   };
 
@@ -72,25 +89,36 @@ class PostListPage extends Component {
     console.log(this.props.users);
   };
 
+  handleNewCategory = newCategory => {
+    //this.setState({categoryList : [...this.state.categoryList,{value:{newCategory}, label:{newCategory} }]});
+    this.setState(state => {
+      const categoryList = [
+        ...state.categoryList,
+        { value: { newCategory }, label: { newCategory } }
+      ];
+      return {
+        categorySelected: "all",
+        categoryList
+      };
+    });
+    console.log(this.state.categoryList);
+  };
+
   render() {
-    const categoryList = [
-      { value: "all", label: "All Issues" },
-      { value: "LOGINISSUE", label: "Login Issue" },
-      { value: "APIERROR", label: "API Issue" },
-      { value: "LOGOUTISSUE", label: "Logout Issue" }
-    ];
     return (
       <div>
         <PostCreateWidget
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
+          categoryList={this.state.categoryList}
+          handleNewCategory={this.handleNewCategory}
         />
         <label>
           {" "}
           Issue Category
           <select onChange={this.handleSelectCategory}>
-            {categoryList.map(category => {
+            {this.state.categoryList.map(category => {
               return <option value={category.value}> {category.label} </option>;
             })}
           </select>
@@ -141,7 +169,8 @@ PostListPage.propTypes = {
       objectId: PropTypes.string.isRequired,
       reply: PropTypes.string,
       category: PropTypes.string,
-      url: PropTypes.state
+      url: PropTypes.state,
+      imageData: PropTypes.string
     })
   ),
   users: PropTypes.shape({

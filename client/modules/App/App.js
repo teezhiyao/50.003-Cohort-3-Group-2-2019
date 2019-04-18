@@ -268,7 +268,7 @@ export class App extends Component {
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
       <div>
-        {this.props.users.name && (
+        {this.props.location.pathname !== "/" && (
           <div className={classes.root}>
             <CssBaseline />
             <AppBar
@@ -380,6 +380,14 @@ export class App extends Component {
                     <ListItemText primary="Profile" />
                   </ListItem>
                 </Link>
+                <Link to={`/grid`}>
+                  <ListItem button key="Board">
+                    <ListItemIcon>
+                      <AccountCircle />
+                    </ListItemIcon>
+                    <ListItemText primary="Board" />
+                  </ListItem>
+                </Link>
               </List>
 
               <Divider />
@@ -463,7 +471,7 @@ export class App extends Component {
             <Chatbot />
           </div>
         )}
-        {!this.props.users.name && (
+        {this.props.location.pathname === "/" && (
           <div className={classes.root}>
             <CssBaseline />
             <main

@@ -17,7 +17,8 @@ import {
   fetchPosts,
   fetchPost,
   fetchReplies,
-  addReplyRequest
+  addReplyRequest,
+  deleteReplyRequest
 } from "../../PostActions";
 
 // Import Selectors
@@ -69,6 +70,14 @@ class PostDetailPage extends Component {
     this.props.dispatch(addReplyRequest({ reply, cuid }));
   };
 
+  handleDeleteReply = reply => {
+    // console.log(post);
+    if (confirm("Do you want to delete this reply")) {
+      // eslint-disable-line
+      this.props.dispatch(deleteReplyRequest(reply));
+    }
+  };
+
   addReply = () => {
     const replyRef = this.refs.reply;
     const cuid = "asdkjsa";
@@ -86,40 +95,6 @@ class PostDetailPage extends Component {
   render() {
     return (
       <div>
-        {/* <Helmet title={this.props.post.title} />
-        <div className={`${styles["single-post"]} ${styles["post-detail"]}`}>
-          <h3 className={styles["post-title"]}>{this.props.post.title}</h3>
-          <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.userName}
-          </p>
-          <p className={styles["post-desc"]}>{this.props.post.content}</p>
-          <p className="ResolveStatus">{this.props.post.resolveStatus}</p>
-          <p className="date">{this.props.post.dateAdded}</p> */}
-        {/* <ToggleButton
-          inactiveLabel={"Resolved"}
-          activeLabel={"Unresolved"}
-          colors={{
-            activeThumb: {
-              base: "rgb(250,250,250)"
-            },
-            inactiveThumb: {
-              base: "rgb(62,130,247)"
-            },
-            active: {
-              base: "rgb(207,221,245)",
-              hover: "rgb(177, 191, 215)"
-            },
-            inactive: {
-              base: "rgb(65,66,68)",
-              hover: "rgb(95,96,98)"
-            }
-          }}
-          value={this.state.value || false}
-          onToggle={value => {
-            this.handleToggle(value);
-          }}
-        /> */}
-
         <PostListItem
           post={this.props.post}
           key={this.props.post.objectId}
@@ -127,7 +102,7 @@ class PostDetailPage extends Component {
           onDelete={() => this.handleDeletePost(this.props.post.objectId)}
         />
         <ReplyList
-          handleDeletePost={this.handleDeletePost}
+          handleDeleteReply={this.handleDeleteReply}
           handleAddReply={this.handleAddReply}
           replies={this.props.replies}
         />

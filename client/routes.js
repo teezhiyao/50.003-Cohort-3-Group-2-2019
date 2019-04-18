@@ -1,8 +1,12 @@
 /* eslint-disable global-require */
 import React, { Component } from "react";
-import { Route, IndexRoute } from "react-router";
+//import { Route, IndexRoute } from "react-router";
+import { IndexRoute } from "react-router";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import App from "./modules/App/App";
 import PostListPage from "./modules/Post/pages/PostListPage/PostListPage";
+import PostCategoryPage from "./modules/Post/pages/PostCategoryPage/PostCategoryPage";
+
 // require.ensure polyfill for node
 if (typeof require.ensure !== "function") {
   require.ensure = function requireModule(deps, callback) {
@@ -24,6 +28,8 @@ if (process.env.NODE_ENV !== "production") {
   require("./modules/LoginAllUpdated/SignUp");
   require("./modules/Post/pages/Resolved/Resolved");
   require("./modules/Post/pages/Pending/Pending")
+  require("./modules/Post/pages/PostCategoryPage/PostCategoryPage");
+  require("./modules/Post/pages/PostGrid/PostGrid")
 }
 
 // react-router setup with code-splitting
@@ -50,7 +56,7 @@ export default (
       }}
     />
     <Route
-      path="/posts/:objectId"
+      path="/posts/:objectId" // colon means dynamic path
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(
@@ -61,7 +67,21 @@ export default (
         });
       }}
     />
+    <Route
+      path="/cat/:category"
+      getComponent={(nextState, callback) => {
+        require.ensure([], require => { // moving require into require.ensure to only download the component when its needed
+          callback(
+            null, // no callback function
+            require("./modules/Post/pages/PostCategoryPage/PostCategoryPage") // simply load this component when getComponent is called
+              .default
+          );
+        });
+      }}
+    />
+
     {/* <Route path="/Loggedin" component={Loggedin} /> */}
+
     <Route
       path="/SignUpPage"
       getComponent={(nextState, cb) => {
@@ -91,6 +111,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require("./modules/Post/pages/Pending/Pending").default);
+        });
+      }}
+    />
+    <Route
+      path="/grid"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require("./modules/Post/pages/PostGrid/PostGrid").default);
         });
       }}
     />

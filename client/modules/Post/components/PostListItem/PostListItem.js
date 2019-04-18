@@ -10,6 +10,7 @@ import Card from "@material-ui/core/Card";
 import styles from "./PostListItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { withRouter } from "react-router";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -31,6 +32,7 @@ export class PostListItem extends Component {
   handleChange = name => event => {
     console.log(name);
     console.log(event.target.checked);
+    // console.log(this.props.location.pathname);
     this.setState({ [name]: event.target.checked });
   };
 
@@ -38,15 +40,22 @@ export class PostListItem extends Component {
     return (
       <Card>
         <CardContent>
-          <h3 className={styles["post-title"]}>
-            <Link to={`/posts/${this.props.post.objectId}`}>
-              {this.props.post.title}
-            </Link>
-          </h3>
-          <p className={styles["author-name"]}>
-            <FormattedMessage id="by" /> {this.props.post.name}
-          </p>
+          {/* <p> {this.props.location.pathname}</p> */}
+
+          {this.props.location.pathname !== "/home" && (
+            <p>
+              <h3 className={styles["post-title"]}>
+                <Link to={`/posts/${this.props.post.objectId}`}>
+                  {this.props.post.title}
+                </Link>
+              </h3>
+              <p className={styles["author-name"]}>
+                <FormattedMessage id="by" /> {this.props.post.username}
+              </p>
+            </p>
+          )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
+          <img src={this.props.post.imageData} />
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <FormControlLabel
               control={
@@ -58,9 +67,6 @@ export class PostListItem extends Component {
               }
               label={this.state.resolve ? "Resolved" : "Unresolved"}
             />
-            <span href="#" align="right" onClick={this.props.onDelete}>
-              <DeleteIcon id="deletePost" />
-            </span>
           </span>
         </CardContent>
       </Card>
@@ -73,15 +79,16 @@ PostListItem.propTypes = {
     name: PropTypes.string,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
+    slug: PropTypes.string,
     cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
-    reply: PropTypes.string
+    reply: PropTypes.string,
+    imageData: PropTypes.string
   }),
+  location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  addReply: PropTypes.func.isRequired
+  addReply: PropTypes.func
 };
-export default injectIntl(PostListItem);
+export default withRouter(PostListItem);
 
 // export default PostListItem;

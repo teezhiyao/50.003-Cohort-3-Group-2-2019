@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 // Import Components
 import PostListItem from "./PostListItem/PostListItem";
+import { Link } from "react-router";
 import addReply from "./PostListItem/PostListItem";
 import Typography from "@material-ui/core/Typography";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -10,6 +11,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
+import { Chip } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const styles = theme => ({
   root: {
@@ -33,6 +36,10 @@ const styles = theme => ({
 
 //takes in props(all posts) and displays every post
 class PostList extends Component {
+  handleClickChip = () => {
+    console.log("clicked chip");
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -44,12 +51,35 @@ class PostList extends Component {
                 {index + 1}
               </Typography>
               <Typography className={classes.secondaryHeading}>
-                {individualPost.title}
-              </Typography>
-              <Typography className={classes.secondaryHeading}>
-                tags: {individualPost.category}
+                <Link to={`/posts/${individualPost.objectId}`}>
+                  {individualPost.title}
+                </Link>
               </Typography>
 
+              <Typography className={classes.secondaryHeading}>
+                <Link to={`/posts/${individualPost.username}`}>
+                  {"By " + individualPost.username}
+                </Link>
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Category:
+                <Link to={`/cat/${individualPost.category}`}>
+                  <Chip
+                    label={individualPost.category}
+                    onClick={this.handleClickChip}
+                  />
+                </Link>
+              </Typography>
+              <span
+                href="#"
+                align="right"
+                onClick={() =>
+                  this.props.handleDeletePost(individualPost.objectId)
+                }
+              >
+                <DeleteIcon id="deletePost" />
+              </span>
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
             </ExpansionPanelSummary>
 
@@ -57,9 +87,6 @@ class PostList extends Component {
               post={individualPost}
               key={individualPost.cuid}
               addReply={this.props.handleAddReply}
-              onDelete={() =>
-                this.props.handleDeletePost(individualPost.objectId)
-              }
             />
           </ExpansionPanel>
         ))}
@@ -75,10 +102,11 @@ PostList.propTypes = {
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       objectId: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
+      slug: PropTypes.string,
       cuid: PropTypes.string,
       reply: PropTypes.string,
-      category: PropTypes.string
+      category: PropTypes.string,
+      imageData: PropTypes.string
     })
   ),
   handleDeletePost: PropTypes.func.isRequired,
