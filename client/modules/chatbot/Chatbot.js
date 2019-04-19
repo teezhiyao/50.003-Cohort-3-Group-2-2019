@@ -7,7 +7,7 @@ import Message from "./Message";
 import Card from "./Card";
 import QuickReplies from "./QuickReplies";
 import callApi from "../../util/apiCaller";
-
+import "babel-polyfill";
 const cookies = new Cookies();
 
 class Chatbot extends Component {
@@ -31,7 +31,8 @@ class Chatbot extends Component {
       cookies.set("userID", uuid(), { path: "/" });
     }
   }
-  df_text_query(queryText) {
+
+  async df_text_query(queryText) {
     let msg;
     let says = {
       speaks: "user",
@@ -41,20 +42,12 @@ class Chatbot extends Component {
         }
       }
     };
-    // return callApi("postNewPost", "post", {
-
-    const res = callApi("api/df_text_query", "post", {
+    this.setState({ messages: [...this.state.messages, says] });
+    const res = await axios.post("/api/df_text_query", "post", {
       text: queryText,
       userID: cookies.get("userID")
     });
-    console.log("In Df text");
-    console.log(res);
-    // this.setState({ messages: ["What is this. lol2"] });
-
-    // const res = axios.post("/api/df_text_query", {
-    //   text: queryText,
-    //   userID: cookies.get("userID")
-    // });
+    console.log(res.then(res => console.log(res)));
 
     for (let msg of res.data.fulfillmentMessages) {
       says = {
@@ -63,6 +56,62 @@ class Chatbot extends Component {
       };
       this.setState({ messages: [...this.state.messages, says] });
     }
+    // return callApi("postNewPost", "post", {
+    console.log("In Df text");
+    // const body = {
+    //   text: queryText,
+    //   userID: cookies.get("userID")
+    // };
+    // const x = fetch(`${API_URL}/api/df_text_query`, {
+    //   headers: { "content-type": "application/json" },
+    //   method: "post",
+    //   body: JSON.stringify(body)
+    // }).then(response => response.json().then(json => ({ json, response })));
+
+    // .then(({ json, response }) => {
+    //   if (!response.ok) {
+    //     return Promise.reject(json);
+    //   }
+
+    //   return json;
+    // })
+    // .then(response => response, error => error);
+    // const x = callApi("api/df_text_query", "post", {
+    //   text: queryText,
+    //   userID: cookies.get("userID")
+    // });
+    // x.then(function(response) {
+    //   console.log(response);
+    // });
+
+    // console.log(
+    //   x
+    //     .then(res => res)
+    //     .then(res => res)
+    //     .then(res => console.log(res))
+    // );
+
+    // x.then(res => console.log(res));
+    // .then(
+    //   function(res) {
+    //     // this.setState({ messages: ["What is this. lol2"] });
+
+    //     // const res = axios.post("/api/df_text_query", {
+    //     //   text: queryText,
+    //     //   userID: cookies.get("userID")
+    //     // });
+    //     console.log("In query function");
+
+    //     console.log(res);
+    //     for (let msg of res.data.fulfillmentMessages) {
+    //       says = {
+    //         speaks: "bot",
+    //         msg: msg
+    //       };
+    //       this.setState({ messages: [...this.state.messages, says] });
+    //     }
+    //   }.bind(this)
+    // );
   }
   df_event_query(eventName) {
     // const res = axios.post("/api/df_event_query", {
