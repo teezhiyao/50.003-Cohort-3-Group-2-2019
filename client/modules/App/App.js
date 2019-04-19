@@ -31,7 +31,7 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import { getUser } from "../Post/UserReducer";
-
+import Chatbot from "../chatbot/Chatbot";
 // Import Style
 // import styles from './App.css';
 
@@ -465,6 +465,7 @@ export class App extends Component {
                 toggleAddPost={this.toggleAddPostSection}
               />
               <div className={styles.container}>{this.props.children}</div>
+              <Chatbot />
               <Footer />
             </main>
           </div>
