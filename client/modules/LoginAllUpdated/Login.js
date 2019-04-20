@@ -76,12 +76,11 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className={styles.background}>
         <div className={styles.heading}>
-          <Typography variant="h4" color="inherit">
             Ticketing Support System
-          </Typography>
         </div>
+
         <Form onSubmit={this.handleSubmit} className={styles["form"]}>
           <Form.Group controlId="email" className={styles["form-field"]}>
             <Form.Control

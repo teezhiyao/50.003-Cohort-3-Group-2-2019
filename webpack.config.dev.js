@@ -79,7 +79,7 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.(jpe?g|gif|png|svg)$/i,
+        test: /\.(jpe?g|gif|png|svg|jpg)$/i,
         use: [
           {
             loader: 'url-loader',
