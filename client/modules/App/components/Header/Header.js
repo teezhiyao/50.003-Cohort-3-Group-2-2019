@@ -23,7 +23,8 @@ class Header extends Component {
 
   render() {
     return (
-      <div style={{ background: `#FFF url(${bg}) center` }}>
+      // <div style={{ background: `#FFF url(${bg}) center` }}>
+      <div className={styles.header}>
         <div className={styles["language-switcher"]}>
           <ul />
         </div>

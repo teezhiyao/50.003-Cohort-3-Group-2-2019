@@ -1,6 +1,7 @@
 .header {
-  background: #eee url("https://www.w3schools.com/w3css/img_snowtops.jpg")
-    center;
+  background: #eee url("../../milkyway.jpg") center;
+  /* background: #eee url("https://www.w3schools.com/w3css/img_snowtops.jpg")
+  center; */
   border-bottom: 1px solid #ccc;
 }
 
