@@ -1,3 +1,4 @@
+"use strict";
 import React, { Component } from "react";
 import axios from "axios/index";
 import Cookies from "universal-cookie";
@@ -6,6 +7,9 @@ import Message from "./Message";
 // import "materialize-css/dist/css/materialize.min.css";
 import Card from "./Card";
 import QuickReplies from "./QuickReplies";
+import textQuery from "./chatbot/chatbot";
+require("babel-core/register");
+require("babel-polyfill");
 
 const cookies = new Cookies();
 
@@ -30,22 +34,26 @@ class Chatbot extends Component {
       cookies.set("userID", uuid(), { path: "/" });
     }
   }
-  df_text_query(queryText) {
-    let msg;
-    let says = {
-      speaks: "user",
-      msg: {
-        text: {
-          text: queryText
-        }
-      }
-    };
+  async df_text_query(queryText) {
+    // let msg;
+    // let says = {
+    //   speaks: "user",
+    //   msg: {
+    //     text: {
+    //       text: queryText
+    //     }
+    //   }
+    // };
     // this.setState({ messages: [...this.state.messages, says] });
-    // const res = axios.post("/api/df_text_query", {
+    // const res = await textQuery("/api/df_text_query", {
     //   text: queryText,
     //   userID: cookies.get("userID")
     // });
-    // console.log(res);
+    // const res = await axios.post("/api/df_text_query", {
+    //   text: queryText,
+    //   userID: cookies.get("userID")
+    // });
+    console.log(res);
 
     // for (let msg of res.data.fulfillmentMessages) {
     //   says = {
