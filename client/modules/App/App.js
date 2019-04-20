@@ -31,7 +31,9 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import { getUser } from "../Post/UserReducer";
-
+import Popper from "@material-ui/core/Popper";
+import Button from "@material-ui/core/Button";
+import Fade from "@material-ui/core/Fade";
 // Import Style
 // import styles from './App.css';
 
@@ -43,6 +45,7 @@ import Footer from "./components/Footer/Footer";
 // Import Actions
 import { toggleAddPost } from "./AppActions";
 import { switchLanguage } from "../../modules/Intl/IntlActions";
+import { Z_FIXED } from "zlib";
 
 const drawerWidth = 240;
 //To do : Tidy up file by using imports instead of throwing everything here
@@ -50,7 +53,6 @@ const styles = theme => ({
   root: {
     display: "flex"
   },
-
   grow: {
     flexGrow: 1
   },
@@ -168,18 +170,31 @@ const styles = theme => ({
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { isMounted: false };
+    this.state = {
+      isMounted: false,
+      anchorCb: null,
+      openCb: false,
+      open: false,
+      anchorEl: null,
+      mobileMoreAnchorEl: null
+    };
   }
-  state = {
-    open: false,
-    anchorEl: null,
-    mobileMoreAnchorEl: null
-  };
+  // state = {
+  //   open: false,
+  //   anchorEl: null,
+  //   mobileMoreAnchorEl: null
+  // };
 
   componentDidMount() {
     this.setState({ isMounted: true }); // eslint-disable-line
   }
-
+  handleClick = event => {
+    const { currentTarget } = event;
+    this.setState(state => ({
+      anchorCb: currentTarget,
+      openCb: !state.openCb
+    }));
+  };
   toggleAddPostSection = () => {
     this.props.dispatch(toggleAddPost());
   };
@@ -210,9 +225,9 @@ export class App extends Component {
   };
   render() {
     const { classes, theme } = this.props;
-    const { open } = this.state;
-
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { open, anchorCb, openCb, anchorEl, mobileMoreAnchorEl } = this.state;
+    const id = open ? "simple-popper" : null;
+    // const { anchorEl, mobileMoreAnchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -465,8 +480,35 @@ export class App extends Component {
                 toggleAddPost={this.toggleAddPostSection}
               />
               <div className={styles.container}>{this.props.children}</div>
+              <Button
+                aria-describedby={id}
+                variant="contained"
+                onClick={this.handleClick}
+              >
+                Toggle ChatBot
+              </Button>
+              <Popper
+                id={id}
+                open={openCb}
+                anchorEl={anchorCb}
+                transition
+                placement={"bottom-end"}
+              >
+                {({ TransitionProps }) => (
+                  <Fade {...TransitionProps} timeout={350}>
+                    <iframe
+                      allow="microphone;"
+                      width="350"
+                      height="430"
+                      src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
+                    />
+                  </Fade>
+                )}
+              </Popper>
               <Footer />
             </main>
+            {/* <Fab color="primary" aria-label="Add" className={classes.fab}> */}
+            {/* </Fab> */}
           </div>
         )}
         {this.props.location.pathname === "/" && (

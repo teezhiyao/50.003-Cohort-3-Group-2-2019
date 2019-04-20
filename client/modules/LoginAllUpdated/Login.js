@@ -102,7 +102,6 @@ class Login extends Component {
               type="password"
             />
           </Form.Group>
-          
           <button
             className={styles["post-login-button"]}
             variant="contained"
@@ -122,16 +121,8 @@ class Login extends Component {
             >
               Sign Up
             </button>
-            <iframe
-    allow="microphone;"
-    width="350"
-    height="430"
-    src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb">
-</iframe>
           </Link>
-        
         </Form>
-
       </div>
     );
   }
@@ -152,7 +143,5 @@ Login.propTypes = {
   ),
   dispatch: PropTypes.func.isRequired
 };
-
-
 
 export default withRouter(connect(mapStateToProps)(Login));
