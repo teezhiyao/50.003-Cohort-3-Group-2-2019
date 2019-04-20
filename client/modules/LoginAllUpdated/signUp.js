@@ -193,6 +193,7 @@ class SignUp extends Component {
               // loadingText="Verifying…"
             />
           </Form>
+          
         )}
       </div>
     );
@@ -212,5 +213,7 @@ SignUp.propTypes = {
   }),
   dispatch: PropTypes.func.isRequired
 };
+
+
 
 export default withRouter(connect(mapStateToProps)(SignUp));
