@@ -27,6 +27,12 @@ class PostListPage extends Component {
     super(props);
     this.state = {
       categorySelected: "all",
+      sortSelected: "recency",
+      sortList: [
+        { value: "recency", label: "Date"},
+        { value: "alph", label: "Alphabetical"},
+        { value: "priority", label: "Priority"},
+      ],
       categoryList: [
         { value: "all", label: "All Issues" },
         { value: "LOGINISSUE", label: "Login Issue" },
@@ -83,6 +89,28 @@ class PostListPage extends Component {
     this.setState({ categorySelected: e.target.value });
     console.log(this.state);
   };
+  handleSort = e => {
+    console.log("inside handlesort")
+    this.setState({ sortSelected: e.target.value });
+    console.log(this.sortSelected);
+    if(e.target.value==="alph"){
+      console.log("inside alph");
+      console.log(this.props.posts);
+      this.props.posts.sort(dynamicSort("title"));
+      console.log(this.props.posts);
+    }
+    if(e.target.value==="recency"){
+      console.log("inside recency");
+      this.props.posts.sort(dynamicSort("createdAt"));
+      console.log(this.props.posts);
+    }
+    if(e.target.value==="priority"){
+      console.log("inside priority");
+      this.props.posts.sort(dynamicSortPriority("priority"));
+      console.log(this.props.posts);
+    }
+    // console.log(this.state);
+  };
 
   placeholder = () => {
     console.log("In Place Holder");
@@ -123,6 +151,15 @@ class PostListPage extends Component {
             })}
           </select>
         </label>
+        <label>
+          {" "}
+          Sort By
+          <select onChange={this.handleSort}>
+            {this.state.sortList.map(category => {
+              return <option value={category.value}> {category.label} </option>;
+            })}
+          </select>
+        </label>
         <Button variant="contained" color="primary" onClick={this.placeholder}>
           Placeholder
         </Button>
@@ -131,6 +168,7 @@ class PostListPage extends Component {
           handleAddReply={this.handleAddReply}
           posts={
             this.state.categorySelected == "all"
+              // ? this.props.posts.sort(dynamicSort("title"))
               ? this.props.posts
               : this.props.posts.filter(
                   post => post.category === this.state.categorySelected
@@ -140,6 +178,31 @@ class PostListPage extends Component {
         />
       </div>
     );
+  }
+}
+
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
+  }
+}
+function dynamicSortPriority() {
+  var sortOrder = 1;
+  var dict = { "HIGH": 3, "MEDIUM": 2, "LOW":1 }
+  
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      var result = (dict[a[priority]] < dict[b[property]]) ? -1 : (dict[a[property]] > dict[b[property]]) ? 1 : 0;
+      return result * sortOrder;
   }
 }
 

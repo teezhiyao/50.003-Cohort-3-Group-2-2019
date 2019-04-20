@@ -39,6 +39,7 @@ class PostList extends Component {
   handleClickChip = () => {
     console.log("clicked chip");
   };
+  
 
   render() {
     const { classes } = this.props;
@@ -57,10 +58,17 @@ class PostList extends Component {
               </Typography>
 
               <Typography className={classes.secondaryHeading}>
-                <Link to={`/posts/${individualPost.username}`}>
                   {"By " + individualPost.username}
-                </Link>
               </Typography>
+              
+              <Typography className={classes.secondaryHeading}>
+                  {individualPost.createdAt.substring(0, 10)}
+              </Typography>
+
+              {/* UNCOMMENT FOR PRIORITY DISPLAY */}
+              {/* <Typography className={classes.secondaryHeading}>
+                  {individualPost.priority}
+              </Typography> */}
 
               <Typography className={classes.secondaryHeading}>
                 Category:
