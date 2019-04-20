@@ -1,6 +1,6 @@
 .header {
-  background: #eee url("../../header-bk.png") center;
-  background-size: cover;
+  background: #eee url("https://www.w3schools.com/w3css/img_snowtops.jpg")
+    center;
   border-bottom: 1px solid #ccc;
 }
 
