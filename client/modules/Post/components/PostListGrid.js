@@ -19,13 +19,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import { isNullOrUndefined } from "util";
 
 const styles = {
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
-    backgroundColor: theme.palette.background.paper
-  },
   gridList: {
     width: 470,
     height: 350,
