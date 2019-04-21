@@ -20,13 +20,15 @@ export class PostCreateWidget extends Component {
     const catRef = this.refs.category;
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
+    const priorityLevelRef = this.refs.category; //Changed to priority
     console.log("trying here");
     if (catRef.value && titleRef.value && contentRef.value) {
       this.props.addPost(
         catRef.value,
         titleRef.value,
         contentRef.value,
-        this.state.baseImage
+        this.state.baseImage,
+        priorityLevelRef.value
       );
       catRef.value = titleRef.value = contentRef.value = "";
     }

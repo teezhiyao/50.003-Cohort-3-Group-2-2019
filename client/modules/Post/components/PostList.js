@@ -39,7 +39,6 @@ class PostList extends Component {
   handleClickChip = () => {
     console.log("clicked chip");
   };
-  
 
   render() {
     const { classes } = this.props;
@@ -58,11 +57,11 @@ class PostList extends Component {
               </Typography>
 
               <Typography className={classes.secondaryHeading}>
-                  {"By " + individualPost.username}
+                {"By " + individualPost.username}
               </Typography>
-              
+
               <Typography className={classes.secondaryHeading}>
-                  {individualPost.createdAt.substring(0, 10)}
+                {individualPost.createdAt.substring(0, 10)}
               </Typography>
 
               {/* UNCOMMENT FOR PRIORITY DISPLAY */}

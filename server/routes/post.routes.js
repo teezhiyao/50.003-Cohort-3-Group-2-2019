@@ -52,6 +52,11 @@ router.route("/queryAllowedPost/:sessionToken").get(function(req, res, next) {
 
 // Add a new Post and sends out email notification to admin
 router.route("/postNewPost").post(function(req, res, next) {
+  // const userId = req.body.post.userId;
+  // var jsonn =
+  //   `{${req.body.post.userId}` +
+  //   ':{read:true},"role:Admin":{read:true,write:true},"*":{}}';
+  // console.log(JSON.parse(jsonn));
   var options = {
     method: "POST",
     url: postUrl,
@@ -69,6 +74,7 @@ router.route("/postNewPost").post(function(req, res, next) {
       imageData: req.body.post.imageData,
       dateAdded: Date.now.toString,
       resolveStatus: false,
+      priorityLevel: req.body.post.priorityLevel,
       replyscuid: {},
       ACL: {
         "2ZtufYEUQd": { read: true },
