@@ -13,7 +13,8 @@ import {
   addPostUserRequest,
   fetchAllowedPosts,
   deletePostRequest,
-  addReplyRequest
+  addReplyRequest,
+  updatePostRequest
 } from "../../PostActions";
 import { toggleAddPost } from "../../../App/AppActions";
 
@@ -85,6 +86,13 @@ class PostListPage extends Component {
     // console.log('PostListPage log');
     // console.log((reply, cuid));
     this.props.dispatch(addReplyRequest({ reply, cuid }));
+  };
+
+  handlePostUpdate = postUpdate => {
+    console.log("PostUpdate log");
+    postUpdate["sessionToken"] = this.props.users.sessionToken;
+    console.log(postUpdate);
+    this.props.dispatch(updatePostRequest(postUpdate));
   };
 
   handleSelectCategory = e => {
@@ -168,6 +176,7 @@ class PostListPage extends Component {
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
+          handlePostUpdate={this.handlePostUpdate}
           posts={
             this.state.categorySelected == "all"
               ? // ? this.props.posts.sort(dynamicSort("title"))

@@ -94,6 +94,7 @@ class PostList extends Component {
               post={individualPost}
               key={individualPost.cuid}
               addReply={this.props.handleAddReply}
+              updatePost={this.props.handlePostUpdate}
             />
           </ExpansionPanel>
         ))}
@@ -118,6 +119,7 @@ PostList.propTypes = {
   ),
   handleDeletePost: PropTypes.func.isRequired,
   handleAddReply: PropTypes.func.isRequired,
+  handlePostUpdate: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 };
 

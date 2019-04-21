@@ -153,14 +153,14 @@ router.route("/posts/:objectId").get(function(req, res, next) {
 });
 
 // Update one post by objectId (To-Do)
-router.route("/posts/:objectId/:sessionToken").put(function(req, res, next) {
+router.route("/posts/:objectId").put(function(req, res, next) {
+  console.log(req.body);
   var options = {
     method: "PUT",
-    url:
-      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts/PeXezOqAXf",
+    url: `${postUrl}/${req.body.postId}`,
     headers: {
       "cache-control": "no-cache",
-      "X-Parse-Session-Token": req.params.sessionToken,
+      "X-Parse-Session-Token": req.body.sessionToken,
       "Server-Token": token,
       "Content-Type": "application/json"
     },
@@ -171,7 +171,7 @@ router.route("/posts/:objectId/:sessionToken").put(function(req, res, next) {
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
 
-    console.log(body);
+    console.log(response);
   });
 });
 
