@@ -13,6 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { withStyles } from "@material-ui/core/styles";
 import { Chip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { grey } from "@material-ui/core/colors";
 
 const styles = theme => ({
   root: {
@@ -43,6 +44,7 @@ class PostList extends Component {
   render() {
     const { classes } = this.props;
     return (
+
       <div className="listView">
         {this.props.posts.map((individualPost, index) => (
           <ExpansionPanel>
@@ -99,6 +101,7 @@ class PostList extends Component {
           </ExpansionPanel>
         ))}
       </div>
+      
     );
   }
 }

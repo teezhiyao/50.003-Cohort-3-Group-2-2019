@@ -316,7 +316,7 @@ export class App extends Component {
                   Ticketing Support System
                 </Typography>
 
-                <div className={classes.search}>
+                {/* <div className={classes.search}>
                   <div className={classes.searchIcon}>
                     <SearchIcon />
                   </div>
@@ -327,13 +327,13 @@ export class App extends Component {
                       input: classes.inputInput
                     }}
                   />
-                </div>
+                </div> */}
                 <div className={classes.grow} />
                 <Typography variant="h6" color="inherit" noWrap>
                   {this.props.users.name && "Welcome " + this.props.users.name}
                 </Typography>
                 <div className={classes.sectionDesktop}>
-                  <IconButton color="inherit">
+                  {/* <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                       <MailIcon />
                     </Badge>
@@ -342,7 +342,7 @@ export class App extends Component {
                     <Badge badgeContent={17} color="secondary">
                       <NotificationsIcon />
                     </Badge>
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton
                     aria-owns={isMenuOpen ? "material-appbar" : undefined}
                     aria-haspopup="true"
@@ -488,7 +488,9 @@ export class App extends Component {
                 intl={this.props.intl}
                 toggleAddPost={this.toggleAddPostSection}
               />
+
               <div className={styles.container}>{this.props.children}</div>
+              
               <Button
                 aria-describedby={id}
                 variant="contained"
@@ -514,7 +516,7 @@ export class App extends Component {
                   </Fade>
                 )}
               </Popper>
-              <Footer />
+              {/* <Footer /> */}
             </main>
             {/* <Fab color="primary" aria-label="Add" className={classes.fab}> */}
             {/* </Fab> */}

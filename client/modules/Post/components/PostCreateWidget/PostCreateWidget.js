@@ -103,7 +103,7 @@ export class PostCreateWidget extends Component {
           </a>
         </div>
         <div className="process">
-          <h4 className="process__heading">Process: Using Base64</h4>
+          {/* <h4 className="process__heading">Process: Using Base64</h4> */}
           <p className="process__details">Upload image</p>
 
           <div className="process__upload-btn">
