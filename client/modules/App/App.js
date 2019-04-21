@@ -97,7 +97,7 @@ const styles = theme => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
+    })
     // marginLeft: -drawerWidth
   },
   content2: {
@@ -462,7 +462,7 @@ export class App extends Component {
               </List>
             </Drawer>
             <main
-              className={classNames(classes.content, {
+              className={classNames(classes.content2, {
                 [classes.contentShift]: open
               })}
             >
