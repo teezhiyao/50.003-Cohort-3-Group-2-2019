@@ -54,7 +54,8 @@ const styles = theme => ({
     display: "flex"
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingRight: theme.spacing.unit * 3
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -90,6 +91,9 @@ const styles = theme => ({
     padding: "0 8px",
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
+  },
+  iconPadText: {
+    padding: "0 0px"
   },
   content: {
     flexGrow: 1,
@@ -160,7 +164,8 @@ const styles = theme => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex"
-    }
+    },
+    paddingRight: theme.spacing.unit * 2
   },
   sectionMobile: {
     display: "flex",
@@ -216,9 +221,9 @@ export class App extends Component {
     this.setState({ open: false });
   };
 
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  // handleProfileMenuOpen = event => {
+  //   this.setState({ anchorEl: event.currentTarget });
+  // };
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
@@ -240,18 +245,18 @@ export class App extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
+    // const renderMenu = (
+    //   <Menu
+    //     anchorEl={anchorEl}
+    //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+    //     open={isMenuOpen}
+    //     onClose={this.handleMenuClose}
+    //   >
+    //     <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+    //     <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+    //   </Menu>
+    // );
 
     const renderMobileMenu = (
       <Menu
@@ -277,12 +282,12 @@ export class App extends Component {
           </IconButton>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
+        {/* <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     );
     return (
@@ -332,7 +337,7 @@ export class App extends Component {
                 <Typography variant="h6" color="inherit" noWrap>
                   {this.props.users.name && "Welcome " + this.props.users.name}
                 </Typography>
-                <div className={classes.sectionDesktop}>
+                {/* <div className={classes.sectionDesktop}>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                       <MailIcon />
@@ -351,7 +356,7 @@ export class App extends Component {
                   >
                     <AccountCircle />
                   </IconButton>
-                </div>
+                </div> */}
                 <div className={classes.sectionMobile}>
                   <IconButton
                     aria-haspopup="true"
@@ -363,7 +368,7 @@ export class App extends Component {
                 </div>
               </Toolbar>
             </AppBar>
-            {renderMenu}
+            {/* {renderMenu} */}
             {renderMobileMenu}
             <Drawer
               className={classes.drawer}
@@ -375,6 +380,26 @@ export class App extends Component {
               }}
             >
               <div className={classes.drawerHeader}>
+                <Link to={`/profile`}>
+                  <IconButton
+                    aria-owns={isMenuOpen ? "material-appbar" : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Link>
+                <IconButton>
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton>
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
                 <IconButton onClick={this.handleDrawerClose}>
                   {theme.direction === "ltr" ? (
                     <ChevronLeftIcon />
@@ -391,24 +416,30 @@ export class App extends Component {
                     <ListItemIcon>
                       <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Home" />
+                    <ListItemText
+                      primary="Home"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
 
-                <Link to={`/profile`}>
+                {/* <Link to={`/profile`}>
                   <ListItem button key="Profile">
                     <ListItemIcon>
                       <AccountCircle />
                     </ListItemIcon>
                     <ListItemText primary="Profile" />
                   </ListItem>
-                </Link>
+                </Link> */}
                 <Link to={`/grid`}>
                   <ListItem button key="Board">
                     <ListItemIcon>
                       <AccountCircle />
                     </ListItemIcon>
-                    <ListItemText primary="Board" />
+                    <ListItemText
+                      primary="Board"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
               </List>
@@ -443,14 +474,17 @@ export class App extends Component {
                     <ListItemIcon>
                       <MailIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Log Out" />
+                    <ListItemText
+                      primary="Log Out"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
               </List>
 
               <Divider />
 
-              <List>
+              {/* <List>
                 <Link to={`/SignUpPage`}>
                   <ListItem button key="Signup">
                     <ListItemIcon>
@@ -459,7 +493,7 @@ export class App extends Component {
                     <ListItemText primary="Signup" />
                   </ListItem>
                 </Link>
-              </List>
+              </List> */}
             </Drawer>
             <main
               className={classNames(classes.content2, {
