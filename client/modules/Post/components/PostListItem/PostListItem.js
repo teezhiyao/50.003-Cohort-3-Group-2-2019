@@ -33,6 +33,12 @@ export class PostListItem extends Component {
     console.log(name);
     console.log(event.target.checked);
     // console.log(this.props.location.pathname);
+    if (name === "resolve") {
+      this.props.updatePost({
+        resolve: event.target.checked,
+        postId: this.props.post.objectId
+      });
+    }
     this.setState({ [name]: event.target.checked });
   };
 
@@ -87,7 +93,8 @@ PostListItem.propTypes = {
   }),
   location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,
-  addReply: PropTypes.func
+  addReply: PropTypes.func,
+  updatePost: PropTypes.func
 };
 export default withRouter(PostListItem);
 

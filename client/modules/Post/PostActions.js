@@ -52,6 +52,14 @@ export function addPostRequest(
   };
 }
 
+export function updatePost(post) {
+  // this is a Redux action creator
+  return {
+    type: UPDATE_POST,
+    post
+  };
+}
+
 export function updatePostRequest(updateBody) {
   console.log("In updatePostRequest");
   console.log(updateBody);
@@ -59,9 +67,9 @@ export function updatePostRequest(updateBody) {
   // console.log(content);
 
   return dispatch => {
-    return callApi("postNewPost", "post", {
-      updateBody: updateBody
-    }).then(res => dispatch(addPost(res)));
+    return callApi(`posts/${updateBody.postId}`, "put", updateBody).then(res =>
+      dispatch(updatePost(res))
+    );
     // dispatch updates the store by adding the action
     // actions describe what happens but don't describe how the app changes
     // reducers specify how the app's state changes in response to the actions sent
