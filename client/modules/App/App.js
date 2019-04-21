@@ -19,6 +19,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import ChatIcon from "@material-ui/icons/Chat";
 import { Link } from "react-router";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -33,6 +34,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { getUser } from "../Post/UserReducer";
 import Popper from "@material-ui/core/Popper";
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
+
 import Fade from "@material-ui/core/Fade";
 // Import Style
 // import styles from './App.css';
@@ -172,6 +175,14 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -523,35 +534,33 @@ export class App extends Component {
                 toggleAddPost={this.toggleAddPostSection}
               />
               <div className={styles.container}>{this.props.children}</div>
-              <Button
-                aria-describedby={id}
-                variant="contained"
-                onClick={this.handleClick}
-              >
-                Toggle ChatBot
-              </Button>
-              <Popper
-                id={id}
-                open={openCb}
-                anchorEl={anchorCb}
-                transition
-                placement={"bottom-end"}
-              >
-                {({ TransitionProps }) => (
-                  <Fade {...TransitionProps} timeout={350}>
-                    <iframe
-                      allow="microphone;"
-                      width="350"
-                      height="430"
-                      src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
-                    />
-                  </Fade>
-                )}
-              </Popper>
               <Footer />
             </main>
-            {/* <Fab color="primary" aria-label="Add" className={classes.fab}> */}
-            {/* </Fab> */}
+            <Fab
+              aria-label="ChatBot"
+              onClick={this.handleClick}
+              className={classes.fab}
+            >
+              <ChatIcon />
+            </Fab>
+            <Popper
+              id={id}
+              open={openCb}
+              anchorEl={anchorCb}
+              transition
+              placement={"bottom-end"}
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <iframe
+                    allow="microphone;"
+                    width="350"
+                    height="430"
+                    src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
+                  />
+                </Fade>
+              )}
+            </Popper>
           </div>
         )}
         {this.props.location.pathname === "/" && (
