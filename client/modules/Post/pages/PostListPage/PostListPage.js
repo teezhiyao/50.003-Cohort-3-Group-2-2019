@@ -39,7 +39,8 @@ class PostListPage extends Component {
         { value: "LOGINISSUE", label: "Login Issue" },
         { value: "APIERROR", label: "API Issue" },
         { value: "LOGOUTISSUE", label: "Logout Issue" },
-        { value: "Client Login Issue", label: "Client Login Issue" }
+        { value: "Client Login Issue", label: "Client Login Issue" },
+        { value: "OTHERS", label: "Others" }
       ]
     };
   }

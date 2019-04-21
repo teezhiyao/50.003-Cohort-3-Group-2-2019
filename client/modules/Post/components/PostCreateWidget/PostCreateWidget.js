@@ -70,7 +70,7 @@ export class PostCreateWidget extends Component {
             </select>
           </label>
 
-          {/*To add new category: */}
+          {/* To add new category:
           <form onSubmit={this.addNewCategory}>
             <label>
               Can't find your category?
@@ -82,7 +82,7 @@ export class PostCreateWidget extends Component {
               />
             </label>
             <button type="submit">Add new category</button>
-          </form>
+          </form> */}
 
           <input
             placeholder={this.props.intl.messages.postTitle}

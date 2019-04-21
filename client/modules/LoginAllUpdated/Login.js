@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "@material-ui/core/Button";
+import {Button, Paper} from "@material-ui/core";
 import Bootstrap from "react-bootstrap";
 //import "./Login.css";
 import styles from "./Login.css";
@@ -82,18 +82,38 @@ class Login extends Component {
           
         <div className={styles.leftoverlay}>
          <img src={require('./assets/accenture-logo.png')} className = {styles.logo}/>
-         {/* <Typography>
-          - High Performance. Delivered. -
-         </Typography> */}
+         <h3 className={styles.slogan}>
+           High Performance. Delivered. 
+         </h3>
         </div>
 
         <Form onSubmit={this.handleSubmit} className={styles["form"]}>
           {/* Ticket Support System */}
+            <img src={require('./assets/accenture.png')} className = {styles.rightlogo}/>
+            <h3 className={styles.rightslogan}>
+             Your one-stop ticket support portal. 
+            </h3>
+
+            <h3 className={styles.description}>
+            <img src={require('./assets/issueicon.png')} className = {styles.icons}/>
+            Upload your issue.
+            </h3>
+                               
+            <h3 className={styles.description}>
+            <img src={require('./assets/seeissue.png')} className = {styles.icons}/>
+            Hear about other's experience.
+            </h3>
+                    
+            <h3 className={styles.description}>
+            <img src={require('./assets/fixicon.png')} className = {styles.icons}/>
+            Get your fix today.
+            </h3>
+          
           <Form.Group controlId="email" className={styles["form-field"]}>
             <Form.Control
               className={styles["form-field-text"]}
               placeholder="Username"
-              autoFocus
+              // autoFocus
               // type="email"
               value={this.state.email}
               onChange={this.handleChange}
@@ -108,26 +128,29 @@ class Login extends Component {
               type="password"
             />
           </Form.Group>
-          <button
-            className={styles["post-login-button"]}
+          <Paper
             variant="contained"
             color="primary"
-            disabled={!this.validateForm()}
             type="submit"
+            disabled={!this.validateForm()}
             onClick={this.handleSubmit}
+            className={styles["post-login-button"]}
           >
             Login
-          </button>{" "}
-          <Link to={`/SignUpPage`} text-decoration="none">
-            <button
-              variant="contained"
-              color="primary"
-              type="signup"
-              className={styles["post-signup-button"]}
-            >
+          </Paper>
+
+          
+          <Paper
+            variant="contained"
+            color="primary"
+            type="signup"
+            className={styles["post-signup-button"]}
+          >
+            <Link to={`/SignUpPage`}>
               Sign Up
-            </button>
-          </Link>
+              </Link>
+          </Paper>
+          
         </Form>
 
       </div>
