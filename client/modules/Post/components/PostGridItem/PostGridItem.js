@@ -38,9 +38,9 @@ export class PostGridItem extends Component {
     return (
       <Card>
         <CardContent>
-            <div>
-                <span style={{ float: "right" }} className={styles["post-action"]}>
-            {/* <FormControlLabel
+          <div>
+            <span style={{ float: "right" }} className={styles["post-action"]}>
+              {/* <FormControlLabel
               control={
                 <Switch
                   checked={this.state.resolve}
@@ -50,21 +50,20 @@ export class PostGridItem extends Component {
               }
               label={this.state.resolve ? "Resolved" : "Unresolved"}
             /> */}
-                <span href="#" align="right" onClick={this.props.onDelete}>
-              <DeleteIcon id="deletePost" />
+              <span href="#" align="right" onClick={this.props.onDelete}>
+                <DeleteIcon id="deletePost" />
+              </span>
             </span>
-            
-          </span>
           </div>
           <div>
-          <h3 className={styles["post-title"]}>
-            <Link to={`/posts/${this.props.post.objectId}`}>
-              {this.props.post.title}
-              {/* <PostDetailPage post={this.props.post} /> */}
-            </Link> 
-          </h3>
-          {/* <p>{this.props.post.category}</p> */}
-          {/* <p className={styles["author-name"]}>
+            <h3 className={styles["post-title"]}>
+              <Link to={`/posts/${this.props.post.objectId}`}>
+                {this.props.post.title}
+                {/* <PostDetailPage post={this.props.post} /> */}
+              </Link>
+            </h3>
+            {/* <p>{this.props.post.category}</p> */}
+            {/* <p className={styles["author-name"]}>
             <FormattedMessage /> {this.props.post.category}
             <Link to={
                     `/cat/${individualPost.category}`
@@ -73,7 +72,9 @@ export class PostGridItem extends Component {
                     </Chip>
             </Link>
           </p> */}
-          <span className={styles["post-desc"]}>{this.props.post.content}</span>
+            <span className={styles["post-desc"]}>
+              {this.props.post.content}
+            </span>
           </div>
         </CardContent>
       </Card>

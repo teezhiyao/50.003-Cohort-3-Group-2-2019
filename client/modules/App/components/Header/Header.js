@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { getUser } from "../../../Post/UserReducer";
 // Import Style
 import styles from "./Header.css";
+import bg from "../../header-bk.png";
 
 class Header extends Component {
   // languageNodes = this.props.intl.enabledLanguages.map(lang => (
@@ -22,6 +23,7 @@ class Header extends Component {
 
   render() {
     return (
+      // <div style={{ background: `#FFF url(${bg}) center` }}>
       <div className={styles.header}>
         <div className={styles["language-switcher"]}>
           <ul />
