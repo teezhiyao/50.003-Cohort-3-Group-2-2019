@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { Link, browserHistory } from "react-router";
 
+import './assets/accenture-logo.png';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -77,11 +79,11 @@ class Login extends Component {
   render() {
     return (
       <div className={styles.background}>
-        <div className={styles.heading}>
-          <Typography variant="h4" color="inherit">
-            Ticketing Support System
-          </Typography>
+          
+        <div className={styles.leftoverlay}>
+         <img src={require('./assets/accenture-logo.png')} className = {styles.logo}/>
         </div>
+
         <Form onSubmit={this.handleSubmit} className={styles["form"]}>
           <Form.Group controlId="email" className={styles["form-field"]}>
             <Form.Control
@@ -123,6 +125,7 @@ class Login extends Component {
             </button>
           </Link>
         </Form>
+
       </div>
     );
   }
