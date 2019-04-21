@@ -76,7 +76,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="Login">
+      <div className={styles.background}>
         <div className={styles.heading}>
           <Typography variant="h4" color="inherit">
             Ticketing Support System
