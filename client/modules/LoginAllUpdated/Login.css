@@ -2,44 +2,22 @@
   margin: auto;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 16px;
+  margin-top: 16px;
   width: 50%;
-  padding: 5px 5px;
+  background: #fafafa;
+  padding: 15px 15px;
   border: 0px solid #ddd;
   border-radius: 4px;
 }
 
-.background{
-  /* background: url(./skyscraper.jpg);
-  background-size: cover; */
-  height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  
-}
-
-.overlay{
-  background-color: #000;
-  opacity: 0.6;
-  position: absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index: 1;
-}
-
 .heading {
-  display:flex;
   width: 50%;
-  height: 100vh;
   margin: auto;
-  /* padding: 64px 16px; */
+  padding: 64px 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  background-image: url('./skyscraper.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: #0099cc;
 }
 
 .post-login-button {
