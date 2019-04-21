@@ -48,7 +48,6 @@ import Footer from "./components/Footer/Footer";
 // Import Actions
 import { toggleAddPost } from "./AppActions";
 import { switchLanguage } from "../../modules/Intl/IntlActions";
-import { Z_FIXED } from "zlib";
 
 const drawerWidth = 240;
 //To do : Tidy up file by using imports instead of throwing everything here
@@ -332,7 +331,7 @@ export class App extends Component {
                   <Typography variant="h6" color="inherit" noWrap>
                     Ticketing Support System
                   </Typography>
-
+                  {/* 
                   <div className={classes.search}>
                     <div className={classes.searchIcon}>
                       <SearchIcon />
@@ -344,9 +343,14 @@ export class App extends Component {
                         input: classes.inputInput
                       }}
                     />
-                  </div>
+                  </div> */}
                   <div className={classes.grow} />
-                  <Typography variant="h6" color="inherit" noWrap>
+                  <Typography
+                    variant="h6"
+                    color="inherit"
+                    noWrap
+                    paddingRight="20px"
+                  >
                     {this.props.users.name &&
                       "Welcome " + this.props.users.name}
                   </Typography>
@@ -361,15 +365,14 @@ export class App extends Component {
                       <NotificationsIcon />
                     </Badge>
                   </IconButton> */}
-                  <IconButton
+                  {/* <IconButton
                     aria-owns={isMenuOpen ? "material-appbar" : undefined}
                     aria-haspopup="true"
                     onClick={this.handleProfileMenuOpen}
                     color="inherit"
                   >
                     <AccountCircle />
-                  </IconButton>
-                </div> */}
+                  </IconButton> */}
                   <div className={classes.sectionMobile}>
                     <IconButton
                       aria-haspopup="true"
@@ -594,8 +597,7 @@ export class App extends Component {
             </main>
           </div>
         )}
-
-       </div>
+      </div>
     );
   }
 }
