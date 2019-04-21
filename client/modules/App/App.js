@@ -307,48 +307,50 @@ export class App extends Component {
       //     !window.devToolsExtension &&
       //     process.env.NODE_ENV === 'development' && <DevTools />}
       <div>
-        {this.props.location.pathname !== "/" && (
-          <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-              position="fixed"
-              className={classNames(classes.appBar, {
-                [classes.appBarShift]: open
-              })}
-            >
-              <Toolbar disableGutters={!open}>
-                <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={this.handleDrawerOpen}
-                  className={classNames(
-                    classes.menuButton,
-                    open && classes.hide
-                  )}
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" color="inherit" noWrap>
-                  Ticketing Support System
-                </Typography>
+        {this.props.location.pathname !== "/" &&
+          this.props.location.pathname !== "/SignUpPage" && (
+            <div className={classes.root}>
+              <CssBaseline />
+              <AppBar
+                position="fixed"
+                className={classNames(classes.appBar, {
+                  [classes.appBarShift]: open
+                })}
+              >
+                <Toolbar disableGutters={!open}>
+                  <IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={this.handleDrawerOpen}
+                    className={classNames(
+                      classes.menuButton,
+                      open && classes.hide
+                    )}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Typography variant="h6" color="inherit" noWrap>
+                    Ticketing Support System
+                  </Typography>
 
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <SearchIcon />
+                    </div>
+                    <InputBase
+                      placeholder="Search…"
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput
+                      }}
+                    />
                   </div>
-                  <InputBase
-                    placeholder="Search…"
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput
-                    }}
-                  />
-                </div>
-                <div className={classes.grow} />
-                <Typography variant="h6" color="inherit" noWrap>
-                  {this.props.users.name && "Welcome " + this.props.users.name}
-                </Typography>
-                {/* <div className={classes.sectionDesktop}>
+                  <div className={classes.grow} />
+                  <Typography variant="h6" color="inherit" noWrap>
+                    {this.props.users.name &&
+                      "Welcome " + this.props.users.name}
+                  </Typography>
+                  {/* <div className={classes.sectionDesktop}>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                       <MailIcon />
@@ -368,73 +370,73 @@ export class App extends Component {
                     <AccountCircle />
                   </IconButton>
                 </div> */}
-                <div className={classes.sectionMobile}>
-                  <IconButton
-                    aria-haspopup="true"
-                    onClick={this.handleMobileMenuOpen}
-                    color="inherit"
-                  >
-                    <MoreIcon />
+                  <div className={classes.sectionMobile}>
+                    <IconButton
+                      aria-haspopup="true"
+                      onClick={this.handleMobileMenuOpen}
+                      color="inherit"
+                    >
+                      <MoreIcon />
+                    </IconButton>
+                  </div>
+                </Toolbar>
+              </AppBar>
+              {/* {renderMenu} */}
+              {renderMobileMenu}
+              <Drawer
+                className={classes.drawer}
+                variant="persistent"
+                anchor="left"
+                open={open}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+              >
+                <div className={classes.drawerHeader}>
+                  <Link to={`/profile`}>
+                    <IconButton
+                      aria-owns={isMenuOpen ? "material-appbar" : undefined}
+                      aria-haspopup="true"
+                      onClick={this.handleProfileMenuOpen}
+                      color="inherit"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </Link>
+                  <IconButton>
+                    <Badge badgeContent={4} color="secondary">
+                      <MailIcon />
+                    </Badge>
+                  </IconButton>
+                  <IconButton>
+                    <Badge badgeContent={17} color="secondary">
+                      <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  <IconButton onClick={this.handleDrawerClose}>
+                    {theme.direction === "ltr" ? (
+                      <ChevronLeftIcon />
+                    ) : (
+                      <ChevronRightIcon />
+                    )}
                   </IconButton>
                 </div>
-              </Toolbar>
-            </AppBar>
-            {/* {renderMenu} */}
-            {renderMobileMenu}
-            <Drawer
-              className={classes.drawer}
-              variant="persistent"
-              anchor="left"
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-            >
-              <div className={classes.drawerHeader}>
-                <Link to={`/profile`}>
-                  <IconButton
-                    aria-owns={isMenuOpen ? "material-appbar" : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleProfileMenuOpen}
-                    color="inherit"
-                  >
-                    <AccountCircle />
-                  </IconButton>
-                </Link>
-                <IconButton>
-                  <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton>
-                  <Badge badgeContent={17} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton onClick={this.handleDrawerClose}>
-                  {theme.direction === "ltr" ? (
-                    <ChevronLeftIcon />
-                  ) : (
-                    <ChevronRightIcon />
-                  )}
-                </IconButton>
-              </div>
-              <Divider />
+                <Divider />
 
-              <List>
-                <Link to={`/home`}>
-                  <ListItem button key="Home">
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Home"
-                      className={classes.iconPadText}
-                    />
-                  </ListItem>
-                </Link>
+                <List>
+                  <Link to={`/home`}>
+                    <ListItem button key="Home">
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Home"
+                        className={classes.iconPadText}
+                      />
+                    </ListItem>
+                  </Link>
 
-                {/* <Link to={`/profile`}>
+                  {/* <Link to={`/profile`}>
                   <ListItem button key="Profile">
                     <ListItemIcon>
                       <AccountCircle />
@@ -442,60 +444,60 @@ export class App extends Component {
                     <ListItemText primary="Profile" />
                   </ListItem>
                 </Link> */}
-                <Link to={`/grid`}>
-                  <ListItem button key="Board">
-                    <ListItemIcon>
-                      <AccountCircle />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Board"
-                      className={classes.iconPadText}
-                    />
-                  </ListItem>
-                </Link>
-              </List>
+                  <Link to={`/grid`}>
+                    <ListItem button key="Board">
+                      <ListItemIcon>
+                        <AccountCircle />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Board"
+                        className={classes.iconPadText}
+                      />
+                    </ListItem>
+                  </Link>
+                </List>
 
-              <Divider />
-              <List>
-                {/* {["Pending Issues", "Resolved Issues", "All Issues"].map( */}
-                {["Pending Issues", "Resolved Issues"].map((text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemIcon>
-                      {index === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
+                <Divider />
+                <List>
+                  {/* {["Pending Issues", "Resolved Issues", "All Issues"].map( */}
+                  {["Pending Issues", "Resolved Issues"].map((text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>
+                        {index === 0 ? <InboxIcon /> : <MailIcon />}
+                      </ListItemIcon>
 
-                    {index === 0 ? (
-                      <Link to={`/pending`}>
-                        <ListItemText primary={text} />
-                      </Link>
-                    ) : null}
-                    {index === 1 ? (
-                      <Link to={`/resolved`}>
-                        <ListItemText primary={text} />
-                      </Link>
-                    ) : null}
-                  </ListItem>
-                ))}
-              </List>
-              <Divider />
+                      {index === 0 ? (
+                        <Link to={`/pending`}>
+                          <ListItemText primary={text} />
+                        </Link>
+                      ) : null}
+                      {index === 1 ? (
+                        <Link to={`/resolved`}>
+                          <ListItemText primary={text} />
+                        </Link>
+                      ) : null}
+                    </ListItem>
+                  ))}
+                </List>
+                <Divider />
 
-              <List>
-                <Link to={`/`}>
-                  <ListItem button key="Log Out">
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary="Log Out"
-                      className={classes.iconPadText}
-                    />
-                  </ListItem>
-                </Link>
-              </List>
+                <List>
+                  <Link to={`/`}>
+                    <ListItem button key="Log Out">
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Log Out"
+                        className={classes.iconPadText}
+                      />
+                    </ListItem>
+                  </Link>
+                </List>
 
-              <Divider />
+                <Divider />
 
-              {/* <List>
+                {/* <List>
                 <Link to={`/SignUpPage`}>
                   <ListItem button key="Signup">
                     <ListItemIcon>
@@ -505,65 +507,66 @@ export class App extends Component {
                   </ListItem>
                 </Link>
               </List> */}
-            </Drawer>
-            <main
-              className={classNames(classes.content2, {
-                [classes.contentShift]: open
-              })}
-            >
-              <Helmet
-                title="Issue Reporting"
-                titleTemplate="%s - Blog App"
-                meta={[
-                  { charset: "utf-8" },
-                  {
-                    "http-equiv": "X-UA-Compatible",
-                    content: "IE=edge"
-                  },
-                  {
-                    name: "viewport",
-                    content: "width=device-width, initial-scale=1"
+              </Drawer>
+              <main
+                className={classNames(classes.content2, {
+                  [classes.contentShift]: open
+                })}
+              >
+                <Helmet
+                  title="Issue Reporting"
+                  titleTemplate="%s - Blog App"
+                  meta={[
+                    { charset: "utf-8" },
+                    {
+                      "http-equiv": "X-UA-Compatible",
+                      content: "IE=edge"
+                    },
+                    {
+                      name: "viewport",
+                      content: "width=device-width, initial-scale=1"
+                    }
+                  ]}
+                />
+                <Header
+                  switchLanguage={lang =>
+                    this.props.dispatch(switchLanguage(lang))
                   }
-                ]}
-              />
-              <Header
-                switchLanguage={lang =>
-                  this.props.dispatch(switchLanguage(lang))
-                }
-                intl={this.props.intl}
-                toggleAddPost={this.toggleAddPostSection}
-              />
-              <div className={styles.container}>{this.props.children}</div>
-              <Footer />
-            </main>
-            <Fab
-              aria-label="ChatBot"
-              onClick={this.handleClick}
-              className={classes.fab}
-            >
-              <ChatIcon />
-            </Fab>
-            <Popper
-              id={id}
-              open={openCb}
-              anchorEl={anchorCb}
-              transition
-              placement={"bottom-end"}
-            >
-              {({ TransitionProps }) => (
-                <Fade {...TransitionProps} timeout={350}>
-                  <iframe
-                    allow="microphone;"
-                    width="350"
-                    height="430"
-                    src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
-                  />
-                </Fade>
-              )}
-            </Popper>
-          </div>
-        )}
-        {this.props.location.pathname === "/" && (
+                  intl={this.props.intl}
+                  toggleAddPost={this.toggleAddPostSection}
+                />
+                <div className={styles.container}>{this.props.children}</div>
+                <Footer />
+              </main>
+              <Fab
+                aria-label="ChatBot"
+                onClick={this.handleClick}
+                className={classes.fab}
+              >
+                <ChatIcon />
+              </Fab>
+              <Popper
+                id={id}
+                open={openCb}
+                anchorEl={anchorCb}
+                transition
+                placement={"bottom-end"}
+              >
+                {({ TransitionProps }) => (
+                  <Fade {...TransitionProps} timeout={350}>
+                    <iframe
+                      allow="microphone;"
+                      width="350"
+                      height="430"
+                      src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
+                    />
+                  </Fade>
+                )}
+              </Popper>
+            </div>
+          )}
+        {(this.props.location.pathname === "/" ||
+          this.props.location.pathname === "/SignUpPage") && (
           <div className={classes.root}>
             <CssBaseline />
             <main

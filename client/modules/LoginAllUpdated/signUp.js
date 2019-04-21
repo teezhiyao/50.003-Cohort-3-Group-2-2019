@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Button, Paper } from "@material-ui/core";
+
 // import React, { Component } from "react";
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
@@ -8,11 +9,12 @@ import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import styles from "./signUp.css";
+// import styles from "./signUp.css";
 import { createUser } from "../Post/PostActions";
-import { browserHistory } from "react-router";
+import { Link, browserHistory } from "react-router";
 
-import "./signUp.css";
+import styles from "./Login.css";
+import "./assets/accenture-logo.png";
 
 class SignUp extends Component {
   constructor(props) {
@@ -89,9 +91,48 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="SignUp">
+      <div className={styles.background}>
+        <div className={styles.leftoverlay}>
+          <img
+            src={require("./assets/accenture-logo.png")}
+            className={styles.logo}
+          />
+          <h3 className={styles.slogan}>High Performance. Delivered.</h3>
+        </div>
+
         {this.state.newUser === null && (
           <Form onSubmit={this.handleSubmit} className={styles["form"]}>
+            <img
+              src={require("./assets/accenture.png")}
+              className={styles.rightlogo}
+            />
+            <h3 className={styles.rightslogan}>
+              Your one-stop ticket support portal.
+            </h3>
+
+            <h3 className={styles.description}>
+              <img
+                src={require("./assets/issueicon.png")}
+                className={styles.icons}
+              />
+              Upload your issue.
+            </h3>
+
+            <h3 className={styles.description}>
+              <img
+                src={require("./assets/seeissue.png")}
+                className={styles.icons}
+              />
+              Hear about other's experience.
+            </h3>
+
+            <h3 className={styles.description}>
+              <img
+                src={require("./assets/fixicon.png")}
+                className={styles.icons}
+              />
+              Get your fix today.
+            </h3>
             <Form.Group controlId="name" className={styles["form-field"]}>
               <Form.Control
                 className={styles["form-field-text"]}
@@ -153,17 +194,22 @@ class SignUp extends Component {
                 type="password"
               />
             </Form.Group>
-            <button
-              //block
-              className={styles["post-button"]}
-              disabled={!this.validateForm()}
+            <Paper
+              variant="contained"
+              color="primary"
               type="submit"
-              // isLoading={this.state.isLoading}
-              // text="Signup"
-              // loadingText="Signing up…"
+              disabled={!this.validateForm()}
+              className={styles["post-signup-button"]}
             >
               Sign Up
-            </button>
+            </Paper>
+            <Paper
+              variant="contained"
+              color="primary"
+              className={styles["post-login-button"]}
+            >
+              <Link to={`/`}>Login Instead</Link>
+            </Paper>
           </Form>
         )}
         {this.state.newUser !== null && (
@@ -193,7 +239,6 @@ class SignUp extends Component {
               // loadingText="Verifying…"
             />
           </Form>
-          
         )}
       </div>
     );
@@ -213,7 +258,5 @@ SignUp.propTypes = {
   }),
   dispatch: PropTypes.func.isRequired
 };
-
-
 
 export default withRouter(connect(mapStateToProps)(SignUp));
