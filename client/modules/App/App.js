@@ -360,7 +360,7 @@ export class App extends Component {
                     <Badge badgeContent={17} color="secondary">
                       <NotificationsIcon />
                     </Badge>
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton
                     aria-owns={isMenuOpen ? "material-appbar" : undefined}
                     aria-haspopup="true"
@@ -594,9 +594,8 @@ export class App extends Component {
             </main>
           </div>
         )}
-      </div>
 
-      // </div>
+       </div>
     );
   }
 }

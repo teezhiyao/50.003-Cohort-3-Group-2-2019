@@ -140,10 +140,11 @@ class Login extends Component {
               type="password"
             />
           </Form.Group>
+          
           <Paper
             variant="contained"
             color="primary"
-            type="submit"
+            // type="submit"
             disabled={!this.validateForm()}
             onClick={this.handleSubmit}
             className={styles["post-login-button"]}

@@ -171,9 +171,9 @@ class PostListPage extends Component {
             })}
           </select>
         </label>
-        <Button variant="contained" color="primary" onClick={this.placeholder}>
+        {/* <Button variant="contained" color="primary" onClick={this.placeholder}>
           Placeholder
-        </Button>
+        </Button> */}
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
