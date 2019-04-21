@@ -82,9 +82,13 @@ class Login extends Component {
           
         <div className={styles.leftoverlay}>
          <img src={require('./assets/accenture-logo.png')} className = {styles.logo}/>
+         {/* <Typography>
+          - High Performance. Delivered. -
+         </Typography> */}
         </div>
 
         <Form onSubmit={this.handleSubmit} className={styles["form"]}>
+          {/* Ticket Support System */}
           <Form.Group controlId="email" className={styles["form-field"]}>
             <Form.Control
               className={styles["form-field-text"]}
@@ -114,7 +118,7 @@ class Login extends Component {
           >
             Login
           </button>{" "}
-          <Link to={`/SignUpPage`}>
+          <Link to={`/SignUpPage`} text-decoration="none">
             <button
               variant="contained"
               color="primary"
