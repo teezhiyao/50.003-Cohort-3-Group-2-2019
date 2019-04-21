@@ -8,6 +8,7 @@ export const ADD_USER = "ADD_USER";
 export const ADD_REPLY = "ADD_REPLY";
 export const ADD_REPLIES = "ADD_REPLIES";
 export const DELETE_REPLY = "DELETE_REPLY";
+export const UPDATE_POST = "UPDATE_POST";
 
 // Export Actions
 export function addPost(post) {
@@ -44,6 +45,22 @@ export function addPostRequest(
         priorityLevel: priorityLevel,
         userId: userId
       }
+    }).then(res => dispatch(addPost(res)));
+    // dispatch updates the store by adding the action
+    // actions describe what happens but don't describe how the app changes
+    // reducers specify how the app's state changes in response to the actions sent
+  };
+}
+
+export function updatePostRequest(updateBody) {
+  console.log("In updatePostRequest");
+  console.log(updateBody);
+  // console.log(title);
+  // console.log(content);
+
+  return dispatch => {
+    return callApi("postNewPost", "post", {
+      updateBody: updateBody
     }).then(res => dispatch(addPost(res)));
     // dispatch updates the store by adding the action
     // actions describe what happens but don't describe how the app changes

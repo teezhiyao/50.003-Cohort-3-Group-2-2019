@@ -18,7 +18,8 @@ import {
   fetchPost,
   fetchReplies,
   addReplyRequest,
-  deleteReplyRequest
+  deleteReplyRequest,
+  updatePostRequest
 } from "../../PostActions";
 
 // Import Selectors
@@ -60,6 +61,10 @@ class PostDetailPage extends Component {
     console.log(value);
     console.log(this.props.post);
     console.log(this.props.post.resolveStatus);
+    this.props.dispatch(
+      updatePostRequest({ resolveStatus: this.props.post.resolveStatus })
+    );
+
     //NEED TO CHANGE THE RESOLVE STATUS IN DATABASE
 
     //console.log(this.props.post.resolveStatus.);

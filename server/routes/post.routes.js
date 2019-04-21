@@ -153,7 +153,27 @@ router.route("/posts/:objectId").get(function(req, res, next) {
 });
 
 // Update one post by objectId (To-Do)
-router.route("/posts/:objectId").put(function(req, res, next) {});
+router.route("/posts/:objectId/:sessionToken").put(function(req, res, next) {
+  var options = {
+    method: "PUT",
+    url:
+      "https://ug-api.acnapiv3.io/swivel/acnapi-common-services/common/classes/Posts/PeXezOqAXf",
+    headers: {
+      "cache-control": "no-cache",
+      "X-Parse-Session-Token": req.params.sessionToken,
+      "Server-Token": token,
+      "Content-Type": "application/json"
+    },
+    body: req.body,
+    json: true
+  };
+
+  request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+  });
+});
 
 // Delete one post by objectId
 router.route("/posts/:objectId/:sessionToken").delete(function(req, res, next) {
