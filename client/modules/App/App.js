@@ -19,6 +19,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import ChatIcon from "@material-ui/icons/Chat";
 import { Link } from "react-router";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -33,6 +34,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { getUser } from "../Post/UserReducer";
 import Popper from "@material-ui/core/Popper";
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
+
 import Fade from "@material-ui/core/Fade";
 // Import Style
 // import styles from './App.css';
@@ -54,7 +57,8 @@ const styles = theme => ({
     display: "flex"
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingRight: theme.spacing.unit * 3
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -91,13 +95,16 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
   },
+  iconPadText: {
+    padding: "0 0px"
+  },
   content: {
     flexGrow: 1,
     // padding: theme.spacing.unit * 3,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    }),
+    })
     // marginLeft: -drawerWidth
   },
   content2: {
@@ -160,13 +167,22 @@ const styles = theme => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex"
-    }
+    },
+    paddingRight: theme.spacing.unit * 2
   },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -216,9 +232,9 @@ export class App extends Component {
     this.setState({ open: false });
   };
 
-  handleProfileMenuOpen = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  // handleProfileMenuOpen = event => {
+  //   this.setState({ anchorEl: event.currentTarget });
+  // };
 
   handleMenuClose = () => {
     this.setState({ anchorEl: null });
@@ -240,18 +256,18 @@ export class App extends Component {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const renderMenu = (
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-      </Menu>
-    );
+    // const renderMenu = (
+    //   <Menu
+    //     anchorEl={anchorEl}
+    //     anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    //     transformOrigin={{ vertical: "top", horizontal: "right" }}
+    //     open={isMenuOpen}
+    //     onClose={this.handleMenuClose}
+    //   >
+    //     <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+    //     <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+    //   </Menu>
+    // );
 
     const renderMobileMenu = (
       <Menu
@@ -277,12 +293,12 @@ export class App extends Component {
           </IconButton>
           <p>Notifications</p>
         </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
+        {/* <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     );
     return (
@@ -332,8 +348,8 @@ export class App extends Component {
                 <Typography variant="h6" color="inherit" noWrap>
                   {this.props.users.name && "Welcome " + this.props.users.name}
                 </Typography>
-                <div className={classes.sectionDesktop}>
-                  {/* <IconButton color="inherit">
+                {/* <div className={classes.sectionDesktop}>
+                  <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                       <MailIcon />
                     </Badge>
@@ -351,7 +367,7 @@ export class App extends Component {
                   >
                     <AccountCircle />
                   </IconButton>
-                </div>
+                
                 <div className={classes.sectionMobile}>
                   <IconButton
                     aria-haspopup="true"
@@ -363,7 +379,8 @@ export class App extends Component {
                 </div>
               </Toolbar>
             </AppBar>
-            {renderMenu}
+
+            {/* {renderMenu} */}
             {renderMobileMenu}
             <Drawer
               className={classes.drawer}
@@ -375,6 +392,26 @@ export class App extends Component {
               }}
             >
               <div className={classes.drawerHeader}>
+                <Link to={`/profile`}>
+                  <IconButton
+                    aria-owns={isMenuOpen ? "material-appbar" : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </Link>
+                <IconButton>
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton>
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
                 <IconButton onClick={this.handleDrawerClose}>
                   {theme.direction === "ltr" ? (
                     <ChevronLeftIcon />
@@ -391,24 +428,30 @@ export class App extends Component {
                     <ListItemIcon>
                       <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Home" />
+                    <ListItemText
+                      primary="Home"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
 
-                <Link to={`/profile`}>
+                {/* <Link to={`/profile`}>
                   <ListItem button key="Profile">
                     <ListItemIcon>
                       <AccountCircle />
                     </ListItemIcon>
                     <ListItemText primary="Profile" />
                   </ListItem>
-                </Link>
+                </Link> */}
                 <Link to={`/grid`}>
                   <ListItem button key="Board">
                     <ListItemIcon>
                       <AccountCircle />
                     </ListItemIcon>
-                    <ListItemText primary="Board" />
+                    <ListItemText
+                      primary="Board"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
               </List>
@@ -443,14 +486,17 @@ export class App extends Component {
                     <ListItemIcon>
                       <MailIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Log Out" />
+                    <ListItemText
+                      primary="Log Out"
+                      className={classes.iconPadText}
+                    />
                   </ListItem>
                 </Link>
               </List>
 
               <Divider />
 
-              <List>
+              {/* <List>
                 <Link to={`/SignUpPage`}>
                   <ListItem button key="Signup">
                     <ListItemIcon>
@@ -459,10 +505,10 @@ export class App extends Component {
                     <ListItemText primary="Signup" />
                   </ListItem>
                 </Link>
-              </List>
+              </List> */}
             </Drawer>
             <main
-              className={classNames(classes.content, {
+              className={classNames(classes.content2, {
                 [classes.contentShift]: open
               })}
             >
@@ -490,36 +536,33 @@ export class App extends Component {
               />
 
               <div className={styles.container}>{this.props.children}</div>
-              
-              <Button
-                aria-describedby={id}
-                variant="contained"
-                onClick={this.handleClick}
-              >
-                Toggle ChatBot
-              </Button>
-              <Popper
-                id={id}
-                open={openCb}
-                anchorEl={anchorCb}
-                transition
-                placement={"bottom-end"}
-              >
-                {({ TransitionProps }) => (
-                  <Fade {...TransitionProps} timeout={350}>
-                    <iframe
-                      allow="microphone;"
-                      width="350"
-                      height="430"
-                      src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
-                    />
-                  </Fade>
-                )}
-              </Popper>
-              {/* <Footer /> */}
+              <Footer />
             </main>
-            {/* <Fab color="primary" aria-label="Add" className={classes.fab}> */}
-            {/* </Fab> */}
+            <Fab
+              aria-label="ChatBot"
+              onClick={this.handleClick}
+              className={classes.fab}
+            >
+              <ChatIcon />
+            </Fab>
+            <Popper
+              id={id}
+              open={openCb}
+              anchorEl={anchorCb}
+              transition
+              placement={"bottom-end"}
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <iframe
+                    allow="microphone;"
+                    width="350"
+                    height="430"
+                    src="https://console.dialogflow.com/api-client/demo/embedded/0eb7b8ed-3068-4e2b-8b23-f34c012e4ceb"
+                  />
+                </Fade>
+              )}
+            </Popper>
           </div>
         )}
         {this.props.location.pathname === "/" && (
@@ -550,9 +593,8 @@ export class App extends Component {
             </main>
           </div>
         )}
-      </div>
 
-      // </div>
+       </div>
     );
   }
 }
