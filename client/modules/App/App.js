@@ -76,7 +76,7 @@ const styles = theme => ({
   },
   toolbar:{
     backgroundColor:"darkslategrey",
-    height: 50
+    height: 40
   },
   menuButton: {
     marginLeft: 12,
@@ -334,9 +334,13 @@ export class App extends Component {
                   >
                     <MenuIcon />
                   </IconButton>
-                  <h6>
+                  <img
+                    src={require("./accenture-logo.png")}
+                    className={cssstyles.logo}
+                  />
+                  <p className={cssstyles.toolbartext}>
                     Ticketing Support System
-                  </h6>
+                  </p>
                   {/* 
                   <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -351,11 +355,11 @@ export class App extends Component {
                     />
                   </div> */}
                   <div className={classes.grow} />
-                  <h6
+                  <p className={cssstyles.toolbartext}
                   >
                     {this.props.users.name &&
-                      "Welcome " + this.props.users.name}
-                  </h6>
+                      "Welcome, " + this.props.users.name}
+                  </p>
                   {/* <div className={classes.sectionDesktop}>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
