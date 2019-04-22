@@ -18,6 +18,7 @@ export class PostCreateWidget extends Component {
       baseImage: files.base64
     });
     const catRef = this.refs.category;
+    console.log(catRef.value);
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
     const priorityLevelRef = this.refs.priotyLevel; //Change to priority
@@ -65,7 +66,7 @@ export class PostCreateWidget extends Component {
                 .filter(category => category.value != "all")
                 .map(category => {
                   return (
-                    <option value={category.value}> {category.label} </option>
+                    <option value={category.label}> {category.label} </option>
                   );
                 })}
             </select>
@@ -90,10 +91,9 @@ export class PostCreateWidget extends Component {
             Issue Priority
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
             <select ref="priotyLevel">
-              {this.props.priorityList
-                .map(sort => {
+              {this.props.priorityList.map(priority => {
                   return (
-                    <option value={sort.value}> {sort.label} </option>
+                    <option value={priority.value}> {priority.label} </option>
                   );
                 })}
             </select>
@@ -144,6 +144,7 @@ PostCreateWidget.propTypes = {
   addUser: PropTypes.func.isRequired,
   showAddPost: PropTypes.bool.isRequired,
   categoryList: PropTypes.array,
+  priorityList: PropTypes.array,
   handleNewCategory: PropTypes.func.isRequired,
   intl: intlShape.isRequired
 };
