@@ -34,10 +34,10 @@ class PostListPage extends Component {
         { value: "alph", label: "Alphabetical" },
         { value: "priorityLevel", label: "Priority" }
       ],
-      priorityList:[
-        { value: "LOW", label: "LOW"},
-        { value: "MEDIUM", label: "MEDIUM"},
-        { value: "HIGH", label: "HIGH"},
+      priorityList: [
+        { value: "LOW", label: "LOW" },
+        { value: "MEDIUM", label: "MEDIUM" },
+        { value: "HIGH", label: "HIGH" }
       ],
       categoryList: [
         { value: "all", label: "All Issues" },
@@ -160,7 +160,6 @@ class PostListPage extends Component {
           handleNewCategory={this.handleNewCategory}
         />
         <label>
-          {" "}
           Issue Category
           <select onChange={this.handleSelectCategory}>
             {this.state.categoryList.map(category => {
