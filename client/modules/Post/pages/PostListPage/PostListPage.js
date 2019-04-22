@@ -6,6 +6,13 @@ import { connect } from "react-redux";
 import PostList from "../../components/PostList";
 import PostCreateWidget from "../../components/PostCreateWidget/PostCreateWidget";
 import Button from "@material-ui/core/Button";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+
+
 
 // Import Actions
 import {
@@ -22,6 +29,19 @@ import { toggleAddPost } from "../../../App/AppActions";
 import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 import { getUser } from "../../UserReducer";
+
+const styles = theme => ({
+  root: {
+    width: "100%"
+  },
+  
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    flexBasis: "88.00%"
+  }
+  
+});
 
 class PostListPage extends Component {
   constructor(props) {
@@ -149,6 +169,7 @@ class PostListPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <PostCreateWidget
@@ -179,6 +200,33 @@ class PostListPage extends Component {
         {/* <Button variant="contained" color="primary" onClick={this.placeholder}>
           Placeholder
         </Button> */}
+
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography >
+              </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Issue Title
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Created By
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Created On
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Priority
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Category
+              </Typography>
+            
+            </ExpansionPanelSummary>
+          </ExpansionPanel>
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
@@ -267,11 +315,13 @@ PostListPage.propTypes = {
     objectId: PropTypes.string.isRequired
   }),
   showAddPost: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
+
 };
 
 PostListPage.contextTypes = {
   router: PropTypes.object
 };
 
-export default connect(mapStateToProps)(PostListPage);
+export default connect(mapStateToProps)(withStyles(styles)(PostListPage));
