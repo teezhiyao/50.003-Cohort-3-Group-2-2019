@@ -61,7 +61,9 @@ export class PostListItem extends Component {
             </p>
           )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
-          <img src={this.props.post.imageData} />
+          {this.props.post.imageData !== "placeholder" && (
+            <img src={this.props.post.imageData} />
+          )}
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <FormControlLabel
               control={
