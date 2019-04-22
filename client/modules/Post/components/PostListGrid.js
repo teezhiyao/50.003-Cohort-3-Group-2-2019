@@ -20,7 +20,7 @@ import { isNullOrUndefined } from "util";
 
 const styles = {
   gridList: {
-    width: 470,
+    width: 270,
     height: 350,
     float: "left",
     // border: '1px solid #ddd',
@@ -32,7 +32,7 @@ const styles = {
     marginTop: "15px"
   },
   div: {
-    width: 500,
+    width: 300,
     height: 450,
     float: "left",
     padding: "15px",
@@ -43,15 +43,18 @@ const styles = {
   },
   header: {
     margin: "auto",
-    width: 500,
+    width: 270,
     paddingTop: "15px",
     paddingBottom: "15px",
     paddingRight: "15px",
     paddingLeft: "15px",
     fontFamily: "Helvetica-Light",
-    fontSize: "32px",
+    fontSize: "28px",
     paddingTop: "15px",
-    textAlign: "center"
+    textAlign: "center",
+    backgroundColor: "#191b33",
+    color: "white"
+
   },
   gridTile: {
     height: "200",

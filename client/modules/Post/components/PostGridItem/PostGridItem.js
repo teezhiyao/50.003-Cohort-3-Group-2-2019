@@ -10,6 +10,9 @@ import Card from "@material-ui/core/Card";
 import styles from "./PostGridItem.css";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import { Chip } from "@material-ui/core";
+
+
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -36,8 +39,8 @@ export class PostGridItem extends Component {
 
   render() {
     return (
-      <Card>
-        <CardContent>
+      <Card style={{ height: "250" }}>
+        <CardContent style={{ height: "250" }}>
           <div>
             <span style={{ float: "right" }} className={styles["post-action"]}>
               {/* <FormControlLabel
@@ -73,7 +76,27 @@ export class PostGridItem extends Component {
             </Link>
           </p> */}
             <span className={styles["post-desc"]}>
-              {this.props.post.content}
+            <table class="w3-table" >
+                    <tr className={styles["tr"]}>
+                    <td className={styles["td1"]}>Priority Level</td>
+                    <td className={styles["td"]}>{this.props.post.priorityLevel}</td>
+                    </tr>
+                    <tr className={styles["tr"]}>
+                    <td  className={styles["td1"]}>Created At</td>
+                    <td className={styles["td"]}>{this.props.post.dateCreated.substring(0, 16)}</td>
+                    </tr>
+            
+            
+            </table>
+              {/* Priority Level : {this.props.post.priorityLevel} <br></br> */}
+              {/* Created At : {this.props.post.dateCreated.substring(0, 16)}<br></br> */}
+              
+              <div className={styles["div1"]}>
+                { this.props.post.resolveStatus
+                  ? <Chip  label="Resolved"/>
+                  : <Chip  label="Unresolved"/>
+                }
+              </div>
             </span>
           </div>
         </CardContent>

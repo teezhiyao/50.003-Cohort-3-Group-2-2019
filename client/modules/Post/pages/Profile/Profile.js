@@ -62,11 +62,11 @@ class Profile extends Component {
                 {/* className={styles["table"]} */}
                 <table class="w3-table" className={styles["table"]}>
                     
-                    <tr>
+                    <tr >
                     <td >Username</td>
                     <td>{this.props.users.username}</td>
                     </tr>
-                    <tr>
+                    <tr >
                     <td>Full Name</td>
                     <td>{this.props.users.name}</td>
                     </tr>

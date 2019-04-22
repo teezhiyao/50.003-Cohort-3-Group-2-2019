@@ -86,17 +86,7 @@ class PostGrid extends Component {
     console.log(this.props.users);
   };
 
-  handleNewCategory =(newCategory)=>{
-    //this.setState({categoryList : [...this.state.categoryList,{value:{newCategory}, label:{newCategory} }]});
-    this.setState(state =>{
-      const categoryList = [...state.categoryList,{value:{newCategory}, label:{newCategory} }];
-      return {
-        categorySelected:"all",
-        categoryList,
-      }
-    });
-    console.log(this.state.categoryList);
-  };
+  
 
   render() {
     
@@ -116,13 +106,13 @@ class PostGrid extends Component {
         </Button> */}
         {/* <div className={styles["gridList"]}> */}
             {this.state.categoryList.map(category => {
-                //console.log(category);
+                // console.log(category);
                 return <PostListGrid
                     handleDeletePost={this.handleDeletePost}
                     handleAddReply={this.handleAddReply}
                     posts={
                     this.props.posts.filter(
-                            post => post.category === category.value
+                            post => post.category === category.label
                         )}
                 />;
             })}
