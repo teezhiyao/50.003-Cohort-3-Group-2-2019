@@ -71,17 +71,20 @@ class PostListGrid extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log("postlistgrid");
+    const { posts } = this.props;
+    console.log("in post list grid");
+    console.log(posts);
+    // console.log(this.props.posts===[]);
     // console.log(this.props.posts[0].category);
     return (
       <div className={classes.div}>
+      {posts[0] && (
+        <div>
         <div class="w3-card-4">
-          <p class="w3-card-4" className={classes.header}>
+          {<p class="w3-card-4" className={classes.header}>
             {this.props.posts[0].category}
-          </p>
+          </p>}
         </div>
-        {/* <p class="w3-card-4" >{this.props.posts[0].category}</p> */}
-        {/* NEED TO HANDLE UNDEFINED EXCEPTION */}
         <GridList className={classes.gridList}>
           {this.props.posts.map((individualPost, index) => (
             <GridListTile cols={2} style={{ height: "250px" }}>
@@ -96,7 +99,8 @@ class PostListGrid extends Component {
               {/* <GridListTileBar title={individualPost.createdAt} /> */}
             </GridListTile>
           ))}
-        </GridList>
+      </GridList>
+      </div>)}
       </div>
     );
   }
