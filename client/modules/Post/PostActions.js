@@ -43,7 +43,8 @@ export function addPostRequest(
         content: content,
         imageData: imageData,
         priorityLevel: priorityLevel,
-        userId: userId
+        userId: userId,
+        dateCreated: new Date().toUTCString()
       }
     }).then(res => dispatch(addPost(res)));
     // dispatch updates the store by adding the action

@@ -44,7 +44,6 @@ class PostList extends Component {
   render() {
     const { classes } = this.props;
     return (
-
       <div className="listView">
         {this.props.posts.map((individualPost, index) => (
           <ExpansionPanel>
@@ -63,7 +62,8 @@ class PostList extends Component {
               </Typography>
 
               <Typography className={classes.secondaryHeading}>
-                {individualPost.createdAt.substring(0, 10)}
+                {/* {individualPost.createdAt.substring(0, 10)} */}
+                {individualPost.dateCreated}
               </Typography>
 
               {/* UNCOMMENT FOR PRIORITY DISPLAY */}
@@ -80,6 +80,7 @@ class PostList extends Component {
                   />
                 </Link>
               </Typography>
+
               <span
                 href="#"
                 align="right"
@@ -101,7 +102,6 @@ class PostList extends Component {
           </ExpansionPanel>
         ))}
       </div>
-      
     );
   }
 }
@@ -117,7 +117,8 @@ PostList.propTypes = {
       cuid: PropTypes.string,
       reply: PropTypes.string,
       category: PropTypes.string,
-      imageData: PropTypes.string
+      imageData: PropTypes.string,
+      dateCreated: PropTypes.string
     })
   ),
   handleDeletePost: PropTypes.func.isRequired,

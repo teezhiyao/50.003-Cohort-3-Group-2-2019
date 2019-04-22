@@ -53,24 +53,22 @@ class Login extends Component {
       const email = this.state.email;
       const password = this.state.password;
       console.log("IN HANDLE SUBMIT");
-      if (confirm("Do you want to Log in")) {
-        this.props.dispatch(fetchLogin(email, password)).then(
-          function(response) {
-            console.log(!response.user.code);
-            if (!response.user.code) {
-              console.log("Success!", response.user.objectId);
-              console.log(response);
-              this.props.dispatch(
-                fetchAllowedPosts(response.user.sessionToken)
-              );
-              this.props.dispatch(fetchReplies());
-              browserHistory.push("/home");
-            } else if (response.user.code === 101) {
-              console.log("Failed Login!");
-            }
-          }.bind(this)
-        );
-      }
+      // if (confirm("Do you want to Log in")) {
+      this.props.dispatch(fetchLogin(email, password)).then(
+        function(response) {
+          console.log(!response.user.code);
+          if (!response.user.code) {
+            console.log("Success!", response.user.objectId);
+            console.log(response);
+            this.props.dispatch(fetchAllowedPosts(response.user.sessionToken));
+            this.props.dispatch(fetchReplies());
+            browserHistory.push("/home");
+          } else if (response.user.code === 101) {
+            console.log("Failed Login!");
+          }
+        }.bind(this)
+      );
+      // }
     } catch (e) {
       alert(e.message);
     }
@@ -140,7 +138,7 @@ class Login extends Component {
               type="password"
             />
           </Form.Group>
-          
+
           <Paper
             variant="contained"
             color="primary"
