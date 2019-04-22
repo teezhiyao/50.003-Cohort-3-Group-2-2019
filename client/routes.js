@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { IndexRoute } from "react-router";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from "./modules/App/App";
-import PostListPage from "./modules/Post/pages/PostListPage/PostListPage";
+// import PostListPage from "./modules/Post/pages/PostListPage/PostListPage";
 import PostCategoryPage from "./modules/Post/pages/PostCategoryPage/PostCategoryPage";
 
 // require.ensure polyfill for node

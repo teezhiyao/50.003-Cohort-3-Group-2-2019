@@ -7,9 +7,9 @@
 .post-title {
   font-family: "Helvetica-Light";
   font-size: 23px;
-  margin-bottom: 16px;
+  margin-bottom: 7px;
   font-weight: 400;
-  color: #616161;
+  color: #131122;
 }
 .form-field {
   width: 70%;
@@ -39,21 +39,43 @@
   line-height: 30px;
   text-align: center;
 }
+.tr{
+  padding: 0px;
+  height: 25px;
+}
+.td{
+  padding: 0px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: normal;
+}
 
+.td1{
+  padding: 0px;
+  font-size: 15px;
+  margin-left: 10px;
+}
 .post-title a {
   text-decoration: none;
-  color: #616161;
+  color: #131122;
+}
+.div1{
+  align-items: center;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .author-name {
   font-size: 16px;
   margin-bottom: 16px;
-  color: #757575;
+  color: #131122;
 }
 
 .post-desc {
-  font-size: 14px;
+  font-size: 17px;
   color: #888;
+  font-weight: bold;
   margin-bottom: 8px;
 }
 
@@ -82,7 +104,9 @@
 }
 
 .post-detail .post-desc {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  /* font-family: "Helvetica-Light"; */
   color: #555;
 }
 
@@ -101,4 +125,25 @@
 
 textarea {
   min-height: 100px;
+}
+
+.MuiGridListTile-tile-577{
+  width: 266px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+.MuiGridListTile-tile-625{
+  height: 150px;
+  margin-bottom: 20px;
+}
+.MuiGridListTile-root-624{
+  height: 220px;
+  /* background-color: #191b33 */
+  /* box-shadow: #454545; */
+}
+.MuiGridListTile-root-282{
+  height: 250px;
+}
+.MuiGridListTile-root-283{
+  height: 250px;
 }

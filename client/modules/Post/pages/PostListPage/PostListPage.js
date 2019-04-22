@@ -21,7 +21,8 @@ import {
   fetchAllowedPosts,
   deletePostRequest,
   addReplyRequest,
-  updatePostRequest
+  updatePostRequest,
+  fetchPosts
 } from "../../PostActions";
 import { toggleAddPost } from "../../../App/AppActions";
 
@@ -34,13 +35,12 @@ const styles = theme => ({
   root: {
     width: "100%"
   },
-  
+
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
     flexBasis: "88.00%"
   }
-  
 });
 
 const ExpansionPanelSummary = withStyles({
@@ -87,6 +87,9 @@ class PostListPage extends Component {
         { label: "API Issue" },
         { label: "Logout Issue" },
         { label: "Client Login Issue" },
+        { label: "Data Logging Issue" },
+        { label: "Feature Request" },
+        { label: "Latency Issue" },
         { label: "Others" }
 
         // { value: "all", label: "All Issues" },
@@ -113,6 +116,7 @@ class PostListPage extends Component {
       this.props.dispatch(
         deletePostRequest(post, this.props.users.sessionToken)
       );
+      this.props.dispatch(fetchAllowedPosts(this.props.users.sessionToken));
     }
   };
 
@@ -217,7 +221,7 @@ class PostListPage extends Component {
               return <option value={category.label}> {category.label} </option>;
             })}
           </select>
-        
+
 
           <p className={style.sorting}>Sort By </p>
           <select className={style.selecttext} onChange={this.handleSort}>
@@ -342,7 +346,6 @@ PostListPage.propTypes = {
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
-
 };
 
 PostListPage.contextTypes = {

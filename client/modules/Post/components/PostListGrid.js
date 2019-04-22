@@ -20,7 +20,7 @@ import { isNullOrUndefined } from "util";
 
 const styles = {
   gridList: {
-    width: 470,
+    width: 270,
     height: 350,
     float: "left",
     // border: '1px solid #ddd',
@@ -32,26 +32,29 @@ const styles = {
     marginTop: "15px"
   },
   div: {
-    width: 500,
+    width: 300,
     height: 450,
     float: "left",
     padding: "15px",
-    marginInlineEnd: "15px",
-    marginInlineStart: "15px",
+    marginInlineEnd: "12px",
+    marginInlineStart: "12px",
     margin: "15px",
     border: "1px solid #ddd"
   },
   header: {
     margin: "auto",
-    width: 500,
+    width: 270,
     paddingTop: "15px",
     paddingBottom: "15px",
     paddingRight: "15px",
     paddingLeft: "15px",
     fontFamily: "Helvetica-Light",
-    fontSize: "32px",
+    fontSize: "28px",
     paddingTop: "15px",
-    textAlign: "center"
+    textAlign: "center",
+    backgroundColor: "#191b33",
+    color: "white"
+
   },
   gridTile: {
     height: "200",
@@ -68,20 +71,23 @@ class PostListGrid extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log("postlistgrid");
+    const { posts } = this.props;
+    console.log("in post list grid");
+    console.log(posts);
+    // console.log(this.props.posts===[]);
     // console.log(this.props.posts[0].category);
     return (
       <div className={classes.div}>
+      {posts[0] && (
+        <div>
         <div class="w3-card-4">
-          <p class="w3-card-4" className={classes.header}>
+          {<p class="w3-card-4" className={classes.header}>
             {this.props.posts[0].category}
-          </p>
+          </p>}
         </div>
-        {/* <p class="w3-card-4" >{this.props.posts[0].category}</p> */}
-        {/* NEED TO HANDLE UNDEFINED EXCEPTION */}
         <GridList className={classes.gridList}>
           {this.props.posts.map((individualPost, index) => (
-            <GridListTile cols={2}>
+            <GridListTile cols={2} style={{ height: "250px" }}>
               <PostGridItem
                 post={individualPost}
                 key={individualPost.cuid}
@@ -93,7 +99,8 @@ class PostListGrid extends Component {
               {/* <GridListTileBar title={individualPost.createdAt} /> */}
             </GridListTile>
           ))}
-        </GridList>
+      </GridList>
+      </div>)}
       </div>
     );
   }
