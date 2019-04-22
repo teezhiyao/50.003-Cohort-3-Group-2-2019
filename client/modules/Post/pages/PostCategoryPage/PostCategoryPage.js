@@ -138,7 +138,7 @@ function mapStateToProps(state) {
   return {
     showAddPost: getShowAddPost(state),
     posts: getPosts(state),
-    users: getUser(state)
+    user: getUser(state)
   };
 }
 
@@ -154,7 +154,7 @@ PostCategoryPage.propTypes = {
       url: PropTypes.state
     })
   ),
-  users: PropTypes.shape({
+  user: PropTypes.shape({
     name: PropTypes.string,
     userType: PropTypes.string,
     sessionToken: PropTypes.string.isRequired,

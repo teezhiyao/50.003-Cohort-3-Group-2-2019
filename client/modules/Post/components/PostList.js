@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 // Import Components
 import PostListItem from "./PostListItem/PostListItem";
@@ -14,6 +15,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Chip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { grey } from "@material-ui/core/colors";
+import { getUser } from "../UserReducer";
 
 const styles = theme => ({
   root: {
@@ -68,7 +70,7 @@ class PostList extends Component {
 
               {/* UNCOMMENT FOR PRIORITY DISPLAY */}
               <Typography className={classes.secondaryHeading}>
-                  {individualPost.priorityLevel}
+                {individualPost.priorityLevel}
               </Typography>
 
               <Typography className={classes.secondaryHeading}>
@@ -80,16 +82,17 @@ class PostList extends Component {
                   />
                 </Link>
               </Typography>
-
-              <span
-                href="#"
-                align="right"
-                onClick={() =>
-                  this.props.handleDeletePost(individualPost.objectId)
-                }
-              >
-                <DeleteIcon id="deletePost" />
-              </span>
+              {this.props.user.userType === "admin" && (
+                <span
+                  href="#"
+                  align="right"
+                  onClick={() =>
+                    this.props.handleDeletePost(individualPost.objectId)
+                  }
+                >
+                  <DeleteIcon id="deletePost" />
+                </span>
+              )}
               {/* <Typography className={classes.miscHeading}>{"tags"}</Typography> */}
             </ExpansionPanelSummary>
 
@@ -104,6 +107,12 @@ class PostList extends Component {
       </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    user: getUser(state)
+  };
 }
 
 PostList.propTypes = {
@@ -121,10 +130,16 @@ PostList.propTypes = {
       dateCreated: PropTypes.string
     })
   ),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    userType: PropTypes.string,
+    sessionToken: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired
+  }),
   handleDeletePost: PropTypes.func.isRequired,
   handleAddReply: PropTypes.func.isRequired,
   handlePostUpdate: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PostList);
+export default connect(mapStateToProps)(withStyles(styles)(PostList));
