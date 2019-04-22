@@ -72,25 +72,25 @@ router.route("/postNewPost").post(function(req, res, next) {
       title: req.body.post.title,
       content: req.body.post.content,
       imageData: req.body.post.imageData,
-      dateAdded: Date.now.toString,
+      dateCreated: new Date().toUTCString(),
       resolveStatus: false,
       priorityLevel: req.body.post.priorityLevel,
       replyscuid: {},
       ACL: {
-        "2ZtufYEUQd": { read: true },
         "role:Admin": { read: true, write: true },
         "*": {}
       }
     },
     json: true
   };
-  request(options, function(error, response, body) {
-    // console.log(response.body.objectId);
-    if (error) throw new Error(error);
-    console.log("reqqq");
-    console.log(options.body);
-    res.json(options.body);
-  });
+  (options.body.ACL[req.body.post.userId] = { read: true }),
+    request(options, function(error, response, body) {
+      // console.log(response.body.objectId);
+      if (error) throw new Error(error);
+      console.log("reqqq");
+      console.log(options.body);
+      res.json(options.body);
+    });
   // Sanitize inputs
   // newPost.title = sanitizeHtml(newPost.title);
   // newPost.name = sanitizeHtml(newPost.name);

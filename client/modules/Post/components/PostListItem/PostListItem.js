@@ -89,7 +89,8 @@ PostListItem.propTypes = {
     cuid: PropTypes.string,
     objectId: PropTypes.string.isRequired,
     reply: PropTypes.string,
-    imageData: PropTypes.string
+    imageData: PropTypes.string,
+    dateCreated: PropTypes.string
   }),
   location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,

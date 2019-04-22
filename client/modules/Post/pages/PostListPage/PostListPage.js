@@ -257,7 +257,8 @@ PostListPage.propTypes = {
       reply: PropTypes.string,
       category: PropTypes.string,
       url: PropTypes.state,
-      imageData: PropTypes.string
+      imageData: PropTypes.string,
+      dateCreated: PropTypes.string
     })
   ),
   users: PropTypes.shape({

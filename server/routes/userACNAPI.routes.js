@@ -26,7 +26,8 @@ router.route("/createUser").post(function(req, res, next) {
       password: req.body.user.password,
       email: req.body.user.email,
       name: req.body.user.name,
-      age: req.body.user.age
+      age: req.body.user.age,
+      userType: "user"
     },
     json: true
   };
