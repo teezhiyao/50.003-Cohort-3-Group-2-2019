@@ -67,9 +67,9 @@ class PostList extends Component {
               </Typography>
 
               {/* UNCOMMENT FOR PRIORITY DISPLAY */}
-              {/* <Typography className={classes.secondaryHeading}>
+              <Typography className={classes.secondaryHeading}>
                   {individualPost.priorityLevel}
-              </Typography> */}
+              </Typography>
 
               <Typography className={classes.secondaryHeading}>
                 Category:

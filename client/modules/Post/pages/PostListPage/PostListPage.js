@@ -32,7 +32,7 @@ class PostListPage extends Component {
       sortList: [
         { value: "recency", label: "Date" },
         { value: "alph", label: "Alphabetical" },
-        { value: "priority", label: "Priority" }
+        { value: "priorityLevel", label: "Priority" }
       ],
       priorityList:[
         { value: "LOW", label: "LOW"},
@@ -122,7 +122,7 @@ class PostListPage extends Component {
     }
     if (e.target.value === "priorityLevel") {
       console.log("inside priority");
-      this.props.posts.sort(dynamicSortPriority("priority"));
+      this.props.posts.sort(dynamicSortPriority("priorityLevel"));
       console.log(this.props.posts);
     }
     // console.log(this.state);
@@ -211,9 +211,9 @@ function dynamicSort(property) {
     return result * sortOrder;
   };
 }
-function dynamicSortPriority() {
+function dynamicSortPriority(property) {
   var sortOrder = 1;
-  var dict = { HIGH: 3, MEDIUM: 2, LOW: 1 };
+  var dict = { HIGH: 1, MEDIUM: 2, LOW: 3 };
 
   if (property[0] === "-") {
     sortOrder = -1;
@@ -221,7 +221,7 @@ function dynamicSortPriority() {
   }
   return function(a, b) {
     var result =
-      dict[a[priority]] < dict[b[property]]
+      dict[a[property]] < dict[b[property]]
         ? -1
         : dict[a[property]] > dict[b[property]]
         ? 1
