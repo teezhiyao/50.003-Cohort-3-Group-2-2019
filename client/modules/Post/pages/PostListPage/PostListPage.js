@@ -21,7 +21,8 @@ import {
   fetchAllowedPosts,
   deletePostRequest,
   addReplyRequest,
-  updatePostRequest
+  updatePostRequest,
+  fetchPosts
 } from "../../PostActions";
 import { toggleAddPost } from "../../../App/AppActions";
 
@@ -34,13 +35,12 @@ const styles = theme => ({
   root: {
     width: "100%"
   },
-  
+
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
     flexBasis: "88.00%"
   }
-  
 });
 
 class PostListPage extends Component {
@@ -92,6 +92,7 @@ class PostListPage extends Component {
       this.props.dispatch(
         deletePostRequest(post, this.props.users.sessionToken)
       );
+      this.props.dispatch(fetchAllowedPosts(this.props.users.sessionToken));
     }
   };
 
@@ -189,14 +190,14 @@ class PostListPage extends Component {
           handleNewCategory={this.handleNewCategory}
         />
         <p className={style.heading}>Your posts related to: "{this.state.categorySelected}"</p>
-        
+
           <p className={style.sorting}>Issue Category</p>
           <select onChange={this.handleSelectCategory}>
             {this.state.categoryList.map(category => {
               return <option value={category.label}> {category.label} </option>;
             })}
           </select>
-        
+
 
           <p className={style.sorting}>Sort By </p>
           <select onChange={this.handleSort}>
@@ -206,32 +207,30 @@ class PostListPage extends Component {
           </select>
 
 
-          <ExpansionPanel>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography >
-              </Typography>
-              <Typography className={classes.secondaryHeading}>
-                Issue Title
-              </Typography>
+        <ExpansionPanel>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography />
+            <Typography className={classes.secondaryHeading}>
+              Issue Title
+            </Typography>
 
-              <Typography className={classes.secondaryHeading}>
-                Created By
-              </Typography>
+            <Typography className={classes.secondaryHeading}>
+              Created By
+            </Typography>
 
-              <Typography className={classes.secondaryHeading}>
-                Created On
-              </Typography>
+            <Typography className={classes.secondaryHeading}>
+              Created On
+            </Typography>
 
-              <Typography className={classes.secondaryHeading}>
-                Priority
-              </Typography>
+            <Typography className={classes.secondaryHeading}>
+              Priority
+            </Typography>
 
-              <Typography className={classes.secondaryHeading}>
-                Category
-              </Typography>
-            
-            </ExpansionPanelSummary>
-          </ExpansionPanel>
+            <Typography className={classes.secondaryHeading}>
+              Category
+            </Typography>
+          </ExpansionPanelSummary>
+        </ExpansionPanel>
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
@@ -322,7 +321,6 @@ PostListPage.propTypes = {
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
-
 };
 
 PostListPage.contextTypes = {
