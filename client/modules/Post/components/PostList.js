@@ -14,6 +14,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Chip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { grey } from "@material-ui/core/colors";
+import classes from "./PostList.css"
 
 const styles = theme => ({
   root: {
@@ -44,7 +45,8 @@ class PostList extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className="listView">
+      // <div className="listView">
+      <div >
         {this.props.posts.map((individualPost, index) => (
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
