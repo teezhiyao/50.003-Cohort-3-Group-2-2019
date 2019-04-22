@@ -35,10 +35,10 @@ class PostGrid extends Component {
         { value: "LOGOUTISSUE", label: "Logout Issue" },
         { value: "Client Login Issue", label: "Client Login Issue" }
       ],
-      priorityList:[
-        { value: "LOW", label: "LOW"},
-        { value: "MEDIUM", label: "MEDIUM"},
-        { value: "HIGH", label: "HIGH"},
+      priorityList: [
+        { value: "LOW", label: "LOW" },
+        { value: "MEDIUM", label: "MEDIUM" },
+        { value: "HIGH", label: "HIGH" }
       ]
     };
   }
@@ -86,36 +86,34 @@ class PostGrid extends Component {
     console.log(this.props.users);
   };
 
-  
-
   render() {
-    
     return (
       <div>
         <PostCreateWidget
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
-          categoryList = {this.state.categoryList}
+          categoryList={this.state.categoryList}
           priorityList={this.state.priorityList}
-          handleNewCategory = {this.handleNewCategory}
+          handleNewCategory={this.handleNewCategory}
         />
-        
+
         {/* <Button variant="contained" color="primary" onClick={this.placeholder}>
           Placeholder
         </Button> */}
         {/* <div className={styles["gridList"]}> */}
-            {this.state.categoryList.map(category => {
-                // console.log(category);
-                return <PostListGrid
-                    handleDeletePost={this.handleDeletePost}
-                    handleAddReply={this.handleAddReply}
-                    posts={
-                    this.props.posts.filter(
-                            post => post.category === category.label
-                        )}
-                />;
-            })}
+        {this.state.categoryList.map(category => {
+          // console.log(category);
+          return (
+            <PostListGrid
+              handleDeletePost={this.handleDeletePost}
+              handleAddReply={this.handleAddReply}
+              posts={this.props.posts.filter(
+                post => post.category === category.label
+              )}
+            />
+          );
+        })}
 
         {/* </div> */}
         {/* <PostListGrid
@@ -136,11 +134,11 @@ class PostGrid extends Component {
 }
 
 // Actions required to provide data for this component to render in sever side.
-  // PostListPage.need = [
-  //   () => {
-  //     return fetchPosts(this.props.users.sessionToken);
-  //   }
-  // ];
+// PostListPage.need = [
+//   () => {
+//     return fetchPosts(this.props.users.sessionToken);
+//   }
+// ];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
