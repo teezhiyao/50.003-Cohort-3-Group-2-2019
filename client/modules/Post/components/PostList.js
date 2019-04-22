@@ -87,9 +87,7 @@ class PostList extends Component {
                 <span
                   href="#"
                   align="right"
-                  onClick={() =>
-                    this.props.handleDeletePost(individualPost.objectId)
-                  }
+                  onClick={() => this.props.handleDeletePost(individualPost)}
                 >
                   <DeleteIcon id="deletePost" />
                 </span>

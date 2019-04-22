@@ -88,7 +88,9 @@ router.route("/postNewPost").post(function(req, res, next) {
       // console.log(response.body.objectId);
       if (error) throw new Error(error);
       console.log("reqqq");
-      console.log(options.body);
+      console.log(body);
+      options.body["objectId"] = body.objectId;
+      console.log(options);
       res.json(options.body);
     });
   // Sanitize inputs

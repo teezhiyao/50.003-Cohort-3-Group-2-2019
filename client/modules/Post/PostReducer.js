@@ -21,13 +21,10 @@ const PostReducer = (state = initialState, action) => {
         data: action.posts
       };
     case DELETE_POST:
-      const newlst = state.data.filter(
-        post => post.objectId !== action.objectId
-      );
-      console.log("Logging in delete post");
-      console.log(newlst);
       return {
-        data: newlst
+        data: [
+          state.data.filter(post => post.objectId !== action.post.objectId)
+        ]
       };
 
     default:

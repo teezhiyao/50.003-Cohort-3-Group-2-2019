@@ -61,7 +61,9 @@ export class PostListItem extends Component {
             </p>
           )}
           <span className={styles["post-desc"]}>{this.props.post.content}</span>
-          <img src={this.props.post.imageData} />
+          {this.props.post.imageData !== "placeholder" && (
+            <img src={this.props.post.imageData} />
+          )}
           <span style={{ float: "right" }} className={styles["post-action"]}>
             <FormControlLabel
               control={
@@ -80,12 +82,6 @@ export class PostListItem extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: getUser(state)
-  };
-}
-
 PostListItem.propTypes = {
   post: PropTypes.shape({
     name: PropTypes.string,
@@ -97,12 +93,6 @@ PostListItem.propTypes = {
     reply: PropTypes.string,
     imageData: PropTypes.string,
     dateCreated: PropTypes.string
-  }),
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    userType: PropTypes.string,
-    sessionToken: PropTypes.string.isRequired,
-    objectId: PropTypes.string.isRequired
   }),
   location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,
