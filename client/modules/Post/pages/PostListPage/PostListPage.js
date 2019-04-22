@@ -168,7 +168,6 @@ class PostListPage extends Component {
           </select>
         </label>
         <label>
-          {" "}
           Sort By
           <select onChange={this.handleSort}>
             {this.state.sortList.map(category => {

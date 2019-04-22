@@ -152,20 +152,22 @@ export function fetchPost(objectId) {
   };
 }
 
-export function deletePost(objectId) {
+export function deletePost(post) {
   console.log("In delete post redux");
   return {
     type: DELETE_POST,
-    objectId
+    post
   };
 }
 
-export function deletePostRequest(objectId, sessionToken) {
+export function deletePostRequest(post, sessionToken) {
   console.log("In delete post request");
+  console.log(post);
   console.log(sessionToken);
+
   return dispatch => {
-    return callApi(`posts/${objectId}/${sessionToken}`, "delete").then(() =>
-      dispatch(deletePost(objectId))
+    return callApi(`posts/${post.objectId}/${sessionToken}`, "delete").then(
+      () => dispatch(deletePost(post))
     );
   };
 }
