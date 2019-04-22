@@ -29,9 +29,17 @@ class Header extends Component {
           <ul />
         </div>
         <div className={styles.content}>
-          <Typography variant="h3" color="inherit">
+
+          <div className={styles.headercaption}>
             Ticketing Support System
-          </Typography>
+          </div>
+          <h3 className={styles.headercaption}>
+            <img
+              src={require("../../addticket.png")}
+              className={styles.icons}
+            />
+            Upload your issue.
+          </h3>
 
           {/* {context.router.isActive("/", true) ? (
             <Button
@@ -46,11 +54,12 @@ class Header extends Component {
           {
             <Button
               variant="contained"
-              color="primary"
+              // color="primary"
               href="#"
               onClick={this.props.toggleAddPost}
+              // className = {styles.add-post-button}
             >
-              Add Issue
+              {/* <img src={require('../../addticket.png')} className = {styles.add-post-button}/> */}
             </Button>
           }
         </div>

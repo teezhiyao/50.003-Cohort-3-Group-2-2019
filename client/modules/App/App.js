@@ -38,7 +38,7 @@ import Fab from "@material-ui/core/Fab";
 
 import Fade from "@material-ui/core/Fade";
 // Import Style
-// import styles from './App.css';
+import cssstyles from './App.css';
 
 // Import Components
 import Helmet from "react-helmet";
@@ -54,6 +54,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: "flex"
+
   },
   grow: {
     flexGrow: 1,
@@ -63,7 +64,7 @@ const styles = theme => ({
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -72,6 +73,10 @@ const styles = theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     })
+  },
+  toolbar:{
+    backgroundColor:"darkslategrey",
+    height: 50
   },
   menuButton: {
     marginLeft: 12,
@@ -315,8 +320,9 @@ export class App extends Component {
                 className={classNames(classes.appBar, {
                   [classes.appBarShift]: open
                 })}
+                
               >
-                <Toolbar disableGutters={!open}>
+                <Toolbar disableGutters={!open} className={classes.toolbar}>
                   <IconButton
                     color="inherit"
                     aria-label="Open drawer"
@@ -328,9 +334,9 @@ export class App extends Component {
                   >
                     <MenuIcon />
                   </IconButton>
-                  <Typography variant="h6" color="inherit" noWrap>
+                  <h6>
                     Ticketing Support System
-                  </Typography>
+                  </h6>
                   {/* 
                   <div className={classes.search}>
                     <div className={classes.searchIcon}>
@@ -345,15 +351,11 @@ export class App extends Component {
                     />
                   </div> */}
                   <div className={classes.grow} />
-                  <Typography
-                    variant="h6"
-                    color="inherit"
-                    noWrap
-                    paddingRight="20px"
+                  <h6
                   >
                     {this.props.users.name &&
                       "Welcome " + this.props.users.name}
-                  </Typography>
+                  </h6>
                   {/* <div className={classes.sectionDesktop}>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -511,11 +513,19 @@ export class App extends Component {
                 </Link>
               </List> */}
               </Drawer>
+              
               <main
                 className={classNames(classes.content2, {
                   [classes.contentShift]: open
                 })}
               >
+              <div className={cssstyles.background}>
+              <Button onClick={this.toggleAddPostSection} className={cssstyles.shiftbutton}>
+            
+              <p className = {cssstyles.caption}>  Ask us anything.  </p>
+              </Button>
+              <div className={cssstyles.captionshadow}/>
+              </div>
                 <Helmet
                   title="Issue Reporting"
                   titleTemplate="%s - Blog App"
@@ -531,14 +541,16 @@ export class App extends Component {
                     }
                   ]}
                 />
-                <Header
+                {/* <Header
                   switchLanguage={lang =>
                     this.props.dispatch(switchLanguage(lang))
                   }
                   intl={this.props.intl}
                   toggleAddPost={this.toggleAddPostSection}
-                />
-                <div className={styles.container}>{this.props.children}</div>
+                /> */}
+
+                <div className={cssstyles.container}>{this.props.children}</div>
+
                 <Footer />
               </main>
               <Fab

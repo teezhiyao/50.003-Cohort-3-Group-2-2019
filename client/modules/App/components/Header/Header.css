@@ -1,17 +1,38 @@
 .header {
-  /* background: #eee url("../../milkyway.jpg") center; */
-  background-image: url('../../skyscraper.jpg');
+  background-image:url("../../vector.png") ;
+  width: 100%;
   height: auto;
-  /* background: #eee url("https://www.w3schools.com/w3css/img_snowtops.jpg")
-  center; */
-  border-bottom: 1px solid #ccc;
+  margin: 20px;
+  margin-top: 50px;
+  border-radius: 10px;
+  position: relative;
+  left: -20px;
+}
+
+.headercaption{
+  color:white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-weight: bold;
+  line-height: 32px;
+  background-color: black;
+}
+
+.icons{
+  margin: 5px;
+  margin-left: 30px;
+  max-width: 10%;
+  height:auto;
 }
 
 .content {
   width: 100%;
   max-width: 980px;
   margin: auto;
-  padding: 64px 16px;
+  padding: 16px;
   overflow: auto;
 }
 
@@ -29,12 +50,11 @@
 }
 
 .add-post-button {
-  display: inline-block;
+  /* display: inline-block; */
   color: #fff;
   background: #03a9f4;
   padding: 8px 16px;
   text-decoration: none;
-  border-radius: 1000px;
   float: right;
 }
 

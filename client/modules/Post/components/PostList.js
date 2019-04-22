@@ -46,7 +46,8 @@ class PostList extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className="listView">
+      // <div className="listView">
+      <div >
         {this.props.posts.map((individualPost, index) => (
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
