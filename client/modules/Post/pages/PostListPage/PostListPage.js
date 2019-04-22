@@ -34,6 +34,11 @@ class PostListPage extends Component {
         { value: "alph", label: "Alphabetical" },
         { value: "priority", label: "Priority" }
       ],
+      priorityList:[
+        { value: "LOW", label: "LOW"},
+        { value: "MEDIUM", label: "MEDIUM"},
+        { value: "HIGH", label: "HIGH"},
+      ],
       categoryList: [
         { value: "all", label: "All Issues" },
         { value: "LOGINISSUE", label: "Login Issue" },
@@ -115,7 +120,7 @@ class PostListPage extends Component {
       this.props.posts.sort(dynamicSort("createdAt"));
       console.log(this.props.posts);
     }
-    if (e.target.value === "priority") {
+    if (e.target.value === "priorityLevel") {
       console.log("inside priority");
       this.props.posts.sort(dynamicSortPriority("priority"));
       console.log(this.props.posts);
@@ -151,6 +156,7 @@ class PostListPage extends Component {
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
           categoryList={this.state.categoryList}
+          priorityList={this.state.priorityList}
           handleNewCategory={this.handleNewCategory}
         />
         <label>

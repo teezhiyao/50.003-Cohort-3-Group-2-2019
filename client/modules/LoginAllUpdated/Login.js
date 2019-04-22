@@ -67,6 +67,7 @@ class Login extends Component {
               browserHistory.push("/home");
             } else if (response.user.code === 101) {
               console.log("Failed Login!");
+              alert("Login has failed! Please try with the registered Username/Password.");
             }
           }.bind(this)
         );

@@ -20,8 +20,9 @@ export class PostCreateWidget extends Component {
     const catRef = this.refs.category;
     const titleRef = this.refs.title;
     const contentRef = this.refs.content;
-    const priorityLevelRef = this.refs.category; //Change to priority
+    const priorityLevelRef = this.refs.priotyLevel; //Change to priority
     console.log("trying here");
+    alert("Your issue has been recorded. Please check your email for the ticket numbr and any further updates.")
     if (catRef.value && titleRef.value && contentRef.value) {
       this.props.addPost(
         catRef.value,
@@ -83,6 +84,20 @@ export class PostCreateWidget extends Component {
             </label>
             <button type="submit">Add new category</button>
           </form> */}
+
+          <label>
+            {" "}
+            Issue Priority
+            {/* <select onChange={this.handleSelectCategory} ref="category" > */}
+            <select ref="priotyLevel">
+              {this.props.priorityList
+                .map(sort => {
+                  return (
+                    <option value={sort.value}> {sort.label} </option>
+                  );
+                })}
+            </select>
+          </label>
 
           <input
             placeholder={this.props.intl.messages.postTitle}
