@@ -84,7 +84,7 @@ class PostListGrid extends Component {
         {/* NEED TO HANDLE UNDEFINED EXCEPTION */}
         <GridList className={classes.gridList}>
           {this.props.posts.map((individualPost, index) => (
-            <GridListTile cols={2}>
+            <GridListTile cols={2} style={{ height: "250px" }}>
               <PostGridItem
                 post={individualPost}
                 key={individualPost.cuid}

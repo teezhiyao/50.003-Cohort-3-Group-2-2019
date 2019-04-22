@@ -41,7 +41,7 @@ export class PostGridItem extends Component {
     return (
       <Card style={{ height: "250" }}>
         <CardContent style={{ height: "250" }}>
-          <div>
+          <div style={{ height: "250" }}>
             <span style={{ float: "right" }} className={styles["post-action"]}>
               {/* <FormControlLabel
               control={
@@ -85,8 +85,6 @@ export class PostGridItem extends Component {
                     <td  className={styles["td1"]}>Created At</td>
                     <td className={styles["td"]}>{this.props.post.dateCreated.substring(0, 16)}</td>
                     </tr>
-            
-            
             </table>
               {/* Priority Level : {this.props.post.priorityLevel} <br></br> */}
               {/* Created At : {this.props.post.dateCreated.substring(0, 16)}<br></br> */}
