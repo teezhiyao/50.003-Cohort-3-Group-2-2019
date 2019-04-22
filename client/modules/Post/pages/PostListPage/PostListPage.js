@@ -11,7 +11,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
-
+import style from "./PostListPage.css";
 
 
 // Import Actions
@@ -47,7 +47,8 @@ class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorySelected: "all",
+      categorySelected: "All Issues",
+      categoryLabel:"All Issues",
       sortSelected: "recency",
       sortList: [
         { value: "recency", label: "Date" },
@@ -60,12 +61,19 @@ class PostListPage extends Component {
         { value: "HIGH", label: "HIGH" }
       ],
       categoryList: [
-        { value: "all", label: "All Issues" },
-        { value: "LOGINISSUE", label: "Login Issue" },
-        { value: "APIERROR", label: "API Issue" },
-        { value: "LOGOUTISSUE", label: "Logout Issue" },
-        { value: "Client Login Issue", label: "Client Login Issue" },
-        { value: "OTHERS", label: "Others" }
+        { label: "All Issues" },
+        { label: "Login Issue" },
+        { label: "API Issue" },
+        { label: "Logout Issue" },
+        { label: "Client Login Issue" },
+        { label: "Others" }
+
+        // { value: "all", label: "All Issues" },
+        // { value: "LOGINISSUE", label: "Login Issue" },
+        // { value: "APIERROR", label: "API Issue" },
+        // { value: "LOGOUTISSUE", label: "Logout Issue" },
+        // { value: "Client Login Issue", label: "Client Login Issue" },
+        // { value: "OTHERS", label: "Others" }
       ]
     };
   }
@@ -180,26 +188,23 @@ class PostListPage extends Component {
           priorityList={this.state.priorityList}
           handleNewCategory={this.handleNewCategory}
         />
-        <label>
-          Issue Category
+        <p className={style.heading}>Your posts related to: "{this.state.categorySelected}"</p>
+        
+          <p className={style.sorting}>Issue Category</p>
           <select onChange={this.handleSelectCategory}>
             {this.state.categoryList.map(category => {
-              return <option value={category.value}> {category.label} </option>;
+              return <option value={category.label}> {category.label} </option>;
             })}
           </select>
-        </label>
-        <label>
-          {" "}
-          Sort By
+        
+
+          <p className={style.sorting}>Sort By </p>
           <select onChange={this.handleSort}>
             {this.state.sortList.map(category => {
               return <option value={category.value}> {category.label} </option>;
             })}
           </select>
-        </label>
-        {/* <Button variant="contained" color="primary" onClick={this.placeholder}>
-          Placeholder
-        </Button> */}
+
 
           <ExpansionPanel>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -232,7 +237,7 @@ class PostListPage extends Component {
           handleAddReply={this.handleAddReply}
           handlePostUpdate={this.handlePostUpdate}
           posts={
-            this.state.categorySelected == "all"
+            this.state.categorySelected == "All Issues"
               ? // ? this.props.posts.sort(dynamicSort("title"))
                 this.props.posts
               : this.props.posts.filter(

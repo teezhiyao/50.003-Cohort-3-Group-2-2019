@@ -3,7 +3,7 @@
   margin: auto;
   width: 100%;
   padding: 25px;
-  background:#2c355c;
+  background:#282f4b;
   justify-content: center;
   border: radius 5px;
   margin-top:5px;
@@ -60,7 +60,6 @@
   right:-10px;
   z-index:7;
   background-color: #003852;
-  color: #ffffff;
   padding: 5px 10px;
   border-radius: 10px;
 }
