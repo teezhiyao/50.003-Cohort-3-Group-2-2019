@@ -6,6 +6,13 @@ import { connect } from "react-redux";
 import PostList from "../../components/PostList";
 import PostCreateWidget from "../../components/PostCreateWidget/PostCreateWidget";
 import Button from "@material-ui/core/Button";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+
+
 
 // Import Actions
 import {
@@ -23,6 +30,19 @@ import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 import { getUser } from "../../UserReducer";
 
+const styles = theme => ({
+  root: {
+    width: "100%"
+  },
+  
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+    flexBasis: "88.00%"
+  }
+  
+});
+
 class PostListPage extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +52,12 @@ class PostListPage extends Component {
       sortList: [
         { value: "recency", label: "Date" },
         { value: "alph", label: "Alphabetical" },
-        { value: "priority", label: "Priority" }
+        { value: "priorityLevel", label: "Priority" }
       ],
-      priorityList:[
-        { value: "LOW", label: "LOW"},
-        { value: "MEDIUM", label: "MEDIUM"},
-        { value: "HIGH", label: "HIGH"},
+      priorityList: [
+        { value: "LOW", label: "LOW" },
+        { value: "MEDIUM", label: "MEDIUM" },
+        { value: "HIGH", label: "HIGH" }
       ],
       categoryList: [
         { value: "all", label: "All Issues" },
@@ -122,7 +142,7 @@ class PostListPage extends Component {
     }
     if (e.target.value === "priorityLevel") {
       console.log("inside priority");
-      this.props.posts.sort(dynamicSortPriority("priority"));
+      this.props.posts.sort(dynamicSortPriority("priorityLevel"));
       console.log(this.props.posts);
     }
     // console.log(this.state);
@@ -149,6 +169,7 @@ class PostListPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <PostCreateWidget
@@ -160,7 +181,6 @@ class PostListPage extends Component {
           handleNewCategory={this.handleNewCategory}
         />
         <label>
-          {" "}
           Issue Category
           <select onChange={this.handleSelectCategory}>
             {this.state.categoryList.map(category => {
@@ -180,6 +200,33 @@ class PostListPage extends Component {
         {/* <Button variant="contained" color="primary" onClick={this.placeholder}>
           Placeholder
         </Button> */}
+
+          <ExpansionPanel>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography >
+              </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Issue Title
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Created By
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Created On
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Priority
+              </Typography>
+
+              <Typography className={classes.secondaryHeading}>
+                Category
+              </Typography>
+            
+            </ExpansionPanelSummary>
+          </ExpansionPanel>
         <PostList
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
@@ -211,9 +258,9 @@ function dynamicSort(property) {
     return result * sortOrder;
   };
 }
-function dynamicSortPriority() {
+function dynamicSortPriority(property) {
   var sortOrder = 1;
-  var dict = { HIGH: 3, MEDIUM: 2, LOW: 1 };
+  var dict = { HIGH: 1, MEDIUM: 2, LOW: 3 };
 
   if (property[0] === "-") {
     sortOrder = -1;
@@ -221,7 +268,7 @@ function dynamicSortPriority() {
   }
   return function(a, b) {
     var result =
-      dict[a[priority]] < dict[b[property]]
+      dict[a[property]] < dict[b[property]]
         ? -1
         : dict[a[property]] > dict[b[property]]
         ? 1
@@ -268,11 +315,13 @@ PostListPage.propTypes = {
     objectId: PropTypes.string.isRequired
   }),
   showAddPost: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
+
 };
 
 PostListPage.contextTypes = {
   router: PropTypes.object
 };
 
-export default connect(mapStateToProps)(PostListPage);
+export default connect(mapStateToProps)(withStyles(styles)(PostListPage));

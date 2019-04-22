@@ -34,6 +34,11 @@ class PostGrid extends Component {
         { value: "APIERROR", label: "API Issue" },
         { value: "LOGOUTISSUE", label: "Logout Issue" },
         { value: "Client Login Issue", label: "Client Login Issue" }
+      ],
+      priorityList:[
+        { value: "LOW", label: "LOW"},
+        { value: "MEDIUM", label: "MEDIUM"},
+        { value: "HIGH", label: "HIGH"},
       ]
     };
   }
@@ -102,6 +107,7 @@ class PostGrid extends Component {
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
           categoryList = {this.state.categoryList}
+          priorityList={this.state.priorityList}
           handleNewCategory = {this.handleNewCategory}
         />
         

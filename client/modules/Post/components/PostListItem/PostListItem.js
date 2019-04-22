@@ -80,6 +80,12 @@ export class PostListItem extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    user: getUser(state)
+  };
+}
+
 PostListItem.propTypes = {
   post: PropTypes.shape({
     name: PropTypes.string,
@@ -91,6 +97,12 @@ PostListItem.propTypes = {
     reply: PropTypes.string,
     imageData: PropTypes.string,
     dateCreated: PropTypes.string
+  }),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    userType: PropTypes.string,
+    sessionToken: PropTypes.string.isRequired,
+    objectId: PropTypes.string.isRequired
   }),
   location: PropTypes.object.isRequired,
   // addReply: PropTypes.func.isRequired,

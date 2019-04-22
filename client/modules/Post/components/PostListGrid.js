@@ -69,7 +69,7 @@ class PostListGrid extends Component {
   render() {
     const { classes } = this.props;
     console.log("postlistgrid");
-    console.log(this.props.posts[0].category);
+    // console.log(this.props.posts[0].category);
     return (
       <div className={classes.div}>
         <div class="w3-card-4">
