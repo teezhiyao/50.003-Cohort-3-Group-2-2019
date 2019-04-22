@@ -66,6 +66,9 @@ class PostListPage extends Component {
         { label: "API Issue" },
         { label: "Logout Issue" },
         { label: "Client Login Issue" },
+        { label: "Data Logging Issue" },
+        { label: "Feature Request" },
+        { label: "Latency Issue" },
         { label: "Others" }
 
         // { value: "all", label: "All Issues" },

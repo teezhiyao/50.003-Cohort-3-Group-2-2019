@@ -30,10 +30,16 @@ class PostGrid extends Component {
       categorySelected: "all",
       categoryList: [
         // { value: "all", label: "All Issues" },
-        { value: "LOGINISSUE", label: "Login Issue" },
-        { value: "APIERROR", label: "API Issue" },
-        { value: "LOGOUTISSUE", label: "Logout Issue" },
-        { value: "Client Login Issue", label: "Client Login Issue" }
+        
+          { label: "All Issues" },
+          { label: "Login Issue" },
+          { label: "API Issue" },
+          { label: "Logout Issue" },
+          { label: "Client Login Issue" },
+          { label: "Data Logging Issue" },
+          { label: "Feature Request" },
+          { label: "Latency Issue" },
+          { label: "Others" }
       ],
       priorityList: [
         { value: "LOW", label: "LOW" },

@@ -36,8 +36,8 @@ const styles = {
     height: 450,
     float: "left",
     padding: "15px",
-    marginInlineEnd: "15px",
-    marginInlineStart: "15px",
+    marginInlineEnd: "12px",
+    marginInlineStart: "12px",
     margin: "15px",
     border: "1px solid #ddd"
   },
