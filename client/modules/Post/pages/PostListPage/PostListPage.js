@@ -68,7 +68,7 @@ class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: props.posts,
+      // posts: props.posts,
       categorySelected: "All Issues",
       categoryLabel:"All Issues",
       sortSelected: "recency",
@@ -168,8 +168,8 @@ class PostListPage extends Component {
     if (e.target.value === "Alphabetical") {
       console.log("inside alph");
       // console.log(this.props.posts);
-      // this.props.posts.sort(dynamicSort("title"));
-      this.setState({posts: this.state.posts.sort(dynamicSort("title"))});
+      this.props.posts.sort(dynamicSort("title"));
+      // this.setState({posts: this.state.posts.sort(dynamicSort("title"))});
       console.log(this.state.posts);
       // console.log(this.state.sortSelected);
       // this.forceUpdate();
@@ -179,15 +179,15 @@ class PostListPage extends Component {
     }
     if (e.target.value === "Date") {
       console.log("inside recency");
-      // this.props.posts.sort(dynamicSort("dateCreated"));
-      this.setState({posts: this.state.posts.sort(dynamicSort("dateCreated"))});
+      this.props.posts.sort(dynamicSort("dateCreated"));
+      // this.setState({posts: this.state.posts.sort(dynamicSort("dateCreated"))});
       console.log(this.state.posts);
       // this.forceUpdate();
     }
     if (e.target.value === "Priority") {
       console.log("inside priority");
-      // this.props.posts.sort(dynamicSortPriority("priorityLevel"));
-      this.setState({posts: this.state.posts.sort(dynamicSortPriority("priorityLevel"))});
+      this.props.posts.sort(dynamicSortPriority("priorityLevel"));
+      // this.setState({posts: this.state.posts.sort(dynamicSortPriority("priorityLevel"))});
       console.log(this.state.posts);
       // this.forceUpdate();
     }
@@ -279,8 +279,8 @@ class PostListPage extends Component {
           posts={
             this.state.categorySelected == "All Issues"
               ? // ? this.props.posts.sort(dynamicSort("title"))
-                this.state.posts
-              : this.state.posts.filter(
+                this.props.posts
+              : this.props.posts.filter(
                   post => post.category === this.state.categorySelected
                 )
           }
