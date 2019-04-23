@@ -1,0 +1,12 @@
+.title{
+    font-family: Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+    color:rgb(214, 214, 214);
+    margin-left:10px;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #6d6413;
+    border-radius:2px;
+    width:65%;
+}
