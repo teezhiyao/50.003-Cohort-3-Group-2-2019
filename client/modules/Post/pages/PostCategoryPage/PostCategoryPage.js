@@ -13,6 +13,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Chip } from "@material-ui/core";
 import PostListItem from "../../components/PostListItem/PostListItem";
 
+import cssstyles from "./PostCategoryPage.css";
+
 // Import Actions
 import {
   fetchPosts,
@@ -82,15 +84,19 @@ class PostCategoryPage extends Component {
   render() {
     const { classes } = this.props;
     return (
+      
       <div>
-        <h1>
+        <p className={cssstyles.title}> Facing a {this.state.categorySelected}? You are not alone. </p>
+        
+        {/* <h1>
           {" "}
           Displaying all Issue Threads related to
           <Chip
             label={this.state.categorySelected}
             onClick={this.handleClick}
           />
-        </h1>
+        </h1> */}
+
         {this.props.posts
           .filter(
             individualPost =>

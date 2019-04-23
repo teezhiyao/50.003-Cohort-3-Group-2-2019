@@ -199,6 +199,7 @@ class SignUp extends Component {
               color="primary"
               type="submit"
               disabled={!this.validateForm()}
+              onClick={this.handleSubmit}
               className={styles["post-signup-button"]}
             >
               Sign Up

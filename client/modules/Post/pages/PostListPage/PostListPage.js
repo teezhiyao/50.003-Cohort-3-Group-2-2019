@@ -221,6 +221,7 @@ class PostListPage extends Component {
     return (
       <div>  
         <PostCreateWidget
+          className={style.postcreatewidget}
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
           showAddPost={this.props.showAddPost}
