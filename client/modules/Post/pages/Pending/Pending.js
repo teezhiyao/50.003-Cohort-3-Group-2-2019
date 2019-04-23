@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 // Import Components
 import PostList from "../../components/PostList";
 import Button from "@material-ui/core/Button";
-
+import style from "./Pending.css";
 // Import Actions
 import {
   addPostRequest,
@@ -19,6 +19,31 @@ import { toggleAddPost } from "../../../App/AppActions";
 import { getShowAddPost } from "../../../App/AppReducer";
 import { getPosts } from "../../PostReducer";
 import { getUser } from "../../UserReducer";
+import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import { withStyles } from "@material-ui/core/styles";
+
+
+const ExpansionPanelSummary = withStyles({
+  root: {
+    backgroundColor: 'rgb(214, 214, 214)',
+    borderBottom: '1px solid rgba(0,0,0,.125)',
+    marginBottom: -1,
+    marginTop:30,
+    minHeight: 56,
+    '&$expanded': {
+      minHeight: 56,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
+  },
+  expanded: {},
+})(props => <MuiExpansionPanelSummary {...props} />);
+
+ExpansionPanelSummary.muiName = 'ExpansionPanelSummary';
+
 
 class Pending extends Component {
   componentDidMount() {
@@ -52,8 +77,8 @@ class Pending extends Component {
   render() {
     return (
       <div>
-        <h1>Pending Issues</h1>
-        <p>Displayed below are all the issues that need to be resolved.</p>
+        <h1 className={style.heading}>Pending Issues</h1>
+        <p className={style.sorting}>Displayed below are all the issues that need to be resolved.</p>
 
         <PostList
           handleDeletePost={this.handleDeletePost}
