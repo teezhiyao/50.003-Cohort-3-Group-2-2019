@@ -1,5 +1,5 @@
 .form {
-  display: block;
+  display: none;
   margin: 20px;
   margin-bottom: 40px;
   margin-left: auto;
@@ -44,7 +44,6 @@
   border-radius: 4px;
   font-family: Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
   font-size: 15px;
-  /* font-style: italic; */
   font-weight: 500;
   border-right:2px solid black;
   border-bottom: 2px solid black;
