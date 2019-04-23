@@ -32,10 +32,12 @@ const styles = {
     marginTop: "15px"
   },
   div: {
-    width: 300,
+    display: "block",
+    width: 290,
     height: 450,
     float: "left",
-    padding: "15px",
+    padding: "10px",
+    paddingTop: "20px",
     marginInlineEnd: "30px",
     marginInlineStart: "30px",
     margin: "15px",
