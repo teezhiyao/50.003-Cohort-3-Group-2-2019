@@ -39,12 +39,15 @@ const styles = theme => ({
 
 //takes in props(all posts) and displays every post
 class PostList extends Component {
+  
+  
   handleClickChip = () => {
     console.log("clicked chip");
   };
 
   render() {
     const { classes } = this.props;
+    console.log("rendering post list");
     return (
       // <div className="listView">
       <div >
@@ -126,7 +129,8 @@ PostList.propTypes = {
       reply: PropTypes.string,
       category: PropTypes.string,
       imageData: PropTypes.string,
-      dateCreated: PropTypes.string
+      dateCreated: PropTypes.string,
+      priorityLevel: PropTypes.string,
     })
   ),
   user: PropTypes.shape({

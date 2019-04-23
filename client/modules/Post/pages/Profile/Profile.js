@@ -22,6 +22,7 @@ class Profile extends Component {
       console.log(this.props.users);
     }
     render() {
+        // console.lop(this)
         var columns = [
             "",
             ""

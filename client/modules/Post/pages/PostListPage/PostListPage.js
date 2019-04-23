@@ -68,6 +68,7 @@ class PostListPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      posts: props.posts,
       categorySelected: "All Issues",
       categoryLabel:"All Issues",
       sortSelected: "recency",
@@ -106,6 +107,7 @@ class PostListPage extends Component {
     // this function is called the moment this component is rendered.
     console.log("componentDidMount");
     console.log(this.state);
+
   }
 
   handleDeletePost = post => {
@@ -161,24 +163,36 @@ class PostListPage extends Component {
   handleSort = e => {
     console.log("inside handlesort");
     this.setState({ sortSelected: e.target.value });
-    console.log(this.sortSelected);
-    if (e.target.value === "alph") {
+    console.log(this.state.sortSelected);
+    // if (e.target.value === "alph") {
+    if (e.target.value === "Alphabetical") {
       console.log("inside alph");
-      console.log(this.props.posts);
-      this.props.posts.sort(dynamicSort("title"));
-      console.log(this.props.posts);
+      // console.log(this.props.posts);
+      // this.props.posts.sort(dynamicSort("title"));
+      this.setState({posts: this.state.posts.sort(dynamicSort("title"))});
+      console.log(this.state.posts);
+      // console.log(this.state.sortSelected);
+      // this.forceUpdate();
+      // this.setState({ sortSelected: e.target.value });
+      // this.props.dispatch(fetchAllowedPosts(this.props.users.sessionToken));
+      // this.forceUpdate();
     }
-    if (e.target.value === "recency") {
+    if (e.target.value === "Date") {
       console.log("inside recency");
-      this.props.posts.sort(dynamicSort("createdAt"));
-      console.log(this.props.posts);
+      // this.props.posts.sort(dynamicSort("dateCreated"));
+      this.setState({posts: this.state.posts.sort(dynamicSort("dateCreated"))});
+      console.log(this.state.posts);
+      // this.forceUpdate();
     }
-    if (e.target.value === "priorityLevel") {
+    if (e.target.value === "Priority") {
       console.log("inside priority");
-      this.props.posts.sort(dynamicSortPriority("priorityLevel"));
-      console.log(this.props.posts);
+      // this.props.posts.sort(dynamicSortPriority("priorityLevel"));
+      this.setState({posts: this.state.posts.sort(dynamicSortPriority("priorityLevel"))});
+      console.log(this.state.posts);
+      // this.forceUpdate();
     }
-    // console.log(this.state);
+    
+    // 
   };
 
   placeholder = () => {
@@ -203,8 +217,9 @@ class PostListPage extends Component {
 
   render() {
     const { classes } = this.props;
+    console.log("rendering post list page");
     return (
-      <div>
+      <div>  
         <PostCreateWidget
           addPost={this.handleAddPost}
           addUser={this.handleAddUser}
@@ -226,7 +241,7 @@ class PostListPage extends Component {
           <p className={style.sorting}>Sort By </p>
           <select className={style.selecttext} onChange={this.handleSort}>
             {this.state.sortList.map(category => {
-              return <option value={category.value}> {category.label} </option>;
+              return <option value={category.label}> {category.label} </option>;
             })}
           </select>
 
@@ -263,8 +278,8 @@ class PostListPage extends Component {
           posts={
             this.state.categorySelected == "All Issues"
               ? // ? this.props.posts.sort(dynamicSort("title"))
-                this.props.posts
-              : this.props.posts.filter(
+                this.state.posts
+              : this.state.posts.filter(
                   post => post.category === this.state.categorySelected
                 )
           }
@@ -276,6 +291,7 @@ class PostListPage extends Component {
 }
 
 function dynamicSort(property) {
+  console.log(property);
   var sortOrder = 1;
   if (property[0] === "-") {
     sortOrder = -1;
@@ -284,6 +300,7 @@ function dynamicSort(property) {
   return function(a, b) {
     var result =
       a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      console.log("returning");
     return result * sortOrder;
   };
 }
@@ -334,7 +351,8 @@ PostListPage.propTypes = {
       category: PropTypes.string,
       url: PropTypes.state,
       imageData: PropTypes.string,
-      dateCreated: PropTypes.string
+      dateCreated: PropTypes.string,
+      priorityLevel: PropTypes.string
     })
   ),
   users: PropTypes.shape({

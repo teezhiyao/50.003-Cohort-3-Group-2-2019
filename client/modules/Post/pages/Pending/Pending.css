@@ -1,0 +1,23 @@
+.heading{
+    font-family: Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+    color:rgb(214, 214, 214);
+    /* padding: 5px; */
+    margin-left:10px;
+    margin-bottom: 20px;
+    border-bottom: 4px solid #6d6413;
+    /* border-bottom: 4px solid #136d6d; */
+    border-radius:2px;
+    width:45%;
+}
+.sorting{
+    font-family: Rubik,Lato,"Lucida Grande","Lucida Sans Unicode",Tahoma,Sans-Serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 600;
+    color:rgb(214, 214, 214);
+    margin: 5px;
+    margin-bottom: 15px;
+}

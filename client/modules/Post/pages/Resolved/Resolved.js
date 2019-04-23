@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 // Import Components
 import PostList from "../../components/PostList";
 import Button from "@material-ui/core/Button";
+import style from "./Resolved.css";
+
 
 // Import Actions
 import {
@@ -56,8 +58,8 @@ class Resolved extends Component {
   render() {
     return (
       <div>
-        <h1>Resolved Issues</h1>
-        <p>Displayed below are all the issues that have been resolved by Accenture.</p>
+        <h1 className={style.heading}>Resolved Issues</h1>
+        <p className={style.sorting}>Displayed below are all the issues that have been resolved by Accenture.</p>
         
         <PostList
           handleDeletePost={this.handleDeletePost}
