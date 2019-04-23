@@ -7,7 +7,7 @@ import PostList from "../../components/PostList";
 import PostCreateWidget from "../../components/PostCreateWidget/PostCreateWidget";
 import Button from "@material-ui/core/Button";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
@@ -42,6 +42,27 @@ const styles = theme => ({
     flexBasis: "88.00%"
   }
 });
+
+const ExpansionPanelSummary = withStyles({
+  root: {
+    backgroundColor: 'rgb(214, 214, 214)',
+    borderBottom: '1px solid rgba(0,0,0,.125)',
+    marginBottom: -1,
+    marginTop:30,
+    minHeight: 56,
+    '&$expanded': {
+      minHeight: 56,
+    },
+  },
+  content: {
+    '&$expanded': {
+      margin: '12px 0',
+    },
+  },
+  expanded: {},
+})(props => <MuiExpansionPanelSummary {...props} />);
+
+ExpansionPanelSummary.muiName = 'ExpansionPanelSummary';
 
 class PostListPage extends Component {
   constructor(props) {
@@ -192,10 +213,10 @@ class PostListPage extends Component {
           priorityList={this.state.priorityList}
           handleNewCategory={this.handleNewCategory}
         />
-        <p className={style.heading}>Your posts related to: "{this.state.categorySelected}"</p>
+          <p className={style.heading}>Your posts related to: "{this.state.categorySelected}"</p>
 
           <p className={style.sorting}>Issue Category</p>
-          <select onChange={this.handleSelectCategory}>
+          <select className={style.selecttext} onChange={this.handleSelectCategory}>
             {this.state.categoryList.map(category => {
               return <option value={category.label}> {category.label} </option>;
             })}
@@ -203,38 +224,39 @@ class PostListPage extends Component {
 
 
           <p className={style.sorting}>Sort By </p>
-          <select onChange={this.handleSort}>
+          <select className={style.selecttext} onChange={this.handleSort}>
             {this.state.sortList.map(category => {
               return <option value={category.value}> {category.label} </option>;
             })}
           </select>
 
+          <ExpansionPanel>
+            {/* <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}> */}
+            <ExpansionPanelSummary>
+              <Typography className={classes.secondaryHeading}>
+                Issue Title
+              </Typography>
 
-        <ExpansionPanel>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography />
-            <Typography className={classes.secondaryHeading}>
-              Issue Title
-            </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Created By
+              </Typography>
 
-            <Typography className={classes.secondaryHeading}>
-              Created By
-            </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Created On
+              </Typography>
 
-            <Typography className={classes.secondaryHeading}>
-              Created On
-            </Typography>
+              <Typography className={classes.secondaryHeading}>
+                Priority
+              </Typography>
 
-            <Typography className={classes.secondaryHeading}>
-              Priority
-            </Typography>
-
-            <Typography className={classes.secondaryHeading}>
-              Category
-            </Typography>
-          </ExpansionPanelSummary>
-        </ExpansionPanel>
+              <Typography className={classes.secondaryHeading}>
+                Category
+              </Typography>
+            
+            </ExpansionPanelSummary>
+          </ExpansionPanel>
         <PostList
+          className = {style.postlist}
           handleDeletePost={this.handleDeletePost}
           handleAddReply={this.handleAddReply}
           handlePostUpdate={this.handlePostUpdate}

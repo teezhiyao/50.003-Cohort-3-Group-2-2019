@@ -49,7 +49,7 @@ class Profile extends Component {
             ]
         ];
         return(
-            <div >
+            <div className={styles["boxx"]}>
                 <p className={styles["box"]}>
                 <div class="w3-card-4">
                     <p className={styles["header"]} >
@@ -63,19 +63,19 @@ class Profile extends Component {
                 <table class="w3-table" className={styles["table"]}>
                     
                     <tr >
-                    <td >Username</td>
+                    <td >Username:</td>
                     <td>{this.props.users.username}</td>
                     </tr>
                     <tr >
-                    <td>Full Name</td>
+                    <td>Full Name:</td>
                     <td>{this.props.users.name}</td>
                     </tr>
                     <tr>
-                    <td>Age</td>
+                    <td>Age:</td>
                     <td>{this.props.users.age}</td>
                     </tr>
                     <tr>
-                    <td>User Type</td>
+                    <td>User Type:</td>
                     <td>{this.props.users.userType}</td>
                     </tr>
                     <tr>

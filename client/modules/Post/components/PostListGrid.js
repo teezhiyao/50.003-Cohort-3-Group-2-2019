@@ -36,10 +36,11 @@ const styles = {
     height: 450,
     float: "left",
     padding: "15px",
-    marginInlineEnd: "12px",
-    marginInlineStart: "12px",
+    marginInlineEnd: "30px",
+    marginInlineStart: "30px",
     margin: "15px",
-    border: "1px solid #ddd"
+    border: "1px solid #ddd",
+    // alignSelf: "center"
   },
   header: {
     margin: "auto",
