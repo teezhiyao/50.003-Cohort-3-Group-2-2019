@@ -412,7 +412,7 @@ export class App extends Component {
                       <AccountCircle />
                     </IconButton>
                   </Link>
-                  <IconButton>
+                  {/* <IconButton>
                     <Badge badgeContent={4} color="secondary">
                       <MailIcon />
                     </Badge>
@@ -421,7 +421,7 @@ export class App extends Component {
                     <Badge badgeContent={17} color="secondary">
                       <NotificationsIcon />
                     </Badge>
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton onClick={this.handleDrawerClose}>
                     {theme.direction === "ltr" ? (
                       <ChevronLeftIcon />

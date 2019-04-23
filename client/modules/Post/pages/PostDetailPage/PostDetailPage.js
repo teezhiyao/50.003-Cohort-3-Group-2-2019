@@ -121,10 +121,10 @@ class PostDetailPage extends Component {
           href="#"
           onClick={this.addReply}
         >
-          <FormattedMessage id="submit" />
+          Reply
         </a>
+
       </div>
-      // </div>
     );
   }
 }
