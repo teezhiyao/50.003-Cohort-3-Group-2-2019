@@ -54,14 +54,14 @@ export class PostCreateWidget extends Component {
       <div className={cls}>
         <div className={styles["form-content"]}>
           <h2 className={styles["form-title"]}>
-            <FormattedMessage id="createNewPost" />
+            What's the matter?
           </h2>
 
           <label>
             {" "}
-            Issue Category
+            <p className={styles["form-subtitle"]}>Issue Category</p>
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
-            <select ref="category">
+            <select className={styles["selecttext"]} ref="category">
               {this.props.categoryList
                 .filter(category => category.value != "all")
                 .map(category => {
@@ -88,9 +88,9 @@ export class PostCreateWidget extends Component {
 
           <label>
             {" "}
-            Issue Priority
+            <p className={styles["form-subtitle"]}>Issue Priority</p>
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
-            <select ref="priotyLevel">
+            <select className={styles["selecttext"]} ref="priotyLevel">
               {this.props.priorityList.map(priority => {
                   return (
                     <option value={priority.value}> {priority.label} </option>
@@ -114,25 +114,26 @@ export class PostCreateWidget extends Component {
             href="#"
             onClick={this.addPost}
           >
-            <FormattedMessage id="submit" />
+            <p className={styles["button-text"]}>Submit</p>
           </a>
         </div>
         <div className="process">
           {/* <h4 className="process__heading">Process: Using Base64</h4> */}
-          <p className="process__details">Upload image</p>
+          <p className={styles["form-subtitle"]}>Upload image</p>
 
-          <div className="process__upload-btn">
+          <div >
             <FileBase
+              className={styles["post-submit-button"]}
               type="file"
               multiple={false}
               onDone={this.addPost.bind(this)}
             />
           </div>
-          <img
+          {/* <img
             src={this.state.baseImage}
             alt="upload-image"
             className="process__image"
-          />
+          /> */}
         </div>
       </div>
     );
