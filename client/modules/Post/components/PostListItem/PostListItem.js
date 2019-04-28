@@ -44,13 +44,13 @@ export class PostListItem extends Component {
 
   render() {
     return (
-      <Card>
+      <Card id="postcard">
         <CardContent>
           {/* <p> {this.props.location.pathname}</p> */}
 
           {this.props.location.pathname !== "/home" && (
             <p>
-              <h3 className={styles["post-title"]}>
+              <h3 className={styles["post-title"]} id="posttitle">
                 <Link to={`/posts/${this.props.post.objectId}`}>
                   {this.props.post.title}
                 </Link>

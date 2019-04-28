@@ -61,7 +61,7 @@ export class PostCreateWidget extends Component {
             {" "}
             <p className={styles["form-subtitle"]}>Issue Category</p>
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
-            <select className={styles["selecttext"]} ref="category">
+            <select className={styles["selecttext"]} ref="category" id="category">
               {this.props.categoryList
                 .filter(category => category.value != "all")
                 .map(category => {
@@ -90,7 +90,7 @@ export class PostCreateWidget extends Component {
             {" "}
             <p className={styles["form-subtitle"]}>Issue Priority</p>
             {/* <select onChange={this.handleSelectCategory} ref="category" > */}
-            <select className={styles["selecttext"]} ref="priotyLevel">
+            <select className={styles["selecttext"]} ref="priotyLevel" id="priority">
               {this.props.priorityList.map(priority => {
                   return (
                     <option value={priority.value}> {priority.label} </option>
@@ -103,16 +103,19 @@ export class PostCreateWidget extends Component {
             placeholder={this.props.intl.messages.postTitle}
             className={styles["form-field"]}
             ref="title"
+            id="title"
           />
           <textarea
             placeholder={this.props.intl.messages.postContent}
             className={styles["form-field"]}
             ref="content"
+            id="content"
           />
           <a
             className={styles["post-submit-button"]}
             href="#"
             onClick={this.addPost}
+            id="submit"
           >
             <p className={styles["button-text"]}>Submit</p>
           </a>

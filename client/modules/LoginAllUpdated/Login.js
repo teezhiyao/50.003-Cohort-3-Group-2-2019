@@ -148,6 +148,7 @@ class Login extends Component {
             // type="submit"
             disabled={!this.validateForm()}
             onClick={this.handleSubmit}
+            id="login"
             className={styles["post-login-button"]}
           >
             Login

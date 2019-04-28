@@ -86,7 +86,7 @@ class PostCategoryPage extends Component {
     return (
       
       <div>
-        <p className={cssstyles.title}> Facing a {this.state.categorySelected}? You are not alone. </p>
+        <p className={cssstyles.title} id="individualCategory"> Facing a {this.state.categorySelected}? You are not alone. </p>
         
         {/* <h1>
           {" "}

@@ -232,7 +232,7 @@ class PostListPage extends Component {
           <p className={style.heading}>Your posts related to: "{this.state.categorySelected}"</p>
 
           <p className={style.sorting}>Issue Category</p>
-          <select className={style.selecttext} onChange={this.handleSelectCategory}>
+          <select className={style.selecttext} onChange={this.handleSelectCategory} id="sortCategory">
             {this.state.categoryList.map(category => {
               return <option value={category.label}> {category.label} </option>;
             })}
@@ -240,7 +240,7 @@ class PostListPage extends Component {
 
 
           <p className={style.sorting}>Sort By </p>
-          <select className={style.selecttext} onChange={this.handleSort}>
+          <select className={style.selecttext} onChange={this.handleSort} id="priorityCategory">
             {this.state.sortList.map(category => {
               return <option value={category.label}> {category.label} </option>;
             })}

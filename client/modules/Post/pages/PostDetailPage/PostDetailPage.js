@@ -99,7 +99,7 @@ class PostDetailPage extends Component {
 
   render() {
     return (
-      <div>
+      <div id="post">
         <PostListItem
           post={this.props.post}
           key={this.props.post.objectId}

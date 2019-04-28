@@ -58,7 +58,7 @@ class PostList extends Component {
                 {index + 1}
               </Typography>
               <Typography className={classes.secondaryHeading}>
-                <Link to={`/posts/${individualPost.objectId}`}>
+                <Link to={`/posts/${individualPost.objectId}`} id="linkToIndividualPost">
                   {individualPost.title}
                 </Link>
               </Typography>
@@ -79,10 +79,11 @@ class PostList extends Component {
 
               <Typography className={classes.secondaryHeading}>
                 Category:
-                <Link to={`/cat/${individualPost.category}`}>
+                <Link to={`/cat/${individualPost.category}`} >
                   <Chip
                     label={individualPost.category}
                     onClick={this.handleClickChip}
+                    id="linkToIndividualCategory"
                   />
                 </Link>
               </Typography>
