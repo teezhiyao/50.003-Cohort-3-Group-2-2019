@@ -101,7 +101,7 @@ class SignUp extends Component {
         </div>
 
         {this.state.newUser === null && (
-          <Form onSubmit={this.handleSubmit} className={styles["form"]}>
+          <Form onSubmit={this.handleSubmit} className={styles["form"]} id="form">
             <img
               src={require("./assets/accenture.png")}
               className={styles.rightlogo}
@@ -141,6 +141,7 @@ class SignUp extends Component {
                 type="text"
                 value={this.state.name}
                 onChange={this.handleChange}
+                id="name"
               />
             </Form.Group>
             <Form.Group controlId="username" className={styles["form-field"]}>
@@ -151,6 +152,8 @@ class SignUp extends Component {
                 type="text"
                 value={this.state.username}
                 onChange={this.handleChange}
+                id="username"
+
               />
             </Form.Group>
             <Form.Group controlId="email" className={styles["form-field"]}>
@@ -161,6 +164,7 @@ class SignUp extends Component {
                 type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                id="email"
               />
             </Form.Group>
             <Form.Group controlId="age" className={styles["form-field"]}>
@@ -171,6 +175,7 @@ class SignUp extends Component {
                 type="text"
                 value={this.state.age}
                 onChange={this.handleChange}
+                id="age"
               />
             </Form.Group>
             <Form.Group controlId="password" className={styles["form-field"]}>
@@ -180,6 +185,7 @@ class SignUp extends Component {
                 value={this.state.password}
                 onChange={this.handleChange}
                 type="password"
+                id="password"
               />
             </Form.Group>
             <Form.Group
@@ -192,6 +198,7 @@ class SignUp extends Component {
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
                 type="password"
+                id="confirmPassword"
               />
             </Form.Group>
             <Paper
@@ -201,6 +208,7 @@ class SignUp extends Component {
               disabled={!this.validateForm()}
               onClick={this.handleSubmit}
               className={styles["post-signup-button"]}
+              id="signupButton"
             >
               Sign Up
             </Paper>

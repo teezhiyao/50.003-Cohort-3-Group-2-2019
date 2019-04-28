@@ -159,6 +159,7 @@ class Login extends Component {
             color="primary"
             type="signup"
             className={styles["post-signup-button"]}
+            id="signup"
           >
             <Link to={`/SignUpPage`}>Sign Up</Link>
           </Paper>
